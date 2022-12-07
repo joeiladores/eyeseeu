@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+/* NAV HOVER STYLE */
+#nav-link-hover:hover {
+  color: red;
+}
+
+
+/* HOME MAIN STYLES */
+.main-section {
+  /* position: absolute; */
+  position: relative;
+  right: 0;
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+  transition: 0.5s;
+  z-index: 2;
+}
+
+.main-section video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.main-section .main-section-text {
+  position: relative;
+  z-index: 10;
+}
+
+.main-section > .main-section-text > h3 {
+  font-size: 3em;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1em;
+}
+
+.main-section .main-section-text p {
+  font-size: 1.1em;
+  color: #fff;
+  margin: 20px 0;
+  font-weight: 400;
+  max-width: 700px;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 991px) {
+  .main-section-text h3
+ {
+   font-size: 2em;
+ }
+}
+
+
+/* CAROUSEL STYLES */
+/* TODO: FIX THIS HINDI NAG RESPONSIVE */
+/* .carousel-section {
+  height: 100vh;
+}
+
+.carousel-item {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+} */
+
+.carousel-section .carousel-item {
+	min-height: 100vh;
+	background-position: center;
+	background-size: cover;
+	position: relative;
+	z-index: 1;
+}
+
+.carousel-section .carousel-item .container {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	text-align: center;
+}
+
+.carousel-section .carousel-item h2 {
+	font-size: 80px;
+	color: white;
+	margin:0 0 10px;
+}
+
+.carousel-section .carousel-item p {
+	font-size: 30px;
+	margin:0;
+	color: white;
+}
+
+/* IF SCREEN BECOMES AMALLWER */
+/* THIS IS MEDIUM SCREEN */
+@media(max-width: 767px) {
+  .carousel-section .carousel-item h2 {
+  	font-size: 45px;
+  }
+  .carousel-section .carousel-item p {
+  	font-size: 22px;
+  }
+}
+
+
+/* ABOUT SECTION LINK IN MAIN STYLES */
+.team-section-link-img {
+  border-radius: 8px;
+  object-fit: cover;
+  height: 50%;
+  overflow-y:auto;
+}
+
+
+/* STYLES FOR TEAM SECTION (DOCTORS)  IN ABOUT PAGE*/
+.team-section {
+  background-color:#8FB9A8;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+
+
+
+/* STYLE FOR LOCATION ACCORDION */
+.accordion {
+  padding: 20px 50px;
+}
+
+#accordion-card-bg {
+  background-color:#8FB9A8;
+  opacity: 0.8;
+  color:black;
+  text-align: center;  
+}
+
+
+/* STYLES FOR FOOTER */
+footer {
+  background-color: #8FB9A8;
+  color: black;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+
+/* STYLES FOR SERVICES CARD HOVER*/
+.other-services-section-card .card:hover {
+  transform: scale(1.25, 1.25);
+  z-index: 2;
+  border-radius: 8px;
+}
+
+
+
+/* PARALLAX STYLES */
+#parallax-section .parallax-location{
+  color: white;
+  padding-top: 200px; 
+  padding-bottom: 200px; 
+  padding-left: 100px;  
+  overflow: hidden; 
+  position: relative; 
+  width: 100%; 
+  background-image: url(photo/location-p.jpg); 
+  background-attachment: fixed; 
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: top center;
+}
+
+#parallax-section .parallax-about {
+  padding-top: 200px; 
+  padding-bottom: 200px; 
+  padding-left: 100px;
+  overflow: hidden; 
+  position: relative; 
+  width: 100%; 
+  background-image: url(photo/tso-clinic-digos.jpg); 
+  background-attachment: fixed; 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-position: top center;
+}
+
+#parallax-section .parallax-contact {
+  padding-top: 200px; 
+  padding-bottom: 200px; 
+  padding-left: 100px;
+  overflow: hidden; 
+  position: relative; 
+  width: 100%; 
+  background-image: url(photo/contact-p.jpg); 
+  background-attachment: fixed; 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-position: top center;
+}
+
+#parallax-section .page-title {
+  background: white; 
+  padding-top: 100px;
+  padding-bottom: 20px; 
+  margin:0 auto; 
+  text-align:center;
+}
+
+#parallax-section .page-title h1 {
+  font-size:35px; 
+  letter-spacing:8px;
+}
+
+#parallax-section .parallax-content {
+  background: white; 
+  padding: 30px 100px; 
+  width: 100%;
+  margin:0 auto; 
+  text-align:justify;
+}
+
+#parallax-section .parallax1 {
+  color: white;
+  padding-left: 100px;
+  padding-top: 200px; 
+  padding-bottom: 200px; 
+  overflow: hidden; 
+  position: relative; 
+  width: 100%; 
+  background-image: url(photo/services-adult-eye-exam.jpg); 
+  background-attachment: fixed; 
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: top center;
+}
+
+#parallax-section .parallax2 {
+  padding-left: 100px;
+  padding-top: 200px; 
+  padding-bottom: 200px; 
+  overflow: hidden; 
+  position: relative; 
+  width: 100%; 
+  background-image: url(photo/services-child-eye-exam.jpg); 
+  background-attachment: fixed; 
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center center;
+}
+
+#parallax-section .parallax3 {
+  padding-left: 100px;
+  padding-top: 200px; 
+  padding-bottom: 200px; 
+  overflow: hidden; 
+  position: relative; 
+  width: 100%; 
+  background-image: url(photo/services-contact-lens.jpg); 
+  background-attachment: fixed; 
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center center;}
+
+
+
+
+/* RESPONSIVLE PARALLAX */
+/* big */
+@media screen and (max-width: 959px) and (min-width: 768px) {
+  #parallax-section .parallax-content {
+    padding: 20px; 
+    width: 620px;    
+}
+/* medium */
+@media screen and (max-width: 767px) {
+  #parallax-section .parallax-content {
+    padding: 30px; 
+    width:420px;
+  }
+  #parallax-section .parallax-content {
+    padding: 30px; 
+    width: 420px;
+  }
+  #parallax-section h2 {
+    font-size: 30px;
+  }  
+  #parallax-section .parallax-title {
+    padding-top: 30px; 
+    padding-bottom: 30px;    
+  }
+
+}
+/* small */
+@media screen and (max-width: 479px) {
+  #parallax-section .parallax-content {
+    padding: 20px 5px; 
+    width: 290px;
+  }
+  #parallax-section .parallax1, 
+  #parallax-section .parallax2, 
+  #parallax-section .parallax3, 
+  #parallax-section .parallax-location {
+  padding: 20px 5px; 
+  width: 290px;
+  }  
+ 
+}
+
+
+
+/* STYLES FOR MAP */
