@@ -12,10 +12,39 @@ html {
   height: 100%;
 }
 
-/* NAV HOVER STYLE */
-#nav-link-hover:hover {
-  color: red;
+
+/* --NAVBAR STYLES-- */
+/* Lustria font family ng favicon */
+.nav-link{
+  color: black;
 }
+
+.nav-link:hover {
+  color: #009EFF;
+  transform: scale(1.03);
+  transition: all .4s ease;
+}
+
+.custom-navbarbrand {
+  color: black;
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
+  margin-right: 1rem;
+  font-size: 1.75rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.custom-navbarbrand:hover {
+  color: black;
+  transform: scale(1.03);
+  transition: all .3s ease;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px 1px rgba(0,0,0,.3);
+}
+
 
 
 /* HOME MAIN STYLES */
