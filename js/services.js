@@ -1,9 +1,8 @@
 window.onload = function () {
-  populateServiceMain();
-  popoulateServiceItems();
+  populateServicePage();
 }
 
-function populateServiceMain() {
+function populateServicePage() {
 
   // POPULATE MAIN SERVICE SECTION
   fetch("https://638eb1de9cbdb0dbe31294ba.mockapi.io/services")
@@ -14,45 +13,60 @@ function populateServiceMain() {
     services.map(service => {
 
       console.log(service);
-      document.querySelector(".page-title").innerHTML = 
+      document.querySelector("#parallax-section").innerHTML = 
       `
-        <h1>${service.main_title}</h1>
+        <section>
+          <div class="page-title">
+            <h1>${service.main_title}</h1>
+          </div>
+        </section>    
+
+        <section>
+          <div class="parallax">
+            <h1>${service.main_subtitle1}</h1>
+            <h3>${service.main_subtitle12}</h3>
+          </div>
+        </section>    
+
+        <section>
+          <div class="parallax-content">${service.main_content}</div>
+        </section> 
       `;
-
-      document.querySelector(".parallax").innerHTML =
-      `
-        <h1>${service.main_subtitle1}</h1>
-        <h3>${service.main_subtitle2}</h3>
-      `;
-
-      document.querySelector(".parallax-content").innerHTML =
-      `
-      ${service.main_content}
-      `; 
-
     });    
 
   });
 
-}
+  // POPULATE THE SERVICES CONTENTS
+  // function popoulateServiceItems() {
+  //   fetch("https://638eb1de9cbdb0dbe31294ba.mockapi.io/services-items")
+  //   .then(response => response.json())
+  //   .then(services => {
+  //     services.map(serviceItems => {
+  //       console.log(serviceItems);
+
+  //       document.querySelector(".container").innerHTML +=
+  //       `
+  //         <div class="content-items pb-5" id="compre-eye-exam">
+  //           <h2>${serviceItems.name}</h2>
+  //           <img class="content-images img-fluid pt-3 pb-3" src="${serviceItems.image}" alt="">
+  //           ${serviceItems.content}
+  //         </div>
+        
+  //       `;
+  //     });    
+
+  //   });
+
+  
+  }
+
+
 
 // TODO: Populate the Service Menu
 
 
 
 
-// POPULATE THE SERVICES CONTENTS
-function popoulateServiceItems() {
-  fetch("https://638eb1de9cbdb0dbe31294ba.mockapi.io/services-items")
-  .then(response => response.json())
-  .then(services => {
-    services.map(serviceItems => {
 
-      
-
-    });    
-
-  });
-}
 
 
