@@ -1,9 +1,11 @@
 window.onload = function () {
-  populate();
+  populateServiceMain();
+  popoulateServiceItems();
 }
 
-function populate() {
+function populateServiceMain() {
 
+  // POPULATE MAIN SERVICE SECTION
   fetch("https://638eb1de9cbdb0dbe31294ba.mockapi.io/services")
   .then(response => response.json())
   .then(services => {
@@ -26,11 +28,31 @@ function populate() {
       document.querySelector(".parallax-content").innerHTML =
       `
       ${service.main_content}
-      `;                          
-    });
+      `; 
+
+    });    
 
   });
 
+}
+
+// TODO: Populate the Service Menu
+
+
+
+
+// POPULATE THE SERVICES CONTENTS
+function popoulateServiceItems() {
+  fetch("https://638eb1de9cbdb0dbe31294ba.mockapi.io/services-items")
+  .then(response => response.json())
+  .then(services => {
+    services.map(serviceItems => {
+
+      
+
+    });    
+
+  });
 }
 
 
