@@ -24,7 +24,7 @@ function populateServicePage() {
         <section>
           <div class="parallax">
             <h1>${service.main_subtitle1}</h1>
-            <h3>${service.main_subtitle12}</h3>
+            <h3>${service.main_subtitle2}</h3>
           </div>
         </section>    
 
