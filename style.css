@@ -14,7 +14,6 @@ html {
 
 
 /* --NAVBAR STYLES-- */
-/* Lustria font family ng favicon */
 .nav-link{
   color: black;
 }
@@ -27,8 +26,6 @@ html {
 
 .custom-navbarbrand {
   color: black;
-  padding-top: .3125rem;
-  padding-bottom: .3125rem;
   margin-right: 1rem;
   font-size: 1.75rem;
   text-decoration: none;
@@ -79,7 +76,7 @@ html {
 }
 
 .main-section > .main-section-text > h3 {
-  font-size: 3em;
+  font-size: 3rem;
   font-weight: 500;
   color: #fff;
   line-height: 1em;
@@ -93,13 +90,28 @@ html {
   max-width: 700px;
 }
 
-
 /* RESPONSIVE */
-@media (max-width: 991px) {
+@media screen and (max-width: 991px) {
   .main-section-text h3
  {
-   font-size: 2em;
+   font-size: 3rem;
  }
+}
+
+@media screen and (max-width: 576px) {
+  .main-section-text h3 {
+    font-size: 1rem;
+    /* / padding-left: 3em; / */
+  }
+  .main-section-text p {
+    font-size: 1rem;
+    /* / max-width: 700px; / */
+  }
+  .main-section {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+
 }
 
 
@@ -114,6 +126,7 @@ html {
   height: 100vh;
   min-height: 100vh;
 } */
+
 
 .carousel-section .carousel-item {
 	min-height: 100vh;
