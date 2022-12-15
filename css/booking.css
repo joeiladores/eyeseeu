@@ -1,0 +1,28 @@
+.booking-section {
+  margin-top: 3em;
+  margin-left: 6.25em;
+  margin-right: 6.25em;
+  /* font-size: 0.5rem; */
+  padding: 1.25em 3em;
+}
+
+.contact-section h3 {
+  font-size: 1.5rem;
+}
+
+.book-section-header {
+  background-color: #0014FF;
+  color: white;
+}
+
+
+/* MEDIA QUERY FOR BOOKING SECTION *********************/
+/* TODO: check this */
+@media screen and (max-width: 400px) {
+  .booking-section {
+    padding: 0.5em 0.5em;
+    margin: 0;
+  }
+}
+
+
