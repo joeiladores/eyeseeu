@@ -84,6 +84,17 @@ body {
 
 /* Meet our team section */
 
+.card {
+    transition: all 0.3s;
+
+}
+
+.card:hover {
+
+    transform: scale(1.15);
+}
+
+
 
 h1 {
     text-align: center;
