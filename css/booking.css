@@ -1,3 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: 'Poppins', sans-serif; */
+}
+
+
 .booking-section {
   margin-top: 3em;
   margin-left: 6.25em;
@@ -26,3 +34,12 @@
 }
 
 
+.no-y-margin {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.page-x-margin {
+  margin-left: 6.25em;
+  margin-right: 6.25em;
+}
