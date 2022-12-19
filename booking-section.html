@@ -12,6 +12,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/booking.css" />
+  <script src="js/booking.js"></script>
+
+  <!-- FOR CALENDLY -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </head>
 
 <body>
@@ -69,140 +74,49 @@
     </div>
   </section>
 
-  <!-- CALENDLY SECRTION ----------------------------------------------------------------------->
-  <section>
-    
-    <div class="page-x-margin mt-5">
-      <h3>Embed Calendly Here....</h3>
-      <div class="col-md-4 pb-3 d-flex">
-        <select class="form-select" aria-label="Choose Your Clinic" required>
-          <option selected>Choose Your Clinic **</option>
-          <option value="digos">Digos</option>
-          <option value="isulan">Isulan</option>
-          <option value="marbel">Marbel</option>
+
+  <!-- NEW BOOKING SECRTION - CALENDLY --------------------------------------------------------->
+  <section class="booking-section pt-5 pb-5">
+    <form>
+      <div class="pb-3">
+        <h1 class="text-white pt-5">Book your Appointment Here</h1>
+      </div>
+      <div class="col-md-5">
+        <select id="selectBranch" class="form-select theme-color-light" aria-label="Choose Your Clinic"
+          required onchange="handleBranchChange()" required>
+          <option value=0 selected>Choose Your Clinic **</option>
+          <option value="caloocan">EyeSeeU Optical Caloocan</option>
+          <option value="iloilo">EyeSeeU Optical Iloilo</option>
+          <option value="gensan">EyeSeeU Optical General Santos</option>
         </select>
       </div>
-    </div>
 
+      <!-- BUTTON FOR SELECTED BRANCH CALENDLY EVENT -->
+      <div id="displayBtnCalBranch" class="page-x-margin mt-5 mb-5">
+        <a id="btnCalendly" type="button" href="" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2" data-bs-toggle="modal" data-bs-target="#errNoSelectedClinic">
+          <i class="bi bi-calendar2-event"></i>&nbsp; Book an Appointment</a>
+      </div>
+    </form>
 
-    <div class="page-x-margin mt-5 d-inline-flex flex-column justify-content-center">
-      <!-- Calendly link widget begin -->
-      <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-      <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-      <a href="" class="btn d-flex bg-primary text-white rounded-3 py-2 px-2" 
-        onclick="Calendly.initPopupWidget({url: 'https://calendly.com/joeiladores/1-hour-consultation-test-esu-optical-marbel'});return false;"><i class="bi bi-calendar2-event"></i>&nbsp; Book
-        an Appointment</a>        
-      <!-- Calendly link widget end -->
-    </div>
-
-  <!-- BOOKING SECTION HEADER ------------------------------------------------------------------>
-  <section class="book-section-header pt-5 pb-5 mt-5">
-    <div>
-      <h4 class="text-center">
-        To book an appointment, fill out the form below!
-      </h4>
-    </div>
-  </section>
-
-  <!-- BOOKING FORM SECTION -------------------------------------------------------------------->
-  <section class="booking-section col-md-8 bg-light rounded-3 mx-auto pt-4 mb-5">
-    <form class="booking-form mx-auto">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 pb-3 d-flex">
-            <select class="form-select" aria-label="Are you an existing patient?" required>
-              <option selected>Are you an existing patient? **</option>
-              <option value="y">Yes</option>
-              <option value="n">No</option>
-            </select>
-          </div>
-          <div class="col-md-6 pb-3 d-flex">
-            <select class="form-select" aria-label="Choose Your Clinic" required>
-              <option selected>Choose Your Clinic **</option>
-              <option value="digos">Digos</option>
-              <option value="isulan">Isulan</option>
-              <option value="marbel">Marbel</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12 pb-2 pt-2">
-            <h3>PERSONAL INFORMATION</h3>
-          </div>
-        </div>
-
-        <div class="row g-3">
-          <div class="col-md-6 pb-3 d-flex">
-            <input type="text" class="form-control" id="FirstName" placeholder="First Name **" required />
-          </div>
-          <div class="col-md-6 pb-3 d-flex">
-            <input type="text" class="form-control" id="LastName" placeholder="Last Name **" required />
-          </div>
-        </div>
-        <div class="row g-3">
-          <div class="col-md-6 pb-3 d-flex">
-            <input type="tel" class="form-control" id="PhoneNum" placeholder="Phone Number" />
-          </div>
-          <div class="col-md-6 pb-3 d-flex">
-            <input type="email" class="form-control" id="Email" placeholder="Email" />
-          </div>
-        </div>
-        <div class="row g-3">
-          <div class="col-md-6 pb-3 d-flex">
-            <input type="text" class="form-control" id="AddressLine1" placeholder="Address Line 1" />
-          </div>
-          <div class="col-md-6 pb-3 d-flex">
-            <input type="text" class="form-control" id="AddressLine2" placeholder="Addresss Line 2" />
-          </div>
-        </div>
-        <div class="row g-3">
-          <div class="col-md-6 pb-3 d-flex">
-            <input type="text" class="form-control" id="City" placeholder="City/Town" />
-          </div>
-          <div class="col-md-6 pb-3 d-flex">
-            <input type="text" class="form-control" id="PostCode" placeholder="Post Code" />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12 pb-2 pt-2 d-flex">
-            <h3>BOOKING INFORMATION</h3>
-          </div>
-        </div>
-
-        <div class="row g-3">
-          <div class="col-md-4 pb-3 d-flex">
-            <input type="datetime-local" class="form-control" id="Date" placeholder="Date **" required />
-          </div>
-          <div class="col-md-8 pb-2 d-flex">
-            <select class="form-select" aria-label="What would you like to book?" required>
-              <option selected>What would you like to book? **</option>
-              <option value="EyeExamAdult">Eye Exam (Adult)</option>
-              <option value="EyeExamChild">Eye Exam (Child)</option>
-              <option value="ContactLenseFitting">ContactLenseFitting</option>
-              <option value="SpecialistTesting">SpecialistTesting</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 pb-3 d-flex">
-            <textarea class="form-control" id="FurtherInfo" rows="5"
-              placeholder="Please provide any other information"></textarea>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 pb-3 d-flex">
-            <button class="btn btn-primary mx-auto" type="submit">
-              Book Appointment
-            </button>
+    <div id="errNoSelectedClinic" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Please choose Clinic</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
         </div>
       </div>
-    </form>
+    </div>
+
   </section>
-  <!-- END OF BOOKING FORM SECTION ------------------------------------------------------------------>
+
+  <!-- MESASAGE US SECTION HENRY --------------------------------------------------------->
+  <section class="pt-5 pb-5">
+    <h1 class="text-center">Message Us Section by Henry</h1>
+  </section>
+
+
 
 
 
