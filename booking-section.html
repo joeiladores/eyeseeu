@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/booking.css" />
   <script src="js/booking.js"></script>
 
-  <!-- FOR CALENDLY -->
+  <!-- FOR CALENDLY --------------------------------------------------------------------------->
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </head>
@@ -75,15 +75,15 @@
   </section>
 
 
-  <!-- NEW BOOKING SECRTION - CALENDLY --------------------------------------------------------->
+  <!-- NEW BOOKING SECRTION - CALENDLY ------------------------------------------------->
   <section class="booking-section pt-5 pb-5">
     <form>
       <div class="pb-3">
         <h1 class="text-white pt-5">Book your Appointment Here</h1>
       </div>
       <div class="col-md-5">
-        <select id="selectBranch" class="form-select theme-color-light" aria-label="Choose Your Clinic"
-          required onchange="handleBranchChange()" required>
+        <select id="selectBranch" class="form-select theme-color-light" aria-label="Choose Your Clinic" required
+          onchange="handleBranchChange()" required>
           <option value=0 selected>Choose Your Clinic **</option>
           <option value="caloocan">EyeSeeU Optical Caloocan</option>
           <option value="iloilo">EyeSeeU Optical Iloilo</option>
@@ -91,18 +91,20 @@
         </select>
       </div>
 
-      <!-- BUTTON FOR SELECTED BRANCH CALENDLY EVENT -->
+      <!-- BUTTON FOR SELECTED BRANCH CALENDLY EVENT ---------------------------------->
       <div id="displayBtnCalBranch" class="page-x-margin mt-5 mb-5">
-        <a id="btnCalendly" type="button" href="" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2" data-bs-toggle="modal" data-bs-target="#errNoSelectedClinic">
+        <a id="btnCalendly" type="button" href="" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2"
+          data-bs-toggle="modal" data-bs-target="#errNoSelectedClinic">
           <i class="bi bi-calendar2-event"></i>&nbsp; Book an Appointment</a>
       </div>
     </form>
 
+    <!-- MODAL ------------------------------------------------------------------------>
     <div id="errNoSelectedClinic" class="modal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Please choose Clinic</h5>
+            <h5 class="modal-title">Please choose a Clinic</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
         </div>
