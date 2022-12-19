@@ -1,28 +1,56 @@
-.booking-section {
-  margin-top: 3em;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: 'Poppins', sans-serif; */
+}
+
+/* NEW STYLES */
+.no-y-margin {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* .page-x-margin {
   margin-left: 6.25em;
   margin-right: 6.25em;
-  /* font-size: 0.5rem; */
-  padding: 1.25em 3em;
+} */
+
+.booking-section {
+  padding-left: 6.25em;
+  padding-right: 6.25em;
+  margin-bottom: 20px;
+  height: 400px;
+  width: 100%;
+  background-color: #3374EB;
 }
 
-.contact-section h3 {
-  font-size: 1.5rem;
+.theme-color-blue {
+  background-color: #3374EB;
+  color: #FFFFFF;
 }
 
-.book-section-header {
-  background-color: #0014FF;
-  color: white;
+.theme-color-light {
+  background-color: #FFFFFF;
+  color: #2F67D5;
 }
 
+#btnCalendly:hover {
+  background-color: #cfcaca;
+}
 
 /* MEDIA QUERY FOR BOOKING SECTION *********************/
 /* TODO: check this */
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 576px) {
   .booking-section {
-    padding: 0.5em 0.5em;
-    margin: 0;
+    padding: 2em 2em;
+    /* margin: 0; */
   }
 }
 
-
+@media screen and (min-width: 577px) and  (max-width: 768px) {
+  .booking-section {
+    padding: 4em 4em;
+    /* margin: 0; */
+  }
+}

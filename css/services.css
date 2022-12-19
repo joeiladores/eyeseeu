@@ -132,11 +132,29 @@ body {
  
 }
 
+
+/* STYLES FOR TEST NAV STICKY POSITION*/
+/* .test-nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  background-color: rgb(51, 51, 51);
+  padding: 5px;
+  color: #00FF6C;
+  position: sticky;
+  top: 0;
+  padding-top: 60px;
+} */
+
 /* STYLES FOR SIDE BAR AND CONTENT */
 
 .services-section {
+  padding-top: 60px;
+  position: sticky;
+  top: 0;
   padding-left: 6.25em;
   padding-right: 6.25em;
+
 }
 
 .sidebar {
@@ -144,7 +162,7 @@ body {
   padding: 0;
   width: 250px;
   background-color: #f1f1f1;
-  position: absolute; /* fixed */
+  position: absolute; 
   /* height: 100%; */
   height: 1000px;
   overflow: auto;
