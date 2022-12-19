@@ -1,115 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="css/booking.css" />
-  </head>
-  <body>
-    <!-- NAVBAR SECTION -->
-    <nav class="navbar navbar-expand-lg bg-light fixed-top">
-      <div class="container">
-        <a class="custom-navbarbrand fs-4" href="index.html">
-          <img
-            src="photo/main-logo&favicon.png"
-            alt="Logo"
-            width="35"
-            height="45"
-            class="d-inline-block align-text-center"
-          />
-          <span>EyeSeeU </span>Optical
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.html">HOME</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="location.html">LOCATION</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="about.html"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                >ABOUT
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="about.html#aboutus"
-                    >About Us</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="about.html#team"
-                    >Meet the Team</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="services.html">SERVICES</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">CONTACT</a>
-            </li>
-          </ul>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/booking.css" />
+  <script src="js/booking.js"></script>
+
+  <!-- FOR CALENDLY --------------------------------------------------------------------------->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+</head>
+
+<body>
+  <!-- NAVBAR SECTION -->
+  <nav class="navbar navbar-expand-lg bg-light fixed-top">
+    <div class="container">
+      <a class="custom-navbarbrand fs-4" href="index.html">
+        <img src="photo/main-logo&favicon.png" alt="Logo" width="35" height="45"
+          class="d-inline-block align-text-center" />
+        <span>EyeSeeU </span>Optical
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="location.html">LOCATION</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="about.html" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">ABOUT
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="about.html#aboutus">About Us</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="about.html#team">Meet the Team</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">SERVICES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">CONTACT</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PARALLAX SECTION -->
+  <section id="parallax-section">
+    <div class="page-title" id="contact">
+      <h1>BOOK YOUR APPOINTMENT</h1>
+    </div>
+    <div class="parallax-contact">
+      <h2></h2>
+    </div>
+  </section>
+
+  <!-- NEW BOOKING SECRTION - CALENDLY ------------------------------------------------->
+  <section class="booking-section pt-5 pb-5">
+    <form>
+      <div class="pb-3">
+        <h1 class="text-white pt-5">Book your Appointment Here</h1>
+      </div>
+      <div class="col-md-5">
+        <select id="selectBranch" class="form-select theme-color-light" aria-label="Choose Your Clinic" required
+          onchange="handleBranchChange()" required>
+          <option value=0 selected>Choose Your Clinic **</option>
+          <option value="caloocan">EyeSeeU Optical Caloocan</option>
+          <option value="iloilo">EyeSeeU Optical Iloilo</option>
+          <option value="gensan">EyeSeeU Optical General Santos</option>
+        </select>
+      </div>
+
+      <!-- BUTTON FOR SELECTED BRANCH CALENDLY EVENT ---------------------------------->
+      <div id="displayBtnCalBranch" class="page-x-margin mt-5 mb-5">
+        <a id="btnCalendly" type="button" href="" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2"
+          data-bs-toggle="modal" data-bs-target="#errNoSelectedClinic">
+          <i class="bi bi-calendar2-event"></i>&nbsp; Book an Appointment</a>
+      </div>
+    </form>
+
+    <!-- MODAL ------------------------------------------------------------------------>
+    <div id="errNoSelectedClinic" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Please choose a Clinic</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
         </div>
       </div>
-    </nav>
+    </div>
 
-    <!-- PARALLAX SECTION -->
-    <section id="parallax-section">
-      <div class="page-title" id="contact">
-        <h1>BOOK YOUR APPOINTMENT</h1>
-      </div>
-      <div class="parallax-contact">
-        <h2></h2>
-      </div>
-    </section>
+  </section>
 
-    <!-- BOOKING SECTION HEADER ------------------------------------------------------------------>
-    <section class="book-section-header pt-5 pb-5 mt-5">
+  <!-- MESASAGE US SECTION HENRY --------------------------------------------------------->
+  <section class="pt-5 pb-5">
+    <h1 class="text-center">Message Us Section by Henry</h1>
+  </section>
+
+
+
+
+
+
+  <!-- BOOKING SECTION HEADER ------------------------------------------------------------------>
+  <!-- <section class="book-section-header pt-5 pb-5 mt-5">
       <div>
         <h4 class="text-center">
           To book an appointment, fill out the form below!
         </h4>
     
       </div>
-    </section>
+    </section> -->
 
-    <!-- BOOKING FORM SECTION ------------------------------------------------------------------>
-    <section class="booking-section col-md-8 bg-light rounded-3 mx-auto pt-4 px-5">
+
+  <!-- OLD BOOKING FORM SECTION ------------------------------------------------------------------>
+  <!-- <section class="booking-section col-md-8 bg-light rounded-3 mx-auto pt-4 px-5">
       <form class="booking-form mx-auto">
         <div class="container">
           <div class="row">
@@ -269,13 +294,12 @@
           </div>
         </div>
       </form>
-    </section>
-    <!-- END OF BOOKING FORM SECTION ------------------------------------------------------------------>
+    </section> -->
+  <!-- END OF BOOKING FORM SECTION ------------------------------------------------------------------>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>
