@@ -1,7 +1,5 @@
 window.onload = function () {
-  populateTestimonialPage();
-};
-
+  
 function populateTestimonialPage() {
   fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/testimonial')
     .then((response) => response.json())
@@ -24,3 +22,6 @@ function populateTestimonialPage() {
       });
     });
 }
+
+populateTestimonialPage();
+
