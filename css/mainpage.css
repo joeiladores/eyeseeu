@@ -1,0 +1,22 @@
+.mp-button {
+  background-color: #009eff;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+}
+
+.mp-button:hover {
+  color: white;
+  background-color: #1e94de;
+}
+
+#mp-vid {
+  filter: blur(8px);
+  filter: brightness(-50px);
+}
+
+.mp-text {
+  text-shadow: 5px 5px 10px black;
+}
