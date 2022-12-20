@@ -1,35 +1,41 @@
-function handleBranchChange() {
 
-  const branch = document.getElementById("selectBranch").value;
-  const btnBranch = document.getElementById("displayBtnCalBranch");
+function handleClinicChange() {
 
-  if (branch === "caloocan") {
-    btnBranch.innerHTML =
+  const clinic = document.getElementById("selectClinic").value;
+  const btnClinic = document.getElementById("displayBtnCalClinic");
+
+  console.log(typeof clinic);
+  console.log(btnClinic.innerHTML);
+
+  if (clinic === "1") {
+    btnClinic.innerHTML =
       `
     <a href="" id="btnCalendly" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2"
     onclick="Calendly.initPopupWidget({url: 'https://calendly.com/esuopticalcaloocan/consultation'});return false;"></i>&nbsp; Book an Appointment</a>
     `;
   }
-  else if (branch === "iloilo") {
+  else if (clinic === "2") {
 
-    btnBranch.innerHTML =
+    btnClinic.innerHTML =
       `
     <a href="" id="btnCalendly" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2"
     onclick="Calendly.initPopupWidget({url: 'https://calendly.com/esuopticaliloilo/consultation'});return false;"><i
         class="bi bi-calendar2-event"></i>&nbsp; Book an Appointment</a>
     `;
   }
-  else if (branch === "gensan") {
+  else if (clinic === "3") {
 
-    btnBranch.innerHTML =
+    btnClinic.innerHTML =
       `
     <a href="" id="btnCalendly" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2"
     onclick="Calendly.initPopupWidget({url: 'https://calendly.com/esuopticalgensan/consultation'});return false;"><i class="bi bi-calendar2-event"></i>&nbsp; Book an Appointment</a>
     `;
   }
   else {
-    return;
+    // return;
   }
+
+  console.log(btnClinic.innerHTML);
 
 };
 

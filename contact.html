@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/booking.css" />
   <script src="js/booking.js"></script>
+  <script defer type="module" src="js/config-firebase-booking.js"></script>
 
   <!-- FOR CALENDLY --------------------------------------------------------------------------->
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
@@ -78,22 +79,19 @@
   <section class="booking-section pt-5 pb-5">
     <form>
       <div class="pb-3">
-        <h1 class="text-white pt-5">Book your Appointment Here</h1>
+        <h4 class="text-white pt-5">Book your Appointment Here</h4>
       </div>
       <div class="col-md-5">
-        <select id="selectBranch" class="form-select theme-color-light" aria-label="Choose Your Clinic" required
-          onchange="handleBranchChange()" required>
-          <option value=0 selected>Choose Your Clinic **</option>
-          <option value="caloocan">EyeSeeU Optical Caloocan</option>
-          <option value="iloilo">EyeSeeU Optical Iloilo</option>
-          <option value="gensan">EyeSeeU Optical General Santos</option>
+        <select id="selectClinic" class="form-select theme-color-light" aria-label="Choose Your Clinic" required
+          onchange="handleClinicChange()" required>
+          <option selected>Choose Your Clinic **</option>
+          <!-- FETCH CLINIC SELECTION FROM FIRESTORE ---------------------------------->
         </select>
       </div>
 
       <!-- BUTTON FOR SELECTED BRANCH CALENDLY EVENT ---------------------------------->
-      <div id="displayBtnCalBranch" class="page-x-margin mt-5 mb-5">
-        <a id="btnCalendly" type="button" href="" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2"
-          data-bs-toggle="modal" data-bs-target="#errNoSelectedClinic">
+      <div id="displayBtnCalClinic" class="page-x-margin mt-5 mb-5">
+        <a id="btnCalendly" type="button" href="" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2" data-bs-toggle="modal" data-bs-target="#errNoSelectedClinic">
           <i class="bi bi-calendar2-event"></i>&nbsp; Book an Appointment</a>
       </div>
     </form>
