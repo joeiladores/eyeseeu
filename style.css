@@ -377,16 +377,3 @@ footer {
 
 
 /* STYLES FOR MAP */
-
-.map-responsive{
-  overflow:hidden;
-  padding-bottom:30%;
-  position:relative;
-  height:0;
-  }
-  .map-responsive iframe{
-  left:0;
-  top:0;
-  width:100%;
-  position:absolute;
-  }
