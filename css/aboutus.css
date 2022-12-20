@@ -51,6 +51,16 @@ body {
 
 /* About Us Section */
 
+.inner-container {
+    transition: all 0.3s;
+
+}
+
+.inner-container:hover {
+
+    transform: scale(1.15);
+}
+
 .about-section {
     background: url(https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xpbmljfGVufDB8fDB8fA%3D%3D&w=1000&q=80) no-repeat left;
     background-size: 65%;
