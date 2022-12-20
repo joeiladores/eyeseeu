@@ -202,13 +202,37 @@ html {
 
 /* STYLES FOR FOOTER */
 footer {
-  background-color: #8FB9A8;
+  background-color: #009EFF;
   color: black;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 20px;
+  margin: 10px;
 }
+
+.vertical-line {
+  border-right: 1px solid black;
+}
+
+.quick-links {
+  text-decoration: none;
+  color: black;
+}
+
+.quick-links:hover {
+  color: rgb(24, 33, 52);
+  padding-left: 3px;
+}
+
+#quicklinks-style {
+  list-style-type: none;
+  font-size: 20px;
+  padding-top: 10px;
+}
+
+#quicklinks-style > li {
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+
 
 
 
@@ -356,7 +380,6 @@ footer {
     padding-top: 30px; 
     padding-bottom: 30px;    
   }
-
 }
 /* small */
 @media screen and (max-width: 479px) {
