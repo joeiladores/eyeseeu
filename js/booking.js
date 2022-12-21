@@ -4,9 +4,6 @@ function handleClinicChange() {
   const clinic = document.getElementById("selectClinic").value;
   const btnClinic = document.getElementById("displayBtnCalClinic");
 
-  console.log(typeof clinic);
-  console.log(btnClinic.innerHTML);
-
   if (clinic === "1") {
     btnClinic.innerHTML =
       `
@@ -34,9 +31,7 @@ function handleClinicChange() {
   else {
     // return;
   }
-
-  console.log(btnClinic.innerHTML);
-
+  
 };
 
 

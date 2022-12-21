@@ -19,9 +19,10 @@ const app = initializeApp(firebaseConfig);
 // Initialize Services
 const db = getFirestore(app);
 
+
+// BOOKING SECTION *********************************************************************
 // Collection Reference
 const clinicRef = collection(db, 'clinic');
-
 
 function populateClinicSelection() {
   // Get Collection Data
@@ -47,6 +48,11 @@ function populateClinicSelection() {
 }
 
 populateClinicSelection();
+// END OF BOOKING SECTION *************************************************************
+
+
+
+
 
 
 
