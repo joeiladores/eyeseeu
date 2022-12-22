@@ -29,7 +29,10 @@ function handleClinicChange() {
     `;
   }
   else {
-    // return;
+    btnClinic.innerHTML =
+      `
+      <a id="btnCalendly" type="button" href="" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2" data-bs-toggle="modal" data-bs-target="#errNoSelectedClinic"><i class="bi bi-calendar2-event"></i>&nbsp; Book an Appointment</a>
+    `;
   }
   
 };
