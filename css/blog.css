@@ -56,3 +56,13 @@ body {
 float: right;
 width: 18rem;
 }
+
+.card {
+    transition: all 0.3s;
+
+}
+
+.card:hover {
+
+    transform: scale(1.10);
+}
