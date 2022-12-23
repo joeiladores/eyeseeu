@@ -376,4 +376,7 @@ footer {
 
 
 
-/* STYLES FOR MAP */
+/* STYLES FOR BLOG */
+.vertical-line{
+  border-left: #111 solid 1px;
+}
