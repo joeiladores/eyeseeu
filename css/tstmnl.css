@@ -1,0 +1,38 @@
+.card {
+  display: flex;
+}
+
+.card-title {
+  color: #009eff;
+}
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  object-fit: cover;
+  border: #009eff 2px solid;
+}
+
+.card::before {
+  content: '';
+  width: 115px;
+  height: 105px;
+  border-bottom-left-radius: 100%;
+  background: #00fff6;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.card::after {
+  content: '';
+  width: 120px;
+  height: 90px;
+  border-bottom-left-radius: 100%;
+  background: #009eff;
+  position: absolute;
+  top: 0;
+  right: 0px;
+}
