@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Roboto:wght@400;500;700&display=swap'); */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Montserrat', sans-serif; */
+
+}
+
+body {
+    margin-top: 10%;
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+
+
+/* STYLES NAVBAR ****************************************************************/
+/* Lustria font family ng favicon */
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+    color: #009EFF;
+    transform: scale(1.03);
+    transition: all .4s ease;
+}
+
+.custom-navbarbrand {
+    color: black;
+    /* padding-top: .3125rem;
+  padding-bottom: .3125rem; */
+    margin-right: 1rem;
+    font-size: 1.75rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.custom-navbarbrand:hover {
+    color: black;
+    transform: scale(1.03);
+    transition: all .3s ease;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px 1px rgba(0, 0, 0, .3);
+}
+
+
+.card-right {
+
+float: right;
+width: 18rem;
+}
+
+.card {
+    transition: all 0.3s;
+
+}
+
+.card:hover {
+
+    transform: scale(1.10);
+}
