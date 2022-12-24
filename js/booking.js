@@ -4,9 +4,6 @@ function handleClinicChange() {
   const clinic = document.getElementById("selectClinic").value;
   const btnClinic = document.getElementById("displayBtnCalClinic");
 
-  console.log(typeof clinic);
-  console.log(btnClinic.innerHTML);
-
   if (clinic === "1") {
     btnClinic.innerHTML =
       `
@@ -32,11 +29,12 @@ function handleClinicChange() {
     `;
   }
   else {
-    // return;
+    btnClinic.innerHTML =
+      `
+      <a id="btnCalendly" type="button" href="" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2" data-bs-toggle="modal" data-bs-target="#errNoSelectedClinic"><i class="bi bi-calendar2-event"></i>&nbsp; Book an Appointment</a>
+    `;
   }
-
-  console.log(btnClinic.innerHTML);
-
+  
 };
 
 
