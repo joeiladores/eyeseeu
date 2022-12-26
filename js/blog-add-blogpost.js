@@ -1,18 +1,20 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js'
 
 // Add Firebase products that you want to use
-import { 
-  getFirestore, 
-  collection, 
-  // getDocs,  
+import {
+  getFirestore,
+  collection,
+  getDocs,
   onSnapshot, addDoc, getDoc, doc,
   // deleteDoc,
   query, where, orderBy
   // serverTime
-} 
-  from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js'
+} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js'
 
-import { getStorage, ref } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js'
+import {
+  getStorage, ref,
+  uploadBytesResumable, getDownloadURL
+} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js'
 
 const firebaseConfig = {
   apiKey: "AIzaSyDzkyd2zPrryUfoYjfdqF1PLim9ukvqZ7I",
@@ -30,7 +32,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-
 // Collection Reference
 const blogRef = collection(db, 'blog');
 
@@ -42,7 +43,7 @@ const blogRef = collection(db, 'blog');
 //       blogs.push({ ...doc.data(), id: doc.id })
 //     });
 //     console.log(blogs);
-    
+
 //   })
 //   .catch(err => {
 //     console.log(err.message);
@@ -59,14 +60,49 @@ const blogRef = collection(db, 'blog');
 
 
 // QUERIES
-const q = query(blogRef, where("blog_id", ">", 0), orderBy("blog_id", "asc"));
-onSnapshot(q, (snapshot) => {
-  let blogs = [];
-  snapshot.docs.forEach((doc) => {
-    blogs.push({ ...doc.data(), id: doc.id })
-  });
-  console.log(blogs);
-}); 
+// const q = query(blogRef, where("blog_id", ">", 0), orderBy("blog_id", "asc"));
+// onSnapshot(q, (snapshot) => {
+//   let blogs = [];
+//   snapshot.docs.forEach((doc) => {
+//     blogs.push({ ...doc.data(), id: doc.id })
+//   });
+//   console.log(blogs);
+// }); 
+
+
+// UPLOAD IMAGE FROM FORM
+document.getElementById("btnUpload").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const fileInput = document.getElementById("uploadImage");
+  let fileItem = fileInput.files[0];
+  let fileName = fileItem.name;
+  let metadata = fileItem.meta;
+  let percentValue;
+
+  console.log(`fileName: ${fileName}`);
+
+  const storageRef = ref(storage, "blog-photos/" + fileName);
+  const uploadTask = uploadBytesResumable(storageRef, fileItem, metadata);
+
+  uploadTask.on('state_changed',
+    (snapshot) => {
+      percentValue = Math.floor(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + percentValue + '% done, ' + snapshot.totalBytes);
+    },
+    (error) => {
+      console.log('Upload error: ' + error);
+    },
+    () => {
+      getDownloadURL(uploadTask.snapshot.ref)
+        .then((downloadURL) => {
+          console.log('downloadURL: ', downloadURL);
+          document.getElementById("uploadedImageURL").value = downloadURL;
+        });
+    }
+  );
+
+});
 
 
 // ADDING DOCUMENTS
@@ -78,21 +114,21 @@ blogForm.addEventListener("submit", (e) => {
   console.log(`pub_date: ${pub_date}`)
 
   addDoc(blogRef, {
+
     blog_id: parseInt(blogForm.blogId.value),
     title: blogForm.title.value,
-    content_preview: blogForm.contentPreview.value,
-    cover_image: blogForm.coverImage.value,
+    cover_image: blogForm.uploadedImageURL.value,
     publish_date: pub_date,
     author: blogForm.author.value,
+    content_preview: blogForm.contentPreview.value,
     content: blogForm.content.value,
   })
-  .then(() => {
-    blogForm.reset();
-  });
+    .then(() => {
+      blogForm.reset();
+    });
+
 
 });
-
-
 
 
 
@@ -100,7 +136,7 @@ blogForm.addEventListener("submit", (e) => {
 // const deleteBlogForm = document.getElementById("delete-blog-form");
 // deleteBlogForm.addEventListener("submit", (e) => {
 //   e.preventDefault();
-  
+
 //   const blogRef = doc(db, "blog", deleteBlogForm.id.value);
 
 //   deleteDoc(blogRef)
@@ -129,4 +165,49 @@ blogForm.addEventListener("submit", (e) => {
 // }); 
 
 
- 
+
+
+// GET BLOGS TIMESTAMP MONTH
+// const q = query(blogRef, where("publish_date", ">", 0), orderBy("blog_id", "asc"));
+onSnapshot(blogRef, (snapshot) => {
+  let blogMonths = [];
+  let blogs = [];
+  let fTimestamp, jsDate, month, month_num, year, month_year;
+  let containsMonthYear;
+
+  snapshot.docs.forEach((doc) => {
+    // blogs.push({ publish_date: doc.data().publish_date })   
+    fTimestamp = doc.data().publish_date;
+    jsDate = fTimestamp.toDate();
+    month = jsDate.toLocaleString('default', { month: 'long' })
+    year = jsDate.toLocaleString('default', { year: 'numeric' })
+    month_num = jsDate.toLocaleString('default', { month: 'numeric' });
+    month_year = month + " " + year;
+
+    // console.log(fTimestamp);
+    // console.log(jsDate);
+    // console.log(month);
+
+    blogs.push({ ...doc.data(), publish_date: jsDate, id: doc.id })
+
+    containsMonthYear = (blogMonths, month_year) => {
+      return blogMonths.some(object => object.month_year === month_year)
+    }
+
+    if (!containsMonthYear(blogMonths, month_year)) {
+      blogMonths.push({ month_num: month_num, month: month, year: year, month_year: month_year });
+    }
+
+  });
+
+  // SORT MONTH BY DATE - START FROM LATEST YEAR, MONTH
+  blogMonths.sort((a, b) => b.year - a.year);
+  blogMonths.sort((a, b) => a.month_num - b.month_num);
+
+  // SORT BLOG BY DATE - STARTS FROM THE LATEST BLOG
+  blogs.sort((a, b) => b.publish_date - a.publish_date);
+  console.log(blogMonths);
+  console.log(blogs);
+
+
+}); 
