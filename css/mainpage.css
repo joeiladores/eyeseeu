@@ -70,7 +70,6 @@
 }
 
 .card-button:hover {
-  text-decoration: underline;
   background-color: #1e94de;
   transform: scale(1.04);
   transition-duration: 2ms;
