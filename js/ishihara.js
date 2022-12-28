@@ -31,10 +31,10 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Collection Reference
-const ishiharaRef = collection(db, 'ishihara-page');
+const pageRef = collection(db, 'ishihara-page');
 
 // GET REAL TIME COLLECTION DATA
-onSnapshot(ishiharaRef, (snapshot) => {
+onSnapshot(pageRef, (snapshot) => {
   // let page = [];
   snapshot.docs.forEach((doc) => {
     // page.push({ ...doc.data(), id: doc.id })
@@ -48,7 +48,7 @@ onSnapshot(ishiharaRef, (snapshot) => {
 });
 
 function populateIntroduction(intro) {
-  console.log(intro);
+  // console.log(intro);
   document.querySelector(".introduction").innerHTML =
     `
   <img class="ishihara-bg" src="${intro.intro_bg_image}" alt="" />
@@ -64,7 +64,7 @@ function populateIntroduction(intro) {
 }
 
 function populateInstruction(inst) {
-  console.log(inst);
+  // console.log(inst);
   document.querySelector(".instruction").innerHTML =
     `
     <h2 class="text-center">${inst.instruction_title}</h2>
@@ -73,4 +73,29 @@ function populateInstruction(inst) {
   `;
 }
 
+const ishiharaRef = collection(db, 'ishihara-vcd-38');
 
+// GET REAL TIME COLLECTION DATA
+const q = query(ishiharaRef, orderBy("plate", "asc"));
+onSnapshot(q, (snapshot) => {
+  let plates = [];
+  snapshot.docs.forEach((doc) => {
+    plates.push({ ...doc.data(), id: doc.id })
+
+  });
+
+  // console.log(plates.length);
+  // console.log(plates);
+
+  ishiharaStartTest(plates);
+});
+
+function ishiharaStartTest(plates) {
+
+  
+
+
+
+  console.log(plates.length);
+  console.log(plates);
+}
