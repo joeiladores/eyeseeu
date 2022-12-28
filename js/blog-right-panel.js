@@ -83,9 +83,6 @@ function displayBlogs() {
 
 function displayFilteredBlogs(month, year) {
 
-  console.log("Filtered blogs");
-  console.log("month: " + month + " year: " + year);
-
   const q = query(blogRef, orderBy("publish_date", "desc"));
   onSnapshot(q, (snapshot) => {
     let fTimestamp, jsDate, jsDateString, fmonth, fyear;
@@ -102,8 +99,6 @@ function displayFilteredBlogs(month, year) {
       console.log(fmonth, fyear);
 
       if(month === fmonth && fyear === fyear) {
-
-        console.log("Inside if")
         document.getElementById("blog").innerHTML +=
         `
           <div class="card mb-3 shadow-lg rounded-3">
@@ -123,7 +118,27 @@ function displayFilteredBlogs(month, year) {
           </div>    
         `;
 
-        console.log("After if");
+      }
+      
+      if(month == "all" && year == "all") {
+        document.getElementById("blog").innerHTML +=
+        `
+          <div class="card mb-3 shadow-lg rounded-3">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="${blog.cover_image}" class="card-image img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">${blog.title}</h5>
+                  ${blog.content_preview}
+                  <a href="#" class="btn btn-primary mb-3">Read More</a>
+                  <p class="card-text"><small class="text-muted">${jsDateString}</small></p>
+                </div>
+              </div>
+            </div>
+          </div>    
+        `;
       }
       
     });
@@ -182,6 +197,11 @@ function displayStickyBlogFilter() {
         <a class="list-group-item" data-month=${blog.month} data-year=${blog.year}>${blog.month_year}</a>    
       `
     });
+
+    document.getElementById("blogMonth").innerHTML += 
+    `
+    <a class="list-group-item" data-month="all" data-year="all">All Blogs</a>   
+    `
 
   });
 

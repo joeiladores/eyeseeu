@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="css/blog-right-panel-grid.css" />
+  <link rel="stylesheet" href="css/blog-right-panel.css" />
   <!-- JS -->
 
   <!-- FIREBASE -->
@@ -23,12 +23,12 @@
 
 <body>
 
-  <!-- NAVBAR SECTION -->
+  <!-- NAVBAR SECTION ------------------------------------------------------->
   <nav class="navbar navbar-expand-lg bg-light fixed-top">
     <div class="container">
       <a class="custom-navbarbrand fs-4" href="index.html">
         <img src="photo/main-logo&favicon.png" alt="Logo" width="35" height="45"
-          class="d-inline-block align-text-center">
+          class="d-inline-block align-text-center" />
         <span>EyeSeeU </span>Optical
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -36,7 +36,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="index.html">HOME</a>
           </li>
@@ -48,15 +48,29 @@
               aria-expanded="false">ABOUT
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="about.html#aboutus">About Us</a></li>
-              <li><a class="dropdown-item" href="about.html#team">Meet the Team</a></li>
+              <li>
+                <a class="dropdown-item" href="about.html#aboutus">About Us</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="about.html#team">Meet the Team</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">SERVICES
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="services.html">Services</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="ishihara.html">Ishihara Test</a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="services.html">SERVICES</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="blog.html">BLOG</a>
+            <a class="nav-link" href="blog.html">BLOGS</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="reviews.html">REVIEWS</a>
@@ -68,7 +82,7 @@
       </div>
     </div>
   </nav>
-  <!-- END OF NAVBAR ----------------------------------------------------------------->
+  <!-- END OF NAVBAR ------------------------------------------------------------------>
 
 
 
@@ -89,7 +103,7 @@
     </section>
 
     
-    <aside class="sticky d-flex align-items-center">
+    <aside class="sticky d-flex justify-content-end">
       <div class="right-sidebar border-0 p-2 shadow-lg rounded-3 bg-primary">
         <h5 class="text-center mt-3 text-light">Blogs</h5>
         <ul id="blogMonth" class="list-group border-0 p-2">
