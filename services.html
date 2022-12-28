@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Services</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="css/services.css" type="text/css">
@@ -13,6 +15,7 @@
   <link rel="icon" href="photo/main-logo&favicon.png" type="image/x-icon">
   <script src="js/services.js"></script>
 </head>
+
 <body>
 
   <!-- NAVBAR SECTION ------------------------------------------------------->
@@ -20,7 +23,7 @@
     <div class="container">
       <a class="custom-navbarbrand fs-4" href="index.html">
         <img src="photo/main-logo&favicon.png" alt="Logo" width="35" height="45"
-          class="d-inline-block align-text-center">
+          class="d-inline-block align-text-center" />
         <span>EyeSeeU </span>Optical
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -28,7 +31,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="index.html">HOME</a>
           </li>
@@ -40,12 +43,32 @@
               aria-expanded="false">ABOUT
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="about.html#aboutus">About Us</a></li>
-              <li><a class="dropdown-item" href="about.html#team">Meet the Team</a></li>
+              <li>
+                <a class="dropdown-item" href="about.html#aboutus">About Us</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="about.html#team">Meet the Team</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">SERVICES
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="services.html">Services</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="ishihara.html">Ishihara Test</a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="services.html">SERVICES</a>
+            <a class="nav-link" href="blog.html">BLOGS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="reviews.html">REVIEWS</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contact.html">CONTACT</a>
@@ -54,6 +77,7 @@
       </div>
     </div>
   </nav>
+  <!-- END OF NAVBAR ------------------------------------------------------------------>
 
 
   <!-- PARALLAX SECTION ------------------------------------------------------------------>
@@ -68,83 +92,121 @@
 
     <div class="sidebar border-bottom pt-3">
       <h2 class="text-center">Services</h2>
-      <a class="dropdown-toggle active" data-bs-toggle="collapse" aria-expanded="true" href="#eyeexamSubmenu">Eye Exam</a>
+      <a class="dropdown-toggle active" data-bs-toggle="collapse" aria-expanded="true" href="#eyeexamSubmenu">Eye
+        Exam</a>
       <ul id="eyeexamSubmenu" class="list-group collapse show rounded-0">
         <a class="list-group-item active rounded-0" href="#compre-eye-exam">Comprehensive Eye Exam</a>
         <a class="list-group-item rounded-0" href="#adult-eye-exam">Adult Eye Exam</a>
         <a class="list-group-item rounded-0" href="#child-eye-exam">Pediatric Eye Exam</a>
         <a class="list-group-item rounded-0" href="#senior-eye-exam">Senior Eye Exam</a>
       </ul>
-      <a class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="false" href="#othervisualSubmenu">Other Visual Tests</a>
+      <a class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="false" href="#othervisualSubmenu">Other Visual
+        Tests</a>
       <ul id="othervisualSubmenu" class="list-group collapse rounded-0">
         <a class="list-group-item rounded-0" href="#visual-acuity-test">Visual Acuity Test</a>
         <a class="list-group-item rounded-0" href="#ishihara-test">Ishihara Test</a>
       </ul>
-      <a class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="false" href="#contactsSubmenu">Contact Lense Fitting</a>
+      <a class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="false" href="#contactsSubmenu">Contact Lense
+        Fitting</a>
       <ul id="contactsSubmenu" class="list-group collapse rounded-0">
         <a class="list-group-item rounded-0" href="#contact-lense-fitting">Contact Lense Fitting</a>
       </ul>
     </div>
-     
-    <!-- POPULATE SERVICES CONTENT HERE --> 
+
+    <!-- POPULATE SERVICES CONTENT HERE -->
     <div class="content border-bottom pt-5">
       <div class="content-items pb-5" id="compre-eye-exam">
         <h2>Comprehensive Eye Exam</h2>
         <img class="content-images img-fluid pt-3 pb-3" src="photo/services/services-comprehensive-eye-exam.jpg" alt="">
-        <p>Bypass the wait at your family physician's office! All of our doctors are trained and licensed to diagnose and prescribe medications to treat all ocular and vision problems. There is no need to go to a family doctor's office if you are having vision changes or any eye condition such as an infection, itching, redness, eye pain, etc.. All of these ocular conditions can and should be addressed by a doctor of optometry. Our doctors take care of every aspect of your eye health and vision needs.</p>
+        <p>Bypass the wait at your family physician's office! All of our doctors are trained and licensed to diagnose
+          and prescribe medications to treat all ocular and vision problems. There is no need to go to a family doctor's
+          office if you are having vision changes or any eye condition such as an infection, itching, redness, eye pain,
+          etc.. All of these ocular conditions can and should be addressed by a doctor of optometry. Our doctors take
+          care of every aspect of your eye health and vision needs.</p>
         <p></p>
-        <p>Complete assessments allow for early intervention Many ocular conditions, including some sight threatening ones, initially present without any symptoms but can be detected through routine, annual, comprehensive eye exams. Early diagnosis and treatment can be the difference between sight for life and a visual impairment. Should we find any irregularity during your check-up, we will make sure you understand its nature and severity, and the options you have to address it.</p>
+        <p>Complete assessments allow for early intervention Many ocular conditions, including some sight threatening
+          ones, initially present without any symptoms but can be detected through routine, annual, comprehensive eye
+          exams. Early diagnosis and treatment can be the difference between sight for life and a visual impairment.
+          Should we find any irregularity during your check-up, we will make sure you understand its nature and
+          severity, and the options you have to address it.</p>
         <p>Your routine annual assessment includes:
-          <ul>
-            <li>A complete general & oculo-visual health history of patient & their related family</li>
-            <li>A vision assessment</li>
-            <li>Determination of the most accurate prescription for far, near, and work-station viewing</li>
-            <li>Colour vision, depth and general perception testing</li>
-            <li>Ocular motility evaluation</li>
-            <li>Evaluation of the central nervous system relating to the eyes, ocular muscles and lids</li>
-            <li>Tear film assessment</li>
-            <li>Evaluation of the of the external and internal ocular tissues</li>
-            <li>Retinal evaluation including retinal imaging and scanning</li>
-            <li>Vascular assessment</li>
-            <li>Glaucoma screening, testing, treatment and management</li>
-            <li>Peripheral visual field assessment</li>
-            <li>Contact lens evaluation and fit assessment for those who wear contacts lenses (additional fee for these services)</li>
-          </ul>
+        <ul>
+          <li>A complete general & oculo-visual health history of patient & their related family</li>
+          <li>A vision assessment</li>
+          <li>Determination of the most accurate prescription for far, near, and work-station viewing</li>
+          <li>Colour vision, depth and general perception testing</li>
+          <li>Ocular motility evaluation</li>
+          <li>Evaluation of the central nervous system relating to the eyes, ocular muscles and lids</li>
+          <li>Tear film assessment</li>
+          <li>Evaluation of the of the external and internal ocular tissues</li>
+          <li>Retinal evaluation including retinal imaging and scanning</li>
+          <li>Vascular assessment</li>
+          <li>Glaucoma screening, testing, treatment and management</li>
+          <li>Peripheral visual field assessment</li>
+          <li>Contact lens evaluation and fit assessment for those who wear contacts lenses (additional fee for these
+            services)</li>
+        </ul>
         </p>
       </div>
-      
+
       <div class="content-items pb-5" id="adult-eye-exam">
         <h2>Adult Eye Exams</h2>
         <img class="content-images img-fluid pt-3 pb-3" src="photo/services/services-adult-eye-exam.jpg" alt="">
-        <p>We will evaluate your vision ( and possible need for glasses and / or contact lenses ) as well as your eye health. Our examination includes assessment for conditions such as glaucoma, diabetic retinopathy, macular degeneration and retinal detachment. Some patients will need to have their pupils dilated to allow for better assessment of these conditions.</p>
-        <p>The Philippine Association of Optometrists recommends that adults ( 20-64 years ) have their eyes examined every one to two years. Older adults ( 65 years and older ) should have their eyes examined annually. Some adults may need to have their eyes examined more frequently than this depending on their health, risk factors and medications they take ( e.g. diabetes, family history of glaucoma, etc ). After your initial exam, we can advise you how often you should have your eyes checked based on YOUR particular eye care needs.</p>
-      </div> 
+        <p>We will evaluate your vision ( and possible need for glasses and / or contact lenses ) as well as your eye
+          health. Our examination includes assessment for conditions such as glaucoma, diabetic retinopathy, macular
+          degeneration and retinal detachment. Some patients will need to have their pupils dilated to allow for better
+          assessment of these conditions.</p>
+        <p>The Philippine Association of Optometrists recommends that adults ( 20-64 years ) have their eyes examined
+          every one to two years. Older adults ( 65 years and older ) should have their eyes examined annually. Some
+          adults may need to have their eyes examined more frequently than this depending on their health, risk factors
+          and medications they take ( e.g. diabetes, family history of glaucoma, etc ). After your initial exam, we can
+          advise you how often you should have your eyes checked based on YOUR particular eye care needs.</p>
+      </div>
 
       <div class="content-items pb-5" id="child-eye-exam">
         <h2>Children Eye Exam</h2>
         <img class="content-images img-fluid pt-3 pb-3" src="photo/services/services-child-eye-exam.jpg" alt="">
-        <p>It is important for children to have their eyes examined starting at a young age. The Philippine Association of Optometrists recommends that children have their first eye exam at the age of six ( 6 )months. This may seem young, but it is important to ensure normal ocular health and eye coordination as your young child’s vision is developing. We can assess your child’s ocular health and visual skills such as near vision, distance vision, depth perception, eye movement, peripheral awareness and color vision. Good vision is more than just seeing 20/20!</p>
+        <p>It is important for children to have their eyes examined starting at a young age. The Philippine Association
+          of Optometrists recommends that children have their first eye exam at the age of six ( 6 )months. This may
+          seem young, but it is important to ensure normal ocular health and eye coordination as your young child’s
+          vision is developing. We can assess your child’s ocular health and visual skills such as near vision, distance
+          vision, depth perception, eye movement, peripheral awareness and color vision. Good vision is more than just
+          seeing 20/20!</p>
         <p>The Philippine Association of Optometrists recommends the following frequency of eye exams for children:</p>
         <ul>
           <li>Infants and toddlers ( birth to 24 months )- by age 6 months</li>
           <li>Preschool ( 2 to 5 years )- at age 3, and prior to entering elementary school</li>
           <li>School age ( 6 to 19 years )-annually</li>
         </ul>
-        <p>Some children have a higher risk of having visual problems, and therefore, may need to be seen more frequently. Some of the factors which may indicate high risk includes premature birth, low birth weight, family history of strabismus ( eye turn ) or amblyopia ( lazy eye ), children with reading and/or learning disabilities.</p>
-      </div> 
+        <p>Some children have a higher risk of having visual problems, and therefore, may need to be seen more
+          frequently. Some of the factors which may indicate high risk includes premature birth, low birth weight,
+          family history of strabismus ( eye turn ) or amblyopia ( lazy eye ), children with reading and/or learning
+          disabilities.</p>
+      </div>
 
       <div class="content-items pb-5" id="senior-eye-exam">
         <h2>Senior Eye Exam</h2>
         <img class="content-images img-fluid pt-3 pb-3" src="photo/services/services-senior-eye-exam.jpg" alt="">
-        <p>By approximately age 60 there is an increased risk of developing cataracts, glaucoma, macular degeneration and other eye diseases. This is particularly true in those with family histories, certain nationalities/ethnic groups, and certain lifestyles/habits. Many eye diseases have no symptoms in their early stages and if detected early, intervention will help reduce the risk of permanent vision loss.</p>
-        <p>ESU Optical covers the basic components of a comprehensive eye exam annually for seniors aged 65 and older. Our doctors recommend additional retinal assessments annually for all patients, especially those over the age of 60. This allows for earlier detection of retinal disease in this higher risk group.</p>          
-      </div> 
+        <p>By approximately age 60 there is an increased risk of developing cataracts, glaucoma, macular degeneration
+          and other eye diseases. This is particularly true in those with family histories, certain nationalities/ethnic
+          groups, and certain lifestyles/habits. Many eye diseases have no symptoms in their early stages and if
+          detected early, intervention will help reduce the risk of permanent vision loss.</p>
+        <p>ESU Optical covers the basic components of a comprehensive eye exam annually for seniors aged 65 and older.
+          Our doctors recommend additional retinal assessments annually for all patients, especially those over the age
+          of 60. This allows for earlier detection of retinal disease in this higher risk group.</p>
+      </div>
 
       <div class="content-items pb-5" id="visual-acuity-test">
         <h2>Visual Acuity Test</h2>
-        <img class="content-images img-fluid pt-3 pb-3" src="photo/services/services-other-visual-tests-visual-acuity.jpg" alt="Snellen Graph Photo">
+        <img class="content-images img-fluid pt-3 pb-3"
+          src="photo/services/services-other-visual-tests-visual-acuity.jpg" alt="Snellen Graph Photo">
         <h5>What is a visual acuity test?</h5>
-        <p>A visual acuity test is an eye exam that checks how well you see the details of a letter or symbol from a specific distance.</p><p>Visual acuity refers to your ability to discern the shapes and details of the things you see. It’s just one factor in your overall vision. Others include color vision, peripheral vision, and depth perception.</p><p>There are several different types of visual acuity tests, most of which are very simple. Depending on the type of test and where it’s conducted, the exam can be performed by:</p>
+        <p>A visual acuity test is an eye exam that checks how well you see the details of a letter or symbol from a
+          specific distance.</p>
+        <p>Visual acuity refers to your ability to discern the shapes and details of the things you see. It’s just one
+          factor in your overall vision. Others include color vision, peripheral vision, and depth perception.</p>
+        <p>There are several different types of visual acuity tests, most of which are very simple. Depending on the
+          type of test and where it’s conducted, the exam can be performed by:</p>
         <ul>
           <li>an optometrist</li>
           <li>an ophthalmologist</li>
@@ -154,40 +216,87 @@
         </ul>
         <p>No risks are associated with visual acuity tests, and you don’t need any special preparation.</p>
         <h3>Purpose of the test</h3>
-        <p>You may need an eye exam if you feel you’re experiencing a vision problem or your vision has changed. A visual acuity test is one part of a comprehensive eye exam.</p><p>Children frequently take visual acuity tests. Early testing and detection of vision problems can prevent issues from getting worse.</p><p>Optometrists, driver’s license bureaus, and many other organizations use this test to check your ability to see.</p>
+        <p>You may need an eye exam if you feel you’re experiencing a vision problem or your vision has changed. A
+          visual acuity test is one part of a comprehensive eye exam.</p>
+        <p>Children frequently take visual acuity tests. Early testing and detection of vision problems can prevent
+          issues from getting worse.</p>
+        <p>Optometrists, driver’s license bureaus, and many other organizations use this test to check your ability to
+          see.</p>
         <h3>How the visual acuity test is performed</h3>
         <p>Two commonly used tests are Snellen and random E.</p>
-        <h4>Snellen</h4><p>The Snellen test uses a chart of letters or symbols. You’ve probably seen the chart in a school nurse’s office or eye doctor’s office. The letters are different sizes and arranged in rows and columns. Viewed from 14 to 20 feet away, this chart helps determine how well you can see letters and shapes.</p><p>During the test, you’ll sit or stand a specific distance away from the chart and cover one eye. You’ll read out loud the letters you see with your uncovered eye. You’ll repeat this process with your other eye. Typically, your doctor will ask you to read smaller and smaller letters until you can no longer accurately distinguish letters.</p>
-        <h4>Random E</h4><p>In the random E test, you’ll identify the direction the letter “E” is facing. Looking at the letter on a chart or projection, you’ll point in the direction the letter is facing: up, down, left, or right.</p><p>These tests tend to be more sophisticated when performed at an eye clinic than in a nurse’s office. At an eye doctor’s office, the chart might be projected or shown as a mirror reflection. You’ll look at the chart through a variety of different lenses. Your doctor will switch out the lenses until you can see the chart clearly. This helps determine your ideal eyeglass or contact lens prescription, if you need vision correction.</p>
+        <h4>Snellen</h4>
+        <p>The Snellen test uses a chart of letters or symbols. You’ve probably seen the chart in a school nurse’s
+          office or eye doctor’s office. The letters are different sizes and arranged in rows and columns. Viewed from
+          14 to 20 feet away, this chart helps determine how well you can see letters and shapes.</p>
+        <p>During the test, you’ll sit or stand a specific distance away from the chart and cover one eye. You’ll read
+          out loud the letters you see with your uncovered eye. You’ll repeat this process with your other eye.
+          Typically, your doctor will ask you to read smaller and smaller letters until you can no longer accurately
+          distinguish letters.</p>
+        <h4>Random E</h4>
+        <p>In the random E test, you’ll identify the direction the letter “E” is facing. Looking at the letter on a
+          chart or projection, you’ll point in the direction the letter is facing: up, down, left, or right.</p>
+        <p>These tests tend to be more sophisticated when performed at an eye clinic than in a nurse’s office. At an eye
+          doctor’s office, the chart might be projected or shown as a mirror reflection. You’ll look at the chart
+          through a variety of different lenses. Your doctor will switch out the lenses until you can see the chart
+          clearly. This helps determine your ideal eyeglass or contact lens prescription, if you need vision correction.
+        </p>
         <h3>Understanding your test results</h3>
-        <p>Visual acuity is expressed as a fraction, such as 20/20. Having 20/20 vision means that your visual acuity at 20 feet away from an object is normal. If you have 20/40 vision, for example, that means you need to be 20 feet away to see an object that people can normally see from 40 feet away.</p><p>If your visual acuity is not 20/20, you may need corrective eyeglasses, contact lenses, or surgery. You might also have an eye condition, such as an eye infection or injury, that needs to be treated. You and your doctor will discuss your test results as well as any treatment or correction that might be necessary.</p>
+        <p>Visual acuity is expressed as a fraction, such as 20/20. Having 20/20 vision means that your visual acuity at
+          20 feet away from an object is normal. If you have 20/40 vision, for example, that means you need to be 20
+          feet away to see an object that people can normally see from 40 feet away.</p>
+        <p>If your visual acuity is not 20/20, you may need corrective eyeglasses, contact lenses, or surgery. You might
+          also have an eye condition, such as an eye infection or injury, that needs to be treated. You and your doctor
+          will discuss your test results as well as any treatment or correction that might be necessary.</p>
       </div>
 
       <div class="content-items pb-5" id="ishihara-test">
         <h2>Ishihara Test</h2>
         <img class="content-images img-fluid pt-3 pb-3" src="photo/services/services-ishihara-pattern.webp" alt="">
-        <h5>Colour blindness (or colour vision deficiency) is the name given to the condition where people find it difficult to identify or distinguish different colours. There are colour blind tests that you can take online to detect the presence and type of colour blindness. The Ishihara test is one of the most common, and here we’ll show you how this simple test works.</h5>
+        <h5>Colour blindness (or colour vision deficiency) is the name given to the condition where people find it
+          difficult to identify or distinguish different colours. There are colour blind tests that you can take online
+          to detect the presence and type of colour blindness. The Ishihara test is one of the most common, and here
+          we’ll show you how this simple test works.</h5>
 
         <div class="card mb-5 mt-3 p-2 bg-secondary text-white">
           <div class="row g-0">
             <div class="col-md-6 align-self-center">
               <div class="card-body">
                 <h2 class="card-title">How do you test for colour blindness?</h2>
-                <p>There are many colour blind tests that detect the presence and type of colour blindness. The Ishihara test is a common one that was developed in 1917 by Japanese ophthalmologist, Shinobu Ishihara. It’s become one of the most common ways to test for red and green colour deficiencies, particularly in children. The test involves identifying the number or shape contained within a series of different coloured dots, also known as Ishihara plates.</p>
-                <p>Other common colour vision tests involve colour arrangement in which you’re asked to arrange colours in order of their shade or to identify matching colours.</p>
+                <p>There are many colour blind tests that detect the presence and type of colour blindness. The Ishihara
+                  test is a common one that was developed in 1917 by Japanese ophthalmologist, Shinobu Ishihara. It’s
+                  become one of the most common ways to test for red and green colour deficiencies, particularly in
+                  children. The test involves identifying the number or shape contained within a series of different
+                  coloured dots, also known as Ishihara plates.</p>
+                <p>Other common colour vision tests involve colour arrangement in which you’re asked to arrange colours
+                  in order of their shade or to identify matching colours.</p>
               </div>
             </div>
             <div class="col-md-6">
-              <div class="card-body">              
-                <p>Some of these colour blind tests are available online such as the City University Test (developed by City University London) and the Farnsworth D-15 test. These can be more useful in detecting blue light deficiencies, which the Ishihara test doesn’t cover.</p><p>While online colour blind tests are a useful indication of a colour vision deficiency, for a proper diagnosis book an eye test and ask your optician to add one to your visit.</p> 
+              <div class="card-body">
+                <p>Some of these colour blind tests are available online such as the City University Test (developed by
+                  City University London) and the Farnsworth D-15 test. These can be more useful in detecting blue light
+                  deficiencies, which the Ishihara test doesn’t cover.</p>
+                <p>While online colour blind tests are a useful indication of a colour vision deficiency, for a proper
+                  diagnosis book an eye test and ask your optician to add one to your visit.</p>
                 <a href="contact.html#book" class="btn btn-light">Book an Eye Test</a>
               </div>
             </div>
           </div>
         </div>
-        
+
         <h2>How does the Ishihara colour blind test work?</h2>
-        <p>You’ll easily recognise an Ishihara test — it’s largely used on children to identify types of colour deficiencies — and is sometimes available online. </p><p>Your optician will have a book made up of 38 different plates, known as pseudoisochromatic plates. Each plate is printed with different coloured dots of differing brightness, density and size. The dots are arranged so that those of a similar colour form a number or shape among a background of dots in a different colour. </p><p>They will show you a range of these plates and ask you to identify the hidden shape or number. Colours that may at first seem equal (or ‘iso) to your brain, are shown to you together and it’s up to your brain and eyes to detect the difference in order to see the hidden shape or number. People with normal colour vision are able to work out the false (or ‘pseudo’) similarity between the two colours and see the hidden shape or number with no problem. </p><p>If you are unable to identify some or all of the hidden figures it will indicate a colour vision deficiency and your optician will be able to make a diagnosis of colour blindness.</p>
+        <p>You’ll easily recognise an Ishihara test — it’s largely used on children to identify types of colour
+          deficiencies — and is sometimes available online. </p>
+        <p>Your optician will have a book made up of 38 different plates, known as pseudoisochromatic plates. Each plate
+          is printed with different coloured dots of differing brightness, density and size. The dots are arranged so
+          that those of a similar colour form a number or shape among a background of dots in a different colour. </p>
+        <p>They will show you a range of these plates and ask you to identify the hidden shape or number. Colours that
+          may at first seem equal (or ‘iso) to your brain, are shown to you together and it’s up to your brain and eyes
+          to detect the difference in order to see the hidden shape or number. People with normal colour vision are able
+          to work out the false (or ‘pseudo’) similarity between the two colours and see the hidden shape or number with
+          no problem. </p>
+        <p>If you are unable to identify some or all of the hidden figures it will indicate a colour vision deficiency
+          and your optician will be able to make a diagnosis of colour blindness.</p>
 
         <div class="card mb-5 mt-3 p-2 bg-secondary text-white">
           <div class="row g-0">
@@ -197,8 +306,11 @@
             <div class="col-md-6">
               <div class="card-body">
                 <h2 class="card-title">Check your vision with our colour blind test</h2>
-                <p class="card-text"><a href="services/ishihara.html" class="btn btn-primary">Click to try Ishihara Test</a></p>
-                <p>There are many other types of eye tests that your optician might perform during an eye examination - Snellen test, Eye dilation exam, and automation refraction test, find out more by visiting our clinic.</p>
+                <p class="card-text"><a href="services/ishihara.html" class="btn btn-primary">Click to try Ishihara
+                    Test</a></p>
+                <p>There are many other types of eye tests that your optician might perform during an eye examination -
+                  Snellen test, Eye dilation exam, and automation refraction test, find out more by visiting our clinic.
+                </p>
               </div>
             </div>
           </div>
@@ -207,58 +319,85 @@
         <div class="accordion accordion-flush" id="accordionFlushExample">
           <div class="accordion-item">
             <h1 class="accordion-header" id="flush-headingOne">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                 <h4>What are the three types of colour blindness?</h4>
               </button>
             </h1>
-            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+              data-bs-parent="#accordionFlushExample">
               <div class="accordion-body">
-                <p>The Ishihara test is used to detect the most common types of colour blindness, which are categorised as red-green colour deficiencies (known as protanomaly and deuteranomaly).</p>
-                <p>These are general terms that cover a range of types and severities, but broadly mean that people are unable to see or differentiate colours that have red or green as part of the whole colour. So for example, people with a red deficiency will find it difficult to see the difference between blue and purple because they are unable to detect the red properties of purple.</p>
-                <p>Your optician might carry out a colour arrangement test too, to confirm the results from the Ishihara test, as well as testing for the blue-light deficiency (tritanomaly), which an Ishihara test doesn’t test for.</p>
+                <p>The Ishihara test is used to detect the most common types of colour blindness, which are categorised
+                  as red-green colour deficiencies (known as protanomaly and deuteranomaly).</p>
+                <p>These are general terms that cover a range of types and severities, but broadly mean that people are
+                  unable to see or differentiate colours that have red or green as part of the whole colour. So for
+                  example, people with a red deficiency will find it difficult to see the difference between blue and
+                  purple because they are unable to detect the red properties of purple.</p>
+                <p>Your optician might carry out a colour arrangement test too, to confirm the results from the Ishihara
+                  test, as well as testing for the blue-light deficiency (tritanomaly), which an Ishihara test doesn’t
+                  test for.</p>
               </div>
             </div>
           </div>
           <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingTwo">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                 <h4>At what age does the colour blindess detected?</h4>
               </button>
             </h2>
-            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+              data-bs-parent="#accordionFlushExample">
               <div class="accordion-body">
-                <p>It’s likely that red-green colour deficiency would be picked up during childhood, and opticians may include an Ishihara test during a children’s eye test to spot this early. But colour blindness can happen at any age and can often develop as a result of certain health conditions, like diabetes and multiple sclerosis, or as a consequence of the eye disease glaucoma. Medications or exposure to certain chemicals can also cause colour deficiencies.</p>
-                <p>So if you notice any changes in your colour vision, you should see your optician who can check this for you. Colour vision tests aren’t part of our usual eye tests, so just let us know if you’d like one.</p>
+                <p>It’s likely that red-green colour deficiency would be picked up during childhood, and opticians may
+                  include an Ishihara test during a children’s eye test to spot this early. But colour blindness can
+                  happen at any age and can often develop as a result of certain health conditions, like diabetes and
+                  multiple sclerosis, or as a consequence of the eye disease glaucoma. Medications or exposure to
+                  certain chemicals can also cause colour deficiencies.</p>
+                <p>So if you notice any changes in your colour vision, you should see your optician who can check this
+                  for you. Colour vision tests aren’t part of our usual eye tests, so just let us know if you’d like
+                  one.</p>
               </div>
             </div>
           </div>
           <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingThree">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                 <h4>Can colour blindess be cured?</h4>
               </button>
             </h2>
-            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+              data-bs-parent="#accordionFlushExample">
               <div class="accordion-body">
-                <p>Unfortunately, there is currently no known cure or treatment for inherited colour blindness. Those with the condition will find that they can adapt to it to some extent but may not be able to pursue professions where accurate colour vision is required. If a colour vision deficiency is developed as a result of illness, injury or medication, addressing the underlying condition may help.</p>
+                <p>Unfortunately, there is currently no known cure or treatment for inherited colour blindness. Those
+                  with the condition will find that they can adapt to it to some extent but may not be able to pursue
+                  professions where accurate colour vision is required. If a colour vision deficiency is developed as a
+                  result of illness, injury or medication, addressing the underlying condition may help.</p>
               </div>
             </div>
           </div>
           <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingThree">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                 <h4>Are online colour blind tests reliable?</h4>
               </button>
             </h2>
-            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+              data-bs-parent="#accordionFlushExample">
               <div class="accordion-body">
-                <p>Some colour blind tests online can give an indication of a possible problem with your colour vision, but they’re not always very reliable and can ultimately never provide an official diagnosis. For this reason, online vision tests should never replace a visit to your optician.</p><p>If you’d like a colour deficiency test for you or your child, book an eye test and ask your optician to add one to your visit.</p>
+                <p>Some colour blind tests online can give an indication of a possible problem with your colour vision,
+                  but they’re not always very reliable and can ultimately never provide an official diagnosis. For this
+                  reason, online vision tests should never replace a visit to your optician.</p>
+                <p>If you’d like a colour deficiency test for you or your child, book an eye test and ask your optician
+                  to add one to your visit.</p>
               </div>
             </div>
           </div>
 
         </div>
-  
+
       </div>
 
       <div class="content-items pb-5" id="contact-lense-fitting">
@@ -281,11 +420,12 @@
           <li>Unsurpassed service and care</li>
           <li>Many brands in stock</li>
           <li>Ability to order your contact lenses directly from us at any time</li>
-          <li>Direct delivery of your lenses to your home or office or courier services available at no to little cost</li>
+          <li>Direct delivery of your lenses to your home or office or courier services available at no to little cost
+          </li>
           <li>Extremely competitive prices</li>
           <li>Security in knowing that your lenses are properly fit and not harmful to your eyes.</li>
         </ul>
-      </div> 
+      </div>
 
     </div>
   </div>
@@ -295,8 +435,8 @@
 
 
 
-      
-  
+
+
 
 
 
@@ -306,6 +446,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
     crossorigin="anonymous"></script>
-  
+
 </body>
+
 </html>
