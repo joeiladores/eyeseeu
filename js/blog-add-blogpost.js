@@ -87,7 +87,7 @@ document.getElementById("btnUpload").addEventListener("click", (e) => {
 
   uploadTask.on('state_changed',
     (snapshot) => {
-      percentValue = Math.floor(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      percentValue = Math.floor((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
       console.log('Upload is ' + percentValue + '% done, ' + snapshot.totalBytes);
     },
     (error) => {
@@ -126,6 +126,8 @@ blogForm.addEventListener("submit", (e) => {
     .then(() => {
       blogForm.reset();
     });
+
+    // TODO: if add not successful then delete the uploaded image
 
 
 });

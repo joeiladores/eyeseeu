@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ishihara Test</title>
+  <!-- BOOTSTRAP -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css" />
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/ishihara.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- JS -->
+
+  <!-- FIREBASE -->
+  <script defer type="module" src="js/ishihara.js"></script>
+</head>
+
+<body>
+  <!-- NAVBAR SECTION ---------------------------------------------------------------->
+  <nav class="navbar navbar-expand-lg bg-light fixed-top">
+    <div class="container">
+      <a class="custom-navbarbrand fs-4" href="index.html">
+        <img src="photo/main-logo&favicon.png" alt="Logo" width="35" height="45"
+          class="d-inline-block align-text-center" />
+        <span>EyeSeeU </span>Optical
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="location.html">LOCATION</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="about.html" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">ABOUT
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="about.html#aboutus">About Us</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="about.html#team">Meet the Team</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">SERVICES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">CONTACT</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END OF NAVBAR ------------------------------------------------------------------>
+
+  <div class="introduction p-3 text-center shadow-lg rounded-3">
+    <img class="ishihara-bg" src="photo/ishihara/Ishihara-Blue-bg-v4.jpg" alt="" />
+    <h2 class="pb-3">Online Ishihara Test for Color Blindness</h2>
+    <div>
+      <img class="img-fluid px-5 pb-3" src="photo/ishihara/colour-blindness_h.jpg" alt="" />
+    </div>
+    <div class="content px-5">
+      <p>
+        This online Ishihara color blindness test is a simple method to
+        diagnose the existence of red-green deficiency. Red-green deficiency
+        means having problems distinguishing reds and greens and is by far the
+        most common form of color vision deficiency.
+      </p>
+      <p>
+        This test was originally designed by Dr Shinobu Ishihara in 1917 and
+        this tool has all 38 Ishihara plates. Each plate contains a circle of
+        dots appearing randomized in color and size. Within the pattern are
+        dots which form a number or a colored line visible to those with
+        normal color vision and invisible, or difficult to see, for those with
+        a red-green color vision defect.
+      </p>
+      <p>
+        To pass each test you must identify the hidden number or line. At any
+        time you can reveal the answer and at the end of the test you will see
+        the test results.
+      </p>
+      <p>
+        If you suffer from red-blindness (protanopia), you are unable to see
+        the color red. If you suffer from green-blindness (deuteranopia), you
+        are unable to see the color green.
+      </p>
+      <p>
+        If you suffer from red-weakness (protanomaly), you will have some
+        difficulty to see the color red. If you suffer from green-weakness
+        (deuteranomaly), you will have some difficulty to see the color green.
+      </p>
+    </div>
+  </div>
+  <br />
+  <div class="instruction my-5 p-5 shadow-lg rounded-3">
+    <h2 class="text-center">Instruction</h2>
+    <p>
+      Plates 1 – 25 each contain a number, plates 26 – 38 contain one or two
+      wiggly lines. To pass each test you must identify the correct number, or
+      correctly trace the wiggly lines.
+    </p>
+    <ol>
+      <li>
+        Sit approximately 75cm from your monitor, with each circle set at eye
+        level.
+      </li>
+      <li>
+        Preferably have mild natural light and no glare on your screen.
+        Interior lights and glare can alter the color of the pictures.
+      </li>
+      <li>
+        Attempt to identify the hidden number or line within 5 seconds then
+        click on the image (left mouse button).
+      </li>
+      <li>
+        Upon left clicking, the answer will be revealed along with an analysis
+        explaining your condition if you got it wrong.
+      </li>
+      <li>
+        Continue to the next Ishihara test, Complete them all to help gauge
+        your color blindness severity.
+      </li>
+      <li>
+        The result of the test will be shown after completion of the test.
+      </li>
+    </ol>
+    <br />
+    <h5>Notes:</h5>
+    <ul>
+      <li>
+        You can toggle back and forth between the original plate and the
+        answer by clicking on the plate itself.
+      </li>
+      <li>
+        <strong>This test cannot guarantee complete accuracy. Your monitor and
+          quality loss of online images may affect the original colors used.
+          Should these tests suggest that you may be color blind, you should
+          seek professional confirmation.</strong>
+      </li>
+    </ul>
+  </div>
+
+  <div class="ishihara-test my-5 pt-3 px-5 shadow-lg rounded-3">
+    <div class="plate-name my-2 pb-3 text-center">
+      <h2>Ishihara Test</h2>
+    </div>
+    <div class="progress mt-2">
+      <div class="progress-bar" role="progressbar" aria-label="Progress bar" style="width: 10%" aria-valuenow="10"
+        aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <div class="ishihara-container d-grid mb-5 pb-5">
+      <div class="row">
+        <!-- LEFT PANEL - ISHIHARA PLATE --------------------------------------->
+
+        <div class="plate-container col-md-6">
+          <div class="plate-name my-2 text-center">
+            <h5>Plate 1</h5>
+          </div>
+          <img class="ishihara-plate img-fluid" src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01_12.png?alt=media&token=d364a539-2bb7-4ef4-8e0c-ff78bb604a18
+          " alt="Ishihara Plate 1" />
+        </div>
+
+        <!-- RIGHT PANEL - DISPLAY --------------------------------------------->
+        <div class="display col pt-5 g-1">
+          <h5>What number does the patient see?</h5>
+          <div class="options col d-flex gap-2 flex-wrap mb-5">
+            <button type="button" class="btn btn-primary">15</button>
+            <button type="button" class="btn btn-primary">9</button>
+            <button type="button" class="btn btn-primary">12</button>
+            <button type="button" class="btn btn-primary">21</button>
+            <button type="button" class="btn btn-primary">I don't know</button>
+            <button type="button" class="btn btn-dark">Next</button>
+          </div>
+
+
+          <div class="display col p-3 shadow rounded-3">
+            <h5>What did you see?</h5><hr>
+            <p>Everyone should see number 12
+            </p>
+
+
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="result text-center" style="display: none">
+    <h1>Result</h1>
+  </div>
+
+  <div class="feature-optician mt-5">
+    <h3 class="text-center text-light">Do I still need an eye test with my optician?</h3>
+    <div class="feature-content shadow-lg bg-light p-5 mt-3 rounded-3">
+      <p>Online eye tests should never replace in-person eye examinations with your optician. While they may be able to
+        give you some indication of your eyesight between your regular eye tests, results are not accurate, and cannot
+        detect the existence of an underlying eye condition or visual impairment.</p>
+      <p>Visiting your optician regularly is the only way to diagnose any changes to your vision or eye health.
+        Opticians use a range of tests and equipment during an eye exam to check the overall health of your eyes
+        thoroughly and advise the necessary treatments — whether that’s wearing glasses, contact lenses or referring you
+        to a specialist. Your optician will also have an idea of your eye health history, so it’s always best to discuss
+        any changes to your eyecare with them before making any decisions.</p>
+        <a href="contact.html" class="btn btn-primary">Book an Eye Test</a>
+    </div>
+
+
+
+
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
