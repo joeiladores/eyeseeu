@@ -87,7 +87,7 @@ function displayPlates(plate) {
 
   let progressValue = Math.floor((plate.plate / 38) * 100);
 
-  // FETCH AND DISPLAY PROGRESS BAR
+  // COMPUTE AND DISPLAY PROGRESS BAR
   document.querySelector(".progress").innerHTML =
     `
     <div class="progress-bar" role="progressbar" aria-label="Progress bar" style="width: ${progressValue}%" aria-valuenow="${progressValue}"
@@ -111,7 +111,7 @@ function displayPlates(plate) {
     option = plate.options[i];
     // console.log(option);
     // console.log(typeof option)
-    // TODO: CATCH ERROR IN OPTION I DONT KNOW AND ONCLICK TO SPACES NOT ON
+    // TODO: CATCH ERROR IN OPTION "I DONT KNOW" AND ONCLICK TO SPACES NOT ON
     if (option == "I don't know") {
       temp = "nothing"
       console.log(`temp: ${temp}`);
@@ -127,7 +127,22 @@ function displayPlates(plate) {
     `
     ${optionsElement}
     <button id="nextBtn" type="button" class="btn btn-dark" data-option="next">Next</button>
+  `;
+
+    // FETCH AND DISPLAY PLATE INFORMATION
+  let info = "";
+  for (let i = 0; i < plate.display.length; i++) {
+    info += `<p>${plate.display[i]}</p>`;
+  }
+
+  document.querySelector(".display").innerHTML =
+    `
+      <h5>What did you see?</h5>
+      <hr>
+      ${info}
   `
+  console.log(document.querySelector(".display").innerHTML);
+
 }
 
 function startTest() {
@@ -167,12 +182,12 @@ function startTest() {
         answer.push(selectedOption);
         console.log(`Pushed to answer[]: ${selectedOption}`);
         console.log(`Answer[]: ${answer}`);
-      }  
+      }
       else if (option === "next" && selectedOption === "") {
         alert("Please select answer");
       }
       else {
-        // ONLY CLICK ON BUTTON OPTIONS AND NOT THE SPACES OUTSIDE THE ELEMENT
+        // ONLY CLICK ON BUTTON OPTIONS AND NOT THE SPACES OUTSIDE THE ELEMENTS
         if (targetElement.type === "button") {
           console.log("Clicked on a button");
           selectedOption = option;
@@ -183,11 +198,20 @@ function startTest() {
         }
       }
 
+    // ADD EVENT LISTENER TO PLATE IMAGE
+    // document.querySelector(".ishihara-plate").addEventListener("click", () => {
+    //   e.preventDefault();
+      
+      
+
+    // }
+
       // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
       displayPlates(plates[counter]);
 
       if (counter === 37) {
         console.log("End of plates");
+        console.log(`Final Answer[]: ${answer}`);
         // TODO: COMPUTE RESULTS AND DISOPLAY AS RESPONSIVE TABLE
       }
 
