@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Image Uploader</title>
+  <!-- BOOTSTRAP -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css" />
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- JS -->
+
+  <!-- FIREBASE -->
+  <script defer type="module" src="js/upload-images.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #blog-form,
+    .bar,
+    .uploadPercentage,
+    .uploadedImage,
+    .uploadedImageURL {
+      margin-left: 6.25em;
+      margin-right: 6.25em;
+    }
+
+    .bar {
+      height: 25px;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+    }
+
+    .image {
+      height: 200px;
+      width: auto;
+      object-fit: contain;
+      display: none;
+      border: 5px solid cornflowerblue;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <form id="blog-form" class="p-5 bg-light border border-1 shadow-lg my-5">
+    <div class="text-center">
+      <h3>Upload Images to Firebase Storage</h3>
+    </div>
+    
+    <div class="mt-5 mb-3">
+      <!-- <label for="coverImage" class="form-label">Cover Image</label> -->
+      <input class="form-control" type="file" id="coverImage" required>
+    </div>
+    
+    <button type="submit" value="submit" class="btn btn-primary col-md-3">Submit</button>
+
+
+    <!-- <div class="input-group mb-3">
+      <input type="file" class="form-control" id="uploadCoverImage">
+      <label class="input-group-text" for="uploadCoverImage">Upload Cover Image</label>
+    </div>     -->
+  </form>
+
+  <div class="bar my-2 bg-secondary shadow-lg">
+    <div class="progress bg-primary rounded-0"></div>
+  </div>
+  <div class="uploadPercentage col-md-6 mx-auto text-center"><h5>0%</h5></div>
+
+  <div class="uploadedImageURL mb-3">
+    <label for="url" class="form-label">Uploaded Image URL</label>
+    <textarea class="form-control" id="url" rows="5" required></textarea>
+  </div>
+
+  <div class="uploadedImage my-5 d-flex justify-content-center">
+    <img class="image" alt="">
+  </div>
+
+  <div class="text-center"><p>.</p></div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+  crossorigin="anonymous"></script>
+</body>
+</html>
