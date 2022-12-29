@@ -12,16 +12,15 @@ html {
   height: 100%;
 }
 
-
 /* --NAVBAR STYLES-- */
-.nav-link{
+.nav-link {
   color: black;
 }
 
 .nav-link:hover {
-  color: #009EFF;
+  color: #009eff;
   transform: scale(1.03);
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 }
 
 .custom-navbarbrand {
@@ -35,14 +34,12 @@ html {
 .custom-navbarbrand:hover {
   color: black;
   transform: scale(1.03);
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 .navbar {
-  box-shadow: 0 2px 4px 1px rgba(0,0,0,.3);
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.3);
 }
-
-
 
 /* HOME MAIN STYLES */
 .main-section {
@@ -92,10 +89,9 @@ html {
 
 /* RESPONSIVE */
 @media screen and (max-width: 991px) {
-  .main-section-text h3
- {
-   font-size: 3rem;
- }
+  .main-section-text h3 {
+    font-size: 3rem;
+  }
 }
 
 @media screen and (max-width: 576px) {
@@ -111,9 +107,7 @@ html {
     padding-left: 2em;
     padding-right: 2em;
   }
-
 }
-
 
 /* CAROUSEL STYLES */
 /* TODO: FIX THIS HINDI NAG RESPONSIVE */
@@ -127,65 +121,59 @@ html {
   min-height: 100vh;
 } */
 
-
 .carousel-section .carousel-item {
-	min-height: 100vh;
-	background-position: center;
-	background-size: cover;
-	position: relative;
-	z-index: 1;
+  min-height: 100vh;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 1;
 }
 
 .carousel-section .carousel-item .container {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%,-50%);
-	text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .carousel-section .carousel-item h2 {
-	font-size: 80px;
-	color: white;
-	margin:0 0 10px;
+  font-size: 80px;
+  color: white;
+  margin: 0 0 10px;
 }
 
 .carousel-section .carousel-item p {
-	font-size: 30px;
-	margin:0;
-	color: white;
+  font-size: 30px;
+  margin: 0;
+  color: white;
 }
 
 /* IF SCREEN BECOMES AMALLWER */
 /* THIS IS MEDIUM SCREEN */
-@media(max-width: 767px) {
+@media (max-width: 767px) {
   .carousel-section .carousel-item h2 {
-  	font-size: 45px;
+    font-size: 45px;
   }
   .carousel-section .carousel-item p {
-  	font-size: 22px;
+    font-size: 22px;
   }
 }
-
 
 /* ABOUT SECTION LINK IN MAIN STYLES */
 .team-section-link-img {
   border-radius: 8px;
   object-fit: cover;
   height: 50%;
-  overflow-y:auto;
+  overflow-y: auto;
 }
-
 
 /* STYLES FOR TEAM SECTION (DOCTORS)  IN ABOUT PAGE*/
 .team-section {
-  background-color:#8FB9A8;
+  background-color: #8fb9a8;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
-
-
-
 
 /* STYLE FOR LOCATION ACCORDION */
 .accordion {
@@ -193,24 +181,90 @@ html {
 }
 
 #accordion-card-bg {
-  background-color:#8FB9A8;
+  background-color: #8fb9a8;
   opacity: 0.8;
-  color:black;
-  text-align: center;  
+  color: black;
+  text-align: center;
 }
-
 
 /* STYLES FOR FOOTER */
 footer {
-  background-color: #8FB9A8;
-  color: black;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 30px 0;
 }
 
+footer h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
 
+footer h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 60px;
+  height: 3px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #009eff);
+}
+
+footer p {
+  font-size: 14px;
+}
+footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+footer li {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.footer-link {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  padding-left: 7px;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+.copyright {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+#social-container {
+  display: inline-block;
+}
+
+.socials {
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 20px;
+  background: rgb(36, 34, 34);
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border-radius: 50px;
+  color: #fff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.socials:hover {
+  color: black;
+  background-color: #fff;
+  cursor: pointer;
+}
 
 /* STYLES FOR SERVICES CARD HOVER*/
 .other-services-section-card .card:hover {
@@ -219,160 +273,153 @@ footer {
   border-radius: 8px;
 }
 
-
-
 /* PARALLAX STYLES */
-#parallax-section .parallax-location{
+#parallax-section .parallax-location {
   color: white;
-  padding-top: 200px; 
-  padding-bottom: 200px; 
-  padding-left: 100px;  
-  overflow: hidden; 
-  position: relative; 
-  width: 100%; 
-  background-image: url(photo/location-p.jpg); 
-  background-attachment: fixed; 
-  background-size: cover; 
-  background-repeat: no-repeat; 
+  padding-top: 200px;
+  padding-bottom: 200px;
+  padding-left: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background-image: url(photo/location-p.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-position: top center;
 }
 
 #parallax-section .parallax-about {
-  padding-top: 200px; 
-  padding-bottom: 200px; 
+  padding-top: 200px;
+  padding-bottom: 200px;
   padding-left: 100px;
-  overflow: hidden; 
-  position: relative; 
-  width: 100%; 
-  background-image: url(photo/tso-clinic-digos.jpg); 
-  background-attachment: fixed; 
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background-image: url(photo/tso-clinic-digos.jpg);
+  background-attachment: fixed;
   background-size: cover;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
   background-position: top center;
 }
 
 #parallax-section .parallax-contact {
-  padding-top: 200px; 
-  padding-bottom: 200px; 
+  padding-top: 200px;
+  padding-bottom: 200px;
   padding-left: 100px;
-  overflow: hidden; 
-  position: relative; 
-  width: 100%; 
-  background-image: url(photo/contact-p.jpg); 
-  background-attachment: fixed; 
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background-image: url(photo/contact-p.jpg);
+  background-attachment: fixed;
   background-size: cover;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
   background-position: top center;
 }
 
 #parallax-section .page-title {
-  background: white; 
+  background: white;
   padding-top: 100px;
-  padding-bottom: 20px; 
-  margin:0 auto; 
-  text-align:center;
+  padding-bottom: 20px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 #parallax-section .page-title h1 {
-  font-size:35px; 
-  letter-spacing:8px;
+  font-size: 35px;
+  letter-spacing: 8px;
 }
 
 #parallax-section .parallax-content {
-  background: white; 
-  padding: 30px 100px; 
+  background: white;
+  padding: 30px 100px;
   width: 100%;
-  margin:0 auto; 
-  text-align:justify;
+  margin: 0 auto;
+  text-align: justify;
 }
 
 #parallax-section .parallax1 {
   color: white;
   padding-left: 100px;
-  padding-top: 200px; 
-  padding-bottom: 200px; 
-  overflow: hidden; 
-  position: relative; 
-  width: 100%; 
-  background-image: url(photo/services-adult-eye-exam.jpg); 
-  background-attachment: fixed; 
-  background-size: cover; 
-  background-repeat: no-repeat; 
+  padding-top: 200px;
+  padding-bottom: 200px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background-image: url(photo/services-adult-eye-exam.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-position: top center;
 }
 
 #parallax-section .parallax2 {
   padding-left: 100px;
-  padding-top: 200px; 
-  padding-bottom: 200px; 
-  overflow: hidden; 
-  position: relative; 
-  width: 100%; 
-  background-image: url(photo/services-child-eye-exam.jpg); 
-  background-attachment: fixed; 
-  background-size: cover; 
-  background-repeat: no-repeat; 
+  padding-top: 200px;
+  padding-bottom: 200px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background-image: url(photo/services-child-eye-exam.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-position: center center;
 }
 
 #parallax-section .parallax3 {
   padding-left: 100px;
-  padding-top: 200px; 
-  padding-bottom: 200px; 
-  overflow: hidden; 
-  position: relative; 
-  width: 100%; 
-  background-image: url(photo/services-contact-lens.jpg); 
-  background-attachment: fixed; 
-  background-size: cover; 
-  background-repeat: no-repeat; 
-  background-position: center center;}
-
-
-
+  padding-top: 200px;
+  padding-bottom: 200px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background-image: url(photo/services-contact-lens.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
 
 /* RESPONSIVLE PARALLAX */
 /* big */
 @media screen and (max-width: 959px) and (min-width: 768px) {
   #parallax-section .parallax-content {
-    padding: 20px; 
-    width: 620px;    
+    padding: 20px;
+    width: 620px;
+  }
 }
 /* medium */
 @media screen and (max-width: 767px) {
   #parallax-section .parallax-content {
-    padding: 30px; 
-    width:420px;
+    padding: 30px;
+    width: 420px;
   }
   #parallax-section .parallax-content {
-    padding: 30px; 
+    padding: 30px;
     width: 420px;
   }
   #parallax-section h2 {
     font-size: 30px;
-  }  
-  #parallax-section .parallax-title {
-    padding-top: 30px; 
-    padding-bottom: 30px;    
   }
-
+  #parallax-section .parallax-title {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 }
 /* small */
 @media screen and (max-width: 479px) {
   #parallax-section .parallax-content {
-    padding: 20px 5px; 
+    padding: 20px 5px;
     width: 290px;
   }
-  #parallax-section .parallax1, 
-  #parallax-section .parallax2, 
-  #parallax-section .parallax3, 
+  #parallax-section .parallax1,
+  #parallax-section .parallax2,
+  #parallax-section .parallax3,
   #parallax-section .parallax-location {
-  padding: 20px 5px; 
-  width: 290px;
-  }  
- 
+    padding: 20px 5px;
+    width: 290px;
+  }
 }
-
-
 
 /* STYLES FOR MAP */
