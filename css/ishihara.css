@@ -76,18 +76,21 @@ body * {
 }
 
 /* TODO: FIX BUTTON COLOR WHEN CLICKED */
-.btn:not(:disabled):not(:disabled):active { 
-  /* background-color: #FD8647; */
-  /* background-color: red; */
+/* .btn:not(:disabled):not(:disabled):active {  */
+/* background-color: #FD8647; */
+/* background-color: red; */
 
-    background-color: green;
+/* .btn:active { */
+.btn:not(:disabled):active {
+
+  background-color: red;
 
 }
 
 .feature-optician {
-  background-color:#2F67D5;
+  background-color: #2F67D5;
   padding: 3em 6.25em;
-  text-justify:distribute;
+  text-justify: distribute;
 }
 
 @media screen and (max-width: 576px) {
@@ -99,6 +102,7 @@ body * {
     margin-left: 1.25em;
     margin-right: 1.25em;
   }
+
   .feature-optician {
     padding-left: 1.25em;
     padding-right: 1.25em;
