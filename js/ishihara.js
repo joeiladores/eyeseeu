@@ -141,7 +141,7 @@ function displayPlates(plate) {
       <hr>
       ${info}
   `
-  console.log(document.querySelector(".display").innerHTML);
+  // console.log(document.querySelector(".display").innerHTML);
 
 }
 
@@ -201,10 +201,13 @@ function startTest() {
     // ADD EVENT LISTENER TO PLATE IMAGE
     // document.querySelector(".ishihara-plate").addEventListener("click", () => {
     //   e.preventDefault();
+
+    //   // let imageElement = e.targetElement;
       
+    //   document.querySelector(".display").style.display = "block";
       
 
-    // }
+    // });
 
       // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
       displayPlates(plates[counter]);
