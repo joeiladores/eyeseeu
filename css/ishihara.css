@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Poppins&family=Roboto:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: 'Montserrat', sans-serif; */
+  /* font-family: 'Poppins', sans-serif; */
+  /* font-family: 'Roboto', sans-serif; */
+}
+
+body * {
+  font-family: 'Roboto', sans-serif;
+}
+
+.introduction,
+.instruction,
+.ishihara-test,
+.result {
+  margin-left: 6.25em;
+  margin-right: 6.25em;
+  margin-top: 6.25em;
+  background-color: white;
+
+}
+
+.ishihara .nav {
+  background-color: #2F67D5;
+
+}
+
+.ishihara .nav-link {
+  color: white;
+}
+
+.ishihara .nav-link:active {
+  background-color: #18A0FB;
+  color: white;
+}
+
+.ishihara-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* height: 100%; */
+  object-fit: cover;
+  z-index: -1;
+}
+
+.ishihara-container {
+  /* height: 600px;
+  width: 600px; */
+  position: relative;
+}
+
+.ishihara-plate {
+  /* object-fit: cover;
+  object-position: center;
+  padding: 10px;
+  height: 380px;
+  width: 380px;
+  overflow: hidden; */
+
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* height: 100%;
+  width: auto; */
+  height: auto;
+  /* width: 100%; */
+  overflow: hidden;
+  object-fit: cover;
+
+}
+
+/* TODO: FIX BUTTON COLOR WHEN CLICKED */
+/* .btn:not(:disabled):not(:disabled):active {  */
+/* background-color: #FD8647; */
+/* background-color: red; */
+
+/* .btn:active { */
+.btn:not(:disabled):active {
+
+  background-color: red;
+
+}
+
+.feature-optician {
+  background-color: #2F67D5;
+  padding: 3em 6.25em;
+  text-justify: distribute;
+}
+
+@media screen and (max-width: 576px) {
+
+  .introduction,
+  .instruction,
+  .ishihara-test,
+  .result {
+    margin-left: 1.25em;
+    margin-right: 1.25em;
+  }
+
+  .feature-optician {
+    padding-left: 1.25em;
+    padding-right: 1.25em;
+  }
+
+}

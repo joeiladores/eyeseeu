@@ -85,7 +85,13 @@
               </ul>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="blog.html">BLOGS</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="services.html">SERVICES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reviews.html">REVIEWS</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="contact.html">CONTACT</a>
@@ -224,50 +230,132 @@
       </div>
     </section>
 
-    <!-- FOOTER SECTION -->
-    <footer class="footer-section container-fluid">
-      <div class="row">
-        <div class="col-lg-4 ps-5 text-start">
-          <a class="custom-navbarbrand fs-2" href="index.html">
-            EyeSeeU Optical
-          </a>
-          <p class="text-dark pt-3">
-            Visit or call us to start experiencing better vision and comfort
-            than ever before!
-          </p>
-        </div>
-        <div class="col-lg-4 ps-3">
-          <ul id="quicklinks-style">
-            <li>
-              <a href="" class="quick-links">Home →</a>
-            </li>
-            <li>
-              <a href="" class="quick-links">About →</a>
-            </li>
-            <li>
-              <a href="" class="quick-links">Location →</a>
-            </li>
-            <li>
-              <a href="" class="quick-links">Service →</a>
-            </li>
-            <li>
-              <a href="" class="quick-links">Contact →</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-4 text-end">
-          <div class="fs-3 justify-content-center">
-            <a href="#"
-              ><span><i class="bi bi-facebook fs-2 pe-2 text-dark"></i></span
-            ></a>
-            <a href="#"
-              ><span><i class="bi bi-messenger fs-2 pe-2 text-dark"></i></span
-            ></a>
-            <a href="#"
-              ><span><i class="bi bi-instagram fs-2 text-dark"></i></span
-            ></a>
+    <!-- Cards -->
+    <section class="card-container">
+      <div class="container">
+        <div class="row text-center p-2">
+          <div class="col-lg-4 py-4">
+            <div class="card">
+              <img
+                class="card-image"
+                src="https://images.pexels.com/photos/5355642/pexels-photo-5355642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt=""
+              />
+              <h3 class="card-title">Reviews</h3>
+              <p class="card-content">
+                Having trouble deciding? See what our customers said about us.
+              </p>
+              <button
+                onclick="window.location.href='reviews.html';"
+                class="card-button"
+              >
+                Reviews
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-4 py-4">
+            <div class="card">
+              <img
+                class="card-image"
+                src="https://images.pexels.com/photos/1591056/pexels-photo-1591056.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt=""
+              />
+              <h3 class="card-title">Blogs</h3>
+              <p class="card-content">
+                Click the button below to see our latest blogs and updates.
+              </p>
+              <button
+                onclick="window.location.href='blog.html';"
+                class="card-button"
+              >
+                Blogs
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-4 py-4">
+            <div class="card">
+              <img
+                class="card-image"
+                src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt=""
+              />
+              <h3 class="card-title">About Us</h3>
+              <p class="card-content">
+                Want to know more about the team? Click the button below.
+              </p>
+              <button
+                onclick="window.location.href='about.html';"
+                class="card-button"
+              >
+                About Us
+              </button>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h3 id="contact">Contact</h3>
+            <p>
+              Philippines, SEA<br />
+              Phone: +639953491782<br />
+              Email: eyeseeu.optical@gmail.com
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h3>Links</h3>
+            <div class="row">
+              <div class="col-md-6">
+                <ul>
+                  <li><a href="index.html" class="footer-link">Home →</a></li>
+                  <li>
+                    <a href="location.html" class="footer-link">Location →</a>
+                  </li>
+                  <li><a href="about.html" class="footer-link">About →</a></li>
+                  <li><a href="blog.html" class="footer-link">Blogs →</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul>
+                  <li>
+                    <a href="services.html" class="footer-link">Services →</a>
+                  </li>
+                  <li>
+                    <a href="reviews.html" class="footer-link">Reviews →</a>
+                  </li>
+                  <li>
+                    <a href="contact.html" class="footer-link">Contact →</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <h3>Socials</h3>
+            <div id="social-container">
+              <a href=""
+                ><p class="socials"><i class="fa-brands fa-facebook-f"></i></p
+              ></a>
+              <a href=""
+                ><p class="socials"><i class="fa-solid fa-envelope"></i></p
+              ></a>
+              <a href=""
+                ><p class="socials"><i class="fa-brands fa-instagram"></i></p
+              ></a>
+              <a href=""
+                ><p class="socials"><i class="fa-brands fa-github"></i></p
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright text-center">
+        Copyright &copy; 2022 EyeSeeU Optical Clinic. All rights reserved.
       </div>
     </footer>
     <script
