@@ -9,6 +9,19 @@
   /* font-family: 'Roboto', sans-serif; */
 }
 
+#loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 9999;
+}
+
 body * {
   font-family: 'Roboto', sans-serif;
 }
@@ -81,9 +94,10 @@ body * {
 /* background-color: red; */
 
 /* .btn:active { */
-.btn:not(:disabled):active {
 
-  background-color: red;
+.optionBtn:active {
+
+  background-color: red !important;
 
 }
 

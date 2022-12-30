@@ -116,14 +116,14 @@ function displayPlates(plate) {
     // console.log(option);
     // console.log(typeof option)
     // TODO: CATCH ERROR IN OPTION "I DONT KNOW" AND ONCLICK TO SPACES NOT ON
-    if (option == "I don't know") {
+    if (option === "I don't know") {
       temp = "nothing"
       console.log(`temp: ${temp}`);
 
-      optionsElement += `<button type="button" class="btn btn-primary" data-option="nothing" data-selected=false>${temp}</button>`;
+      optionsElement += `<button type="button" class="optionBtn btn btn-primary" data-option="nothing" data-selected=false>${temp}</button>`;
     }
     else {
-      optionsElement += `<button type="button" class="btn btn-primary" data-option=${option} data-selected=false>${option}</button>`;
+      optionsElement += `<button type="button" class="optionBtn btn btn-primary" data-option=${option} data-selected=false>${option}</button>`;
     }
   }
   // console.log(optionsElement);
@@ -196,8 +196,9 @@ function startTest() {
           selectedOption = option;
           console.log(`Selected option: ${selectedOption}`);
           targetElement.dataset.selected = true;
-          // targetElement.classList.add("active");
+          targetElement.classList.add("active");
           // this.style.backgroundColor = "red";
+          console.log(targetElement.classList);
           // TODO: FIX BUTTON COLOR ACTIVE
         }
       }
