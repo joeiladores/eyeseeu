@@ -14,6 +14,9 @@ body {
     margin-top: 10%;
     height: 100%;
     scroll-behavior: smooth;
+    background: url(https://www.freepnglogos.com/uploads/circle-png/circle-blue-shadow-png-clipart-13.png) no-repeat right;
+    background-attachment: fixed;
+
 }
 
 
@@ -64,5 +67,5 @@ width: 18rem;
 
 .card:hover {
 
-    transform: scale(1.10);
+    transform: scale(1.01);
 }
