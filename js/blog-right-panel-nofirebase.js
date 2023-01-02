@@ -3,21 +3,22 @@ window.onload = function () {
   displayStickyBlogFilter()
 }
 
-function displayBlogs() {
+let startPageIndex = 0, pageLimit = 5, currentPageEnd = pageLimit, pageEnd;
 
-  let pageSet = 1, pageLimit = 5;
+function displayBlogs() {  
 
   // GET BLOGS
   fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew?sortBy=Publish_Date&order=desc')
     .then((response) => response.json())
-    .then((blogs) => {      
+    .then((blogs) => {
 
       // console.log(blogs);
       const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       let month, year, day, d;
-                
+
       // DISPLAY 5 BLOGS
-      blogs.slice(0, pageLimit).map((blog) => {
+      pageEnd = blogs.length;
+      blogs.slice(startPageIndex, currentPageEnd).map((blog) => {
 
         d = new Date(blog.Publish_Date);
         month = monthNames[d.getMonth()];
@@ -47,6 +48,7 @@ function displayBlogs() {
           `;
 
         // TODO: VIEW MORE BLOGS BUTTON
+        document.getElementById("morePageBtn").style.display = "block";
 
       });
 
@@ -58,71 +60,77 @@ function displayBlogs() {
 
 function displayFilteredBlogs(m, y) {
 
+  // console.log("Filtered blogs...");
+  // console.log(`m: ${m}, y: ${y}`);
+  // console.log("typeof m: " + typeof m, " typeof y: " + typeof y);
+
   // GET BLOGS
   fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew?sortBy=Publish_Date&order=desc')
     .then((response) => response.json())
-    .then((blogs) => {      
+    .then((blogs) => {
 
-      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      let month, year, day, d;
-                
       // DISPLAY 5 BLOGS
       blogs.map((blog) => {
 
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let month, year, day, d;
         d = new Date(blog.Publish_Date);
         month = monthNames[d.getMonth()];
         day = d.getDate();
-        year = d.getFullYear();
+        year = d.getFullYear().toString();   
+        
+        // console.log(typeof month);
+        // console.log(typeof day);
+        // console.log(typeof year);
 
         if(m === month && y === year) {
-          document.getElementById("blog").innerHTML +=
-          `
-            <div class="card mb-3 shadow-lg rounded-3">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <a href="blogpost.html?blog=${blog.Id}">
-                    <img src="${blog.Cover_Image}" class="card-image img-fluid rounded-start" alt="...">
-                  </a>
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title mb-3">${blog.Title}</h5>
-                    ${blog.Content_Preview}                                  
-                    <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
-                    <div class="mt-3"><a href="blogpost.html?blog=${blog.Id}" class="btn btn-primary mb-3">Read More</a></div>  
-                  </div>
-                </div>
-              </div>
-            </div>    
-          `;
-        }
-        else if(m == "all" && y == "all") {
-          document.getElementById("blog").innerHTML +=
-          `
-            <div class="card mb-3 shadow-lg rounded-3">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <a href="blogpost.html?blog=${blog.Id}">
-                    <img src="${blog.Cover_Image}" class="card-image img-fluid rounded-start" alt="...">
-                  </a>
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title mb-3">${blog.Title}</h5>
-                    ${blog.Content_Preview}                                  
-                    <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
-                    <div class="mt-3"><a href="blogpost.html?blog=${blog.Id}" class="btn btn-primary mb-3">Read More</a></div>  
-                  </div>
-                </div>
-              </div>
-            </div>    
-          `;
-        }
-        else {
-          displayBlogs();
-        }
 
-        // TODO: VIEW MORE BLOGS BUTTON
+          // console.log("Inside if....");
+          // console.log(`month: ${month}, day: ${day}, year: ${year}`);
+
+          document.getElementById("blog").innerHTML +=
+            `
+            <div class="card mb-3 shadow-lg rounded-3">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <a href="blogpost.html?blog=${blog.Id}">
+                    <img src="${blog.Cover_Image}" class="card-image img-fluid rounded-start" alt="...">
+                  </a>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title mb-3">${blog.Title}</h5>
+                    ${blog.Content_Preview}                                  
+                    <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
+                    <div class="mt-3"><a href="blogpost.html?blog=${blog.Id}" class="btn btn-primary mb-3">Read More</a></div>  
+                  </div>
+                </div>
+              </div>
+            </div>    
+          `;
+        }
+        if(m === "all" && y === "all") {
+          document.getElementById("blog").innerHTML +=
+            `
+            <div class="card mb-3 shadow-lg rounded-3">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <a href="blogpost.html?blog=${blog.Id}">
+                    <img src="${blog.Cover_Image}" class="card-image img-fluid rounded-start" alt="...">
+                  </a>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title mb-3">${blog.Title}</h5>
+                    ${blog.Content_Preview}                                  
+                    <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
+                    <div class="mt-3"><a href="blogpost.html?blog=${blog.Id}" class="btn btn-primary mb-3">Read More</a></div>  
+                  </div>
+                </div>
+              </div>
+            </div>    
+          `;
+        }
 
       });
 
@@ -154,7 +162,7 @@ function displayStickyBlogFilter() {
 
         // console.log(`month_year: ${month_year}`);
 
-        containsMonthYear = (blogMonths, month_year) => {
+        let containsMonthYear = (blogMonths, month_year) => {
           return blogMonths.some(object => object.month_year === month_year)
         }
 
@@ -169,13 +177,6 @@ function displayStickyBlogFilter() {
       blogMonths.sort((a, b) => b.year - a.year);
 
       // console.log(blogMonths);
-
-      // SORT BLOG BY DATE - STARTS FROM THE LATEST BLOG
-      // blogs.sort((a, b) => b.Publish_Date - a.Publish_Date);
-      // console.log(blogs);
-      // blogs.forEach((blog) => {
-      //   console.log(blog.Publish_Date);
-      // });
 
       // DISPLAY MONTHS & YEAR IN THE STICKY RIGHT PANEL
       document.getElementById("blogMonth").innerHTML +=
@@ -203,20 +204,54 @@ function displayStickyBlogFilter() {
 }
 
 // ADD EVENT LISTENER TO MONTHS CLICK EVENTS
-// document.getElementById("blogMonth").addEventListener("click", (e) => {
-//   e.preventDefault();
+document.getElementById("blogMonth").addEventListener("click", (e) => {
+  e.preventDefault();
 
-//   let targetElement = e.target;
-//   let month = targetElement.dataset.month;
-//   let year = targetElement.dataset.year;
+  let targetElement = e.target;
+  let month = targetElement.dataset.month;
+  let year = targetElement.dataset.year;
 
-//   // TODO: ACTIVE MONTH AND YEAR
-//   // targetElement.classList.add("active");
+  // TODO: ACTIVE MONTH AND YEAR
+  // targetElement.classList.add("active");
 
-//   console.log(targetElement);
-//   console.log(`month: ${month}, year: ${year}`);
+  // console.log(targetElement);
+  // console.log(`month: ${month}, year: ${year}`);
+  // console.log("Event listerner...");
+  // console.log("typeof month: " + typeof month, ", typeof year: " + typeof year);
 
-//   document.getElementById("blog").innerHTML = "";
-//   displayFilteredBlogs(month, year);
+  if (month === "home" && year === "home") {
+    document.getElementById("blog").innerHTML = "";
+    displayBlogs();
+    document.getElementById("morePageBtn").textContent = "View more blogs";
+    document.getElementById("morePageBtn").classList.remove("disabled");
+  }
+  else {
+    document.getElementById("blog").innerHTML = "";
+    document.getElementById("morePageBtn").style.display = "none";
+    displayFilteredBlogs(month, year);
+  }
 
-// });
+});
+
+// ADD EVENT LISTERNER TO THE VIEW MORE BUTTON
+document.getElementById("morePageBtn").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  startPageIndex += pageLimit;
+  currentPageEnd += pageLimit;
+
+  console.log(`Page Start Index: ${startPageIndex}`);
+  console.log(`Page Current End: ${currentPageEnd}`);
+  console.log(`Page End: ${pageEnd}`);
+  
+  if((pageEnd - currentPageEnd) >= pageLimit) {    
+    displayBlogs();
+  }
+  else {
+    displayBlogs();
+    document.getElementById("morePageBtn").textContent = "End of blog";
+    document.getElementById("morePageBtn").classList.add("disabled");
+    startPageIndex = 0, currentPageEnd = pageLimit;
+  } 
+
+});

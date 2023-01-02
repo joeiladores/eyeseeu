@@ -213,6 +213,8 @@ function displayStickyBlogFilter() {
 document.getElementById("blogMonth").addEventListener("click", (e) => {
   e.preventDefault();
 
+  document.getElementById("blog").innerHTML = "";
+
   let targetElement = e.target;
   let month = targetElement.dataset.month;
   let year = targetElement.dataset.year;
@@ -222,8 +224,7 @@ document.getElementById("blogMonth").addEventListener("click", (e) => {
 
   // console.log(targetElement);
   // console.log(`month: ${month}, year: ${year}`);
-
-  document.getElementById("blog").innerHTML = "";
+  
   displayFilteredBlogs(month, year);
 
 });
