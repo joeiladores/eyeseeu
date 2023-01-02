@@ -43,7 +43,7 @@ function displayBlogs() {
 
   const q = query(blogRef, orderBy("publish_date", "desc"));
   onSnapshot(q, (snapshot) => {
-    let blogs = [];
+    // let blogs = [];
     let fTimestamp, jsDate, jsDateString;
 
     snapshot.docs.forEach((doc) => {
@@ -53,7 +53,7 @@ function displayBlogs() {
 
       // console.log(jsDateString);
 
-      blogs.push({ ...doc.data(), publish_date: jsDateString, id: doc.id })
+      // blogs.push({ ...doc.data(), publish_date: jsDateString, id: doc.id })
 
       let blog = doc.data();
 
@@ -73,7 +73,8 @@ function displayBlogs() {
               </div>
             </div>
           </div>
-        </div>    
+        </div>
+
     `
     });
 
@@ -96,7 +97,7 @@ function displayFilteredBlogs(month, year) {
       fmonth = jsDate.toLocaleString('default', { month: 'long' });
       fyear = jsDate.toLocaleString('default', { year: 'numeric' });  
       
-      console.log(fmonth, fyear);
+      // console.log(fmonth, fyear);
 
       if(month === fmonth && fyear === fyear) {
         document.getElementById("blog").innerHTML +=
@@ -180,16 +181,14 @@ function displayStickyBlogFilter() {
 
     });
 
-    // SORT MONTH BY DATE - START FROM LATEST YEAR, MONTH
-
-    blogMonths.sort((a, b) => b.year - a.year);
+    // SORT MONTH BY DATE - START FROM LATEST YEAR, MONTH 
     blogMonths.sort((a, b) => b.month_num - a.month_num);
+    blogMonths.sort((a, b) => b.year - a.year);
 
     // SORT BLOG BY DATE - STARTS FROM THE LATEST BLOG
-
     blogs.sort((a, b) => b.publish_date - a.publish_date);
-    console.log(blogMonths);
-    console.log(blogs);
+    // console.log(blogMonths);
+    // console.log(blogs);
 
     blogMonths.forEach((blog) => {
       document.getElementById("blogMonth").innerHTML +=
@@ -218,10 +217,11 @@ document.getElementById("blogMonth").addEventListener("click", (e) => {
   let month = targetElement.dataset.month;
   let year = targetElement.dataset.year;
 
+  // TODO: ACTIVE MONTH AND YEAR
   // targetElement.classList.add("active");
 
-  console.log(targetElement);
-  console.log(`month: ${month}, year: ${year}`);
+  // console.log(targetElement);
+  // console.log(`month: ${month}, year: ${year}`);
 
   document.getElementById("blog").innerHTML = "";
   displayFilteredBlogs(month, year);

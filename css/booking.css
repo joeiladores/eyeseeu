@@ -39,6 +39,15 @@
   background-color: #cfcaca;
 }
 
+/* #customModal::backdrop {
+  background-color: purple;
+  opacity: .2;
+} */
+
+.modal::backdrop {
+  background-color: purple;
+  
+}
 
 
 /* MEDIA QUERY FOR BOOKING SECTION *********************/

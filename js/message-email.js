@@ -77,21 +77,20 @@ function displayModal(status, icon, message) {
   modal.innerHTML =
     `
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center shadow-lg bg-transparent">
-        <div class="modal-header bg-primary">
-          <h1 class="modal-title fs-5">${status}</h1>
-          <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body px-5 bg-light">
-          <div class="mb-3 animated rotateIn me-3 d-flex flex-row align-items-center justify-content-center">
-            <div class="fa-4x mb-3 animated rotateIn me-3 align-self-center text-primary">${icon}</div>
+      <div class="modal-content text-center shadow-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">${status}</h1>
+            <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex flex-row align-items-center justify-content-center bg-light">
+            <div class="fa-4x text-primary">${icon}</div>
             <div class="fs-5">${message}</div>
           </div>
         </div>
       </div>
     </div>
   `
-
   document.getElementById("customModal").style.display = "block";
 
   closeModalBtn.addEventListener("click", () => {
@@ -101,7 +100,8 @@ function displayModal(status, icon, message) {
 }
 
 document.getElementById("m__selectClinic").onchange = () => {
-
+  // const value = document.getElementById("m__selectClinic").value;
+  // console.log(`Selected clinic: ${value}`);
 }
 
 document.getElementById("submitBtn").onclick = (e) => {
@@ -141,7 +141,7 @@ document.getElementById("submitBtn").onclick = (e) => {
       .catch((err) => console.log(err));
   }
   else {
-    displayModal(`Warning`, `<i class="fa-solid fa-circle-xmark"></i>`, `Email not sent! Please fill in the input form`);
+    displayModal(`Unsuccessful`, `<i class="fa-solid fa-circle-xmark"></i>`, `Email not sent! Please fill in the message form completely`);
   }
 
 }
