@@ -14,16 +14,16 @@ function displayBlogs() {
 
       // console.log(blogs);
       const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      let month, year, day, d;
+      let month, year, day, jsDate;
 
       // DISPLAY 5 BLOGS
       pageEnd = blogs.length;
       blogs.slice(startPageIndex, currentPageEnd).map((blog) => {
 
-        d = new Date(blog.Publish_Date);
-        month = monthNames[d.getMonth()];
-        day = d.getDate();
-        year = d.getFullYear();
+        jsDate = new Date(blog.Publish_Date);
+        month = monthNames[jsDate.getMonth()];
+        day = jsDate.getDate();
+        year = jsDate.getFullYear();
         // console.log(month, day, year);
 
         document.getElementById("blog").innerHTML +=
@@ -31,7 +31,7 @@ function displayBlogs() {
             <div class="card mb-3 shadow-lg rounded-3">
               <div class="row g-0">
                 <div class="col-md-4">
-                  <a href="blogpost.html?blog=${blog.Id}">
+                  <a href="blogpost-test.html?blog=${blog.id}">
                     <img src="${blog.Cover_Image}" class="card-image img-fluid rounded-start" alt="...">
                   </a>
                 </div>
@@ -40,7 +40,7 @@ function displayBlogs() {
                     <h5 class="card-title mb-3">${blog.Title}</h5>
                     ${blog.Content_Preview}                                  
                     <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
-                    <div class="mt-3"><a href="blogpost.html?blog=${blog.Id}" class="btn btn-primary mb-3">Read More</a></div>  
+                    <div class="mt-3"><a href="blogpost.html?blog=${blog.id}" class="btn btn-primary mb-3">Read More</a></div>  
                   </div>
                 </div>
               </div>
@@ -93,7 +93,7 @@ function displayFilteredBlogs(m, y) {
             <div class="card mb-3 shadow-lg rounded-3">
               <div class="row g-0">
                 <div class="col-md-4">
-                  <a href="blogpost.html?blog=${blog.Id}">
+                  <a href="blogpost.html?blog=${blog.id}">
                     <img src="${blog.Cover_Image}" class="card-image img-fluid rounded-start" alt="...">
                   </a>
                 </div>
@@ -102,7 +102,7 @@ function displayFilteredBlogs(m, y) {
                     <h5 class="card-title mb-3">${blog.Title}</h5>
                     ${blog.Content_Preview}                                  
                     <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
-                    <div class="mt-3"><a href="blogpost.html?blog=${blog.Id}" class="btn btn-primary mb-3">Read More</a></div>  
+                    <div class="mt-3"><a href="blogpost.html?blog=${blog.id}" class="btn btn-primary mb-3">Read More</a></div>  
                   </div>
                 </div>
               </div>
@@ -115,7 +115,7 @@ function displayFilteredBlogs(m, y) {
             <div class="card mb-3 shadow-lg rounded-3">
               <div class="row g-0">
                 <div class="col-md-4">
-                  <a href="blogpost.html?blog=${blog.Id}">
+                  <a href="blogpost.html?blog=${blog.id}">
                     <img src="${blog.Cover_Image}" class="card-image img-fluid rounded-start" alt="...">
                   </a>
                 </div>
@@ -124,7 +124,7 @@ function displayFilteredBlogs(m, y) {
                     <h5 class="card-title mb-3">${blog.Title}</h5>
                     ${blog.Content_Preview}                                  
                     <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
-                    <div class="mt-3"><a href="blogpost.html?blog=${blog.Id}" class="btn btn-primary mb-3">Read More</a></div>  
+                    <div class="mt-3"><a href="blogpost.html?blog=${blog.id}" class="btn btn-primary mb-3">Read More</a></div>  
                   </div>
                 </div>
               </div>
@@ -143,7 +143,7 @@ function displayFilteredBlogs(m, y) {
 function displayStickyBlogFilter() {
 
   // GET BLOGS DATES
-  fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogs')
+  fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew')
     .then((response) => response.json())
     .then((data) => {
 
@@ -221,6 +221,7 @@ document.getElementById("blogMonth").addEventListener("click", (e) => {
 
   if (month === "home" && year === "home") {
     document.getElementById("blog").innerHTML = "";
+    startPageIndex = 0, currentPageEnd = pageLimit;
     displayBlogs();
     document.getElementById("morePageBtn").textContent = "View more blogs";
     document.getElementById("morePageBtn").classList.remove("disabled");
@@ -251,7 +252,6 @@ document.getElementById("morePageBtn").addEventListener("click", (e) => {
     displayBlogs();
     document.getElementById("morePageBtn").textContent = "End of blog";
     document.getElementById("morePageBtn").classList.add("disabled");
-    startPageIndex = 0, currentPageEnd = pageLimit;
   } 
 
 });
