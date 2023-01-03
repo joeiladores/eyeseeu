@@ -74,3 +74,10 @@
   transform: scale(1.04);
   transition-duration: 2ms;
 }
+
+/* Ishihara test */
+
+.ishiharaImg {
+  width: 30vw;
+  height: auto;
+}
