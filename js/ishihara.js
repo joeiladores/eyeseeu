@@ -111,14 +111,10 @@ function displayPlates(plate) {
   let optionsElement = "", option = "", temp = "";
   for (let i = 0; i < plate.options.length; i++) {
     option = plate.options[i];
-    // console.log(option);
-    // console.log(typeof option)
+    console.log(`In creating options... Option: ${option}`, typeof option);
     // TODO: CATCH ERROR IN OPTION "I DONT KNOW" AND ONCLICK TO SPACES NOT ON
-    if (option === "I don't know") {
-      temp = "nothing"
-      console.log(`temp: ${temp}`);
-
-      optionsElement += `<button type="button" class="optionBtn btn btn-primary" data-option="nothing" data-selected=false>${temp}</button>`;
+    if (option === "I don’t know") {
+      optionsElement += `<button type="button" class="optionBtn btn btn-primary" data-option="nothing" data-selected=false>${option}</button>`;
     }
     else {
       optionsElement += `<button type="button" class="optionBtn btn btn-primary" data-option=${option} data-selected=false>${option}</button>`;
@@ -166,7 +162,21 @@ function hidePlateInfo() {
   document.querySelector(".plate-info").style.display = "none";
 }
 
-// ADD EVENT LISTERNER TO THE VIEW MORE BUTTON
+function showModal() {
+  document.getElementById("customModal").style.display = "block";
+  document.getElementById("overlay").classList.add("active");
+
+}
+
+document.getElementById("closeModalBtn").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  document.getElementById("customModal").style.display = "none";
+  document.getElementById("overlay").classList.remove("active");
+});
+
+
+// ADD EVENT LISTERNER TO THE PLATE IMAGE
 document.querySelector(".plate-container").addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -174,8 +184,6 @@ document.querySelector(".plate-container").addEventListener("click", (e) => {
   let elementID = targetElement.id;
 
   // console.log(`target id: ${elementID}`);
-
-  // {/* <img onclick="document.getElementById('P1Q').style.display= ''; document.getElementById('P1A').style.display= 'none' ;" src="/CBTests/ishihara/Plate1A.gif" alt="Ishihara Color Blindness Test 1 Answer"> */}
 
   if (elementID === "plate-Q") {
     hidePlateQ();
@@ -191,7 +199,7 @@ function startTest() {
 
   let counter = 0;
   let answer = [];
-  let selectedOption = "", previousOption = "";
+  let selectedOption = "";
 
   displayTest();
 
@@ -212,10 +220,11 @@ function startTest() {
 
       let targetElement = e.target;
       let option = targetElement.dataset.option;
-      let parentElement = document.querySelector(".options");
 
       // console.log(targetElement);
       console.log(`Onclick: ${option}`);
+      console.log(`Option: ${option}`);
+      console.log(`Selected Option: ${selectedOption}`);
 
       // TODO: REVIEW PUSHED ANSWERS, SHOULD NOT ACCEPT CLICK IF THERE IS NO ANSWER YET!!
       if (option === "next" && selectedOption != "") {
@@ -224,18 +233,21 @@ function startTest() {
         // PUSH SELECTED OPTION TO THE ANSWER ARRAY
         answer.push(selectedOption);
         console.log(`Pushed to answer[]: ${selectedOption}`);
-        console.log(`Answer[]: ${answer}`);
+        console.log(`Answer[]: ${answer}`);      
         hidePlateA();
         hidePlateInfo();
+        
+        // RESET SELECTED OPTION TO ""
+        selectedOption = "";
       }
       else if (option === "next" && selectedOption === "") {
-        alert("Please select answer");
+        showModal();
       }
       else {
         // ONLY CLICK ON BUTTON OPTIONS AND NOT THE SPACES OUTSIDE THE ELEMENTS
         if (targetElement.type === "button") {
-          console.log("Clicked on a button");
           selectedOption = option;
+          console.log("Clicked on a button");
           console.log(`Selected option: ${selectedOption}`);
           targetElement.dataset.selected = true;
           targetElement.classList.add("active");
@@ -244,19 +256,6 @@ function startTest() {
           // TODO: FIX BUTTON COLOR ACTIVE
         }
       }
-
-      // ADD EVENT LISTENER TO PLATE IMAGE
-      // const displayInfo = (event:MouseEvent) => {
-      //   console.log("MouseEvent: from image");
-      // };
-
-      // document.querySelector(".ishihara-plate").addEventListener("click", displayInfo);
-
-      //   document.querySelector(".display").style.display = "block";
-
-      // });
-
-
 
       // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
       displayPlates(plates[counter]);

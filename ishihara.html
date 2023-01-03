@@ -26,7 +26,7 @@
     function pageLoaded() {
       // Hide the loader
       document.getElementById("loader").style.display = "none";
-    }  
+    }
     // Add the pageLoaded function as a listener to the onload event
     window.addEventListener("load", pageLoaded);
   </script>
@@ -35,11 +35,11 @@
 
 <body>
 
-  <div id="loader" >
+  <div id="loader">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
-  </div>  
+  </div>
 
   <!-- NAVBAR SECTION ---------------------------------------------------------------->
   <nav class="navbar navbar-expand-lg bg-light fixed-top">
@@ -111,7 +111,7 @@
 
   <div class="instruction my-5 p-5 shadow-lg rounded-3">
     <!-- INSTRUCTION HERE -->
-    
+
   </div>
 
   <div class="ishihara-test my-5 py-3 px-5 shadow-lg rounded-3" style="display: none">
@@ -125,7 +125,7 @@
       <div class="row">
         <!-- FETCH AND DISPLAY LEFT PANEL - ISHIHARA PLATE -->
         <div class="plate-container col-md-6">
-          <!-- FETCH AND DISPLAY PLATE NUMBER AND IMAGE HERE -->          
+          <!-- FETCH AND DISPLAY PLATE NUMBER AND IMAGE HERE -->
         </div>
 
         <!-- RIGHT PANEL - DISPLAY --------------------------------------------->
@@ -139,7 +139,7 @@
             <!-- FETCH DISPLAY AND DISPLAY HERE -->
           </div>
         </div>
-        
+
       </div>
     </div>
   </div>
@@ -166,8 +166,27 @@
   </div>
   <!-- END OF FEATURE SECTION --------------------------------------------------------------------->
 
-   <!-- FOOTER SECTION ---------------------------------------------------------------------------->
-   <footer>
+  <!-- Modal -->
+  <div class="modal" id="customModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h5 class="modal-title" id="modal-title">Incomplete</h5>
+          <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center d-flex flex-row justify-content-center align-content-center">
+          <i class="fa-solid fa-circle-xmark fa-4x text-primary me-4"></i>
+          <h5 class="align-self-center">Please select answer</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="overlay"></div>
+
+
+  <!-- FOOTER SECTION ---------------------------------------------------------------------------->
+  <footer>
     <div class="container">
       <div class="row">
         <div class="col-md-4">
