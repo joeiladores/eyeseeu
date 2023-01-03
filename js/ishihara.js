@@ -97,16 +97,14 @@ function displayPlates(plate) {
   // FETCH AND DISPLAY PLATE NUMBER ND IMAGE
   document.querySelector(".plate-container").innerHTML =
     `
-    <div class="plate-name my-2 text-center">
+    <div class="plate-name py-3 text-center">
       <h5>Plate ${plate.plate}</h5>
     </div>
-    <img class="ishihara-plate img-fluid" src="${plate.plateURL}"
-      alt="Ishihara Plate ${plate.plate}" />
+    <img id="plate-Q" class="ishihara-plate-img img-fluid" src="${plate.plateURL}"
+      alt="Ishihara Plate ${plate.plate}" data-plate="${plate.plate}" data-url="plateURL"/>
+    <img id="plate-A" class="ishihara-plate-img img-fluid" src="${plate.plateURL2}" style="display: none"
+      alt="Ishihara Plate ${plate.plate}" data-plate="${plate.plate}" data-url="plateURL2"/>
   `
-
-{/* <img onclick="document.getElementById('P1Q').style.display= ''; document.getElementById('P1A').style.display= 'none' ;" src="/CBTests/ishihara/Plate1A.gif" alt="Ishihara Color Blindness Test 1 Answer"> */}
-
-
 
   // FETCH AND DISPLAY OPTIONS
   // console.log(plate.options);
@@ -138,7 +136,7 @@ function displayPlates(plate) {
   for (let i = 0; i < plate.display.length; i++) {
     info += `<p>${plate.display[i]}</p>`;
   }
-  document.querySelector(".display").innerHTML =
+  document.querySelector(".plate-info").innerHTML =
     `
       <h5>What did you see?</h5>
       <hr>
@@ -146,6 +144,48 @@ function displayPlates(plate) {
   `
   // console.log(document.querySelector(".display").innerHTML);
 }
+
+function hidePlateQ() {
+  document.getElementById("plate-Q").style.display = "none";
+}
+
+function showPlateA() {
+  document.getElementById("plate-A").style.display = "block";
+  document.querySelector(".plate-info").style.display = "block";
+}
+
+function showPlateQ() {
+  document.getElementById("plate-Q").style.display = "block";
+}
+
+function hidePlateA() {
+  document.getElementById("plate-A").style.display = "none";  
+}
+
+function hidePlateInfo() {
+  document.querySelector(".plate-info").style.display = "none";
+}
+
+// ADD EVENT LISTERNER TO THE VIEW MORE BUTTON
+document.querySelector(".plate-container").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  let targetElement = e.target;
+  let elementID = targetElement.id;
+
+  // console.log(`target id: ${elementID}`);
+
+  // {/* <img onclick="document.getElementById('P1Q').style.display= ''; document.getElementById('P1A').style.display= 'none' ;" src="/CBTests/ishihara/Plate1A.gif" alt="Ishihara Color Blindness Test 1 Answer"> */}
+
+  if (elementID === "plate-Q") {
+    hidePlateQ();
+    showPlateA();
+  }
+  if (elementID === "plate-A") {
+    hidePlateA();
+    showPlateQ();
+  }
+});
 
 function startTest() {
 
@@ -185,6 +225,8 @@ function startTest() {
         answer.push(selectedOption);
         console.log(`Pushed to answer[]: ${selectedOption}`);
         console.log(`Answer[]: ${answer}`);
+        hidePlateA();
+        hidePlateInfo();
       }
       else if (option === "next" && selectedOption === "") {
         alert("Please select answer");
