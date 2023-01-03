@@ -1,214 +1,207 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js'
-
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  onSnapshot, addDoc, getDoc, doc,
-  // deleteDoc,
-  query, where, orderBy
-  // serverTime
-} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js'
-
-import {
-  getStorage, ref, listAll,
-  uploadBytesResumable, getDownloadURL
-} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js'
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDzkyd2zPrryUfoYjfdqF1PLim9ukvqZ7I",
-  authDomain: "eyeseeu-22ad4.firebaseapp.com",
-  projectId: "eyeseeu-22ad4",
-  storageBucket: "eyeseeu-22ad4.appspot.com",
-  messagingSenderId: "210845750796",
-  appId: "1:210845750796:web:af3f92bccaf04fa201c029"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-// Initialize Services
-const db = getFirestore(app);
-const storage = getStorage(app);
-
-// Collection Reference
-const blogRef = collection(db, 'blog');
-
 window.onload = function () {
   displayBlogs();
   displayStickyBlogFilter()
 }
 
-function displayBlogs() {
+let startPageIndex = 0, pageLimit = 5, currentPageEnd = pageLimit, pageEnd;
 
-  const q = query(blogRef, orderBy("publish_date", "desc"));
-  onSnapshot(q, (snapshot) => {
-    let blogs = [];
-    let fTimestamp, jsDate, jsDateString;
+function displayBlogs() {  
 
-    snapshot.docs.forEach((doc) => {
-      fTimestamp = doc.data().publish_date;
-      jsDate = fTimestamp.toDate();
-      jsDateString = jsDate.toLocaleString('default', { dateStyle: 'long' });
+  // GET BLOGS
+  fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew?sortBy=Publish_Date&order=desc')
+    .then((response) => response.json())
+    .then((blogs) => {
 
-      // console.log(jsDateString);
+      // console.log(blogs);
+      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      let month, year, day, jsDate;
 
-      blogs.push({ ...doc.data(), publish_date: jsDateString, id: doc.id })
+      // DISPLAY 5 BLOGS
+      pageEnd = blogs.length;
+      blogs.slice(startPageIndex, currentPageEnd).map((blog) => {
 
-      let blog = doc.data();
+        jsDate = new Date(blog.Publish_Date);
+        month = monthNames[jsDate.getMonth()];
+        day = jsDate.getDate();
+        year = jsDate.getFullYear();
+        // console.log(month, day, year);
 
-      document.getElementById("blog").innerHTML +=
-        `
-        <div class="card mb-3 shadow-lg rounded-3">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="${blog.cover_image}" class="card-image img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">${blog.title}</h5>
-                ${blog.content_preview}
-                <a href="#" class="btn btn-primary mb-3">Read More</a>
-                <p class="card-text"><small class="text-muted">${jsDateString}</small></p>
+        document.getElementById("blog").innerHTML +=
+          `
+            <div class="card mb-3 shadow-lg rounded-3">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <a href="blogpost.html?blog=${blog.id}" target="_blank">
+                    <img src="${blog.Cover_Image}" class="card-image img-fluid rounded-start" alt="...">
+                  </a>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title mb-3">${blog.Title}</h5>
+                    ${blog.Content_Preview}                                  
+                    <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
+                    <div class="mt-3"><a href="blogpost.html?blog=${blog.id}" target="_blank"class="btn btn-primary mb-3">Read More</a></div>  
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>    
-    `
+            </div>    
+          `;
+
+        // TODO: VIEW MORE BLOGS BUTTON
+        document.getElementById("morePageBtn").style.display = "block";
+
+      });
+
+    })
+    .catch((err) => {
+      console.log("Error is: " + err);
     });
-
-  });
-
 }
 
-function displayFilteredBlogs(month, year) {
+function displayFilteredBlogs(m, y) {
 
-  const q = query(blogRef, orderBy("publish_date", "desc"));
-  onSnapshot(q, (snapshot) => {
-    let fTimestamp, jsDate, jsDateString, fmonth, fyear;
+  // console.log("Filtered blogs...");
+  // console.log(`m: ${m}, y: ${y}`);
+  // console.log("typeof m: " + typeof m, " typeof y: " + typeof y);
 
-    snapshot.docs.forEach((doc) => {
-      let blog = doc.data();
+  // GET BLOGS
+  fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew?sortBy=Publish_Date&order=desc')
+    .then((response) => response.json())
+    .then((blogs) => {
 
-      fTimestamp = blog.publish_date;
-      jsDate = fTimestamp.toDate();
-      jsDateString = jsDate.toLocaleString('default', { dateStyle: 'long' });
-      fmonth = jsDate.toLocaleString('default', { month: 'long' });
-      fyear = jsDate.toLocaleString('default', { year: 'numeric' });  
-      
-      console.log(fmonth, fyear);
+      // DISPLAY 5 BLOGS
+      blogs.map((blog) => {
 
-      if(month === fmonth && fyear === fyear) {
-        document.getElementById("blog").innerHTML +=
-        `
-          <div class="card mb-3 shadow-lg rounded-3">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="${blog.cover_image}" class="card-image img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">${blog.title}</h5>
-                  ${blog.content_preview}
-                  <a href="#" class="btn btn-primary mb-3">Read More</a>
-                  <p class="card-text"><small class="text-muted">${jsDateString}</small></p>
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let month, year, day, d;
+        d = new Date(blog.Publish_Date);
+        month = monthNames[d.getMonth()];
+        day = d.getDate();
+        year = d.getFullYear().toString();   
+        
+        // console.log(typeof month);
+        // console.log(typeof day);
+        // console.log(typeof year);
+
+        if(m === month && y === year) {
+
+          // console.log("Inside if....");
+          // console.log(`month: ${month}, day: ${day}, year: ${year}`);
+
+          document.getElementById("blog").innerHTML +=
+            `
+            <div class="card mb-3 shadow-lg rounded-3">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <a href="blogpost.html?blog=${blog.id}">
+                    <img src="${blog.Cover_Image}" class="card-image img-fluid rounded-start" alt="...">
+                  </a>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title mb-3">${blog.Title}</h5>
+                    ${blog.Content_Preview}                                  
+                    <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
+                    <div class="mt-3"><a href="blogpost.html?blog=${blog.id}" class="btn btn-primary mb-3">Read More</a></div>  
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>    
-        `;
-
-      }
-      
-      if(month == "all" && year == "all") {
-        document.getElementById("blog").innerHTML +=
-        `
-          <div class="card mb-3 shadow-lg rounded-3">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="${blog.cover_image}" class="card-image img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">${blog.title}</h5>
-                  ${blog.content_preview}
-                  <a href="#" class="btn btn-primary mb-3">Read More</a>
-                  <p class="card-text"><small class="text-muted">${jsDateString}</small></p>
+            </div>    
+          `;
+        }
+        if(m === "all" && y === "all") {
+          document.getElementById("blog").innerHTML +=
+            `
+            <div class="card mb-3 shadow-lg rounded-3">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <a href="blogpost.html?blog=${blog.id}">
+                    <img src="${blog.Cover_Image}" class="card-image img-fluid rounded-start" alt="...">
+                  </a>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title mb-3">${blog.Title}</h5>
+                    ${blog.Content_Preview}                                  
+                    <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
+                    <div class="mt-3"><a href="blogpost.html?blog=${blog.id}" class="btn btn-primary mb-3">Read More</a></div>  
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>    
-        `;
-      }
-      
+            </div>    
+          `;
+        }
+
+      });
+
+    })
+    .catch((err) => {
+      console.log("Error is: " + err);
     });
-
-  });
-
 }
 
 function displayStickyBlogFilter() {
 
-  // GET BLOGS TIMESTAMP MONTH
-  onSnapshot(blogRef, (snapshot) => {
-    let blogMonths = [];
-    let blogs = []
-    let fTimestamp, jsDate, month, month_num, year, month_year;
-    let containsMonthYear;
+  // GET BLOGS DATES
+  fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew')
+    .then((response) => response.json())
+    .then((data) => {
 
-    snapshot.docs.forEach((doc) => {
-      fTimestamp = doc.data().publish_date;
-      jsDate = fTimestamp.toDate();
-      month = jsDate.toLocaleString('default', { month: 'long' })
-      year = jsDate.toLocaleString('default', { year: 'numeric' })
-      month_num = jsDate.toLocaleString('default', { month: 'numeric' });
-      month_year = month + " " + year;
+      // const blogs = [];
+      let blogMonths = [];
+      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      let month, month_num, year, month_year;
 
-      // console.log(fTimestamp);
-      // console.log(jsDate);
-      // console.log(month);
+      data.forEach((blog) => {
 
-      blogs.push({ ...doc.data(), publish_date: jsDate, id: doc.id })
+        const d = new Date(blog.Publish_Date);
+        month_num = d.getMonth();
+        month = monthNames[d.getMonth()];
+        year = d.getFullYear();
+        month_year = month + " " + year;
 
-      containsMonthYear = (blogMonths, month_year) => {
-        return blogMonths.some(object => object.month_year === month_year)
-      }
+        // console.log(`month_year: ${month_year}`);
 
-      if (!containsMonthYear(blogMonths, month_year)) {
-        blogMonths.push({ month_num: month_num, month: month, year: year, month_year: month_year });
-      }
+        let containsMonthYear = (blogMonths, month_year) => {
+          return blogMonths.some(object => object.month_year === month_year)
+        }
 
-    });
+        if (!containsMonthYear(blogMonths, month_year)) {
+          blogMonths.push({ month_num: month_num, month: month, year: year, month_year: month_year });
+        }
 
-    // SORT MONTH BY DATE - START FROM LATEST YEAR, MONTH
+      });
 
-    blogMonths.sort((a, b) => b.year - a.year);
-    blogMonths.sort((a, b) => b.month_num - a.month_num);
+      // SORT MONTH BY DATE - START FROM LATEST YEAR, MONTH 
+      blogMonths.sort((a, b) => b.month_num - a.month_num);
+      blogMonths.sort((a, b) => b.year - a.year);
 
-    // SORT BLOG BY DATE - STARTS FROM THE LATEST BLOG
+      // console.log(blogMonths);
 
-    blogs.sort((a, b) => b.publish_date - a.publish_date);
-    console.log(blogMonths);
-    console.log(blogs);
-
-    blogMonths.forEach((blog) => {
+      // DISPLAY MONTHS & YEAR IN THE STICKY RIGHT PANEL
       document.getElementById("blogMonth").innerHTML +=
-        ` 
-        <a class="list-group-item" data-month=${blog.month} data-year=${blog.year}>${blog.month_year}</a>    
+        `
+      <a class="list-group-item" data-month="home" data-year="home">Home</a>   
       `
+
+      blogMonths.forEach((blog) => {
+        document.getElementById("blogMonth").innerHTML +=
+          ` 
+          <a class="list-group-item" data-month=${blog.month} data-year=${blog.year}>${blog.month_year}</a>    
+        `
+      });
+
+      document.getElementById("blogMonth").innerHTML +=
+        `
+      <a class="list-group-item" data-month="all" data-year="all">All Blogs</a>   
+      `
+
+    })
+    .catch((err) => {
+      console.log("Error is: " + err);
     });
-
-    document.getElementById("blogMonth").innerHTML += 
-    `
-    <a class="list-group-item" data-month="all" data-year="all">All Blogs</a>   
-    `
-
-  });
-
 
 }
-
-
 
 // ADD EVENT LISTENER TO MONTHS CLICK EVENTS
 document.getElementById("blogMonth").addEventListener("click", (e) => {
@@ -218,12 +211,47 @@ document.getElementById("blogMonth").addEventListener("click", (e) => {
   let month = targetElement.dataset.month;
   let year = targetElement.dataset.year;
 
+  // TODO: ACTIVE MONTH AND YEAR
   // targetElement.classList.add("active");
 
-  console.log(targetElement);
-  console.log(`month: ${month}, year: ${year}`);
+  // console.log(targetElement);
+  // console.log(`month: ${month}, year: ${year}`);
+  // console.log("Event listerner...");
+  // console.log("typeof month: " + typeof month, ", typeof year: " + typeof year);
 
-  document.getElementById("blog").innerHTML = "";
-  displayFilteredBlogs(month, year);
+  if (month === "home" && year === "home") {
+    document.getElementById("blog").innerHTML = "";
+    startPageIndex = 0, currentPageEnd = pageLimit;
+    displayBlogs();
+    document.getElementById("morePageBtn").textContent = "View more blogs";
+    document.getElementById("morePageBtn").classList.remove("disabled");
+  }
+  else {
+    document.getElementById("blog").innerHTML = "";
+    document.getElementById("morePageBtn").style.display = "none";
+    displayFilteredBlogs(month, year);
+  }
+
+});
+
+// ADD EVENT LISTERNER TO THE VIEW MORE BUTTON
+document.getElementById("morePageBtn").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  startPageIndex += pageLimit;
+  currentPageEnd += pageLimit;
+
+  // console.log(`Page Start Index: ${startPageIndex}`);
+  // console.log(`Page Current End: ${currentPageEnd}`);
+  // console.log(`Page End: ${pageEnd}`);
+  
+  if((pageEnd - currentPageEnd) >= pageLimit) {    
+    displayBlogs();
+  }
+  else {
+    displayBlogs();
+    document.getElementById("morePageBtn").textContent = "End of blog";
+    document.getElementById("morePageBtn").classList.add("disabled");
+  } 
 
 });

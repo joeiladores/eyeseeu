@@ -12,6 +12,7 @@
 }
 
 body {
+
     height: 100%;   
     background: url(https://www.freeiconspng.com/uploads/blue-circle-png-30.png) no-repeat left;
     background-attachment: fixed;
@@ -68,24 +69,24 @@ body {
 }
 
 .inner-container:hover {
-    transform: scale(1.05);
+    transform: scale(1.15);
 }
 
 .about-section {
     background: url(https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xpbmljfGVufDB8fDB8fA%3D%3D&w=1000&q=80) no-repeat left;
     background-size: 65%;
     overflow: hidden;
-    padding: 100px 0;
+    padding: 170px 0;
 }
 
 
 
 .inner-container {
-    width: 65%;
+    width: 55%;
     height: 100%;
     float: right;
     background-color: white;
-    padding: 150px;
+    padding: 100px;
 }
 
 .inner-container h1 {
@@ -348,6 +349,7 @@ a:hover {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    min-height: 448px;
     
    
 }
@@ -372,6 +374,85 @@ a:hover {
     transform: scale(1.04);
     transition-duration: 2ms;
   }
+
+  /* STYLES FOR FOOTER */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 30px 0;
+}
+
+footer h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+footer h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 60px;
+  height: 3px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #009eff);
+}
+
+footer p {
+  font-size: 14px;
+}
+footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+footer li {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.footer-link {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  padding-left: 7px;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+.copyright {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+#social-container {
+  display: inline-block;
+}
+
+.socials {
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 20px;
+  background: rgb(36, 34, 34);
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border-radius: 50px;
+  color: #fff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.socials:hover {
+  color: black;
+  background-color: #fff;
+  cursor: pointer;
+}
 
 
 
