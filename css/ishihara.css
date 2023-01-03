@@ -99,6 +99,7 @@ body * {
   object-fit: cover;
   object-position: center;
   object-fit: scale-down;
+  transition: 200ms ease-in-out;
 }
 
 #overlay {
@@ -125,10 +126,26 @@ body * {
 
 /* .btn:active { */
 
-.optionBtn:active {
+/* .inputBtn {
+  background-color:#2F67D5;
+  color: white;
+  cursor:pointer;
 
-  background-color: red !important;
+} */
 
+/* .optionBtn {
+  background-color:#2F67D5;
+  color: white;
+} */
+
+.optionBtn:hover {
+  background-color: #FD8647;
+  color: black;
+}
+
+.optionBtn.active {
+  background-color: #FD8647;
+  color: black;
 }
 
 .feature-optician {
