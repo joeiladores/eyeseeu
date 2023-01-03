@@ -29,7 +29,8 @@ body * {
 .introduction,
 .instruction,
 .ishihara-test,
-.result {
+.result,
+.ishihara-cards {
   margin-left: 6.25em;
   margin-right: 6.25em;
   margin-top: 6.25em;
@@ -154,12 +155,14 @@ body * {
   text-justify: distribute;
 }
 
+
 @media screen and (max-width: 576px) {
 
   .introduction,
   .instruction,
   .ishihara-test,
-  .result {
+  .result,
+  .ishihara-cards {
     margin-left: 1.25em;
     margin-right: 1.25em;
   }
