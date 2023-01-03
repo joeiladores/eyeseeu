@@ -41,6 +41,11 @@ html {
   box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.3);
 }
 
+.nav-link:is(:link, :active, :visited).active {
+  color: #0082d3;
+  transform: scale(1.05);
+}
+
 /* HOME MAIN STYLES */
 .main-section {
   /* position: absolute; */
