@@ -21,34 +21,9 @@ function populateTestimonialPage() {
               </div>
         `;
                 document.querySelector('#card-container').innerHTML += cards;
+                
             });
         });
-}
-
-function GetData() {
-
-  fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogs')
-      .then( response =>
-      {
-          if ( response.status !== 200 )
-          {
-              console.log( 'Looks like there was a problem. Status Code: ' +
-                  response.status );
-              return;
-          }
-
-          console.log( response.headers.get( "Content-Type" ) );
-          return response.json();
-      }
-      )
-      .then( myJson =>
-      {
-          console.log( JSON.stringify( myJson ) );
-      } )
-      .catch( err =>
-      {
-          console.log( 'Fetch Error :-S', err );
-      } );
 }
 
 window.onload = function () {
