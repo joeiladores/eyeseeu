@@ -156,9 +156,6 @@ function showPlateQ() {
 
 function hidePlateA() {
   document.getElementById("plate-A").style.display = "none";  
-}
-
-function hidePlateInfo() {
   document.querySelector(".plate-info").style.display = "none";
 }
 
@@ -235,7 +232,6 @@ function startTest() {
         console.log(`Pushed to answer[]: ${selectedOption}`);
         console.log(`Answer[]: ${answer}`);      
         hidePlateA();
-        hidePlateInfo();
         
         // RESET SELECTED OPTION TO ""
         selectedOption = "";
@@ -264,6 +260,7 @@ function startTest() {
         console.log("End of plates");
         console.log(`Final Answer[]: ${answer}`);
         // TODO: COMPUTE RESULTS AND DISOPLAY AS RESPONSIVE TABLE
+
       }
 
     });
