@@ -97,33 +97,27 @@ function displayPlates(plate) {
   // FETCH AND DISPLAY PLATE NUMBER ND IMAGE
   document.querySelector(".plate-container").innerHTML =
     `
-    <div class="plate-name my-2 text-center">
+    <div class="plate-name py-3 text-center">
       <h5>Plate ${plate.plate}</h5>
     </div>
-    <img class="ishihara-plate img-fluid" src="${plate.plateURL}"
-      alt="Ishihara Plate ${plate.plate}" />
+    <img id="plate-Q" class="ishihara-plate-img img-fluid" src="${plate.plateURL}"
+      alt="Ishihara Plate ${plate.plate}" data-plate="${plate.plate}" data-url="plateURL"/>
+    <img id="plate-A" class="ishihara-plate-img img-fluid" src="${plate.plateURL2}" style="display: none"
+      alt="Ishihara Plate ${plate.plate}" data-plate="${plate.plate}" data-url="plateURL2"/>
   `
-
-{/* <img onclick="document.getElementById('P1Q').style.display= ''; document.getElementById('P1A').style.display= 'none' ;" src="/CBTests/ishihara/Plate1A.gif" alt="Ishihara Color Blindness Test 1 Answer"> */}
-
-
 
   // FETCH AND DISPLAY OPTIONS
   // console.log(plate.options);
   let optionsElement = "", option = "", temp = "";
   for (let i = 0; i < plate.options.length; i++) {
     option = plate.options[i];
-    // console.log(option);
-    // console.log(typeof option)
+    console.log(`In creating options... Option: ${option}`, typeof option);
     // TODO: CATCH ERROR IN OPTION "I DONT KNOW" AND ONCLICK TO SPACES NOT ON
-    if (option == "I don't know") {
-      temp = "nothing"
-      console.log(`temp: ${temp}`);
-
-      optionsElement += `<button type="button" class="btn btn-primary" data-option="nothing" data-selected=false>${temp}</button>`;
+    if (option === "I don’t know") {
+      optionsElement += `<button type="button" class="optionBtn btn btn-primary" data-option="nothing" data-selected=false>${option}</button>`;
     }
     else {
-      optionsElement += `<button type="button" class="btn btn-primary" data-option=${option} data-selected=false>${option}</button>`;
+      optionsElement += `<button type="button" class="optionBtn btn btn-primary" data-option=${option} data-selected=false>${option}</button>`;
     }
   }
   // console.log(optionsElement);
@@ -138,7 +132,7 @@ function displayPlates(plate) {
   for (let i = 0; i < plate.display.length; i++) {
     info += `<p>${plate.display[i]}</p>`;
   }
-  document.querySelector(".display").innerHTML =
+  document.querySelector(".plate-info").innerHTML =
     `
       <h5>What did you see?</h5>
       <hr>
@@ -147,11 +141,62 @@ function displayPlates(plate) {
   // console.log(document.querySelector(".display").innerHTML);
 }
 
+function hidePlateQ() {
+  document.getElementById("plate-Q").style.display = "none";
+}
+
+function showPlateA() {
+  document.getElementById("plate-A").style.display = "block";
+  document.querySelector(".plate-info").style.display = "block";
+}
+
+function showPlateQ() {
+  document.getElementById("plate-Q").style.display = "block";
+}
+
+function hidePlateA() {
+  document.getElementById("plate-A").style.display = "none";  
+  document.querySelector(".plate-info").style.display = "none";
+}
+
+function showModal() {
+  document.getElementById("customModal").style.display = "block";
+  document.getElementById("overlay").classList.add("active");
+
+}
+
+document.getElementById("closeModalBtn").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  document.getElementById("customModal").style.display = "none";
+  document.getElementById("overlay").classList.remove("active");
+});
+
+
+// ADD EVENT LISTERNER TO THE PLATE IMAGE
+document.querySelector(".plate-container").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  let targetElement = e.target;
+  let elementID = targetElement.id;
+
+  // console.log(`target id: ${elementID}`);
+
+  if (elementID === "plate-Q") {
+    hidePlateQ();
+    showPlateA();
+  }
+  if (elementID === "plate-A") {
+    hidePlateA();
+    showPlateQ();
+  }
+});
+
 function startTest() {
 
   let counter = 0;
   let answer = [];
-  let selectedOption = "", previousOption = "";
+  let selectedOption = "";
 
   displayTest();
 
@@ -172,10 +217,11 @@ function startTest() {
 
       let targetElement = e.target;
       let option = targetElement.dataset.option;
-      let parentElement = document.querySelector(".options");
 
       // console.log(targetElement);
       console.log(`Onclick: ${option}`);
+      console.log(`Option: ${option}`);
+      console.log(`Selected Option: ${selectedOption}`);
 
       // TODO: REVIEW PUSHED ANSWERS, SHOULD NOT ACCEPT CLICK IF THERE IS NO ANSWER YET!!
       if (option === "next" && selectedOption != "") {
@@ -184,36 +230,28 @@ function startTest() {
         // PUSH SELECTED OPTION TO THE ANSWER ARRAY
         answer.push(selectedOption);
         console.log(`Pushed to answer[]: ${selectedOption}`);
-        console.log(`Answer[]: ${answer}`);
+        console.log(`Answer[]: ${answer}`);      
+        hidePlateA();
+        
+        // RESET SELECTED OPTION TO ""
+        selectedOption = "";
       }
       else if (option === "next" && selectedOption === "") {
-        alert("Please select answer");
+        showModal();
       }
       else {
         // ONLY CLICK ON BUTTON OPTIONS AND NOT THE SPACES OUTSIDE THE ELEMENTS
         if (targetElement.type === "button") {
-          console.log("Clicked on a button");
           selectedOption = option;
+          console.log("Clicked on a button");
           console.log(`Selected option: ${selectedOption}`);
           targetElement.dataset.selected = true;
-          // targetElement.classList.add("active");
+          targetElement.classList.add("active");
           // this.style.backgroundColor = "red";
+          console.log(targetElement.classList);
           // TODO: FIX BUTTON COLOR ACTIVE
         }
       }
-
-      // ADD EVENT LISTENER TO PLATE IMAGE
-      // const displayInfo = (event:MouseEvent) => {
-      //   console.log("MouseEvent: from image");
-      // };
-
-      // document.querySelector(".ishihara-plate").addEventListener("click", displayInfo);
-
-      //   document.querySelector(".display").style.display = "block";
-
-      // });
-
-
 
       // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
       displayPlates(plates[counter]);
@@ -222,6 +260,7 @@ function startTest() {
         console.log("End of plates");
         console.log(`Final Answer[]: ${answer}`);
         // TODO: COMPUTE RESULTS AND DISOPLAY AS RESPONSIVE TABLE
+
       }
 
     });

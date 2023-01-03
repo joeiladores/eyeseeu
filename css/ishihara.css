@@ -9,6 +9,19 @@
   /* font-family: 'Roboto', sans-serif; */
 }
 
+#loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 9999;
+}
+
 body * {
   font-family: 'Roboto', sans-serif;
 }
@@ -51,10 +64,10 @@ body * {
 .ishihara-container {
   /* height: 600px;
   width: 600px; */
-  position: relative;
+  /* position: relative; */
 }
 
-.ishihara-plate {
+.plate-container {
   /* object-fit: cover;
   object-position: center;
   padding: 10px;
@@ -62,17 +75,47 @@ body * {
   width: 380px;
   overflow: hidden; */
 
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  /* position: relative; */
+  /* top: 50%;
+  left: 50%; */
+  /* transform: translate(-50%, -50%); */
   /* height: 100%;
   width: auto; */
-  height: auto;
+  /* height: auto; */
   /* width: 100%; */
-  overflow: hidden;
+  /* overflow: hidden;
   object-fit: cover;
+  object-position: center; */
 
+}
+
+.plate-container {
+  height: 400px;
+}
+
+.ishihara-plate-img {
+  height: 50vh;
+  width:100%;
+  object-fit: cover;
+  object-position: center;
+  object-fit: scale-down;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 /* TODO: FIX BUTTON COLOR WHEN CLICKED */
@@ -81,9 +124,10 @@ body * {
 /* background-color: red; */
 
 /* .btn:active { */
-.btn:not(:disabled):active {
 
-  background-color: red;
+.optionBtn:active {
+
+  background-color: red !important;
 
 }
 

@@ -11,7 +11,7 @@
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css" />
   <!-- FONT AWESOME -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
   <!-- CSS -->
   <link rel="stylesheet" href="css/ishihara.css" />
   <link rel="stylesheet" href="style.css" />
@@ -19,10 +19,28 @@
 
   <!-- FIREBASE -->
   <script defer type="module" src="js/ishihara.js"></script>
-  <script defer type="module" src="js/ishihara-test.js"></script>
+  <!-- <script defer type="module" src="js/ishihara-test.js"></script> -->
+
+  <script>
+    // Function to execute when the page finishes loading
+    function pageLoaded() {
+      // Hide the loader
+      document.getElementById("loader").style.display = "none";
+    }
+    // Add the pageLoaded function as a listener to the onload event
+    window.addEventListener("load", pageLoaded);
+  </script>
+
 </head>
 
 <body>
+
+  <div id="loader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
   <!-- NAVBAR SECTION ---------------------------------------------------------------->
   <nav class="navbar navbar-expand-lg bg-light fixed-top">
     <div class="container">
@@ -82,10 +100,10 @@
       </div>
     </div>
   </nav>
-  <!-- END OF NAVBAR ------------------------------------------------------------------>
+  <!-- END OF NAVBAR ------------------------------------------------------------------------------>
 
 
-  <!-- ISHIHARA TEST PAGE ------------------------------------------------------------->
+  <!-- ISHIHARA TEST ------------------------------------------------------------------------------>
   <div class="introduction p-3 text-center shadow-lg rounded-3">
     <!-- INTROUCTION HERE -->
   </div>
@@ -93,7 +111,7 @@
 
   <div class="instruction my-5 p-5 shadow-lg rounded-3">
     <!-- INSTRUCTION HERE -->
-    
+
   </div>
 
   <div class="ishihara-test my-5 py-3 px-5 shadow-lg rounded-3" style="display: none">
@@ -103,37 +121,35 @@
     <div class="progress mt-2">
       <!-- FETCH NAD DISPLAY PROGRESS BAR HERE -->
     </div>
-    <div class="ishihara-container d-grid mb-5 pb-5">
+    <div class="ishihara-container d-grid mb-3 pb-3">
       <div class="row">
-        <!-- FETCH AND DISPLAY LEFT PANEL - ISHIHARA PLATE --------------------------------------->
-
+        <!-- FETCH AND DISPLAY LEFT PANEL - ISHIHARA PLATE -->
         <div class="plate-container col-md-6">
           <!-- FETCH AND DISPLAY PLATE NUMBER AND IMAGE HERE -->
-          
         </div>
 
         <!-- RIGHT PANEL - DISPLAY --------------------------------------------->
         <div class="display-right-panel col pt-5 g-1">
           <!-- TODO: FIXED THE QUESTION ON NUMBERS AND LINES -->
-          <h5>What number does the patient see?</h5>
+          <h5>What does the patient see?</h5>
           <div class="options col d-flex gap-2 flex-wrap mb-5">
             <!-- FETCH OPTIONS AND DISPLAY HERE -->
           </div>
-          <div class="display col p-3 shadow rounded-3" style="display: none">
+          <div class="plate-info col p-3 shadow rounded-3" style="display: none">
             <!-- FETCH DISPLAY AND DISPLAY HERE -->
           </div>
         </div>
 
-
-
       </div>
     </div>
   </div>
+  <!-- END OF ISHIHARA TEST ----------------------------------------------------------------------->
 
   <div class="result text-center" style="display: none">
     <h1>Result</h1>
   </div>
 
+  <!-- FEATURE SECTION ----------------------------------------------------------------------------->
   <div class="feature-optician mt-5">
     <h3 class="text-center text-light">Do I still need an eye test with my optician?</h3>
     <div class="feature-content shadow-lg bg-light p-5 mt-3 rounded-3">
@@ -147,14 +163,29 @@
         any changes to your eyecare with them before making any decisions.</p>
       <a href="contact.html" class="btn btn-primary">Book an Eye Test</a>
     </div>
+  </div>
+  <!-- END OF FEATURE SECTION --------------------------------------------------------------------->
 
-
-
-
-
+  <!-- Modal -->
+  <div class="modal" id="customModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h5 class="modal-title" id="modal-title">Incomplete</h5>
+          <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center d-flex flex-row justify-content-center align-content-center">
+          <i class="fa-solid fa-circle-xmark fa-4x text-primary me-4"></i>
+          <h5 class="align-self-center">Please select answer</h5>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- FOOTER SECTION --------------------------------------------------------->
+  <div id="overlay"></div>
+
+
+  <!-- FOOTER SECTION ---------------------------------------------------------------------------->
   <footer>
     <div class="container">
       <div class="row">
@@ -171,17 +202,25 @@
           <div class="row">
             <div class="col-md-6">
               <ul>
-                <li><a href="#" class="footer-link">Home →</a></li>
-                <li><a href="#" class="footer-link">Location →</a></li>
-                <li><a href="#" class="footer-link">About →</a></li>
-                <li><a href="#" class="footer-link">Blogs →</a></li>
+                <li><a href="index.html" class="footer-link">Home →</a></li>
+                <li>
+                  <a href="location.html" class="footer-link">Location →</a>
+                </li>
+                <li><a href="about.html" class="footer-link">About →</a></li>
+                <li><a href="blog.html" class="footer-link">Blogs →</a></li>
               </ul>
             </div>
             <div class="col-md-6">
               <ul>
-                <li><a href="#" class="footer-link">Services →</a></li>
-                <li><a href="#" class="footer-link">Reviews →</a></li>
-                <li><a href="#" class="footer-link">Contact →</a></li>
+                <li>
+                  <a href="services.html" class="footer-link">Services →</a>
+                </li>
+                <li>
+                  <a href="reviews.html" class="footer-link">Reviews →</a>
+                </li>
+                <li>
+                  <a href="contact.html" class="footer-link">Contact →</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -189,7 +228,7 @@
         <div class="col-md-4">
           <h3>Socials</h3>
           <div id="social-container">
-            <a href=""></a>
+            <a href="">
               <p class="socials"><i class="fa-brands fa-facebook-f"></i></p>
             </a>
             <a href="">
@@ -209,6 +248,7 @@
       Copyright &copy; 2022 EyeSeeU Optical Clinic. All rights reserved.
     </div>
   </footer>
+  <!-- END OF FOOTER SECTION ---------------------------------------------------------------------->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
