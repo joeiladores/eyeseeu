@@ -15,42 +15,38 @@ body {
     height: 100%;   
     background: url(https://www.freeiconspng.com/uploads/blue-circle-png-30.png) no-repeat left;
     background-attachment: fixed;
- 
-  
 }
-
-
 
 /* STYLES NAVBAR ****************************************************************/
 /* Lustria font family ng favicon */
 .nav-link {
-    color: black;
+  color: black;
 }
 
 .nav-link:hover {
-    color: #009EFF;
-    transform: scale(1.03);
-    transition: all .4s ease;
+  color: #009eff;
+  transform: scale(1.03);
+  transition: all 0.4s ease;
 }
 
 .custom-navbarbrand {
-    color: black;
-    /* padding-top: .3125rem;
+  color: black;
+  /* padding-top: .3125rem;
   padding-bottom: .3125rem; */
-    margin-right: 1rem;
-    font-size: 1.75rem;
-    text-decoration: none;
-    white-space: nowrap;
+  margin-right: 1rem;
+  font-size: 1.75rem;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .custom-navbarbrand:hover {
-    color: black;
-    transform: scale(1.03);
-    transition: all .3s ease;
+  color: black;
+  transform: scale(1.03);
+  transition: all 0.3s ease;
 }
 
 .navbar {
-    box-shadow: 0 2px 4px 1px rgba(0, 0, 0, .3);
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.3);
 }
 
 /* Banner TOP */
@@ -68,12 +64,10 @@ body {
 /* About Us Section */
 
 .inner-container {
-    transition: all 0.3s;
-
+  transition: all 0.3s;
 }
 
 .inner-container:hover {
-
     transform: scale(1.05);
 }
 
@@ -92,13 +86,12 @@ body {
     float: right;
     background-color: white;
     padding: 150px;
-
 }
 
 .inner-container h1 {
-    margin-bottom: 30px;
-    font-size: 30px;
-    font-weight: 900;
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: 900;
 }
 
 .text {
@@ -106,8 +99,8 @@ body {
     color: black;
     line-height: 30px;
     text-align: justify;
-}
 
+}
 
 /* Meet our team section */
 a,
@@ -115,6 +108,7 @@ a:hover {
   text-decoration: none;
   transition: color 0.3s ease-in-out;
 }
+
 
 #pageHeaderTitle {
   margin: 2rem 0;
@@ -387,28 +381,25 @@ a:hover {
     .inner-container {
         padding: 80px;
     }
-
-   
-
 }
 
-@media screen and (max-width:1000px) {
-    .about-section {
-        background-size: 100%;
-        padding: 100px 40px;
-    }
+@media screen and (max-width: 1000px) {
+  .about-section {
+    background-size: 100%;
+    padding: 100px 40px;
+  }
+
 
     .inner-container {
         width: 100%;
     }
 
-    
 }
 
-@media screen and (max-width:600px) {
-    .about-section {
-        padding: 0;
-    }
+@media screen and (max-width: 600px) {
+  .about-section {
+    padding: 0;
+  }
 
     .projcard-title {
         position: relative;
@@ -421,3 +412,4 @@ a:hover {
         padding: 60px;
     }
 }
+
