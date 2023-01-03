@@ -34,6 +34,8 @@ const db = getFirestore(app);
 const pageRef = collection(db, 'ishihara-page');
 const platesRef = collection(db, 'ishihara-vcd-38');
 
+let counter = 0;
+
 // GET REAL TIME COLLECTION DATA
 onSnapshot(pageRef, (snapshot) => {
   // let page = [];
@@ -82,8 +84,6 @@ function displayTest() {
 }
 
 function displayPlates(plate) {
-  // console.log("Display Plate");
-  // console.log(plate);
 
   let progressValue = Math.floor((plate.plate / 38) * 100);
 
@@ -108,23 +108,22 @@ function displayPlates(plate) {
 
   // FETCH AND DISPLAY OPTIONS
   // console.log(plate.options);
-  let optionsElement = "", option = "", temp = "";
+  let optionsElement = "", option = "";
   for (let i = 0; i < plate.options.length; i++) {
     option = plate.options[i];
-    console.log(`In creating options... Option: ${option}`, typeof option);
-    // TODO: CATCH ERROR IN OPTION "I DONT KNOW" AND ONCLICK TO SPACES NOT ON
+
     if (option === "I don’t know") {
-      optionsElement += `<button type="button" class="optionBtn btn btn-primary" data-option="nothing" data-selected=false>${option}</button>`;
+      optionsElement += `<div class="optionBtn btn btn-primary" data-option="nothing" data-selected=false>${option}</div>`;
     }
     else {
-      optionsElement += `<button type="button" class="optionBtn btn btn-primary" data-option=${option} data-selected=false>${option}</button>`;
+      optionsElement += `<div class="optionBtn btn btn-primary" data-option=${option} data-selected=false>${option}</div>`;
     }
   }
   // console.log(optionsElement);
   document.querySelector(".options").innerHTML =
     `
     ${optionsElement}
-    <button id="nextBtn" type="button" class="btn btn-dark" data-option="next">Next</button>
+    <button id="nextBtn" class="btn btn-dark" data-option="next">Next</button>
   `;
 
   // FETCH AND DISPLAY PLATE INFORMATION
@@ -138,7 +137,6 @@ function displayPlates(plate) {
       <hr>
       ${info}
   `
-  // console.log(document.querySelector(".display").innerHTML);
 }
 
 function hidePlateQ() {
@@ -155,7 +153,7 @@ function showPlateQ() {
 }
 
 function hidePlateA() {
-  document.getElementById("plate-A").style.display = "none";  
+  document.getElementById("plate-A").style.display = "none";
   document.querySelector(".plate-info").style.display = "none";
 }
 
@@ -165,6 +163,12 @@ function showModal() {
 
 }
 
+// TODO: DESELECT ACTIVE AND SELECTED TO FALSE
+function deselectOtherOptions() {
+
+}
+
+// SDD EVENT LISTNER TO THE MODAL CLOSE BUTTON
 document.getElementById("closeModalBtn").addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -180,8 +184,6 @@ document.querySelector(".plate-container").addEventListener("click", (e) => {
   let targetElement = e.target;
   let elementID = targetElement.id;
 
-  // console.log(`target id: ${elementID}`);
-
   if (elementID === "plate-Q") {
     hidePlateQ();
     showPlateA();
@@ -194,7 +196,7 @@ document.querySelector(".plate-container").addEventListener("click", (e) => {
 
 function startTest() {
 
-  let counter = 0;
+  // let counter = 0;
   let answer = [];
   let selectedOption = "";
 
@@ -219,20 +221,18 @@ function startTest() {
       let option = targetElement.dataset.option;
 
       // console.log(targetElement);
-      console.log(`Onclick: ${option}`);
-      console.log(`Option: ${option}`);
-      console.log(`Selected Option: ${selectedOption}`);
+      // console.log(`Option: ${option}`);
+      // console.log(`Selected Option: ${selectedOption}`);
 
-      // TODO: REVIEW PUSHED ANSWERS, SHOULD NOT ACCEPT CLICK IF THERE IS NO ANSWER YET!!
       if (option === "next" && selectedOption != "") {
-        console.log(`Selected answer: ${selectedOption}`);
+
         counter++;
         // PUSH SELECTED OPTION TO THE ANSWER ARRAY
         answer.push(selectedOption);
-        console.log(`Pushed to answer[]: ${selectedOption}`);
-        console.log(`Answer[]: ${answer}`);      
+        // console.log(`Pushed to answer[]: ${selectedOption}`);
+        console.log(`Answer[]: ${answer}`);
         hidePlateA();
-        
+
         // RESET SELECTED OPTION TO ""
         selectedOption = "";
       }
@@ -241,19 +241,23 @@ function startTest() {
       }
       else {
         // ONLY CLICK ON BUTTON OPTIONS AND NOT THE SPACES OUTSIDE THE ELEMENTS
-        if (targetElement.type === "button") {
+        if (targetElement.classList.contains("optionBtn")) {
           selectedOption = option;
-          console.log("Clicked on a button");
           console.log(`Selected option: ${selectedOption}`);
-          targetElement.dataset.selected = true;
           targetElement.classList.add("active");
-          // this.style.backgroundColor = "red";
-          console.log(targetElement.classList);
+          targetElement.dataset.selected = "true";
+          targetElement.classList.remove("btn-primary");
+          targetElement.classList.add("btn-warning");
+
+          // INACTIVATE AND DESELECT OTHER OPTIONS
+          deselectOtherOptions();
+
+          console.log(targetElement);
           // TODO: FIX BUTTON COLOR ACTIVE
         }
       }
 
-      // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
+     // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
       displayPlates(plates[counter]);
 
       if (counter === 37) {
@@ -269,3 +273,4 @@ function startTest() {
 
 
 }
+
