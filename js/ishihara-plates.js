@@ -33,12 +33,16 @@ const db = getFirestore(app);
 // Collection Reference
 const platesRef = collection(db, 'ishihara-vcd-38');
 
+const platesArray = [];
+
 function showPlates(plates) {
 
   plates.forEach((plate) => {
 
     // console.log(`Plate: ${plate.plate}`);
     // console.log(`Plate: ${plate.plateURL}`);
+
+    platesArray.push(plate);
 
     document.getElementById("plate-cards-preview").innerHTML +=
       `
@@ -58,12 +62,9 @@ function showPlates(plates) {
 }
 
 function showCardModal(plateNum) {
+  
+  console.log("Inside card modal...accepting plate no. ${plateNum}");
 
-
-  // document.getElementById("cardModalBody").innerHTML =
-  //   `
-
-  // `
   document.getElementById("cardModal").style.display = "block";
   document.getElementById("overlay").classList.add("active");
 }
@@ -75,17 +76,17 @@ function closeCardModal() {
 
 document.querySelector(".closeBtn").onclick = () => closeCardModal();
 
-// document.getElementById("plate-cards-preview").addEventListener("click", (e) => {
-//   const card = e.target;
-//   // console.log("Card clicked...");
-//   // console.log(card);  
+document.getElementById("plate-cards-preview").addEventListener("click", (e) => {
+  const card = e.target;
+  // console.log("Card clicked...");
+  // console.log(card);  
 
-//   if (card.classList.contains("card-img-bottom")) {
-//     console.log(card.dataset.plate);
-//     showCardModal(card.dataset.plate);
-//   }
+  if (card.classList.contains("card-img-bottom")) {
+    console.log(card.dataset.plate);
+    showCardModal(card.dataset.plate);
+  }
 
-// });
+});
 
 
 // FETCH PLATES FROM FIRESTORE AND DISPLAY IN CARDS

@@ -160,7 +160,7 @@ body * {
 }
 
 .zoom-plate img {
-  transition: all 1.5s ease;
+  transition: all 1s ease;
 }
 
 .zoom-plate:hover img {
