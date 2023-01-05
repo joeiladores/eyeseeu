@@ -33,25 +33,75 @@ const db = getFirestore(app);
 // Collection Reference
 const platesRef = collection(db, 'ishihara-vcd-38');
 
-// FETCH PLATES FROM FIRESTORE
+const platesArray = [];
+
+function showPlates(plates) {
+
+  plates.forEach((plate) => {
+
+    // console.log(`Plate: ${plate.plate}`);
+    // console.log(`Plate: ${plate.plateURL}`);
+
+    platesArray.push(plate);
+
+    document.getElementById("plate-cards-preview").innerHTML +=
+      `
+      <div class="col">
+        <div class="card shadow-lg rounded-3 pb-3">
+          <div class="card-body">
+            <h5 class="card-title text-center">Plate ${plate.plate}</h5>
+          </div>
+          <div class="zoom-plate p-3">
+            <img class="card-img-bottom img-fluid" src=${plate.plateURL}" alt="Ishihara Plate ${plate.plate}" data-plate=${plate.plate}>      
+          </div>    
+        </div>
+      </div>    
+    `
+  });
+
+}
+
+function showCardModal(plateNum) {
+  
+  console.log("Inside card modal...accepting plate no. ${plateNum}");
+
+  document.getElementById("cardModal").style.display = "block";
+  document.getElementById("overlay").classList.add("active");
+}
+
+function closeCardModal() {
+  document.getElementById("cardModal").style.display = "none";
+  document.getElementById("overlay").classList.remove("active");
+}
+
+document.querySelector(".closeBtn").onclick = () => closeCardModal();
+
+document.getElementById("plate-cards-preview").addEventListener("click", (e) => {
+  const card = e.target;
+  // console.log("Card clicked...");
+  // console.log(card);  
+
+  if (card.classList.contains("card-img-bottom")) {
+    console.log(card.dataset.plate);
+    showCardModal(card.dataset.plate);
+  }
+
+});
+
+
+// FETCH PLATES FROM FIRESTORE AND DISPLAY IN CARDS
 const q = query(platesRef, orderBy("plate", "asc"));
 onSnapshot(q, (snapshot) => {
   const plates = [];
   snapshot.docs.forEach((doc) => {
     plates.push({ ...doc.data(), id: doc.id });
-
-    document.getElementById("plate-cards").innerHTML +=
-    `
-      <div class="col">
-        <div class="card shadow-lg rounded-3">
-          <div class="card-body border-bottom">
-            <h5 class="card-title text-center">Plate ${doc.data().plate}</h5>
-          </div>
-          <img src=${doc.data().plateURL}" class="card-img-bottom" alt="Ishihara Plate ${doc.data().plate}">          
-        </div>
-      </div>    
-    `
-
-
   });
+
+  console.log(plates);
+
+  showPlates(plates);
+
 });
+
+
+

@@ -104,16 +104,40 @@
 
 
   <!-- ISHIHARA PLATES ---------------------------------------------------------------------------->
-  <div id="ishihara-cards" class="ishihara-cards my-5 py-3">    
-    <div id="plate-cards" class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+  <div id="ishihara-cards" class="ishihara-cards my-5 py-3">
+    <div id="plate-cards-preview" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-3">
       <!-- DISPLAY PLATES HERE -->
     </div>
   </div>
   <!-- END OF ISHIHARA PLATES --------------------------------------------------------------------->
 
-  
+  <!-- CARD MODAL -->
+  <div id="cardModal" class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" display="none">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Ishihara Plate 1</h1>
+          <button type="button" class="btn-close closeBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="cardModalBody" class="modal-body justify-content-center">
+          <div class="card d-flex flex-column" style="width: 29rem;" >
+            <img class="img-fluid"
+              src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01_12.png?alt=media&token=d364a539-2bb7-4ef4-8e0c-ff78bb604a18"
+              class="card-img-top" alt="...">
+              <img class="img-fluid"
+              src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01B_12.png?alt=media&token=f16ee1f0-f6f6-40d4-821c-880440b91aad"
+              class="card-img-top" alt="..." style="display: none">
+            <div class="card-body">
+              <p class="card-text text-center">Everyone should see number 12.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  
+
   <div id="overlay"></div>
 
 

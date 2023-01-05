@@ -155,6 +155,18 @@ body * {
   text-justify: distribute;
 }
 
+.zoom-plate {
+  overflow: hidden;
+}
+
+.zoom-plate img {
+  transition: all 1s ease;
+}
+
+.zoom-plate:hover img {
+  transform: scale(1.25);
+}
+
 
 @media screen and (max-width: 576px) {
 
