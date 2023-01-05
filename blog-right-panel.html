@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog Right Panel</title>
+  <!-- BOOTSTRAP -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css" />
+  <!-- FONT AWESOME -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/blog-right-panel.css" />
+  <!-- JS -->
+
+  <!-- FIREBASE -->
+  <!-- <script defer type="module" src="js/blog-right-panel.js"></script> -->
+
+  <!-- MOCKAPI -->
+  <script defer type="module" src="js/blog-right-panel-nofirebase.js"></script>
+
 </head>
+
 <body>
 
-  <!-- NAVBAR SECTION -->
+  <!-- NAVBAR SECTION ------------------------------------------------------->
   <nav class="navbar navbar-expand-lg bg-light fixed-top">
     <div class="container">
       <a class="custom-navbarbrand fs-4" href="index.html">
         <img src="photo/main-logo&favicon.png" alt="Logo" width="35" height="45"
-          class="d-inline-block align-text-center">
+          class="d-inline-block align-text-center" />
         <span>EyeSeeU </span>Optical
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -27,7 +40,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="index.html">HOME</a>
           </li>
@@ -39,15 +52,29 @@
               aria-expanded="false">ABOUT
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="about.html#aboutus">About Us</a></li>
-              <li><a class="dropdown-item" href="about.html#team">Meet the Team</a></li>
+              <li>
+                <a class="dropdown-item" href="about.html#aboutus">About Us</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="about.html#team">Meet the Team</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">SERVICES
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="services.html">Services</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="ishihara.html">Ishihara Test</a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="services.html">SERVICES</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="blog.html">BLOG</a>
+            <a class="nav-link" href="blog.html">BLOGS</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="reviews.html">REVIEWS</a>
@@ -59,44 +86,38 @@
       </div>
     </div>
   </nav>
-  <!-- END OF NAVBAR ----------------------------------------------------------------->
+  <!-- END OF NAVBAR ------------------------------------------------------------------>
 
-   <section class="page-x-margin d-flex mt-5 py-5">
-    
-    <div class="left-panel bg-warning justify-content-center me-3 rounded-3">
-      <div class="my-3">
-        <h5 class="align-self-center">Horizontal Blog Cards by Joshua One</h5>
-      </div>  
-      <div class="my-3">
-        <h5 class="align-self-center">Horizontal Blog Cards by Joshua Two</h5>
-      </div>  
-      <div class="my-3">
-        <h5 class="align-self-center">Horizontal Blog Cards by Joshua Three</h5>
+
+
+  <main class="d-flex flex-wrap gap-3">
+    <section class="article">
+      <div class="blog-header">
+        <h2>Stay Informed with Blogs from EyeSeeU Optical</h2>
+        <p>Stay informed by reading the helpful blogs from EyeSeeU Optical and learn more about various eye health topics and vision care. </p>
       </div>
-    </div>
-        
+      <div id="blog" class="d-grid gap-3">
+        <!-- FETCH BLOGS, DISPLAY CARDS HERE -->
+      </div>
+      <button id="morePageBtn" class="btn btn-primary my-3">View more blogs</button>
+    </section>
+    
+    <aside class="sticky d-flex justify-content-end">
+      <div class="right-sidebar border-0 p-2 shadow-lg rounded-3 bg-primary">
+        <h5 class="text-center mt-3 text-light">Blogs</h5>
+        <ul id="blogMonth" class="list-group border-0 p-2">
+          <!-- FETCH MONTHS, DISPLAY MONTHS HERE -->
+        </ul>
+      </div>
+    </aside>
+  </main>
 
-      <aside class="right-panel rounded-3 shadow-lg g-5">
-        <div class="right-sidebar border-0 py-2">
-          <h5 class="text-center">Blogs</h5>
-          <ul id="blogMonth" class="list-group rounded-3 p-2">
-            <a class="list-group-item active rounded-0" href="#">December 2022</a>
-            <a class="list-group-item rounded-0" href="#">November 2022</a>
-            <a class="list-group-item rounded-0" href="#">October 2022</a>
-            <a class="list-group-item rounded-0" href="#">September 2022</a>
-          </ul>          
-        </div>
-      </aside>      
-  
-  </section>
-
-  
-  
-  
-
+  <footer>Footer</footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-  crossorigin="anonymous"></script>
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
+

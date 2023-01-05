@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ishihara Test</title>
+  <title>Ishihara Plates</title>
   <!-- BOOTSTRAP -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
@@ -18,8 +18,8 @@
   <!-- JS -->
 
   <!-- FIREBASE -->
-  <script defer type="module" src="js/ishihara.js"></script>
-
+  <script defer type="module" src="js/ishihara-plates.js"></script>
+  <!-- <script defer type="module" src="js/ishihara-test.js"></script> -->
 
   <script>
     // Function to execute when the page finishes loading
@@ -103,85 +103,17 @@
   <!-- END OF NAVBAR ------------------------------------------------------------------------------>
 
 
-  <!-- ISHIHARA TEST ------------------------------------------------------------------------------>
-  <div class="introduction p-3 text-center shadow-lg rounded-3">
-    <!-- INTROUCTION HERE -->
-  </div>
-  <br />
-
-  <div class="instruction my-5 p-5 shadow-lg rounded-3">
-    <!-- INSTRUCTION HERE -->
-
-  </div>
-
-  <div class="ishihara-test my-5 py-3 px-5 shadow-lg rounded-3" style="display: none">
-    <div class="plate-name my-2 pb-3 text-center">
-      <h2>Ishihara Test</h2>
-    </div>
-    <div class="progress mt-2">
-      <!-- FETCH NAD DISPLAY PROGRESS BAR HERE -->
-    </div>
-    <div class="ishihara-container d-grid mb-3 pb-3">
-      <div class="row">
-        <!-- FETCH AND DISPLAY LEFT PANEL - ISHIHARA PLATE -->
-        <div class="plate-container col-md-6">
-          <!-- FETCH AND DISPLAY PLATE NUMBER AND IMAGE HERE -->
-        </div>
-
-        <!-- RIGHT PANEL - DISPLAY --------------------------------------------->
-        <div class="display-right-panel col pt-5 g-1">
-          <!-- TODO: FIXED THE QUESTION ON NUMBERS AND LINES -->
-          <h5>What does the patient see?</h5>
-          <div class="options col d-flex gap-2 flex-wrap mb-5">
-            <!-- FETCH OPTIONS AND DISPLAY HERE -->
-          </div>
-          <div class="plate-info col p-3 shadow rounded-3 bg-light" style="display: none">
-            <!-- FETCH DISPLAY AND DISPLAY HERE -->
-          </div>
-        </div>
-
-      </div>
+  <!-- ISHIHARA PLATES ---------------------------------------------------------------------------->
+  <div id="ishihara-cards" class="ishihara-cards my-5 py-3">    
+    <div id="plate-cards" class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+      <!-- DISPLAY PLATES HERE -->
     </div>
   </div>
-  <!-- END OF ISHIHARA TEST ----------------------------------------------------------------------->
+  <!-- END OF ISHIHARA PLATES --------------------------------------------------------------------->
 
-  <div class="result text-center" style="display: none">
-    <h1>Result</h1>
-  </div>
+  
 
-  <!-- FEATURE SECTION ----------------------------------------------------------------------------->
-  <div class="feature-optician mt-5">
-    <h3 class="text-center text-light">Do I still need an eye test with my optician?</h3>
-    <div class="feature-content shadow-lg bg-light p-5 mt-3 rounded-3">
-      <p>Online eye tests should never replace in-person eye examinations with your optician. While they may be able to
-        give you some indication of your eyesight between your regular eye tests, results are not accurate, and cannot
-        detect the existence of an underlying eye condition or visual impairment.</p>
-      <p>Visiting your optician regularly is the only way to diagnose any changes to your vision or eye health.
-        Opticians use a range of tests and equipment during an eye exam to check the overall health of your eyes
-        thoroughly and advise the necessary treatments — whether that’s wearing glasses, contact lenses or referring you
-        to a specialist. Your optician will also have an idea of your eye health history, so it’s always best to discuss
-        any changes to your eyecare with them before making any decisions.</p>
-      <a href="contact.html" class="btn btn-primary">Book an Eye Test</a>
-    </div>
-  </div>
-  <!-- END OF FEATURE SECTION --------------------------------------------------------------------->
-
-  <!-- Modal -->
-  <div class="modal" id="customModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true" style="display: none">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header justify-content-center">
-          <h5 class="modal-title" id="modal-title">Incomplete</h5>
-          <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center d-flex flex-row justify-content-center align-content-center">
-          <i class="fa-solid fa-circle-xmark fa-4x text-primary me-4"></i>
-          <h5 class="align-self-center">Please select answer</h5>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  
   <div id="overlay"></div>
 
 
