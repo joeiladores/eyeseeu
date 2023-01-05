@@ -158,9 +158,8 @@ function hidePlateA() {
 }
 
 function showModal() {
-  document.getElementById("customModal").style.display = "block";
+  document.getElementById("errModal").style.display = "block";
   document.getElementById("overlay").classList.add("active");
-
 }
 
 // TODO: DESELECT ACTIVE AND SELECTED TO FALSE
@@ -169,10 +168,8 @@ function deselectOtherOptions() {
 }
 
 // SDD EVENT LISTNER TO THE MODAL CLOSE BUTTON
-document.getElementById("closeModalBtn").addEventListener("click", (e) => {
-  e.preventDefault();
-
-  document.getElementById("customModal").style.display = "none";
+document.getElementById("closeModalBtn").addEventListener("click", () => {
+  document.getElementById("errModal").style.display = "none";
   document.getElementById("overlay").classList.remove("active");
 });
 
