@@ -57,7 +57,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.html">HOME</a>
+              <a class="nav-link active" aria-current="page" href="index.html"
+                >HOME</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="location.html">LOCATION</a>
@@ -84,11 +86,28 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="blog.html">BLOGS</a>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="services.html"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >SERVICES
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="services.html">Services</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="ishihara.html"
+                    >Ishihara Test</a
+                  >
+                </li>
+              </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="services.html">SERVICES</a>
+              <a class="nav-link" href="blog.html">BLOGS</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="reviews.html">REVIEWS</a>
@@ -117,7 +136,7 @@
         <h3 class="mp-text">professional, and up-to-date</h3>
         <h3 class="mp-text">vision care</h3>
         <p class="mp-text pt-5">
-          At three locations in Digos City, Isulan, and Koronadal City
+          At three locations in Caloocan City, Iloilo, and General Santos City
         </p>
         <a href="contact.html#book" class="mp-button">Book An Appointment</a>
       </div>
@@ -295,6 +314,35 @@
       </div>
     </section>
 
+    <!-- ISHIHARA TEST -->
+    <section class="text-dark bg-light text-center text-sm-start">
+      <div class="container">
+        <div class="d-sm-flex align-items-center justify-content-between">
+          <div class="p-5">
+            <h3 class="pb-4">Ishihara Test</h3>
+            <p>
+              Take our online Ishihara Test to see if you have any colorblindness
+              on a specific color. The test consists of a number of Ishihara
+              plates, which are a type of pseudoisochromatic plate. Each plate
+              depicts a solid circle of colored dots appearing randomized in
+              color and size.
+            </p>
+            <button
+              onclick="window.location.href='ishihara.html';"
+              class="mp-button mt-2"
+            >
+              Take the test
+            </button>
+          </div>
+          <img
+            class="ishiharaImg d-none d-md-block"
+            src="http://disciplesofflight.com/wp-content/uploads/2014/09/Ishihara_Test_Plate.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </section>
+
     <!-- FOOTER SECTION -->
     <footer>
       <div class="container">
@@ -304,7 +352,10 @@
             <p>
               Philippines, SEA<br />
               Phone: +639953491782<br />
-              Email: eyeseeu.optical@gmail.com
+              Emails: <br />
+              esuopticalcaloocan@gmail.com <br />
+              esuopticaliloilo@gmail.com <br />
+              esuopticalgensan@gmail.com <br />
             </p>
           </div>
           <div class="col-md-4">

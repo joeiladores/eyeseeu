@@ -70,7 +70,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.html">HOME</a>
+              <a class="nav-link" aria-current="page" href="index.html"
+                >HOME</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="location.html">LOCATION</a>
@@ -97,24 +99,41 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="blog.html">BLOGS</a>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="services.html"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >SERVICES
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="services.html">Services</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="ishihara.html"
+                    >Ishihara Test</a
+                  >
+                </li>
+              </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="services.html">SERVICES</a>
+              <a class="nav-link" href="blog.html">BLOGS</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="reviews.html">REVIEWS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">CONTACT</a>
+              <a class="nav-link active" href="contact.html">CONTACT</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-
-    <!-- PARALLAX SECTION -->
+   
+     <!-- PARALLAX SECTION -->
     <section id="parallax-section">
       <div class="page-title" id="contact">
         <h1>BOOK YOUR APPOINTMENT</h1>
@@ -156,7 +175,7 @@
             data-bs-target="#errNoSelectedClinic"
           >
             <i class="bi bi-calendar2-event"></i>&nbsp; Book an Appointment</a
-          >
+          > 
         </div>
       </form>
 
@@ -179,8 +198,7 @@
     </div>
   </section>
 
-  <!-- MESASAGE US SECTION HENRY --------------------------------------------------------->
- 
+<!-- <messages section> -->
   <script src="js/message.js"></script>
   <script type="text/javascript"
  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
@@ -191,41 +209,55 @@
       emailjs.init("xZ2fSpIl3WekPZ1sM");
    })();
 </script>
-<!--  -->
 
-    <div class="container-fluid bg-light">
+    <div class="container bg-light">
         <div class="row">
-            <div class="col-md-6 p-5 bg-danger text-white">
-                <h1>HOW MAY WE HELP YOU</h1>
+            <div class="col-md-6 mb-1 py-2 bg-primary text-white">
+                <h1>How may we help you</h1>
+                <br>
                 <h4>
                     Thank you for reaching out, Let us know what is on your mind send us message now. We valued your Privacy. 
                 </h4>
                 </div>
-                <div class="col-md-6 py-2">
-                    <h1>CONTACT FORM</h1>
+                <div class="col-md-6 py-2 ">
+                    <h1>MESSAGE US</h1>
                     <div class="form-group">
                         <h5 for="name">Name</h5>
-                        <input type="text" class="form-control" id="name" placeholder="enter your name"/>
+                        <input type="text" class="form-control" id="name" placeholder="Name"/>
                     </div>
+                    <div class="form-group">
+                      <h5 for="phoneNum">Phone number</h5>
+                      <input type="tel" class="form-control" id="phoneNum" placeholder="Phone number"/>
+                  </div>
                     <div class="form-group">
                         <h5 for="email">Email</h5>
-                        <input type="text" class="form-control" id="email" placeholder="enter your email"/>
+                        <input type="email" class="form-control" id="email" placeholder="Email"/>
                     </div>
+                    <!-- <div class="form-group">
+                      <select
+                        id="selectClinic"
+                        class="form-select theme-color-light"
+                        aria-label="Choose Your Clinic"
+                        required
+                        onchange="handleClinicChange()"
+                        required
+                      >
+                        <option selected>Choose Your Clinic **</option>
+                        <!-- FETCH CLINIC SELECTION FROM FIRESTORE ---------------------------------->
+                      <!-- </select>
+                    </div>  -->
                     <div class="form-group">
                         <h5 for="message">Message</h5>
-                        <textarea id="message" rows = "5" class="form-control" placeholder="Message here"></textarea>
+                        <textarea id="message" rows = "3" class="form-control" placeholder="Message here"></textarea>
                     </div>
-                    <button class="btn mt-4 btn-primary"onclick = "sendMail()">submit</button>
+                    <button class="btn mt-4 btn-primary"onclick = "sendMail()">Submit</button>
                 </div>
             </div>
     </div>
     
 
     <!-- MESASAGE US SECTION HENRY --------------------------------------------------------->
-    <section class="pt-5 pb-5">
-      <h1 class="text-center">Message Us Section by Henry</h1>
-    </section>
-
+   
     <!-- BOOKING SECTION HEADER ------------------------------------------------------------------>
     <!-- <section class="book-section-header pt-5 pb-5 mt-5">
       <div>

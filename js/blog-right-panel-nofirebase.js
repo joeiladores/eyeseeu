@@ -31,7 +31,7 @@ function displayBlogs() {
             <div class="card mb-3 shadow-lg rounded-3">
               <div class="row g-0">
                 <div class="col-md-4">
-                  <a href="blogpost.html?blog=${blog.id}" target="_blank">
+                  <a href="blogpost-draft.html?blog=${blog.id}">
                     <img src="${blog.Cover_Image}" class="card-image img-fluid rounded-start" alt="...">
                   </a>
                 </div>
@@ -40,7 +40,7 @@ function displayBlogs() {
                     <h5 class="card-title mb-3">${blog.Title}</h5>
                     ${blog.Content_Preview}                                  
                     <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
-                    <div class="mt-3"><a href="blogpost.html?blog=${blog.id}" target="_blank"class="btn btn-primary mb-3">Read More</a></div>  
+                    <div class="mt-3"><a href="blogpost-draft.html?blog=${blog.id}" class="btn btn-primary mb-3">Read More</a></div>  
                   </div>
                 </div>
               </div>
