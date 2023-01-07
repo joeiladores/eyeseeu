@@ -102,123 +102,154 @@
   </nav>
   <!-- END OF NAVBAR ------------------------------------------------------------------------------>
 
-
-  <!-- ISHIHARA TEST ------------------------------------------------------------------------------>
-  <div class="introduction p-3 text-center shadow-lg rounded-3">
-    <!-- INTROUCTION HERE -->
+  <!-- BACKGROUND IMAGE -->
+  <div class="container-fluid">
+    <img class="ishihara-bg p-0 m-0" src="photo/ishihara/ishihara-test-blue-bg.jpg" alt="">
   </div>
-  <br />
+  
 
-  <div class="instruction my-5 p-5 shadow-lg rounded-3">
-    <!-- INSTRUCTION HERE -->
-
+  <!-- PILL NAVBAR -------------------------------------------------------------------------------->
+  <div class="pill-navbar mt-4 pt-5">
+    <ul class="nav nav-pills nav-fill gap-2 p-1 bg-light rounded-5 d-flex" id="pillNav2" role="tablist" style="
+      --bs-nav-link-color: var(--bs-white); 
+      --bs-nav-pills-link-active-color: var(--bs-white); 
+      --bs-nav-pills-link-active-bg: var(--bs-primary);">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab"
+          aria-selected="true">Instroduction</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link rounded-5" id="profile-tab2" data-bs-toggle="tab" type="button" role="tab"
+          aria-selected="false">Instruction</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link rounded-5" id="contact-tab2" data-bs-toggle="tab" type="button" role="tab"
+          aria-selected="false">Ishihara Test</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link rounded-5" id="contact-tab2" data-bs-toggle="tab" type="button" role="tab"
+          aria-selected="false">Result</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link rounded-5" id="contact-tab2" data-bs-toggle="tab" type="button" role="tab"
+          aria-selected="false">Ishihara Plates</button>
+      </li>
+    </ul>
   </div>
+  <!-- END OF PILL NAVBAR ------------------------------------------------------------------------>
 
-  <div class="ishihara-test my-5 py-3 px-5 shadow-lg rounded-3" style="display: none">
-    <div class="plate-name my-2 pb-3 text-center">
-      <h2>Ishihara Test</h2>
+  <section class="tab-container pt-3 my-3 rounded-3 shadow-lg">
+
+    <!-- INDTRODUCTION ----------------------------------------------------------------------------->
+    <div id="tab-intro" class="tab-pane active">
     </div>
-    <div class="progress mt-2">
-      <!-- FETCH NAD DISPLAY PROGRESS BAR HERE -->
+
+    <!-- INSTRUCTION ------------------------------------------------------------------------------>
+    <div id="tab-inst" class="tab-pane my-5 p-5" style="display: none">
     </div>
-    <div class="ishihara-container d-grid mb-3 pb-3">
-      <div class="row">
-        <!-- FETCH AND DISPLAY LEFT PANEL - ISHIHARA PLATE -->
-        <div class="plate-container col-md-6">
-          <!-- FETCH AND DISPLAY PLATE NUMBER AND IMAGE HERE -->
-        </div>
 
-        <!-- RIGHT PANEL - DISPLAY --------------------------------------------->
-        <div class="display-right-panel col pt-5 g-1">
-          <h5>What does the patient see?</h5>
-          <div class="options col d-flex gap-2 flex-wrap mb-5">
-            <!-- FETCH OPTIONS AND DISPLAY HERE -->
+    <!-- ISHIHARA TEST ---------------------------------------------------------------------------->
+    <div id="tab-test" class="tab-pane my-5 py-3 px-5 shadow-lg rounded-3" style="display: none">
+      <div class="plate-name my-2 pb-3 text-center">
+        <h2>Ishihara Test</h2>
+      </div>
+      <div class="progress mt-2">
+        <!-- FETCH NAD DISPLAY PROGRESS BAR HERE -->
+      </div>
+      <div class="ishihara-container d-grid mb-3 pb-3">
+        <div class="row">
+          <!-- FETCH AND DISPLAY LEFT PANEL - ISHIHARA PLATE -->
+          <div class="plate-container col-md-6">
+            <!-- FETCH AND DISPLAY PLATE NUMBER AND IMAGE HERE -->
           </div>
-          <div class="plate-info col p-3 shadow rounded-3 bg-light" style="display: none">
-            <!-- FETCH DISPLAY AND DISPLAY HERE -->
-          </div>
-        </div>
 
+          <!-- RIGHT PANEL - DISPLAY --------------------------------------------->
+          <div class="display-right-panel col pt-5 g-1">
+            <h5>What does the patient see?</h5>
+            <div class="options col d-flex gap-2 flex-wrap mb-5">
+              <!-- FETCH OPTIONS AND DISPLAY HERE -->
+            </div>
+            <div class="plate-info col p-3 shadow rounded-3 bg-light" style="display: none">
+              <!-- FETCH DISPLAY AND DISPLAY HERE -->
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Modal -->
-  <div class="modal" id="errModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modal-title"
-    aria-hidden="true" style="display: none">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header justify-content-center">
-          <h5 class="modal-title" id="modal-title">Incomplete</h5>
-          <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal"
-            aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center d-flex flex-row justify-content-center align-content-center">
-          <i class="fa-solid fa-circle-xmark fa-4x text-primary me-4"></i>
-          <h5 class="align-self-center">Please select answer</h5>
+    <!-- Modal -->
+    <div class="modal" id="errModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modal-title"
+      aria-hidden="true" style="display: none">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <h5 class="modal-title" id="modal-title">Incomplete</h5>
+            <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center d-flex flex-row justify-content-center align-content-center">
+            <i class="fa-solid fa-circle-xmark fa-4x text-primary me-4"></i>
+            <h5 class="align-self-center">Please select answer</h5>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="overlay"></div>
+    <div id="overlay"></div>
+    <!-- END OF ISHIHARA TEST ----------------------------------------------------------------------->
 
-
-
-  <!-- END OF ISHIHARA TEST ----------------------------------------------------------------------->
-
-  <div class="result text-center" style="display: none">
-    <h1>Result</h1>
-  </div>
-
-  <!-- ISHIHARA PLATES ---------------------------------------------------------------------------->
-  <!-- ISHIHARA PLATES ---------------------------------------------------------------------------->
-  <div id="ishihara-cards" class="ishihara-cards my-5 py-3">
-    <div id="plate-cards-preview" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-3">
-      <!-- DISPLAY PLATES HERE -->
+    <!-- RESULT ------------------------------------------------------------------------------------->
+    <div id="tab-result" class="tab-pane text-center" style="display: none">
+      <h1>Result</h1>
     </div>
-  </div>
-  <!-- END OF ISHIHARA PLATES --------------------------------------------------------------------->
 
-  <!-- CARD MODAL -->
-  <div id="cardModal" class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true" display="none">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Ishihara Plate 1</h1>
-          <button type="button" class="btn-close closeBtn" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div id="cardModalBody" class="modal-body justify-content-center">
-          <!-- CARD INSIDE THE MODAL -->
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-7 plate-container">
-                <img 
-                  src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01_12.png?alt=media&token=d364a539-2bb7-4ef4-8e0c-ff78bb604a18"
-                  class="plate-Q img-fluid rounded-start" alt="...">
-                <img 
-                  src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01B_12.png?alt=media&token=f16ee1f0-f6f6-40d4-821c-880440b91aad"
-                  class="plate-A img-fluid rounded-start" alt="..." style="display: none">
-              </div>
-              <div class="col-md-5 g-danger my-auto">
-                <div class="card-body">
-                  <div class="question p-3" >
-                    <h5 class="card-title">What do you see?</h5>
-                    <p class="card-text">Click the plate to check.</p>
-                  </div>
-                  <div class="plate-info p-3 shadow rounded-3 bg-light" style="display: none">
-                    <!-- FETCH DISPLAY AND DISPLAY HERE -->
-                    <h5>What did you see?</h5>
-                    <hr>
-                    <p>Everyone should see 12.</p>
+    <!-- ISHIHARA PLATES PREVIEW CARDS -------------------------------------------------------------->
+    <div id="tab-plates" id="tab-pane" class="ishihara-cards my-5 py-3">
+      <div id="plate-cards-preview" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-3">
+        <!-- DISPLAY PLATES PREVIEW HERE -->
+      </div>
+    </div>
+
+    <!-- CARD MODAL -->
+    <div id="cardModal" class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" display="none">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Ishihara Plate 1</h1>
+            <button type="button" class="btn-close closeBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div id="cardModalBody" class="modal-body justify-content-center">
+            <!-- CARD INSIDE THE MODAL -->
+            <div class="card mb-3">
+              <div class="row g-0">
+                <div class="col-md-7 plate-container">
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01_12.png?alt=media&token=d364a539-2bb7-4ef4-8e0c-ff78bb604a18"
+                    class="plate-Q img-fluid rounded-start" alt="...">
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01B_12.png?alt=media&token=f16ee1f0-f6f6-40d4-821c-880440b91aad"
+                    class="plate-A img-fluid rounded-start" alt="..." style="display: none">
+                </div>
+                <div class="col-md-5 g-danger my-auto">
+                  <div class="card-body">
+                    <div class="question p-3">
+                      <h5 class="card-title">What do you see?</h5>
+                      <p class="card-text">Click the plate to check.</p>
+                    </div>
+                    <div class="plate-info p-3 shadow rounded-3 bg-light" style="display: none">
+                      <!-- FETCH DISPLAY AND DISPLAY HERE -->
+                      <h5>What did you see?</h5>
+                      <hr>
+                      <p>Everyone should see 12.</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- <div class="card d-flex flex-column" style="width: 29rem;" >
+            <!-- <div class="card d-flex flex-column" style="width: 29rem;" >
             <img class="img-fluid"
               src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01_12.png?alt=media&token=d364a539-2bb7-4ef4-8e0c-ff78bb604a18"
               class="card-img-top" alt="...">
@@ -229,17 +260,13 @@
               <p class="card-text text-center">Everyone should see number 12.</p>
             </div>
           </div> -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <!-- END OF ISHIHARA PLATES PREVIEW CARDS ----------------------------------------------------->
 
-
-
-
-
-
-
+  </section>
 
 
   <!-- FEATURE SECTION ----------------------------------------------------------------------------->

@@ -54,12 +54,11 @@ onSnapshot(pageRef, (snapshot) => {
 
 function populateIntroduction(intro) {
   // console.log(intro);
-  document.querySelector(".introduction").innerHTML =
-    `
-  <img class="ishihara-bg" src="${intro.intro_bg_image}" alt="" />
-    <h2 class="pb-3">${intro.intro_title}</h2>
-    <div>
-      <img class="img-fluid px-5 pb-3" src="${intro.intro_header_img}" alt="" />
+  document.getElementById("tab-intro").innerHTML =
+    `  
+    <h2 class="py-3 text-center">${intro.intro_title}</h2>
+    <div class="text-center">
+      <img class="img-fluid pb-3" src="${intro.intro_header_img}" alt="" style="width: 100%"/>
     </div>
     <div class="content px-5">${intro.intro_content}</div>
   </div>
@@ -70,7 +69,7 @@ function populateIntroduction(intro) {
 
 function populateInstruction(inst) {
   // console.log(inst);
-  document.querySelector(".instruction").innerHTML =
+  document.getElementById("tab-inst").innerHTML =
     `
     <h2 class="text-center">${inst.instruction_title}</h2>
     ${inst.instruction}
@@ -82,7 +81,7 @@ function populateInstruction(inst) {
 }
 
 function displayTest() {
-  document.querySelector(".ishihara-test").style.display = "block";
+  document.getElementById("tab-test").style.display = "block";
 }
 
 function displayPlates(plate) {
@@ -294,9 +293,12 @@ function showPlatesPreview() {
 }
 
 function showCardModal(plateNum) {  
-  // console.log(`Inside card modal...accepting plate no. ${plateNum}`);
+  console.log(`Inside card modal...accepting plate no. ${plateNum}`);
   document.getElementById("cardModal").style.display = "block";
   document.getElementById("overlay").classList.add("active");
+
+  // TODO: What next after the card modal is shown?
+  // Display the plate information
 }
 
 function closeCardModal() {
@@ -313,6 +315,15 @@ document.getElementById("plate-cards-preview").addEventListener("click", (e) => 
     showCardModal(card.dataset.plate);
   }
 });
+
+
+
+
+// TODO: pills navbar
+// const tabContainer = document.querySelector(".tab-content")
+// const tabEl = tabContainer.querySelectorAll("[data-bs-toggle='tab']")
+// const progressTab = document.querySelector("#progress-tab")
+
 
 
 showPlatesPreview();
