@@ -130,7 +130,6 @@
 
         <!-- RIGHT PANEL - DISPLAY --------------------------------------------->
         <div class="display-right-panel col pt-5 g-1">
-          <!-- TODO: FIXED THE QUESTION ON NUMBERS AND LINES -->
           <h5>What does the patient see?</h5>
           <div class="options col d-flex gap-2 flex-wrap mb-5">
             <!-- FETCH OPTIONS AND DISPLAY HERE -->
@@ -143,11 +142,105 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal -->
+  <div class="modal" id="errModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modal-title"
+    aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h5 class="modal-title" id="modal-title">Incomplete</h5>
+          <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center d-flex flex-row justify-content-center align-content-center">
+          <i class="fa-solid fa-circle-xmark fa-4x text-primary me-4"></i>
+          <h5 class="align-self-center">Please select answer</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="overlay"></div>
+
+
+
   <!-- END OF ISHIHARA TEST ----------------------------------------------------------------------->
 
   <div class="result text-center" style="display: none">
     <h1>Result</h1>
   </div>
+
+  <!-- ISHIHARA PLATES ---------------------------------------------------------------------------->
+  <!-- ISHIHARA PLATES ---------------------------------------------------------------------------->
+  <div id="ishihara-cards" class="ishihara-cards my-5 py-3">
+    <div id="plate-cards-preview" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-3">
+      <!-- DISPLAY PLATES HERE -->
+    </div>
+  </div>
+  <!-- END OF ISHIHARA PLATES --------------------------------------------------------------------->
+
+  <!-- CARD MODAL -->
+  <div id="cardModal" class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" display="none">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Ishihara Plate 1</h1>
+          <button type="button" class="btn-close closeBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="cardModalBody" class="modal-body justify-content-center">
+          <!-- CARD INSIDE THE MODAL -->
+          <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-7 plate-container">
+                <img 
+                  src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01_12.png?alt=media&token=d364a539-2bb7-4ef4-8e0c-ff78bb604a18"
+                  class="plate-Q img-fluid rounded-start" alt="...">
+                <img 
+                  src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01B_12.png?alt=media&token=f16ee1f0-f6f6-40d4-821c-880440b91aad"
+                  class="plate-A img-fluid rounded-start" alt="..." style="display: none">
+              </div>
+              <div class="col-md-5 g-danger my-auto">
+                <div class="card-body">
+                  <div class="question p-3" >
+                    <h5 class="card-title">What do you see?</h5>
+                    <p class="card-text">Click the plate to check.</p>
+                  </div>
+                  <div class="plate-info p-3 shadow rounded-3 bg-light" style="display: none">
+                    <!-- FETCH DISPLAY AND DISPLAY HERE -->
+                    <h5>What did you see?</h5>
+                    <hr>
+                    <p>Everyone should see 12.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="card d-flex flex-column" style="width: 29rem;" >
+            <img class="img-fluid"
+              src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01_12.png?alt=media&token=d364a539-2bb7-4ef4-8e0c-ff78bb604a18"
+              class="card-img-top" alt="...">
+              <img class="img-fluid"
+              src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01B_12.png?alt=media&token=f16ee1f0-f6f6-40d4-821c-880440b91aad"
+              class="card-img-top" alt="..." style="display: none">
+            <div class="card-body">
+              <p class="card-text text-center">Everyone should see number 12.</p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
 
   <!-- FEATURE SECTION ----------------------------------------------------------------------------->
   <div class="feature-optician mt-5">
@@ -165,24 +258,6 @@
     </div>
   </div>
   <!-- END OF FEATURE SECTION --------------------------------------------------------------------->
-
-  <!-- Modal -->
-  <div class="modal" id="errModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true" style="display: none">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header justify-content-center">
-          <h5 class="modal-title" id="modal-title">Incomplete</h5>
-          <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center d-flex flex-row justify-content-center align-content-center">
-          <i class="fa-solid fa-circle-xmark fa-4x text-primary me-4"></i>
-          <h5 class="align-self-center">Please select answer</h5>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="overlay"></div>
 
 
   <!-- FOOTER SECTION ---------------------------------------------------------------------------->

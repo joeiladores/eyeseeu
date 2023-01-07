@@ -18,7 +18,7 @@
   <!-- JS -->
 
   <!-- FIREBASE -->
-  <script defer type="module" src="js/ishihara-plates.js"></script>
+  <script defer type="module" src="js/ishihara.js"></script>
   <!-- <script defer type="module" src="js/ishihara-test.js"></script> -->
 
   <script>
@@ -114,14 +114,42 @@
   <!-- CARD MODAL -->
   <div id="cardModal" class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true" display="none">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Ishihara Plate 1</h1>
           <button type="button" class="btn-close closeBtn" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div id="cardModalBody" class="modal-body justify-content-center">
-          <div class="card d-flex flex-column" style="width: 29rem;" >
+          <!-- CARD INSIDE THE MODAL -->
+          <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-7 plate-container">
+                <img 
+                  src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01_12.png?alt=media&token=d364a539-2bb7-4ef4-8e0c-ff78bb604a18"
+                  class="plate-Q img-fluid rounded-start" alt="...">
+                <img 
+                  src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01B_12.png?alt=media&token=f16ee1f0-f6f6-40d4-821c-880440b91aad"
+                  class="plate-A img-fluid rounded-start" alt="..." style="display: none">
+              </div>
+              <div class="col-md-5 g-danger my-auto">
+                <div class="card-body">
+                  <div class="question p-3" >
+                    <h5 class="card-title">What do you see?</h5>
+                    <p class="card-text">Click the plate to check.</p>
+                  </div>
+                  <div class="plate-info p-3 shadow rounded-3 bg-light" style="display: none">
+                    <!-- FETCH DISPLAY AND DISPLAY HERE -->
+                    <h5>What did you see?</h5>
+                    <hr>
+                    <p>Everyone should see 12.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="card d-flex flex-column" style="width: 29rem;" >
             <img class="img-fluid"
               src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01_12.png?alt=media&token=d364a539-2bb7-4ef4-8e0c-ff78bb604a18"
               class="card-img-top" alt="...">
@@ -131,12 +159,11 @@
             <div class="card-body">
               <p class="card-text text-center">Everyone should see number 12.</p>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
   </div>
-
 
   <div id="overlay"></div>
 

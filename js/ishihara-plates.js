@@ -35,14 +35,12 @@ const platesRef = collection(db, 'ishihara-vcd-38');
 
 const platesArray = [];
 
-function showPlates(plates) {
+function showPlatesPreview() {
 
-  plates.forEach((plate) => {
+  platesArray.forEach((plate) => {
 
     // console.log(`Plate: ${plate.plate}`);
     // console.log(`Plate: ${plate.plateURL}`);
-
-    platesArray.push(plate);
 
     document.getElementById("plate-cards-preview").innerHTML +=
       `
@@ -58,13 +56,10 @@ function showPlates(plates) {
       </div>    
     `
   });
-
 }
 
-function showCardModal(plateNum) {
-  
-  console.log("Inside card modal...accepting plate no. ${plateNum}");
-
+function showCardModal(plateNum) {  
+  // console.log(`Inside card modal...accepting plate no. ${plateNum}`);
   document.getElementById("cardModal").style.display = "block";
   document.getElementById("overlay").classList.add("active");
 }
@@ -76,31 +71,24 @@ function closeCardModal() {
 
 document.querySelector(".closeBtn").onclick = () => closeCardModal();
 
-document.getElementById("plate-cards-preview").addEventListener("click", (e) => {
-  const card = e.target;
-  // console.log("Card clicked...");
-  // console.log(card);  
-
+document.getElementById("plate-cards-preview").addEventListener("click", (e) => { 
+  const card = e.target; 
   if (card.classList.contains("card-img-bottom")) {
     console.log(card.dataset.plate);
     showCardModal(card.dataset.plate);
   }
-
 });
 
 
 // FETCH PLATES FROM FIRESTORE AND DISPLAY IN CARDS
 const q = query(platesRef, orderBy("plate", "asc"));
 onSnapshot(q, (snapshot) => {
-  const plates = [];
+
   snapshot.docs.forEach((doc) => {
-    plates.push({ ...doc.data(), id: doc.id });
+    platesArray.push({ ...doc.data(), id: doc.id });
   });
-
-  console.log(plates);
-
-  showPlates(plates);
-
+  console.log(platesArray);
+  showPlatesPreview();
 });
 
 

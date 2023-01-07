@@ -34,13 +34,15 @@ const db = getFirestore(app);
 const pageRef = collection(db, 'ishihara-page');
 const platesRef = collection(db, 'ishihara-vcd-38');
 
+const answer = [];
+const plates= [];
 let counter = 0;
 
 // GET REAL TIME COLLECTION DATA
 onSnapshot(pageRef, (snapshot) => {
-  // let page = [];
+
   snapshot.docs.forEach((doc) => {
-    // page.push({ ...doc.data(), id: doc.id })
+
     if (doc.data().type === "introduction") {
       populateIntroduction(doc.data());
     }
@@ -100,9 +102,9 @@ function displayPlates(plate) {
     <div class="plate-name py-3 text-center">
       <h5>Plate ${plate.plate}</h5>
     </div>
-    <img id="plate-Q" class="ishihara-plate-img img-fluid" src="${plate.plateURL}"
+    <img id="plate-Q" class="plate-Q ishihara-plate-img img-fluid" src="${plate.plateURL}"
       alt="Ishihara Plate ${plate.plate}" data-plate="${plate.plate}" data-url="plateURL"/>
-    <img id="plate-A" class="ishihara-plate-img img-fluid" src="${plate.plateURL2}" style="display: none"
+    <img id="plate-A" class="plate-A ishihara-plate-img img-fluid" src="${plate.plateURL2}" style="display: none"
       alt="Ishihara Plate ${plate.plate}" data-plate="${plate.plate}" data-url="plateURL2"/>
   `
 
@@ -140,20 +142,20 @@ function displayPlates(plate) {
 }
 
 function hidePlateQ() {
-  document.getElementById("plate-Q").style.display = "none";
+  document.querySelector(".plate-Q").style.display = "none";
 }
 
 function showPlateA() {
-  document.getElementById("plate-A").style.display = "block";
+  document.querySelector(".plate-A").style.display = "block";
   document.querySelector(".plate-info").style.display = "block";
 }
 
 function showPlateQ() {
-  document.getElementById("plate-Q").style.display = "block";
+  document.querySelector(".plate-Q").style.display = "block";
 }
 
 function hidePlateA() {
-  document.getElementById("plate-A").style.display = "none";
+  document.querySelector(".plate-A").style.display = "none";
   document.querySelector(".plate-info").style.display = "none";
 }
 
@@ -176,16 +178,15 @@ document.getElementById("closeModalBtn").addEventListener("click", () => {
 
 // ADD EVENT LISTERNER TO THE PLATE IMAGE
 document.querySelector(".plate-container").addEventListener("click", (e) => {
-  e.preventDefault();
 
   let targetElement = e.target;
-  let elementID = targetElement.id;
+  // let elementID = targetElement.id;
 
-  if (elementID === "plate-Q") {
+  if (targetElement.classList.contains("plate-Q")) {
     hidePlateQ();
     showPlateA();
   }
-  if (elementID === "plate-A") {
+  if (targetElement.classList.contains("plate-A")) {
     hidePlateA();
     showPlateQ();
   }
@@ -194,7 +195,6 @@ document.querySelector(".plate-container").addEventListener("click", (e) => {
 function startTest() {
 
   // let counter = 0;
-  let answer = [];
   let selectedOption = "";
 
   displayTest();
@@ -202,7 +202,7 @@ function startTest() {
   // FETCH PLATES FROM FIRESTORE
   const q = query(platesRef, orderBy("plate", "asc"));
   onSnapshot(q, (snapshot) => {
-    const plates = [];
+
     snapshot.docs.forEach((doc) => {
       plates.push({ ...doc.data(), id: doc.id });
     });
@@ -217,17 +217,12 @@ function startTest() {
       let targetElement = e.target;
       let option = targetElement.dataset.option;
 
-      // console.log(targetElement);
-      // console.log(`Option: ${option}`);
-      // console.log(`Selected Option: ${selectedOption}`);
-
       if (option === "next" && selectedOption != "") {
 
         counter++;
         // PUSH SELECTED OPTION TO THE ANSWER ARRAY
         answer.push(selectedOption);
-        // console.log(`Pushed to answer[]: ${selectedOption}`);
-        console.log(`Answer[]: ${answer}`);
+        console.log(answer);
         hidePlateA();
 
         // RESET SELECTED OPTION TO ""
@@ -237,19 +232,18 @@ function startTest() {
         showModal();
       }
       else {
-        // ONLY CLICK ON BUTTON OPTIONS AND NOT THE SPACES OUTSIDE THE ELEMENTS
+        // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
         if (targetElement.classList.contains("optionBtn")) {
           selectedOption = option;
-          console.log(`Selected option: ${selectedOption}`);
           targetElement.classList.add("active");
           targetElement.dataset.selected = "true";
           targetElement.classList.remove("btn-primary");
           targetElement.classList.add("btn-warning");
 
-          // INACTIVATE AND DESELECT OTHER OPTIONS
+          // TODO: INACTIVATE AND DESELECT OTHER OPTIONS
           deselectOtherOptions();
 
-          console.log(targetElement);
+          // console.log(targetElement);
           // TODO: FIX BUTTON COLOR ACTIVE
         }
       }
@@ -271,3 +265,54 @@ function startTest() {
 
 }
 
+
+
+
+
+// FOR THE PLATES PAGE
+function showPlatesPreview() {
+
+  plates.forEach((plate) => {
+
+    // console.log(`Plate: ${plate.plate}`);
+    // console.log(`Plate: ${plate.plateURL}`);
+
+    document.getElementById("plate-cards-preview").innerHTML +=
+      `
+      <div class="col">
+        <div class="card shadow-lg rounded-3 pb-3">
+          <div class="card-body">
+            <h5 class="card-title text-center">Plate ${plate.plate}</h5>
+          </div>
+          <div class="zoom-plate p-3">
+            <img class="card-img-bottom img-fluid" src=${plate.plateURL}" alt="Ishihara Plate ${plate.plate}" data-plate=${plate.plate}>      
+          </div>    
+        </div>
+      </div>    
+    `
+  });
+}
+
+function showCardModal(plateNum) {  
+  // console.log(`Inside card modal...accepting plate no. ${plateNum}`);
+  document.getElementById("cardModal").style.display = "block";
+  document.getElementById("overlay").classList.add("active");
+}
+
+function closeCardModal() {
+  document.getElementById("cardModal").style.display = "none";
+  document.getElementById("overlay").classList.remove("active");
+}
+
+document.querySelector(".closeBtn").onclick = () => closeCardModal();
+
+document.getElementById("plate-cards-preview").addEventListener("click", (e) => { 
+  const card = e.target; 
+  if (card.classList.contains("card-img-bottom")) {
+    console.log(card.dataset.plate);
+    showCardModal(card.dataset.plate);
+  }
+});
+
+
+showPlatesPreview();
