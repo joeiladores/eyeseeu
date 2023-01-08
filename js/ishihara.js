@@ -156,7 +156,7 @@ function deactivateElement(element) {
   element.classList.remove("active");
 }
 
-// ADD EVETN LISTENER TO THE START BUTTON, OPEN THE PILL TEST
+// ADD EVETN LISTENER TO THE START BUTTON, OPEN THE PILL NAV TEST AND START TEST
 document.getElementById("startBtn").addEventListener("click", () => {
   activateElement(document.getElementById("nav-pill-test"));
   deactivateElement(document.getElementById("nav-pill-inst"));
@@ -164,6 +164,8 @@ document.getElementById("startBtn").addEventListener("click", () => {
   deactivateElement(document.getElementById("tab-2"));
   startTest();
 });
+
+document.getElementById("nav-pill-test").addEventListener("click", startTest());
 
 function startTest() {
 
