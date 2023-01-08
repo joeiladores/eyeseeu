@@ -1,56 +1,50 @@
-function blogpost() {
-    fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogs')
-        .then((response) => response.json())
-        .then((data) => {
-            data.forEach((user) => {
-                const cards = `
-                <div class="mt-3">
-                  <div class="col-md-4">
-                    <img src="${user.Thumbnail}" class="img-fluid rounded-start mt-3 ms-3 mb-3" alt="...">
-                  </div>
-                  <div class="col-md-8">
-                    <div class="ms-3">
-                    <p class="">${user.Author}</p>
-                    <p class="">${user.Publish_Date}</p>
-                    <h5 class="">${user.Title}</h5>
-                      <p class="">${user.Content}</p>                      
-                  </div>
-                </div>
-              </div>
-        `;
-                document.querySelector('#card-container').innerHTML += cards;
-            });
-        });
-}
-
-function GetData() {
-
-  fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogs/:id')
-      .then( response =>
-      {
-          if ( response.status !== 200 )
-          {
-              console.log( 'Looks like there was a problem. Status Code: ' +
-                  response.status );
-              return;
-          }
-
-          console.log( response.headers.get( "Content-Type" ) );
-          return response.json();
-      }
-      )
-      .then( myJson =>
-      {
-          console.log( JSON.stringify( myJson ) );
-      } )
-      .catch( err =>
-      {
-          console.log( 'Fetch Error :-S', err );
-      } );
-}
-
 window.onload = function () {
-    blogpost();
-};
-
-
+    displayBlogPost();
+    // displayBlogPreviewCarousel();
+  }
+  
+  function displayBlogPost() {
+  
+    const urlSearchStr = new URLSearchParams(window.location.search);
+    let blogID = urlSearchStr.get("blog");
+    // console.log(blogID);
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let month, year, day, jsDate;
+  
+    // GET SPECIFIC BLOG BY BLOG_ID
+    fetch(`https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew/${blogID}`)
+      .then((response) => response.json())
+      .then((blog) => {
+  
+        // console.log(blog.Title);
+        jsDate = new Date(blog.Publish_Date);
+        month = monthNames[jsDate.getMonth()];
+        day = jsDate.getDate();
+        year = jsDate.getFullYear();
+  
+        document.getElementById("blog-title").innerHTML =
+          `
+          <h1>${blog.Title}</h1>
+          <h3>${blog.Author}</h3>
+          <h5><small>${month} ${day}, ${year}</small></h5>
+        `
+  
+        document.getElementById("blog-cover-image").innerHTML =
+          `
+      
+          <img src="${blog.Cover_Image}" class="blog-image img-fluid rounded-start" alt="..." style="display: block; margin-left: auto; margin-right: auto;">
+          
+        `
+  
+        document.getElementById("blog-content").innerHTML =
+          `
+          <div>${blog.Content}</div>
+        
+        `
+  
+  
+      })
+      .catch((err) => {
+        console.log("Error is: " + err);
+      });
+  }
