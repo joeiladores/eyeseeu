@@ -218,7 +218,6 @@ function startTest() {
       if (targetElement.classList.contains("optionBtn")) {
         selectedOption = option;
         activateElement(targetElement);
-        console.log(targetElement);
         // deactivateElement(targetElement);
 
         // targetElement.classList.add("active");
@@ -306,15 +305,12 @@ function compute(normal, weakvcd, answer) {
   else return "wrong"
 }
 
+document.getElementById("nav-pill-plates").addEventListener("click", showPlatesPreview());
+
 // FOR THE PLATES PAGE
 function showPlatesPreview() {
 
-  // console.log(array);
-
   plates.forEach((plate) => {
-
-    // console.log(`Plate: ${plate.plate}`);
-    // console.log(`Plate: ${plate.plateURL}`);
 
     document.getElementById("plate-cards-preview").innerHTML +=
       `
@@ -333,7 +329,7 @@ function showPlatesPreview() {
 }
 
 function showCardModal(plateNum) {
-  console.log(`Inside card modal...accepting plate no. ${plateNum}`);
+
   document.getElementById("cardModal").style.display = "block";
   document.getElementById("overlay").classList.add("active");
 
@@ -355,16 +351,6 @@ document.getElementById("plate-cards-preview").addEventListener("click", (e) => 
     showCardModal(card.dataset.plate);
   }
 });
-
-// FETCH PLATES FROM FIRESTORE AND DISPLAY IN CARDS
-const q2 = query(platesRef, orderBy("plate", "asc"));
-const array = [];
-const snapshot2 = await getDocs(q);
-snapshot2.forEach(doc => {
-  array.push(doc.data());
-});
-
-showPlatesPreview();
 
 
 
