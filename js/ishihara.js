@@ -34,54 +34,16 @@ const db = getFirestore(app);
 const pageRef = collection(db, 'ishihara-page');
 const platesRef = collection(db, 'ishihara-vcd-38');
 
-let counter = 0;
+const answer = [];
+const plates = [];
+let currentIndex = 0;
+let n_plates = 38;
 
-// GET REAL TIME COLLECTION DATA
-onSnapshot(pageRef, (snapshot) => {
-  // let page = [];
-  snapshot.docs.forEach((doc) => {
-    // page.push({ ...doc.data(), id: doc.id })
-    if (doc.data().type === "introduction") {
-      populateIntroduction(doc.data());
-    }
-    if (doc.data().type === "instruction") {
-      populateInstruction(doc.data());
-    }
-  });
+const q = query(platesRef, orderBy("plate", "asc"));
+const snapshot = await getDocs(q);
+snapshot.forEach(doc => {
+  plates.push(doc.data());
 });
-
-function populateIntroduction(intro) {
-  // console.log(intro);
-  document.querySelector(".introduction").innerHTML =
-    `
-  <img class="ishihara-bg" src="${intro.intro_bg_image}" alt="" />
-    <h2 class="pb-3">${intro.intro_title}</h2>
-    <div>
-      <img class="img-fluid px-5 pb-3" src="${intro.intro_header_img}" alt="" />
-    </div>
-    <div class="content px-5">${intro.intro_content}</div>
-  </div>
-    
-  `;
-
-}
-
-function populateInstruction(inst) {
-  // console.log(inst);
-  document.querySelector(".instruction").innerHTML =
-    `
-    <h2 class="text-center">${inst.instruction_title}</h2>
-    ${inst.instruction}
-    ${inst.notes} 
-    <a id="startBtn" class="btn btn-primary mb-3">Start Test</a>   
-  `;
-  document.getElementById("startBtn").addEventListener("click", startTest);
-  // console.log(document.querySelector(".instruction"));
-}
-
-function displayTest() {
-  document.querySelector(".ishihara-test").style.display = "block";
-}
 
 function displayPlates(plate) {
 
@@ -97,12 +59,12 @@ function displayPlates(plate) {
   // FETCH AND DISPLAY PLATE NUMBER ND IMAGE
   document.querySelector(".plate-container").innerHTML =
     `
-    <div class="plate-name py-3 text-center">
+    <div class="plate-name pt-2 text-center">
       <h5>Plate ${plate.plate}</h5>
     </div>
-    <img id="plate-Q" class="ishihara-plate-img img-fluid" src="${plate.plateURL}"
+    <img id="plate-Q" class="plate-Q ishihara-plate-img img-fluid" src="${plate.plateURL}"
       alt="Ishihara Plate ${plate.plate}" data-plate="${plate.plate}" data-url="plateURL"/>
-    <img id="plate-A" class="ishihara-plate-img img-fluid" src="${plate.plateURL2}" style="display: none"
+    <img id="plate-A" class="plate-A ishihara-plate-img img-fluid" src="${plate.plateURL2}" style="display: none"
       alt="Ishihara Plate ${plate.plate}" data-plate="${plate.plate}" data-url="plateURL2"/>
   `
 
@@ -113,17 +75,17 @@ function displayPlates(plate) {
     option = plate.options[i];
 
     if (option === "I don’t know") {
-      optionsElement += `<div class="optionBtn btn btn-primary" data-option="nothing" data-selected=false>${option}</div>`;
+      optionsElement += `<div class="optionBtn btn" data-option="nothing" data-selected=false>${option}</div>`;
     }
     else {
-      optionsElement += `<div class="optionBtn btn btn-primary" data-option=${option} data-selected=false>${option}</div>`;
+      optionsElement += `<div class="optionBtn btn" data-option=${option} data-selected=false>${option}</div>`;
     }
   }
   // console.log(optionsElement);
   document.querySelector(".options").innerHTML =
     `
     ${optionsElement}
-    <button id="nextBtn" class="btn btn-dark" data-option="next">Next</button>
+    <button id="nextBtn" class="btn btn-success" data-option="next">Next</button>
   `;
 
   // FETCH AND DISPLAY PLATE INFORMATION
@@ -140,20 +102,20 @@ function displayPlates(plate) {
 }
 
 function hidePlateQ() {
-  document.getElementById("plate-Q").style.display = "none";
+  document.querySelector(".plate-Q").style.display = "none";
 }
 
 function showPlateA() {
-  document.getElementById("plate-A").style.display = "block";
+  document.querySelector(".plate-A").style.display = "block";
   document.querySelector(".plate-info").style.display = "block";
 }
 
 function showPlateQ() {
-  document.getElementById("plate-Q").style.display = "block";
+  document.querySelector(".plate-Q").style.display = "block";
 }
 
 function hidePlateA() {
-  document.getElementById("plate-A").style.display = "none";
+  document.querySelector(".plate-A").style.display = "none";
   document.querySelector(".plate-info").style.display = "none";
 }
 
@@ -167,6 +129,7 @@ function deselectOtherOptions() {
 
 }
 
+
 // SDD EVENT LISTNER TO THE MODAL CLOSE BUTTON
 document.getElementById("closeModalBtn").addEventListener("click", () => {
   document.getElementById("errModal").style.display = "none";
@@ -176,98 +139,270 @@ document.getElementById("closeModalBtn").addEventListener("click", () => {
 
 // ADD EVENT LISTERNER TO THE PLATE IMAGE
 document.querySelector(".plate-container").addEventListener("click", (e) => {
-  e.preventDefault();
 
   let targetElement = e.target;
-  let elementID = targetElement.id;
+  // let elementID = targetElement.id;
 
-  if (elementID === "plate-Q") {
+  if (targetElement.classList.contains("plate-Q")) {
     hidePlateQ();
     showPlateA();
   }
-  if (elementID === "plate-A") {
+  if (targetElement.classList.contains("plate-A")) {
     hidePlateA();
     showPlateQ();
   }
 });
 
+function activateElement(element) {
+  element.classList.add("active");
+  element.classList.remove("inactive");
+}
+
+function deactivateElement(element) {
+  element.classList.add("inactive");
+  element.classList.remove("active");
+}
+
+// ADD EVETN LISTENER TO THE START BUTTON, OPEN THE PILL NAV TEST AND START TEST
+document.getElementById("startBtn").addEventListener("click", () => {
+  activateElement(document.getElementById("nav-pill-test"));
+  deactivateElement(document.getElementById("nav-pill-inst"));
+  activateElement(document.getElementById("tab-3"));
+  deactivateElement(document.getElementById("tab-2"));
+  startTest();
+});
+
+document.getElementById("nav-pill-test").addEventListener("click", startTest());
+
 function startTest() {
 
-  // let counter = 0;
-  let answer = [];
   let selectedOption = "";
+  // console.log("Starting test...");
+  // console.log(plates);
 
-  displayTest();
+  // DISPLAY INITIAL PLATE 1
+  displayPlates(plates[0]);
 
-  // FETCH PLATES FROM FIRESTORE
-  const q = query(platesRef, orderBy("plate", "asc"));
-  onSnapshot(q, (snapshot) => {
-    const plates = [];
-    snapshot.docs.forEach((doc) => {
-      plates.push({ ...doc.data(), id: doc.id });
-    });
+  // ADD EVENT LISTENERS TO OPTIONS
+  document.querySelector(".options").addEventListener("click", (e) => {
+    e.preventDefault();
 
-    // DISPLAY INITIAL PLATE 1
-    displayPlates(plates[0]);
+    let targetElement = e.target;
+    let option = targetElement.dataset.option;
+    console.log("Selected option: " + option);
 
-    // ADD EVENT LISTENERS TO OPTIONS
-    document.querySelector(".options").addEventListener("click", (e) => {
-      e.preventDefault();
+    if (option === "next" && selectedOption != "" && currentIndex === n_plates - 1) {
+      console.log("End of plates");
+      console.log(`Final Answer[]: ${answer}`);
 
-      let targetElement = e.target;
-      let option = targetElement.dataset.option;
+      // TODO: COMPUTE RESULTS AND DISOPLAY AS RESPONSIVE TABLE
+      showResult();
+    }
+    else if (option === "next" && selectedOption != "") {
 
-      // console.log(targetElement);
-      // console.log(`Option: ${option}`);
-      // console.log(`Selected Option: ${selectedOption}`);
+      // PUSH ANSWER TO THE PLATES ARRAY
+      plates[currentIndex].answer = selectedOption;
+      answer.push(selectedOption);
+      console.log(answer);
+      hidePlateA();
 
-      if (option === "next" && selectedOption != "") {
+      currentIndex++;
+      // RESET SELECTED OPTION TO ""
+      selectedOption = "";
+    }
+    else if (option === "next" && selectedOption === "") {
+      showModal();
+    }
+    else {
+      // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
+      if (targetElement.classList.contains("optionBtn")) {
+        selectedOption = option;
+        activateElement(targetElement);
+        console.log(targetElement);
+        // deactivateElement(targetElement);
 
-        counter++;
-        // PUSH SELECTED OPTION TO THE ANSWER ARRAY
-        answer.push(selectedOption);
-        // console.log(`Pushed to answer[]: ${selectedOption}`);
-        console.log(`Answer[]: ${answer}`);
-        hidePlateA();
+        // targetElement.classList.add("active");
+        // targetElement.dataset.selected = "true";
+        // targetElement.classList.remove("btn-primary");
+        // targetElement.classList.add("btn-warning");
 
-        // RESET SELECTED OPTION TO ""
-        selectedOption = "";
+        // TODO: INACTIVATE AND DESELECT OTHER OPTIONS
+        // deselectOtherOptions();
+
+        // console.log(targetElement);
+        // TODO: FIX BUTTON COLOR ACTIVE
       }
-      else if (option === "next" && selectedOption === "") {
-        showModal();
-      }
-      else {
-        // ONLY CLICK ON BUTTON OPTIONS AND NOT THE SPACES OUTSIDE THE ELEMENTS
-        if (targetElement.classList.contains("optionBtn")) {
-          selectedOption = option;
-          console.log(`Selected option: ${selectedOption}`);
-          targetElement.classList.add("active");
-          targetElement.dataset.selected = "true";
-          targetElement.classList.remove("btn-primary");
-          targetElement.classList.add("btn-warning");
+    }
 
-          // INACTIVATE AND DESELECT OTHER OPTIONS
-          deselectOtherOptions();
-
-          console.log(targetElement);
-          // TODO: FIX BUTTON COLOR ACTIVE
-        }
-      }
-
-     // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
-      displayPlates(plates[counter]);
-
-      if (counter === 37) {
-        console.log("End of plates");
-        console.log(`Final Answer[]: ${answer}`);
-        // TODO: COMPUTE RESULTS AND DISOPLAY AS RESPONSIVE TABLE
-
-      }
-
-    });
+    // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
+    displayPlates(plates[currentIndex]);
 
   });
 
 
 }
+
+function showResult() {
+
+  let result = "";
+
+  activateElement(document.getElementById("nav-pill-result"));
+  deactivateElement(document.getElementById("nav-pill-test"));
+  activateElement(document.getElementById("tab-4"));
+  deactivateElement(document.getElementById("tab-3"));
+
+  // DISPLAY RESULTS IN A TABLE
+  document.getElementById("table-head").innerHTML =
+    `
+    <tr>
+      <th scope="col">Plate</th>
+      <th scope="col">Type</th>
+      <th scope="col">Answer</th>
+      <th scope="col">Correct</th>
+      <th scope="col">Weak VCD</th>
+      <th scope="col">Result</th>
+    </tr>  
+    `
+
+  // for(let i = 0; i < n_plates; i++) {
+
+  //   result = compute(plates[i].normal, plates[i].weak_vcd, plates[i].answer)
+
+  //   document.getElementById("table-body").innerHTML +=
+  //     `
+  //     <tr>
+  //       <td>${plates[i].plate}</td>
+  //       <td>${plates[i].type}</td>
+  //       <td>${plates[i].answer}</td>
+  //       <td>${plates[i].normal}</td>
+  //       <td>${plates[i].weak_vcd}</td>
+  //       <td>${result}</td>
+  //     </tr>
+  //     `
+  // }
+
+
+  plates.forEach((plate) => {
+
+    result = compute(plate.normal, plate.weak_vcd, plate.answer)
+
+    document.getElementById("table-body").innerHTML +=
+      `
+        <tr>
+          <td>${plate.plate}</td>
+          <td>${plate.type}</td>
+          <td>${plate.answer}</td>
+          <td>${plate.normal}</td>
+          <td>${plate.weak_vcd}</td>
+          <td>${result}</td>
+        </tr>
+        `
+  });
+
+}
+
+function compute(normal, weakvcd, answer) {
+  if (answer === normal) return "correct"
+  else return "wrong"
+}
+
+// FOR THE PLATES PAGE
+function showPlatesPreview() {
+
+  // console.log(array);
+
+  plates.forEach((plate) => {
+
+    // console.log(`Plate: ${plate.plate}`);
+    // console.log(`Plate: ${plate.plateURL}`);
+
+    document.getElementById("plate-cards-preview").innerHTML +=
+      `
+      <div class="col">
+        <div class="card shadow-lg rounded-3 pb-3">
+          <div class="card-body">
+            <h5 class="card-title text-center">Plate ${plate.plate}</h5>
+          </div>
+          <div class="zoom-plate p-3">
+            <img class="card-img-bottom img-fluid" src=${plate.plateURL}" alt="Ishihara Plate ${plate.plate}" data-plate=${plate.plate}>      
+          </div>    
+        </div>
+      </div>    
+    `
+  });
+}
+
+function showCardModal(plateNum) {
+  console.log(`Inside card modal...accepting plate no. ${plateNum}`);
+  document.getElementById("cardModal").style.display = "block";
+  document.getElementById("overlay").classList.add("active");
+
+  // TODO: What next after the card modal is shown?
+  // Display the plate information
+}
+
+function closeCardModal() {
+  document.getElementById("cardModal").style.display = "none";
+  document.getElementById("overlay").classList.remove("active");
+}
+
+document.querySelector(".closeBtn").onclick = () => closeCardModal();
+
+document.getElementById("plate-cards-preview").addEventListener("click", (e) => {
+  const card = e.target;
+  if (card.classList.contains("card-img-bottom")) {
+    console.log(card.dataset.plate);
+    showCardModal(card.dataset.plate);
+  }
+});
+
+// FETCH PLATES FROM FIRESTORE AND DISPLAY IN CARDS
+const q2 = query(platesRef, orderBy("plate", "asc"));
+const array = [];
+const snapshot2 = await getDocs(q);
+snapshot2.forEach(doc => {
+  array.push(doc.data());
+});
+
+showPlatesPreview();
+
+
+
+// TODO: pills navbar
+// console.clear();
+
+const pillContainer = document.querySelector("#pill-tabs");
+const pillElement = pillContainer.querySelectorAll("[data-bs-toggle='tab']")
+// const progressTab = document.querySelector("#progress-tab")
+
+function tabEventShow(event) {
+  const currentItem = this.parentNode;
+  const list = Array.from(currentItem.parentNode.children);
+  const index = list.indexOf(currentItem);
+  const tabId = "tab-" + (index + 1);
+
+  // console.log("Index: " + index);
+  // console.log("Tab Id:" + tabId);
+
+  const tabContainer = document.getElementById("tab-container");
+  const tabList = Array.from(document.querySelectorAll(".tab-pane"));
+
+  for (let i = 0; i < tabList.length; i++) {
+
+    if (tabList[i].id === tabId) {
+      tabList[i].classList.add("active");
+      tabList[i].classList.remove("inactive");
+    }
+    else {
+      tabList[i].classList.add("inactive");
+      tabList[i].classList.remove("active");
+    }
+
+  }
+
+}
+
+pillElement.forEach((tab) => {
+  tab.addEventListener("show.bs.tab", tabEventShow)
+})
 

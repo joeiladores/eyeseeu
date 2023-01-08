@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Poppins&family=Roboto:wght@400;500;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  /* font-family: 'Montserrat', sans-serif; */
-  /* font-family: 'Poppins', sans-serif; */
-  /* font-family: 'Roboto', sans-serif; */
-}
-
 #loader {
   display: flex;
   align-items: center;
@@ -22,20 +13,29 @@
   z-index: 9999;
 }
 
-body * {
+.pill-navbar *,
+.tab-container *,
+.feature-optician *{
   font-family: 'Roboto', sans-serif;
 }
 
-.introduction,
-.instruction,
-.ishihara-test,
-.result,
-.ishihara-cards {
+.pill-navbar {
   margin-left: 6.25em;
   margin-right: 6.25em;
-  margin-top: 6.25em;
-  background-color: white;
+  /* margin-top: 6.25em;*/
+}
 
+.tab-container .active {
+  display: block;
+}
+
+.tab-container .inactive {
+  display: none;
+}
+
+.tab-container {
+  margin-left: 6.25em;
+  margin-right: 6.25em;
 }
 
 .ishihara .nav {
@@ -57,46 +57,47 @@ body * {
   top: 0;
   left: 0;
   width: 100%;
+  overflow: hidden;
   /* height: 100%; */
   object-fit: cover;
   z-index: -1;
 }
 
-.ishihara-container {
-  /* height: 600px;
-  width: 600px; */
-  /* position: relative; */
+/* .ishihara-container {
+  height: 600px;
+  width: 600px;
+  position: relative;
 }
 
 .plate-container {
-  /* object-fit: cover;
+  object-fit: cover;
   object-position: center;
   padding: 10px;
   height: 380px;
   width: 380px;
-  overflow: hidden; */
+  overflow: hidden;
 
-  /* position: relative; */
-  /* top: 50%;
-  left: 50%; */
-  /* transform: translate(-50%, -50%); */
-  /* height: 100%;
-  width: auto; */
-  /* height: auto; */
-  /* width: 100%; */
-  /* overflow: hidden;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: auto;
+  height: auto;
+  width: 100%;
+  overflow: hidden;
   object-fit: cover;
-  object-position: center; */
+  object-position: center;
 
-}
+} */
 
-.plate-container {
+/* .plate-container {
   height: 400px;
-}
+} */
 
 .ishihara-plate-img {
   height: 50vh;
-  width:100%;
+  width: 100%;
   object-fit: cover;
   object-position: center;
   object-fit: scale-down;
@@ -134,19 +135,22 @@ body * {
 
 } */
 
-/* .optionBtn {
+.optionBtn {
   background-color:#2F67D5;
   color: white;
-} */
+  border: none;
+}
 
 .optionBtn:hover {
   background-color: #FD8647;
   color: black;
+  bordern-none;
 }
 
 .optionBtn.active {
   background-color: #FD8647;
   color: black;
+  border: none;
 }
 
 .feature-optician {
@@ -167,14 +171,10 @@ body * {
   transform: scale(1.25);
 }
 
-
 @media screen and (max-width: 576px) {
 
-  .introduction,
-  .instruction,
-  .ishihara-test,
-  .result,
-  .ishihara-cards {
+  .pill-navbar,
+  .tab-container {
     margin-left: 1.25em;
     margin-right: 1.25em;
   }
