@@ -23,12 +23,16 @@
 .tab-container {
   margin-left: 6.25em;
   margin-right: 6.25em;
-  background-color: white;
+  /* background-color: white; */
   font-family: 'Roboto', sans-serif;
 }
 
 .tab-container .active {
-  /* display: block; */
+  display: block;
+}
+
+.tab-container .inactive {
+  display: none;
 }
 
 .ishihara .nav {
@@ -165,7 +169,7 @@
 @media screen and (max-width: 576px) {
 
   .pill-navbar,
-  .ishihara-container,
+  .tab-container,
   .tab-pane,
   /* .introduction,
   .instruction,

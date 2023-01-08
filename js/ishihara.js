@@ -35,54 +35,8 @@ const pageRef = collection(db, 'ishihara-page');
 const platesRef = collection(db, 'ishihara-vcd-38');
 
 const answer = [];
-const plates= [];
+const plates = [];
 let counter = 0;
-
-// GET REAL TIME COLLECTION DATA
-onSnapshot(pageRef, (snapshot) => {
-
-  snapshot.docs.forEach((doc) => {
-
-    if (doc.data().type === "introduction") {
-      populateIntroduction(doc.data());
-    }
-    if (doc.data().type === "instruction") {
-      populateInstruction(doc.data());
-    }
-  });
-});
-
-function populateIntroduction(intro) {
-  // console.log(intro);
-  document.getElementById("tab-intro").innerHTML =
-    `  
-    <h2 class="py-3 text-center">${intro.intro_title}</h2>
-    <div class="text-center">
-      <img class="img-fluid pb-3" src="${intro.intro_header_img}" alt="" style="width: 100%"/>
-    </div>
-    <div class="content px-5">${intro.intro_content}</div>
-  </div>
-    
-  `;
-
-}
-
-function populateInstruction(inst) {
-  // console.log(inst);
-  document.getElementById("tab-inst").innerHTML =
-    `
-    <h2 class="text-center">${inst.instruction_title}</h2>
-    ${inst.instruction}
-    ${inst.notes} 
-    <a id="startBtn" class="btn btn-primary mb-3">Start Test</a>   
-  `;
-  document.getElementById("startBtn").addEventListener("click", startTest);
-  // console.log(document.querySelector(".instruction"));
-}
-
-function displayTest() {
-  document.getElementById("tab-test").style.display = "block";
-}
 
 function displayPlates(plate) {
 
@@ -191,12 +145,14 @@ document.querySelector(".plate-container").addEventListener("click", (e) => {
   }
 });
 
+// ADD EVETN LISTENER TO THE START BUTTON
+document.getElementById("startBtn").addEventListener("click", startTest);
+
 function startTest() {
 
-  // let counter = 0;
-  let selectedOption = "";
+  document.getElementById("nav-pill-test").classList.remove("disabled");
 
-  displayTest();
+  let selectedOption = "";
 
   // FETCH PLATES FROM FIRESTORE
   const q = query(platesRef, orderBy("plate", "asc"));
@@ -247,7 +203,7 @@ function startTest() {
         }
       }
 
-     // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
+      // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
       displayPlates(plates[counter]);
 
       if (counter === 37) {
@@ -261,12 +217,7 @@ function startTest() {
 
   });
 
-
 }
-
-
-
-
 
 // FOR THE PLATES PAGE
 function showPlatesPreview() {
@@ -292,7 +243,7 @@ function showPlatesPreview() {
   });
 }
 
-function showCardModal(plateNum) {  
+function showCardModal(plateNum) {
   console.log(`Inside card modal...accepting plate no. ${plateNum}`);
   document.getElementById("cardModal").style.display = "block";
   document.getElementById("overlay").classList.add("active");
@@ -308,22 +259,68 @@ function closeCardModal() {
 
 document.querySelector(".closeBtn").onclick = () => closeCardModal();
 
-document.getElementById("plate-cards-preview").addEventListener("click", (e) => { 
-  const card = e.target; 
+document.getElementById("plate-cards-preview").addEventListener("click", (e) => {
+  const card = e.target;
   if (card.classList.contains("card-img-bottom")) {
     console.log(card.dataset.plate);
     showCardModal(card.dataset.plate);
   }
 });
 
+// FETCH PLATES FROM FIRESTORE AND DISPLAY IN CARDS
+const q = query(platesRef, orderBy("plate", "asc"));
+onSnapshot(q, (snapshot) => {
+
+  snapshot.docs.forEach((doc) => {
+    plates.push({ ...doc.data(), id: doc.id });
+  });
+  console.log("Plates preview")
+  console.log(plates);
+  showPlatesPreview();
+});
+
+
 
 
 
 // TODO: pills navbar
-// const tabContainer = document.querySelector(".tab-content")
-// const tabEl = tabContainer.querySelectorAll("[data-bs-toggle='tab']")
+// console.clear();
+
+const pillContainer = document.querySelector("#pill-tabs");
+const pillElement = pillContainer.querySelectorAll("[data-bs-toggle='tab']")
 // const progressTab = document.querySelector("#progress-tab")
 
+function tabEventShow(event) {
+  const currentItem = this.parentNode;
+  const list = Array.from(currentItem.parentNode.children);
+  const index = list.indexOf(currentItem);
+  const tabId = "tab-" + (index + 1);
+
+  // console.log("Index: " + index);
+  // console.log("Tab Id:" + tabId);
+
+  const tabContainer = document.getElementById("tab-container");
+  const tabList = Array.from(document.querySelectorAll(".tab-pane"));
+
+  for (let i = 0; i < tabList.length; i++) {
+
+    if (tabList[i].id === tabId) {
+      tabList[i].classList.add("active");
+      tabList[i].classList.remove("inactive");
+    }
+    else {
+      tabList[i].classList.add("inactive");
+      tabList[i].classList.remove("active");
+    }
+
+  }
+
+}
+
+pillElement.forEach((tab) => {
+  tab.addEventListener("show.bs.tab", tabEventShow)
+})
 
 
-showPlatesPreview();
+
+
