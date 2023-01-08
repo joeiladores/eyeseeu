@@ -36,7 +36,14 @@ const platesRef = collection(db, 'ishihara-vcd-38');
 
 const answer = [];
 const plates = [];
-let counter = 0;
+let currentIndex = 0;
+let n_plates = 38;
+
+const q = query(platesRef, orderBy("plate", "asc"));
+const snapshot = await getDocs(q);
+snapshot.forEach(doc => {
+  plates.push(doc.data());
+});
 
 function displayPlates(plate) {
 
@@ -68,17 +75,17 @@ function displayPlates(plate) {
     option = plate.options[i];
 
     if (option === "I don’t know") {
-      optionsElement += `<div class="optionBtn btn btn-primary" data-option="nothing" data-selected=false>${option}</div>`;
+      optionsElement += `<div class="optionBtn btn" data-option="nothing" data-selected=false>${option}</div>`;
     }
     else {
-      optionsElement += `<div class="optionBtn btn btn-primary" data-option=${option} data-selected=false>${option}</div>`;
+      optionsElement += `<div class="optionBtn btn" data-option=${option} data-selected=false>${option}</div>`;
     }
   }
   // console.log(optionsElement);
   document.querySelector(".options").innerHTML =
     `
     ${optionsElement}
-    <button id="nextBtn" class="btn btn-dark" data-option="next">Next</button>
+    <button id="nextBtn" class="btn btn-success" data-option="next">Next</button>
   `;
 
   // FETCH AND DISPLAY PLATE INFORMATION
@@ -170,79 +177,139 @@ document.getElementById("nav-pill-test").addEventListener("click", startTest());
 function startTest() {
 
   let selectedOption = "";
+  // console.log("Starting test...");
+  // console.log(plates);
 
-  // FETCH PLATES FROM FIRESTORE
-  const q = query(platesRef, orderBy("plate", "asc"));
-  onSnapshot(q, (snapshot) => {
+  // DISPLAY INITIAL PLATE 1
+  displayPlates(plates[0]);
 
-    snapshot.docs.forEach((doc) => {
-      plates.push({ ...doc.data(), id: doc.id });
-    });
+  // ADD EVENT LISTENERS TO OPTIONS
+  document.querySelector(".options").addEventListener("click", (e) => {
+    e.preventDefault();
 
-    // DISPLAY INITIAL PLATE 1
-    displayPlates(plates[0]);
+    let targetElement = e.target;
+    let option = targetElement.dataset.option;
+    console.log("Selected option: " + option);
 
-    // ADD EVENT LISTENERS TO OPTIONS
-    document.querySelector(".options").addEventListener("click", (e) => {
-      e.preventDefault();
+    if (option === "next" && selectedOption != "" && currentIndex === n_plates - 1) {
+      console.log("End of plates");
+      console.log(`Final Answer[]: ${answer}`);
 
-      let targetElement = e.target;
-      let option = targetElement.dataset.option;
+      // TODO: COMPUTE RESULTS AND DISOPLAY AS RESPONSIVE TABLE
+      showResult();
+    }
+    else if (option === "next" && selectedOption != "") {
 
-      if (option === "next" && selectedOption != "") {
+      // PUSH ANSWER TO THE PLATES ARRAY
+      plates[currentIndex].answer = selectedOption;
+      answer.push(selectedOption);
+      console.log(answer);
+      hidePlateA();
 
-        counter++;
-        // PUSH SELECTED OPTION TO THE ANSWER ARRAY
-        answer.push(selectedOption);
-        console.log(answer);
-        hidePlateA();
+      currentIndex++;
+      // RESET SELECTED OPTION TO ""
+      selectedOption = "";
+    }
+    else if (option === "next" && selectedOption === "") {
+      showModal();
+    }
+    else {
+      // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
+      if (targetElement.classList.contains("optionBtn")) {
+        selectedOption = option;
+        activateElement(targetElement);
+        console.log(targetElement);
+        // deactivateElement(targetElement);
 
-        // RESET SELECTED OPTION TO ""
-        selectedOption = "";
+        // targetElement.classList.add("active");
+        // targetElement.dataset.selected = "true";
+        // targetElement.classList.remove("btn-primary");
+        // targetElement.classList.add("btn-warning");
+
+        // TODO: INACTIVATE AND DESELECT OTHER OPTIONS
+        // deselectOtherOptions();
+
+        // console.log(targetElement);
+        // TODO: FIX BUTTON COLOR ACTIVE
       }
-      else if (option === "next" && selectedOption === "") {
-        showModal();
-      }
-      else {
-        // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
-        if (targetElement.classList.contains("optionBtn")) {
-          selectedOption = option;
-          targetElement.classList.add("active");
-          targetElement.dataset.selected = "true";
-          targetElement.classList.remove("btn-primary");
-          targetElement.classList.add("btn-warning");
+    }
 
-          // TODO: INACTIVATE AND DESELECT OTHER OPTIONS
-          deselectOtherOptions();
-
-          // console.log(targetElement);
-          // TODO: FIX BUTTON COLOR ACTIVE
-        }
-      }
-
-      // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
-      displayPlates(plates[counter]);
-
-      if (counter === 37) {
-        console.log("End of plates");
-        console.log(`Final Answer[]: ${answer}`);
-
-        
-        // TODO: COMPUTE RESULTS AND DISOPLAY AS RESPONSIVE TABLE
-
-      }
-
-    });
+    // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
+    displayPlates(plates[currentIndex]);
 
   });
 
+
+}
+
+function showResult() {
+
+  let result = "";
+
+  activateElement(document.getElementById("nav-pill-result"));
+  deactivateElement(document.getElementById("nav-pill-test"));
+  activateElement(document.getElementById("tab-4"));
+  deactivateElement(document.getElementById("tab-3"));
+
+  // DISPLAY RESULTS IN A TABLE
+  document.getElementById("table-head").innerHTML =
+    `
+    <tr>
+      <th scope="col">Plate</th>
+      <th scope="col">Type</th>
+      <th scope="col">Answer</th>
+      <th scope="col">Correct</th>
+      <th scope="col">Weak VCD</th>
+      <th scope="col">Result</th>
+    </tr>  
+    `
+
+  // for(let i = 0; i < n_plates; i++) {
+
+  //   result = compute(plates[i].normal, plates[i].weak_vcd, plates[i].answer)
+
+  //   document.getElementById("table-body").innerHTML +=
+  //     `
+  //     <tr>
+  //       <td>${plates[i].plate}</td>
+  //       <td>${plates[i].type}</td>
+  //       <td>${plates[i].answer}</td>
+  //       <td>${plates[i].normal}</td>
+  //       <td>${plates[i].weak_vcd}</td>
+  //       <td>${result}</td>
+  //     </tr>
+  //     `
+  // }
+
+
+  plates.forEach((plate) => {
+
+    result = compute(plate.normal, plate.weak_vcd, plate.answer)
+
+    document.getElementById("table-body").innerHTML +=
+      `
+        <tr>
+          <td>${plate.plate}</td>
+          <td>${plate.type}</td>
+          <td>${plate.answer}</td>
+          <td>${plate.normal}</td>
+          <td>${plate.weak_vcd}</td>
+          <td>${result}</td>
+        </tr>
+        `
+  });
+
+}
+
+function compute(normal, weakvcd, answer) {
+  if (answer === normal) return "correct"
+  else return "wrong"
 }
 
 // FOR THE PLATES PAGE
 function showPlatesPreview() {
 
-  // console.log("Plates preview...");
-  // console.log(plates);
+  // console.log(array);
 
   plates.forEach((plate) => {
 
@@ -290,17 +357,14 @@ document.getElementById("plate-cards-preview").addEventListener("click", (e) => 
 });
 
 // FETCH PLATES FROM FIRESTORE AND DISPLAY IN CARDS
-const q = query(platesRef, orderBy("plate", "asc"));
-onSnapshot(q, (snapshot) => {
-
-  snapshot.docs.forEach((doc) => {
-    plates.push({ ...doc.data(), id: doc.id });
-  });
-  // console.log("Plates Query...")
-  // console.log(plates);
-  showPlatesPreview();
+const q2 = query(platesRef, orderBy("plate", "asc"));
+const array = [];
+const snapshot2 = await getDocs(q);
+snapshot2.forEach(doc => {
+  array.push(doc.data());
 });
 
+showPlatesPreview();
 
 
 

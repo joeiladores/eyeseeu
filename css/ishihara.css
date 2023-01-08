@@ -13,21 +13,16 @@
   z-index: 9999;
 }
 
-.pill-navbar {
-  margin-left: 6.25em;
-  margin-right: 6.25em;
-  /* margin-top: 6.25em;*/
-}
-
-.tab-container {
-  margin-left: 6.25em;
-  margin-right: 6.25em;
-}
-
 .pill-navbar *,
 .tab-container *,
 .feature-optician *{
   font-family: 'Roboto', sans-serif;
+}
+
+.pill-navbar {
+  margin-left: 6.25em;
+  margin-right: 6.25em;
+  /* margin-top: 6.25em;*/
 }
 
 .tab-container .active {
@@ -36,6 +31,11 @@
 
 .tab-container .inactive {
   display: none;
+}
+
+.tab-container {
+  margin-left: 6.25em;
+  margin-right: 6.25em;
 }
 
 .ishihara .nav {
@@ -135,19 +135,22 @@
 
 } */
 
-/* .optionBtn {
+.optionBtn {
   background-color:#2F67D5;
   color: white;
-} */
+  border: none;
+}
 
 .optionBtn:hover {
   background-color: #FD8647;
   color: black;
+  bordern-none;
 }
 
 .optionBtn.active {
   background-color: #FD8647;
   color: black;
+  border: none;
 }
 
 .feature-optician {
