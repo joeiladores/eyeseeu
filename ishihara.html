@@ -125,7 +125,7 @@
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link rounded-5" id="nav-pill-test" data-bs-toggle="tab" data-bs-target="#tab-test"
+        <button class="nav-link rounded-5 disabled" id="nav-pill-test" data-bs-toggle="tab" data-bs-target="#tab-test"
           type="button" role="tab" aria-selected="false" data-tab-value="tab-test">
           Ishihara Test
         </button>
@@ -216,8 +216,9 @@
             affect the original colors used. Should these tests suggest that you may be color blind, you should seek
             professional confirmation.</strong></li>
       </ul>
-      <a id="startBtn" href="#tab-3" data-bs-toggle="tab" data-bs-target="#tab-3" class="btn btn-primary mb-3">Start
-        Test</a>
+      <!-- <a id="startBtn" href="#tab-3" class="btn btn-primary mb-3">Start
+        Test</a> -->
+        <button id="startBtn" class="btn btn-primary" data-toggle="tab" href="#tab-3">Start Test</button>
     </div>
 
     <!-- ISHIHARA TEST ---------------------------------------------------------------------------->

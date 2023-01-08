@@ -122,6 +122,7 @@ function deselectOtherOptions() {
 
 }
 
+
 // SDD EVENT LISTNER TO THE MODAL CLOSE BUTTON
 document.getElementById("closeModalBtn").addEventListener("click", () => {
   document.getElementById("errModal").style.display = "none";
@@ -145,12 +146,26 @@ document.querySelector(".plate-container").addEventListener("click", (e) => {
   }
 });
 
-// ADD EVETN LISTENER TO THE START BUTTON
-document.getElementById("startBtn").addEventListener("click", startTest());
+function activateElement(element) {
+  element.classList.add("active");
+  element.classList.remove("inactive");
+}
+
+function deactivateElement(element) {
+  element.classList.add("inactive");
+  element.classList.remove("active");
+}
+
+// ADD EVETN LISTENER TO THE START BUTTON, OPEN THE PILL TEST
+document.getElementById("startBtn").addEventListener("click", () => {
+  activateElement(document.getElementById("nav-pill-test"));
+  deactivateElement(document.getElementById("nav-pill-inst"));
+  activateElement(document.getElementById("tab-3"));
+  deactivateElement(document.getElementById("tab-2"));
+  startTest();
+});
 
 function startTest() {
-
-  document.getElementById("nav-pill-test").classList.remove("disabled");
 
   let selectedOption = "";
 
