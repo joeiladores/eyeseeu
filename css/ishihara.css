@@ -16,14 +16,17 @@
 .pill-navbar {
   margin-left: 6.25em;
   margin-right: 6.25em;
-  margin-top: 6.25em;
-  font-family: 'Roboto', sans-serif;
+  /* margin-top: 6.25em;*/
 }
 
 .tab-container {
   margin-left: 6.25em;
   margin-right: 6.25em;
-  /* background-color: white; */
+}
+
+.pill-navbar *,
+.tab-container *,
+.feature-optician *{
   font-family: 'Roboto', sans-serif;
 }
 
@@ -165,17 +168,10 @@
   transform: scale(1.25);
 }
 
-
 @media screen and (max-width: 576px) {
 
   .pill-navbar,
-  .tab-container,
-  .tab-pane,
-  /* .introduction,
-  .instruction,
-  .ishihara-test,
-  .result, */
-  .ishihara-cards {
+  .tab-container {
     margin-left: 1.25em;
     margin-right: 1.25em;
   }

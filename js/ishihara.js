@@ -52,7 +52,7 @@ function displayPlates(plate) {
   // FETCH AND DISPLAY PLATE NUMBER ND IMAGE
   document.querySelector(".plate-container").innerHTML =
     `
-    <div class="plate-name py-3 text-center">
+    <div class="plate-name pt-2 text-center">
       <h5>Plate ${plate.plate}</h5>
     </div>
     <img id="plate-Q" class="plate-Q ishihara-plate-img img-fluid" src="${plate.plateURL}"
@@ -146,7 +146,7 @@ document.querySelector(".plate-container").addEventListener("click", (e) => {
 });
 
 // ADD EVETN LISTENER TO THE START BUTTON
-document.getElementById("startBtn").addEventListener("click", startTest);
+document.getElementById("startBtn").addEventListener("click", startTest());
 
 function startTest() {
 
@@ -209,6 +209,8 @@ function startTest() {
       if (counter === 37) {
         console.log("End of plates");
         console.log(`Final Answer[]: ${answer}`);
+
+        
         // TODO: COMPUTE RESULTS AND DISOPLAY AS RESPONSIVE TABLE
 
       }
@@ -221,6 +223,9 @@ function startTest() {
 
 // FOR THE PLATES PAGE
 function showPlatesPreview() {
+
+  // console.log("Plates preview...");
+  // console.log(plates);
 
   plates.forEach((plate) => {
 
@@ -274,11 +279,10 @@ onSnapshot(q, (snapshot) => {
   snapshot.docs.forEach((doc) => {
     plates.push({ ...doc.data(), id: doc.id });
   });
-  console.log("Plates preview")
-  console.log(plates);
+  // console.log("Plates Query...")
+  // console.log(plates);
   showPlatesPreview();
 });
-
 
 
 
@@ -320,7 +324,4 @@ function tabEventShow(event) {
 pillElement.forEach((tab) => {
   tab.addEventListener("show.bs.tab", tabEventShow)
 })
-
-
-
 
