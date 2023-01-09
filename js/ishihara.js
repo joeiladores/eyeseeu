@@ -85,7 +85,7 @@ function displayPlates(plate) {
   document.querySelector(".options").innerHTML =
     `
     ${optionsElement}
-    <button id="nextBtn" class="btn btn-success" data-option="next">Next</button>
+    <button id="nextBtn" class="btn btn-dark" data-option="next">Next</button>
   `;
 
   // FETCH AND DISPLAY PLATE INFORMATION
@@ -123,12 +123,6 @@ function showModal() {
   document.getElementById("errModal").style.display = "block";
   document.getElementById("overlay").classList.add("active");
 }
-
-// TODO: DESELECT ACTIVE AND SELECTED TO FALSE
-function deselectOtherOptions() {
-
-}
-
 
 // SDD EVENT LISTNER TO THE MODAL CLOSE BUTTON
 document.getElementById("closeModalBtn").addEventListener("click", () => {
@@ -174,6 +168,18 @@ document.getElementById("startBtn").addEventListener("click", () => {
 
 document.getElementById("nav-pill-test").addEventListener("click", startTest());
 
+function styleOptionBtns(current_target, target_element) {
+
+  const otherOptions = Array.from(current_target.children);
+  // console.log(otherOptions);
+
+  otherOptions.forEach((child) => {
+    if(child != target_element) child.classList.remove("active");      
+    else child.classList.add("active");   
+  });
+  console.log(otherOptions);
+}
+
 function startTest() {
 
   let selectedOption = "";
@@ -185,7 +191,6 @@ function startTest() {
 
   // ADD EVENT LISTENERS TO OPTIONS
   document.querySelector(".options").addEventListener("click", (e) => {
-    e.preventDefault();
 
     let targetElement = e.target;
     let option = targetElement.dataset.option;
@@ -213,32 +218,21 @@ function startTest() {
     else if (option === "next" && selectedOption === "") {
       showModal();
     }
-    else {
+    else if(targetElement.classList.contains("optionBtn")){
       // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
-      if (targetElement.classList.contains("optionBtn")) {
         selectedOption = option;
-        activateElement(targetElement);
-        // deactivateElement(targetElement);
-
-        // targetElement.classList.add("active");
-        // targetElement.dataset.selected = "true";
-        // targetElement.classList.remove("btn-primary");
-        // targetElement.classList.add("btn-warning");
-
-        // TODO: INACTIVATE AND DESELECT OTHER OPTIONS
-        // deselectOtherOptions();
-
-        // console.log(targetElement);
-        // TODO: FIX BUTTON COLOR ACTIVE
-      }
+        styleOptionBtns(e.currentTarget, targetElement);           
+        
+        // TODO: FIX BUTTON COLOR ACTIVE\
+        console.log(`target: ${e.relatedTarget.classList}`);  
     }
+    else return;
 
     // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
     displayPlates(plates[currentIndex]);
-
   });
 
-
+  
 }
 
 function showResult() {

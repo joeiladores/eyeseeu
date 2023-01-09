@@ -134,20 +134,17 @@
   cursor:pointer;
 
 } */
-
+.optionBtn.btn.active {
+  background-color:#FD8647;
+  color: black;
+  border: none;
+}
 .optionBtn {
   background-color:#2F67D5;
   color: white;
   border: none;
 }
-
 .optionBtn:hover {
-  background-color: #FD8647;
-  color: black;
-  bordern-none;
-}
-
-.optionBtn.active {
   background-color: #FD8647;
   color: black;
   border: none;
