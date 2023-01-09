@@ -1,18 +1,10 @@
 function populateTestimonialPage() {
-  // for (let x = 0; x < rating; x++) {
-  //   let star += <i class="fa-solid fa-star"></i>;
-  // }
+  
   fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/testimonial')
     .then((response) => response.json())
     .then((data) => {
       data.forEach((user) => {
-        // console.log(user.id);
-        // for (let x = 0; x < user.id; x++) {
-        // //   for (let y = 0; y < rating; y++) {
-        // //     document.getElementById('star').innerHTML =
-        // //       '<i class="fa-solid fa-star"></i>';
-        // //   }
-        // // }
+        
         let ratings = Math.floor(user.rating);
         let stars = '';
         for (let i = 0; i < ratings; i++) {
@@ -27,12 +19,11 @@ function populateTestimonialPage() {
               <hr>
               <h6 class="card-text">"${user.text}"</h6>
               <p class="card-text">
-              <div id="stars" class="text-muted">Ratings: <span style="color: #fef837">${stars}</span></div>
+              <div id="stars" class="text-muted">Ratings: <span style="color: #FFDF00">${stars}</span></div>
               </p>
             </div>
           </div>
-        </div>
-      `;
+        </div>`;
         document.querySelector('#card-container').innerHTML += cards;
       });
     });
