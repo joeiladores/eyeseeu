@@ -134,20 +134,17 @@
   cursor:pointer;
 
 } */
-
+.optionBtn.btn.active {
+  background-color:#FD8647;
+  color: black;
+  border: none;
+}
 .optionBtn {
   background-color:#2F67D5;
   color: white;
   border: none;
 }
-
 .optionBtn:hover {
-  background-color: #FD8647;
-  color: black;
-  bordern-none;
-}
-
-.optionBtn.active {
   background-color: #FD8647;
   color: black;
   border: none;
@@ -182,6 +179,13 @@
   .feature-optician {
     padding-left: 1.25em;
     padding-right: 1.25em;
+  }
+
+}
+
+@media screen and (max-width: 830px) {
+  .nav-pills {
+    flex-direction: column;
   }
 
 }

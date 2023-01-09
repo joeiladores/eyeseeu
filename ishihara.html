@@ -108,7 +108,7 @@
 
   <!-- PILL NAVBAR -------------------------------------------------------------------------------->
   <div class="pill-navbar mt-4 pt-5">
-    <ul class="nav nav-pills nav-fill gap-2 p-1 bg-light rounded-5 flex-column flex-sm-row" id="pill-tabs"
+    <ul class="nav nav-pills nav-fill gap-2 p-1 bg-light rounded-5" id="pill-tabs"
       role="tablist" style="
           --bs-nav-link-color: var(--bs-white);
           --bs-nav-pills-link-active-color: var(--bs-white);
@@ -202,7 +202,7 @@
         <li>Sit approximately 75cm from your monitor, with each circle set at eye level. </li>
         <li>Preferably have mild natural light and no glare on your screen. Interior lights and glare can alter the
           color of the pictures. </li>
-        <li>Attempt to identify the hidden number or line within 5 seconds then click on the image (left mouse button).
+        <li>Attempt to identify the hidden number or line within 5 seconds and select an answer, then click on the image (left mouse button).
         </li>
         <li>Upon left clicking, the answer will be revealed along with an analysis explaining your condition if you got
           it wrong. </li>
@@ -212,13 +212,14 @@
       <br>
       <h5>Notes:</h5>
       <ul>
-        <li>You can toggle back and forth between the original plate and the answer by clicking on the plate itself.
+        <li>After an answer is selected for each plate, you can toggle back and forth between the original plate and the answer by clicking on the plate itself.
         </li>
         <li><strong>This test cannot guarantee complete accuracy. Your monitor and quality loss of online images may
             affect the original colors used. Should these tests suggest that you may be color blind, you should seek
             professional confirmation.</strong></li>
       </ul>
-        <button id="startBtn" class="btn btn-primary" data-toggle="tab" href="#tab-3">Start Test</button>
+      
+        <a id="startBtn" class="btn btn-primary" data-toggle="tab" href="#">Start Test</a>
     </div>
 
     <!-- ISHIHARA TEST ---------------------------------------------------------------------------->
@@ -267,11 +268,12 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <div id="overlay"></div>
+      </div>      
+      
     </div>
     <!-- END OF ISHIHARA TEST ----------------------------------------------------------------------->
+
+    <div id="overlay"></div>
 
     <!-- RESULT ------------------------------------------------------------------------------------->
     <div id="tab-4" class="tab-pane inactive bg-light rounded-3 shadow-lg px-5 pb-3">
@@ -346,13 +348,8 @@
               <!-- CARD INSIDE THE MODAL -->
               <div class="card mb-3">
                 <div class="row g-0">
-                  <div class="col-md-7 plate-container">
-                    <img
-                      src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01_12.png?alt=media&token=d364a539-2bb7-4ef4-8e0c-ff78bb604a18"
-                      class="plate-Q img-fluid rounded-start" alt="..." />
-                    <img
-                      src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-plates-38%2F01B_12.png?alt=media&token=f16ee1f0-f6f6-40d4-821c-880440b91aad"
-                      class="plate-A img-fluid rounded-start" alt="..." style="display: none" />
+                  <div class="col-md-7 modal-plate-container">
+                    <!-- GET AND DISPLAY PLATE AND ANWEER PLARTE -->
                   </div>
                   <div class="col-md-5 g-danger my-auto">
                     <div class="card-body">
