@@ -38,6 +38,7 @@ const answer = [];
 const plates = [];
 let currentIndex = 0;
 let n_plates = 38;
+let hasSelectedAnswer = false;
 
 const q = query(platesRef, orderBy("plate", "asc"));
 const snapshot = await getDocs(q);
@@ -137,7 +138,7 @@ document.querySelector(".plate-container").addEventListener("click", (e) => {
   let targetElement = e.target;
   // let elementID = targetElement.id;
 
-  if (targetElement.classList.contains("plate-Q")) {
+  if (targetElement.classList.contains("plate-Q") && hasSelectedAnswer) {
     hidePlateQ();
     showPlateA();
   }
@@ -183,8 +184,6 @@ function styleOptionBtns(current_target, target_element) {
 function startTest() {
 
   let selectedOption = "";
-  // console.log("Starting test...");
-  // console.log(plates);
 
   // DISPLAY INITIAL PLATE 1
   displayPlates(plates[0]);
@@ -209,11 +208,13 @@ function startTest() {
       plates[currentIndex].answer = selectedOption;
       answer.push(selectedOption);
       console.log(answer);
-      hidePlateA();
+      hidePlateA();     
 
       currentIndex++;
+
       // RESET SELECTED OPTION TO ""
       selectedOption = "";
+      hasSelectedAnswer = false;
     }
     else if (option === "next" && selectedOption === "") {
       showModal();
@@ -221,9 +222,10 @@ function startTest() {
     else if(targetElement.classList.contains("optionBtn")){
       // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
         selectedOption = option;
-        styleOptionBtns(e.currentTarget, targetElement);           
+        styleOptionBtns(e.currentTarget, targetElement);      
+        hasSelectedAnswer = true;     
         
-        // TODO: FIX BUTTON COLOR ACTIVE\
+        // TODO: FIX BUTTON COLOR ACTIVE
         console.log(`target: ${e.relatedTarget.classList}`);  
     }
     else return;
