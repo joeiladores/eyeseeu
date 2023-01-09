@@ -77,7 +77,7 @@ function displayPlates(plate) {
     option = plate.options[i];
 
     if (option === "I don’t know") {
-      optionsElement += `<div class="optionBtn btn" data-option="nothing" data-selected=false>${option}</div>`;
+      optionsElement += `<div class="optionBtn btn" data-option="Nothing" data-selected=false>${option}</div>`;
     }
     else {
       optionsElement += `<div class="optionBtn btn" data-option=${option} data-selected=false>${option}</div>`;
@@ -176,8 +176,8 @@ function styleOptionBtns(current_target, target_element) {
   // console.log(otherOptions);
 
   otherOptions.forEach((child) => {
-    if(child != target_element) child.classList.remove("active");      
-    else child.classList.add("active");   
+    if (child != target_element) child.classList.remove("active");
+    else child.classList.add("active");
   });
 
 }
@@ -209,7 +209,7 @@ function startTest() {
       plates[currentIndex].answer = selectedOption;
       // answer.push(selectedOption);
       console.log(answer);
-      hidePlateA();     
+      hidePlateA();
 
       currentIndex++;
 
@@ -220,14 +220,14 @@ function startTest() {
     else if (option === "next" && selectedOption === "") {
       showModal();
     }
-    else if(targetElement.classList.contains("optionBtn")){
+    else if (targetElement.classList.contains("optionBtn")) {
       // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
-        selectedOption = option;
-        styleOptionBtns(e.currentTarget, targetElement);      
-        hasSelectedAnswer = true;     
-        
-        // TODO: FIX BUTTON COLOR ACTIVE
-        console.log(`target: ${e.relatedTarget.classList}`);  
+      selectedOption = option;
+      styleOptionBtns(e.currentTarget, targetElement);
+      hasSelectedAnswer = true;
+
+      // TODO: FIX BUTTON COLOR ACTIVE
+      console.log(`target: ${e.relatedTarget.classList}`);
     }
     else return;
 
@@ -235,7 +235,7 @@ function startTest() {
     displayPlates(plates[currentIndex]);
   });
 
-  
+
 }
 
 function showResult() {
@@ -327,6 +327,25 @@ function showPlatesPreview() {
 
 function showCardModal(plateNum) {
 
+  // console.log("In showCardModal...");
+  // console.log("Plate num: " + plateNum);
+  // console.log(typeof parseInt(plateNum));
+
+  const selectedPlate = plates.find(current_plate => current_plate.plate === parseInt(plateNum));
+
+  // console.log(selectedPlate);
+
+  document.querySelector(".modal-plate-container").innerHTML =
+    `
+  <img
+    src="${selectedPlate.plateURL}"
+    class="plate-Q img-fluid rounded-start" alt="..." />
+  <img
+  src="${selectedPlate.plateURL2}"
+  class="plate-A img-fluid rounded-start" alt="..." style="display: none" />
+
+  `
+
   document.getElementById("cardModal").style.display = "block";
   document.getElementById("overlay").classList.add("active");
 
@@ -344,7 +363,7 @@ document.querySelector(".closeBtn").onclick = () => closeCardModal();
 document.getElementById("plate-cards-preview").addEventListener("click", (e) => {
   const card = e.target;
   if (card.classList.contains("card-img-bottom")) {
-    console.log(card.dataset.plate);
+    // console.log(card.dataset.plate);
     showCardModal(card.dataset.plate);
   }
 });
@@ -384,6 +403,8 @@ pillElement.forEach((tab) => {
   tab.addEventListener("show.bs.tab", tabEventShow)
 })
 
+
+// ANSWER DATASET FOR TESTING OF RESULT
 function testAnswerData() {
 
 
