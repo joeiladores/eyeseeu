@@ -34,7 +34,9 @@ const db = getFirestore(app);
 const pageRef = collection(db, 'ishihara-page');
 const platesRef = collection(db, 'ishihara-vcd-38');
 
-const answer = [];
+// SAMPLE ANSWER SET FOR TESTING ONLY
+let answer = [];
+answer = ['12', '13', '14', '15', '16', '17'];
 const plates = [];
 let currentIndex = 0;
 let n_plates = 38;
@@ -69,8 +71,7 @@ function displayPlates(plate) {
       alt="Ishihara Plate ${plate.plate}" data-plate="${plate.plate}" data-url="plateURL2"/>
   `
 
-  // FETCH AND DISPLAY OPTIONS
-  // console.log(plate.options);
+  // GET AND DISPLAY OPTIONS
   let optionsElement = "", option = "";
   for (let i = 0; i < plate.options.length; i++) {
     option = plate.options[i];
@@ -82,14 +83,14 @@ function displayPlates(plate) {
       optionsElement += `<div class="optionBtn btn" data-option=${option} data-selected=false>${option}</div>`;
     }
   }
-  // console.log(optionsElement);
+
   document.querySelector(".options").innerHTML =
     `
     ${optionsElement}
     <button id="nextBtn" class="btn btn-dark" data-option="next">Next</button>
   `;
 
-  // FETCH AND DISPLAY PLATE INFORMATION
+  // GET AND DISPLAY PLATE INFORMATION, INITIALLY NOT SHOWN BY DEFAULT
   let info = "";
   for (let i = 0; i < plate.display.length; i++) {
     info += `<p>${plate.display[i]}</p>`;
@@ -206,7 +207,7 @@ function startTest() {
 
       // PUSH ANSWER TO THE PLATES ARRAY
       plates[currentIndex].answer = selectedOption;
-      answer.push(selectedOption);
+      // answer.push(selectedOption);
       console.log(answer);
       hidePlateA();     
 
@@ -279,7 +280,7 @@ function showResult() {
 
   plates.forEach((plate) => {
 
-    result = compute(plate.normal, plate.weak_vcd, plate.answer)
+    result = computeResult(plate.normal, plate.weak_vcd, plate.answer)
 
     document.getElementById("table-body").innerHTML +=
       `
@@ -296,9 +297,9 @@ function showResult() {
 
 }
 
-function compute(normal, weakvcd, answer) {
-  if (answer === normal) return "correct"
-  else return "wrong"
+function computeResult(normal, weakvcd, answer) {
+  if (answer === normal) return "correct";
+  else return "wrong";
 }
 
 document.getElementById("nav-pill-plates").addEventListener("click", showPlatesPreview());
@@ -348,14 +349,9 @@ document.getElementById("plate-cards-preview").addEventListener("click", (e) => 
   }
 });
 
-
-
-// TODO: pills navbar
-// console.clear();
-
+// PILL NAVBAR EVENTS
 const pillContainer = document.querySelector("#pill-tabs");
 const pillElement = pillContainer.querySelectorAll("[data-bs-toggle='tab']")
-// const progressTab = document.querySelector("#progress-tab")
 
 function tabEventShow(event) {
   const currentItem = this.parentNode;
@@ -388,3 +384,12 @@ pillElement.forEach((tab) => {
   tab.addEventListener("show.bs.tab", tabEventShow)
 })
 
+function testAnswerData() {
+
+
+
+
+
+}
+
+testAnswerData();
