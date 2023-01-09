@@ -178,7 +178,7 @@ function styleOptionBtns(current_target, target_element) {
     if(child != target_element) child.classList.remove("active");      
     else child.classList.add("active");   
   });
-  console.log(otherOptions);
+
 }
 
 function startTest() {
