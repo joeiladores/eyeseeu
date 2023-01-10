@@ -200,14 +200,13 @@ function startTest() {
       console.log("End of plates");
       console.log(`Final Answer[]: ${answer}`);
 
-      // TODO: COMPUTE RESULTS AND DISOPLAY AS RESPONSIVE TABLE
+      // TODO: COMPUTE RESULTS AND DISOPLAY A RESPONSIVE TABLE
       showResult();
     }
     else if (option === "next" && selectedOption != "") {
 
       // PUSH ANSWER TO THE PLATES ARRAY
       plates[currentIndex].answer = selectedOption;
-      // answer.push(selectedOption);
       console.log(answer);
       hidePlateA();
 
@@ -227,7 +226,7 @@ function startTest() {
       hasSelectedAnswer = true;
 
       // TODO: FIX BUTTON COLOR ACTIVE
-      console.log(`target: ${e.relatedTarget.classList}`);
+      return;
     }
     else return;
 
