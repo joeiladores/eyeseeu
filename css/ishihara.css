@@ -57,8 +57,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  overflow: hidden;
   /* height: 100%; */
+  overflow: hidden;
   object-fit: cover;
   z-index: -1;
 }
