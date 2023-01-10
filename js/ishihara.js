@@ -302,8 +302,12 @@ function showResult() {
 }
 
 function computeResult(normal, weakvcd, answer) {
+
   if (answer === normal) return "correct";
   else return "wrong";
+
+  // TODO: MAKE A COMPUTATION FOR NORMAL VISION, WEAK VCD, EXTREME VCD OR TOTAL BLINDNESS
+  // CAN BE LIKE A PROGRESS BAR 
 }
 
 document.getElementById("nav-pill-plates").addEventListener("click", showPlatesPreview());
