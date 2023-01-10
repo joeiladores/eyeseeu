@@ -22,7 +22,10 @@
 .pill-navbar {
   margin-left: 6.25em;
   margin-right: 6.25em;
-  /* margin-top: 6.25em;*/
+  position: sticky;
+  top: 1rem;
+  /* height: auto; */
+  z-index: 10;
 }
 
 .tab-container .active {
@@ -53,13 +56,15 @@
 }
 
 .ishihara-bg {
+  /* background-size:contain; */
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
-  /* height: 100%; */
-  overflow: hidden;
   object-fit: cover;
+  overflow: hidden;
   z-index: -1;
 }
 
@@ -168,7 +173,7 @@
   transform: scale(1.25);
 }
 
-/* STYLES FOR TABLE */
+/* TODO: STYLES FOR TABLE */
 #table-head {
   height: 100%;
   width: 100%;
@@ -190,11 +195,13 @@
     padding-left: 1.25em;
     padding-right: 1.25em;
   }
-  /* .tab-pane,
+  /* TODO: */
+  .tab-pane,
   .tab-pane .content {
     padding-left: 1em;
     padding-right: 1em;
-  } */
+    font-size: 0.8rem;
+  }
 
 
 }
