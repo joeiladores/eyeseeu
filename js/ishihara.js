@@ -91,34 +91,39 @@ function displayPlates(plate) {
   `;
 
   // GET AND DISPLAY PLATE INFORMATION, INITIALLY NOT SHOWN BY DEFAULT
-  let info = "";
-  for (let i = 0; i < plate.display.length; i++) {
-    info += `<p>${plate.display[i]}</p>`;
+  displayPlateInfo(".plate-info", plate.display);
+
+}
+
+function displayPlateInfo(element, info) {
+  let infoStr = "";
+  for (let i = 0; i < info.length; i++) {
+    infoStr += `<p>${info[i]}</p>`;
   }
-  document.querySelector(".plate-info").innerHTML =
+  document.querySelector(element).innerHTML =
     `
       <h5>What did you see?</h5>
       <hr>
-      ${info}
+      ${infoStr}
   `
 }
 
-function hidePlateQ() {
-  document.querySelector(".plate-Q").style.display = "none";
+function hidePlateQ(imageElement) {
+  document.querySelector(imageElement).style.display = "none";
 }
 
-function showPlateA() {
-  document.querySelector(".plate-A").style.display = "block";
-  document.querySelector(".plate-info").style.display = "block";
+function showPlateQ(imageElement) {
+  document.querySelector(imageElement).style.display = "block";
 }
 
-function showPlateQ() {
-  document.querySelector(".plate-Q").style.display = "block";
+function showPlateA(imageElement, infoElement) {
+  document.querySelector(imageElement).style.display = "block";
+  document.querySelector(infoElement).style.display = "block";
 }
 
-function hidePlateA() {
-  document.querySelector(".plate-A").style.display = "none";
-  document.querySelector(".plate-info").style.display = "none";
+function hidePlateA(imageElement, infoElement) {
+  document.querySelector(imageElement).style.display = "none";
+  document.querySelector(infoElement).style.display = "none";
 }
 
 function showModal() {
@@ -140,12 +145,12 @@ document.querySelector(".plate-container").addEventListener("click", (e) => {
   // let elementID = targetElement.id;
 
   if (targetElement.classList.contains("plate-Q") && hasSelectedAnswer) {
-    hidePlateQ();
-    showPlateA();
+    hidePlateQ(".plate-Q");
+    showPlateA(".plate-A", ".plate-info");
   }
   if (targetElement.classList.contains("plate-A")) {
-    hidePlateA();
-    showPlateQ();
+    hidePlateA(".plate-A", ".plate-info");
+    showPlateQ(".plate-Q");
   }
 });
 
@@ -208,7 +213,7 @@ function startTest() {
       // PUSH ANSWER TO THE PLATES ARRAY
       plates[currentIndex].answer = selectedOption;
       console.log(answer);
-      hidePlateA();
+      hidePlateA(".plate-A", ".plate-info");
 
       currentIndex++;
 
@@ -297,13 +302,17 @@ function showResult() {
 }
 
 function computeResult(normal, weakvcd, answer) {
+
   if (answer === normal) return "correct";
   else return "wrong";
+
+  // TODO: MAKE A COMPUTATION FOR NORMAL VISION, WEAK VCD, EXTREME VCD OR TOTAL BLINDNESS
+  // CAN BE LIKE A PROGRESS BAR 
 }
 
 document.getElementById("nav-pill-plates").addEventListener("click", showPlatesPreview());
 
-// FOR THE PLATES PAGE
+// FOR THE PLATES PREVIEW CARDS
 function showPlatesPreview() {
 
   plates.forEach((plate) => {
@@ -333,23 +342,30 @@ function showCardModal(plateNum) {
   const selectedPlate = plates.find(current_plate => current_plate.plate === parseInt(plateNum));
 
   // console.log(selectedPlate);
-
-  document.querySelector(".modal-plate-container").innerHTML =
-    `
-  <img
-    src="${selectedPlate.plateURL}"
-    class="plate-Q img-fluid rounded-start" alt="..." />
-  <img
-  src="${selectedPlate.plateURL2}"
-  class="plate-A img-fluid rounded-start" alt="..." style="display: none" />
-
-  `
+  // console.log(selectedPlate.plateURL);
+  // console.log(selectedPlate.plateURL2);
 
   document.getElementById("cardModal").style.display = "block";
   document.getElementById("overlay").classList.add("active");
 
+  document.querySelector(".modal-plate-container").innerHTML =
+    `
+    <img
+      src="${selectedPlate.plateURL}"
+      class="plate-Q2 img-fluid rounded-start" alt="..." />
+    <img
+      src="${selectedPlate.plateURL2}"
+      class="plate-A2 img-fluid rounded-start" alt="..." style="display: none" />
+  `
+  displayPlateInfo(".answer-plate-info", selectedPlate.display);
+  
+  console.log(document.querySelector(".modal-plate-container").innerHTML);
+
+  
+
   // TODO: What next after the card modal is shown?
   // Display the plate information
+  
 }
 
 function closeCardModal() {
@@ -357,8 +373,30 @@ function closeCardModal() {
   document.getElementById("overlay").classList.remove("active");
 }
 
+// ADD EVENT LISTERNER TO THE PLATE MODAL IMAGE
+document.querySelector(".modal-plate-container").addEventListener("click", (e) => {
+ 
+  let targetElement = e.target;  
+
+  if (targetElement.classList.contains("plate-Q2")) {
+    console.log(targetElement);
+    document.querySelector(".question-message").style.display = "none";
+    hidePlateQ(".plate-Q2");
+    showPlateA(".plate-A2", ".answer-plate-info");
+    console.log(document.querySelector(".modal-plate-container"));
+  }
+  if (targetElement.classList.contains("plate-A2")) {
+    console.log(targetElement);
+    hidePlateA(".plate-A2", ".answer-plate-info");
+    showPlateQ(".plate-Q2");
+    document.querySelector(".question-message").style.display = "block";
+    console.log(document.querySelector(".modal-plate-container"));
+  }
+});
+
 document.querySelector(".closeBtn").onclick = () => closeCardModal();
 
+// EVENT FOR CARD PREVIEW
 document.getElementById("plate-cards-preview").addEventListener("click", (e) => {
   const card = e.target;
   if (card.classList.contains("card-img-bottom")) {
