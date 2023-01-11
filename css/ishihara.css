@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Poppins&family=Roboto:wght@400;500;700&display=swap');
 
+body {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-page%2Fishihara-test-blue-bg.jpg?alt=media&token=c902e814-1bc3-48e4-b658-2ccf795b2bc0');
+}
+
 #loader {
   display: flex;
   align-items: center;
@@ -54,51 +58,6 @@
   background-color: #18A0FB;
   color: white;
 }
-
-.ishihara-bg {
-  /* background-size:contain; */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  object-fit: cover;
-  overflow: hidden;
-  z-index: -1;
-}
-
-/* .ishihara-container {
-  height: 600px;
-  width: 600px;
-  position: relative;
-}
-
-.plate-container {
-  object-fit: cover;
-  object-position: center;
-  padding: 10px;
-  height: 380px;
-  width: 380px;
-  overflow: hidden;
-
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 100%;
-  width: auto;
-  height: auto;
-  width: 100%;
-  overflow: hidden;
-  object-fit: cover;
-  object-position: center;
-
-} */
-
-/* .plate-container {
-  height: 400px;
-} */
 
 .ishihara-plate-img {
   height: 50vh;
