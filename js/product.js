@@ -17,7 +17,7 @@ function displayProduct() {
               <div class="col-md-4 g-3 mt-5">
               <figure class="card card-product-grid">
                 <div class="img-wrap"> 
-                          <img src="${user.img}" class="img-fluid">
+                  <img src="${user.img}" class="img-fluid">
                 </div>
                 <figcaption class="info-wrap">
                   <div class="fix-height">
@@ -61,7 +61,6 @@ function renderProducts(products) {
           <figure class="card card-product-grid">
             <div class="img-wrap"> 
               <img src="${product.img}" class="img-fluid">
-              <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
             </div>
             <figcaption class="info-wrap">
               <div class="fix-height">
