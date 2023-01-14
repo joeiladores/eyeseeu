@@ -12,15 +12,10 @@ const firebaseConfig = {
   appId: "1:210845750796:web:af3f92bccaf04fa201c029"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
 
-// Initialize Services
+const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
-// BOOKING SECTION *********************************************************************
-// Collection Reference
 const clinicRef = collection(db, 'clinic');
 
 function populateClinicSelection() {
@@ -47,7 +42,7 @@ function populateClinicSelection() {
 }
 
 populateClinicSelection();
-// END OF BOOKING SECTION *************************************************************
+
 
 
 
