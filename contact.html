@@ -14,12 +14,14 @@
   <link rel="icon" href="photo/main-logo&favicon.png" type="image/x-icon" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/contact.css" />
-  <!-- <script src="js/booking.js"></script> -->
+  <!-- FIREBASE -->
   <script defer type="module" src="js/contact.js"></script>
-
-  <!-- FOR CALENDLY --------------------------------------------------------------------------->
+  <script defer type="module" src="js/message.js"></script>
+  <!-- CALENDLY -->
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <!-- EMAILJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 
 <body>
@@ -83,7 +85,7 @@
     </div>
   </nav>
 
-  <!-- PARALLAX SECTION -->
+  <!-- PARALLAX SECTION ---------------------------------------------------------------->
   <section id="parallax-section">
     <div class="page-title" id="contact">
       <h1>BOOK YOUR APPOINTMENT</h1>
@@ -107,24 +109,23 @@
               <!-- FETCH CLINIC SELECTION FROM FIRESTORE ---------------------------------->
             </select>
           </div>
-    
+
           <!-- BUTTON FOR SELECTED BRANCH CALENDLY EVENT ---------------------------------->
           <div id="displayBtnCalClinic" class="page-x-margin mt-5 mb-5">
-            <a id="btnCalendly" type="button" href="" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2"
-              data-bs-toggle="modal" data-bs-target="#errNoSelectedClinic">
+            <a id="btnCalendly" type="button" href="" width="150px"
+              class="btn theme-color-light rounded-3 py-3 px-3 fw-2" data-bs-toggle="modal"
+              data-bs-target="#errNoSelectedClinic">
               <i class="bi bi-calendar2-event"></i>&nbsp; Book an Appointment</a>
           </div>
-        </form>        
+        </form>
       </div>
       <div class="col-md-6 align-self-center justify-content-center">
         <img class="img-fluid"
-        src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/contact%2Fscheduler.png?alt=media&token=7fb63aaf-51fb-4908-8834-a55a5c49a3b1" height="300px"
-        alt="">
-      </div>  
-      
-    </div>
+          src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/contact%2Fscheduler.png?alt=media&token=7fb63aaf-51fb-4908-8834-a55a5c49a3b1"
+          height="300px" alt="">
+      </div>
 
-    
+    </div>
 
     <!-- MODAL ------------------------------------------------------------------------>
     <div id="errNoSelectedClinic" class="modal" tabindex="-1">
@@ -139,239 +140,60 @@
     </div>
     </div>
   </section>
+  <!-- END OF BOOKING SECTION -------------------------------------------------------->
 
-  <!-- <messages section> -->
-  <script src="js/message.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
-  </script>
-  <!-- fr email.js pb key -->
-  <script type="text/javascript">
-    (function () {
-      emailjs.init("xZ2fSpIl3WekPZ1sM");
-    })();
-  </script>
 
-  <div class="container bg-light">
+  <!-- MESSAGE US FORM ---------------------------------------------------------------------->
+  <section class="message-section bg-light my-5 rounded-3 shadow-lg">
     <div class="row">
-      <div class="col-md-6 mb-1 py-2 bg-primary text-white">
-        <h1>How may we help you</h1>
-        <br>
-        <h4>
-          Thank you for reaching out, Let us know what is on your mind send us message now. We valued your Privacy.
-        </h4>
+      <div class="col-md-6 py-3 px-4 bg-primary text-white d-flex flex-column rounded-3 shadow-lg align-self-center">
+        <h2 class="">How can we help?</h2>
+        <h5 class="mb-5">
+          Let us know what is on your mind and send us a message.
+        </h5>
+        <h5 class="">
+          Old-fashioned phone calls work too!
+        </h5>
+        <div id="clinic-contacts">
+          <!-- FETCH CLINIC CONTACTS AND DISPLAY HERE ----------------------------------->
+        </div>
       </div>
-      <div class="col-md-6 py-2 ">
-        <h1>MESSAGE US</h1>
-        <div class="form-group">
-          <h5 for="name">Name</h5>
-          <input type="text" class="form-control" id="name" placeholder="Name" />
+
+      <form class="message-form col mx-auto pe-5 ps-3 py-3">
+        <h2 class="text-center mb-3">GET IN TOUCH</h2>
+        <div class="mb-3">
+          <select id="m__selectClinic" class="form-select theme-color-light" aria-label="Choose Your Clinic">
+            <option selected value=0>Choose Your Clinic **</option>
+            <!-- FETCH CLINIC SELECTION FROM FIRESTORE ---------------------------------->
+          </select>
         </div>
-        <div class="form-group">
-          <h5 for="phoneNum">Phone number</h5>
-          <input type="tel" class="form-control" id="phoneNum" placeholder="Phone number" />
+        <div class="mb-3">
+          <input type="text" class="form-control" id="name" placeholder="Your Name" required />
         </div>
-        <div class="form-group">
-          <h5 for="email">Email</h5>
-          <input type="email" class="form-control" id="email" placeholder="Email" />
+        <div class="mb-3">
+          <input type="tel" class="form-control" id="phone" placeholder="Phone Number" required />
         </div>
-        <!-- <div class="form-group">
-                      <select
-                        id="selectClinic"
-                        class="form-select theme-color-light"
-                        aria-label="Choose Your Clinic"
-                        required
-                        onchange="handleClinicChange()"
-                        required
-                      >
-                        <option selected>Choose Your Clinic **</option>
-                        <!-- FETCH CLINIC SELECTION FROM FIRESTORE ---------------------------------->
-        <!-- </select>
-                    </div>  -->
-        <div class="form-group">
-          <h5 for="message">Message</h5>
-          <textarea id="message" rows="3" class="form-control" placeholder="Message here"></textarea>
+        <div class="mb-3">
+          <input type="email" class="form-control" id="email" placeholder="Email" required />
         </div>
-        <button class="btn mt-4 btn-primary" onclick="sendMail()">Submit</button>
-      </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="subject" placeholder="Subject" required />
+        </div>
+        <div class="mb-3">
+          <textarea id="message" rows="5" class="form-control" placeholder="How can we help you?"></textarea>
+        </div>
+        <button id="submitEmailBtn" class="btn btn-primary float-end" type="submit">Submit</button>
+      </form>
     </div>
+  </section>
+
+  <!-- MODAL FOR MESSAGE RESULT AFTER SENDING EMAIL -->
+  <div id="customModal" class="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+
   </div>
 
+  <div id="overlay"></div>
 
-  <!-- MESASAGE US SECTION HENRY --------------------------------------------------------->
-
-  <!-- BOOKING SECTION HEADER ------------------------------------------------------------------>
-  <!-- <section class="book-section-header pt-5 pb-5 mt-5">
-      <div>
-        <h4 class="text-center">
-          To book an appointment, fill out the form below!
-        </h4>
-    
-      </div>
-    </section> -->
-
-  <!-- OLD BOOKING FORM SECTION ------------------------------------------------------------------>
-  <!-- <section class="booking-section col-md-8 bg-light rounded-3 mx-auto pt-4 px-5">
-      <form class="booking-form mx-auto">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 pb-3 d-flex">
-              <select
-                class="form-select"
-                aria-label="Are you an existing patient?"
-                required
-              >
-                <option selected>Are you an existing patient? **</option>
-                <option value="y">Yes</option>
-                <option value="n">No</option>
-              </select>
-            </div>
-            <div class="col-md-6 pb-3 d-flex">
-              <select
-                class="form-select"
-                aria-label="Choose Your Clinic"
-                required
-              >
-                <option selected>Choose Your Clinic **</option>
-                <option value="digos">Digos</option>
-                <option value="isulan">Isulan</option>
-                <option value="marbel">Marbel</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 pb-2 pt-2">
-              <h3>PERSONAL INFORMATION</h3>
-            </div>
-          </div>
-
-          <div class="row g-3">
-            <div class="col-md-6 pb-3 d-flex">
-              <input
-                type="text"
-                class="form-control"
-                id="FirstName"
-                placeholder="First Name **"
-                required
-              />
-            </div>
-            <div class="col-md-6 pb-3 d-flex">
-              <input
-                type="text"
-                class="form-control"
-                id="LastName"
-                placeholder="Last Name **"
-                required
-              />
-            </div>
-          </div>
-          <div class="row g-3">
-            <div class="col-md-6 pb-3 d-flex">
-              <input
-                type="tel"
-                class="form-control"
-                id="PhoneNum"
-                placeholder="Phone Number"
-              />
-            </div>
-            <div class="col-md-6 pb-3 d-flex">
-              <input
-                type="email"
-                class="form-control"
-                id="Email"
-                placeholder="Email"
-              />
-            </div>
-          </div>
-          <div class="row g-3">
-            <div class="col-md-6 pb-3 d-flex">
-              <input
-                type="text"
-                class="form-control"
-                id="AddressLine1"
-                placeholder="Address Line 1"
-              />
-            </div>
-            <div class="col-md-6 pb-3 d-flex">
-              <input
-                type="text"
-                class="form-control"
-                id="AddressLine2"
-                placeholder="Addresss Line 2"
-              />
-            </div>
-          </div>
-          <div class="row g-3">
-            <div class="col-md-6 pb-3 d-flex">
-              <input
-                type="text"
-                class="form-control"
-                id="City"
-                placeholder="City/Town"
-              />
-            </div>
-            <div class="col-md-6 pb-3 d-flex">
-              <input
-                type="text"
-                class="form-control"
-                id="PostCode"
-                placeholder="Post Code"
-              />
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 pb-2 pt-2 d-flex">
-              <h3>BOOKING INFORMATION</h3>
-            </div>
-          </div>
-
-          <div class="row g-3">
-            <div class="col-md-4 pb-3 d-flex">
-              <input
-                type="datetime-local"
-                class="form-control"
-                id="Date"
-                placeholder="Date **"
-                required
-              />
-            </div>
-            <div class="col-md-8 pb-2 d-flex">
-              <select
-                class="form-select"
-                aria-label="What would you like to book?"
-                required
-              >
-                <option selected>What would you like to book? **</option>
-                <option value="EyeExamAdult">Eye Exam (Adult)</option>
-                <option value="EyeExamChild">Eye Exam (Child)</option>
-                <option value="ContactLenseFitting">ContactLenseFitting</option>
-                <option value="SpecialistTesting">SpecialistTesting</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 pb-3 d-flex">
-              <textarea
-                class="form-control"
-                id="FurtherInfo"
-                rows="5"
-                placeholder="Please provide any other information"
-              ></textarea>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 pb-3 d-flex">
-              <button class="btn btn-primary mb-5 mx-auto" type="submit">
-                Book Appointment
-              </button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </section> -->
-  <!-- END OF BOOKING FORM SECTION ------------------------------------------------------------------>
 
   <!-- FOOTER SECTION -->
   <footer>
