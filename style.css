@@ -390,10 +390,13 @@ footer li {
   padding-top: 200px;
   padding-bottom: 200px;
   padding-left: 100px;
+  padding-right: 100px;
   overflow: hidden;
   position: relative;
   width: 100%;
-  background-image: url(https://i.shgcdn.com/e48a6dea-2100-4df6-a276-aa2c2007e56a/-/format/auto/-/preview/3000x3000/-/quality/lighter/);
+  height: 50vh;
+  background-image: url(https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-page%2Fishihara-bg.webp?alt=media&token=50f55cb3-b159-413c-afe1-a705233390c2);
+  /* background-image: url(https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-page%2FEnchroma-bg-wide.png?alt=media&token=69634995-79a2-4764-b12e-794cffccc247); */
   background-attachment: fixed;
   background-size: contain;
   background-repeat: no-repeat;
@@ -402,43 +405,71 @@ footer li {
 
 /* RESPONSIVLE PARALLAX */
 /* big */
-@media screen and (max-width: 959px) and (min-width: 768px) {
+/* @media screen and (max-width: 959px) and (min-width: 768px) {
   #parallax-section .parallax-content {
     padding: 20px;
     width: 620px;
   }
-}
+} */
 /* medium */
 @media screen and (max-width: 767px) {
   #parallax-section .parallax-content {
     padding: 30px;
-    width: 420px;
+    /* width: 420px; */
   }
   #parallax-section .parallax-content {
-    padding: 30px;
-    width: 420px;
+    padding: 3em; 
+    /* width: 420px; */
   }
   #parallax-section h2 {
-    font-size: 30px;
+    font-size: 1.5rem;
   }
   #parallax-section .parallax-title {
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 30px; 
+    padding-bottom: 30px; 
   }
 }
 /* small */
 @media screen and (max-width: 479px) {
-  #parallax-section .parallax-content {
-    padding: 20px 5px;
-    width: 290px;
+  #parallax-section .page-title h1 {
+    font-size:2rem; 
+    letter-spacing:0.15rem;
   }
+  #parallax-section .parallax-content {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+  #parallax-section h2 {
+    font-size: 1.5rem;
+  }   
   #parallax-section .parallax1,
   #parallax-section .parallax2,
   #parallax-section .parallax3,
-  #parallax-section .parallax-location {
-    padding: 20px 5px;
-    width: 290px;
+  #parallax-section .parallax-location,
+  #parallax-section .parallax-ishihara {
+    padding-left: 2em;
+    padding-right: 2em;
+    /* width: 290px; */
   }
+}
+
+/* small */
+@media screen and (max-width: 576px) {
+  #parallax-section .page-title h1 {
+    font-size:2rem; 
+    letter-spacing:0.15rem;
+  }
+  #parallax-section .parallax-content {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+  #parallax-section .parallax {
+    padding-left: 2em;
+    padding-right: 2em;
+  }  
+  #parallax-section h2 {
+    font-size: 1.5rem;
+  }   
 }
 
 /* STYLES FOR MAP */
