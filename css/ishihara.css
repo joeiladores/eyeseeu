@@ -142,6 +142,12 @@ body {
   transform: scale(1.25);
 }
 
+.ishihara-text-gradient {
+  background: linear-gradient(to right, #3B12E2, #2ad2e4, transparent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* TODO: STYLES FOR TABLE */
 #table-head {
   height: 100%;

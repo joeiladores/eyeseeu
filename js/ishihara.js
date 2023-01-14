@@ -36,7 +36,7 @@ const platesRef = collection(db, 'ishihara-vcd-38');
 
 // SAMPLE ANSWER SET FOR TESTING ONLY
 let answer = [];
-answer = ['12', '13', '14', '15', '16', '17'];
+// answer = ['12', '13', '14', '15', '16', '17'];
 const plates = [];
 let currentIndex = 0;
 let n_plates = 38;
@@ -199,18 +199,23 @@ function startTest() {
 
     let targetElement = e.target;
     let option = targetElement.dataset.option;
-    console.log("Selected option: " + option);
+    // console.log("Selected option: " + option);
 
     if (option === "next" && selectedOption != "" && currentIndex === n_plates - 1) {
       console.log("End of plates");
       console.log(`Final Answer[]: ${answer}`);
 
+      // TODO: DISPLAY BUTTON OR MODAL "You have reached the end of the test." "Show Result"
+
       // TODO: COMPUTE RESULTS AND DISOPLAY A RESPONSIVE TABLE
       showResult();
+
+      
     }
     else if (option === "next" && selectedOption != "") {
 
       // PUSH ANSWER TO THE PLATES ARRAY
+      answer.push(selectedOption);
       plates[currentIndex].answer = selectedOption;
       console.log(answer);
       hidePlateA(".plate-A", ".plate-info");
@@ -241,16 +246,12 @@ function startTest() {
 
 }
 
+// DISPLAY RESULTS IN A RESPONSIVE TABLE
 function showResult() {
 
   let result = "";
+  activateElement(document.getElementById("test-result"));
 
-  // activateElement(document.getElementById("nav-pill-result"));
-  // deactivateElement(document.getElementById("nav-pill-test"));
-  activateElement(document.getElementById("tab-4"));
-  // deactivateElement(document.getElementById("tab-3"));
-
-  // DISPLAY RESULTS IN A TABLE
   document.getElementById("table-head").innerHTML =
     `
     <tr>

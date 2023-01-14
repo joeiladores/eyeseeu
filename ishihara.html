@@ -104,11 +104,12 @@
 
   <!-- PARALLAX SECTION ---------------------------------------------------------------->
   <section id="parallax-section">
-    <div class="page-title" id="contact">
+    <!-- <div class="page-title" id="contact">
       <h1>WELCOME TO THE ISHIHARA COLOR BLIND TEST</h1>
-    </div>
+    </div> -->
     <div class="parallax-ishihara">
-
+      <h3><span class="ishihara-text-gradient">Welcome to &nbsp;&nbsp;</span></h3>
+      <h1><span class="ishihara-text-gradient">Ishihara Test &nbsp;&nbsp;</span></h1>
     </div>
   </section>
 
@@ -137,12 +138,6 @@
           Start Ishihara Test
         </button>
       </li>
-      <!-- <li class="nav-item" role="presentation">
-        <button class="nav-link rounded-5" id="nav-pill-result" data-bs-toggle="tab" data-bs-target="#tab-4"
-          type="button" role="tab" aria-selected="false" data-tab-value="tab-result">
-          Result
-        </button>
-      </li> -->
       <li class="nav-item" role="presentation">
         <button class="nav-link rounded-5" id="nav-pill-plates" data-bs-toggle="tab" data-bs-target="#tab-4"
           aria-selected="false" data-tab-value="tab-plates">
@@ -292,20 +287,22 @@
     <div id="overlay-light"></div>
 
     <!-- RESULT ------------------------------------------------------------------------------------->
-    <div id="tab-" class="tab-pane inactive bg-light rounded-3 shadow-lg px-5 pb-3">
-      <h2 class="py-3 text-center">
-        Result
-      </h2>
-      <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-          <thead id="table-head" class="table-secondary">
-
-          </thead>
-          <tbody id="table-body">
-
-          </tbody>
-        </table>
+    <div id="test-result" class="inactive mt-5 bg-transparent">
+      <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
+        <h2 class="py-2 m-0">Result</h2>
       </div>
+      <div class="bg-light">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead id="table-head" class="table-primary">
+  
+            </thead>
+            <tbody id="table-body">
+  
+            </tbody>
+          </table>
+        </div>
+      </div>      
     </div>
 
     <!-- ISHIHARA PLATES PREVIEW CARDS -------------------------------------------------------------->
