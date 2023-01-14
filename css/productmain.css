@@ -1,7 +1,12 @@
+.carouselHero{
+	height: 25em;
+}
 
+.container a{
+	text-decoration: none;
+}
 
 .links{
-    text-decoration: none;
     -webkit-transform: scale(1);
 	transform: scale(1);
 	-webkit-transition: .3s ease-in-out;
