@@ -99,13 +99,13 @@ function displayPlateInfo(element, info) {
   let infoStr = "";
   for (let i = 0; i < info.length; i++) {
     infoStr += `<p>${info[i]}</p>`;
-  }  
+  }
   document.querySelector(element).innerHTML =
     `
       <h5>What did you see?</h5>
       <hr>
       ${infoStr}
-  `  
+  `
 }
 
 function hidePlateQ(imageElement) {
@@ -340,10 +340,6 @@ function showCardModal(plateNum) {
 
   const selectedPlate = plates.find(current_plate => current_plate.plate === parseInt(plateNum));
 
-  // console.log(selectedPlate);
-  // console.log(selectedPlate.plateURL);
-  // console.log(selectedPlate.plateURL2); 
-
   document.getElementById("card-modal-title").innerHTML = `Plate ${plateNum}`;
 
   document.querySelector(".modal-plate-container").innerHTML =
@@ -355,11 +351,20 @@ function showCardModal(plateNum) {
       src="${selectedPlate.plateURL2}"
       class="plate-A2 img-fluid rounded-start" alt="..." style="display: none" />
   `
-  
+
+  document.querySelector(".question-message").innerHTML =
+    `
+    <h5 class="card-title">What do you see?</h5>
+    <p class="card-text">Click the plate to check.</p>
+  `  
+
   document.getElementById("cardModal").style.display = "block";
   document.getElementById("overlay-light").classList.add("active");
 
-  displayPlateInfo(".answer-plate-info", selectedPlate.display);  
+  displayPlateInfo(".answer-plate-info", selectedPlate.display);
+  // DEFAULT DISPLAY OF PLATE INFO
+  document.querySelector(".question-message").style.display = "block";    
+  document.querySelector(".answer-plate-info").style.display = "none";    
 }
 
 function closeCardModal() {
@@ -369,22 +374,18 @@ function closeCardModal() {
 
 // ADD EVENT LISTERNER TO THE PLATE MODAL IMAGE
 document.querySelector(".modal-plate-container").addEventListener("click", (e) => {
- 
-  let targetElement = e.target;  
+
+  let targetElement = e.target;
 
   if (targetElement.classList.contains("plate-Q2")) {
-    console.log(targetElement);
-    document.querySelector(".question-message").style.display = "none";
     hidePlateQ(".plate-Q2");
+    document.querySelector(".question-message").style.display = "none";    
     showPlateA(".plate-A2", ".answer-plate-info");
-    console.log(document.querySelector(".modal-plate-container"));
   }
   if (targetElement.classList.contains("plate-A2")) {
-    console.log(targetElement);
     hidePlateA(".plate-A2", ".answer-plate-info");
     showPlateQ(".plate-Q2");
     document.querySelector(".question-message").style.display = "block";
-    console.log(document.querySelector(".modal-plate-container"));
   }
 });
 
