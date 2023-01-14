@@ -85,19 +85,6 @@ body {
   pointer-events: all;
 }
 
-/* TODO: FIX BUTTON COLOR WHEN CLICKED */
-/* .btn:not(:disabled):not(:disabled):active {  */
-/* background-color: #FD8647; */
-/* background-color: red; */
-
-/* .btn:active { */
-
-/* .inputBtn {
-  background-color:#2F67D5;
-  color: white;
-  cursor:pointer;
-
-} */
 .optionBtn.btn.active {
   background-color:#FD8647;
   color: black;
