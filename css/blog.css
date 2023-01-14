@@ -78,6 +78,11 @@ width: 18rem;
     transform: scale(1.01);
 }
   
+
+.card-img-top {
+  width: 100%;
+  height: auto; /* Adjusts the height to maintain the aspect ratio of the image */
+}
   
 @media screen and (max-width: 756px) {
   
@@ -89,10 +94,11 @@ width: 18rem;
 
 }
   
-@media (max-width: 576px) {
-  .d-none.d-sm-block {
+
+  
+@media only screen and (max-width: 1040px) and (max-height: 640px) {
+  .card-body .carousel-indicators {
     display: none;
   }
 }
-  
   
