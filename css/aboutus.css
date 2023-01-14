@@ -192,7 +192,6 @@ flex-direction: column;
 .postcard .postcard__preview-txt {
 overflow: hidden;
 text-overflow: ellipsis;
-text-align: justify;
 height: 100%;
 }
 .postcard .postcard__tagbox {
