@@ -78,16 +78,19 @@ transition: all 0.3s;
   background-size: 65%;
   overflow: hidden;
   padding: 110px 0;
+  
+ 
 }
 
 
 .inner-container {
+  flex-basis: 100%;
   width: 55%;
   height: 100%;
   float: right;
   background-color: white;
   padding: 100px;
-  border-radius: 10% 75% 50% 50%;
+  border-radius: 20% 20% 20% 20%;
 }
 
 .inner-container h1 {
@@ -102,6 +105,12 @@ color: black;
 line-height: 30px;
 text-align: justify;
 
+}
+
+@media (max-width: 600px) {
+  .inner-container {
+    width: 100%;
+  }
 }
 
 /* Meet our team section */
@@ -155,11 +164,14 @@ line-height: 1.2;
 font-size: 1.75rem;
 }
 .postcard .postcard__img {
-  max-height: 180px;
 width: 100%;
 object-fit: cover;
 position: relative;
 }
+
+
+
+
 .postcard .postcard__img_link {
 display: contents;
 }
@@ -325,7 +337,7 @@ background-image: linear-gradient(30deg, rgba(0, 118, 189, 0.1), transparent 50%
   font-weight: bold;
   letter-spacing: 2px;
   color: #333;
-  padding-bottom: 10px;
+  margin-top: 100px;
 }
 
 .h1:after {
@@ -347,6 +359,13 @@ background-image: linear-gradient(30deg, rgba(0, 118, 189, 0.1), transparent 50%
   min-height: 459px;
   
  
+}
+
+@media (max-width: 600px) {
+  .banner {
+    background-position: center;
+    background-size: cover;
+  }
 }
 
 .card-button {

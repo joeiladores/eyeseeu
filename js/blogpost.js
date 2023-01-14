@@ -51,7 +51,7 @@ function displayBlogPost() {
 }
 
 
-const API_URL = 'https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew';
+const API_URL = 'https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew?sortBy=Publish_Date&order=desc';
 
 async function getBlogs() {
   try {
@@ -69,8 +69,8 @@ async function displayBlogs() {
   const carouselIndicators = document.querySelector('.carousel-indicators');
   let counter = 0;
 
-  blogs.forEach((blog, index) => {
-    if (counter >= 3) {
+  for(let i=0; i<blogs.length; i+=3){
+    if (counter >= 5) {
       return;
     }
     counter++;
@@ -78,60 +78,56 @@ async function displayBlogs() {
     const div = document.createElement('div');
     div.classList.add('carousel-item');
 
-    if (index === 0) {
+    if (counter === 1) {
       div.classList.add('active');
     }
 
     div.innerHTML = `
-    <div class="row d-flex justify-content-evenly">
+    <div class="row d-flex justify-content-center">
       <div class="col-4">
-        <div class="card border border-info" style="width: 18rem;">
+        <div class="card border border-light" style="width: 18rem;">
           <div class="card-body">
-          <img src="${blogs[index].Cover_Image}" class="card-img-top" alt="...">
-            <h5 class="card-title">${blogs[index].Title}</h5>
-            <p class="card-text"></p>
-            <a href="blogpost.html?blog=${blogs[index].id}" class="btn btn-info">Read More</a>
+          <img src="${blogs[i].Thumbnail}" class="card-img-top" alt="...">
+            <h5 class="card-title">${blogs[i].Title}</h5>
+            <a href="blogpost.html?blog=${blogs[i].id}" class="btn btn-info">Read More</a>
           </div>
         </div>
       </div>
       <div class="col-4">
-        <div class="card border border-info " style="width: 18rem;">
+        <div class="card border border-light" style="width: 18rem;">
           <div class="card-body">
-          <img src="${blogs[index + 3].Cover_Image}" class="card-img-top" alt="...">
-            <h5 class="card-title">${blogs[index + 3].Title}</h5>
-            <p class="card-text"></p>
-            <a href="blogpost.html?blog=${blogs[index + 3].id}" class="btn btn-info">Read More</a>
+          <img src="${blogs[i+1].Thumbnail}" class="card-img-top" alt="...">
+            <h5 class="card-title">${blogs[i+1].Title}</h5>
+            <a href="blogpost.html?blog=${blogs[i+1].id}" class="btn btn-info">Read More</a>
           </div>
         </div>
       </div>
       <div class="col-4">
-        <div class="card border border-info" style="width: 18rem;">
+        <div class="card border border-light" style="width: 18rem;">
           <div class="card-body">
-          <img src="${blogs[index + 6].Cover_Image}" class="card-img-top" alt="...">
-            <h5 class="card-title">${blogs[index + 6].Title}</h5>
-            <p class="card-text"></p>
-            <a href="blogpost.html?blog=${blogs[index + 6].id}" class="btn btn-info">Read More</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-  `;
-    carouselInner.appendChild(div);
+          <img src="${blogs[i+2].Thumbnail}" class="card-img-top" alt="...">
+            <h5 class="card-title">${blogs[i+2].Title}</h5>
+            <a href="blogpost.html?blog=${blogs[i+2].id}" class="btn btn-info">Read More</a>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            `;
+            carouselInner.appendChild(div);
 
-    const indicator = document.createElement('li');
-    indicator.setAttribute('data-bs-target', '#carouselExampleDark');
-    indicator.setAttribute('data-bs-slide-to', index);
+            const indicator = document.createElement('li');
+indicator.setAttribute('data-bs-target', '#carouselExampleDark');
+indicator.setAttribute('data-bs-slide-to', counter-1);
 
-    if (index === 0) {
-      indicator.classList.add('active');
-    }
-    carouselIndicators.appendChild(indicator);
-  });
+if (counter === 1) {
+  indicator.classList.add('active');
+}
+carouselIndicators.appendChild(indicator);
+}
 }
 
 displayBlogs();
-
 
 
 
