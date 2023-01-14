@@ -63,7 +63,7 @@ function displayPlates(plate) {
   document.querySelector(".plate-container").innerHTML =
     `
     <div class="plate-name pt-2 text-center">
-      <h5>Plate ${plate.plate}</h5>
+      <h4>Plate ${plate.plate}</h4>
     </div>
     <img id="plate-Q" class="plate-Q ishihara-plate-img img-fluid" src="${plate.plateURL}"
       alt="Ishihara Plate ${plate.plate}" data-plate="${plate.plate}" data-url="plateURL"/>
@@ -99,13 +99,13 @@ function displayPlateInfo(element, info) {
   let infoStr = "";
   for (let i = 0; i < info.length; i++) {
     infoStr += `<p>${info[i]}</p>`;
-  }
+  }  
   document.querySelector(element).innerHTML =
     `
       <h5>What did you see?</h5>
       <hr>
       ${infoStr}
-  `
+  `  
 }
 
 function hidePlateQ(imageElement) {
@@ -165,7 +165,7 @@ function deactivateElement(element) {
 }
 
 // ADD EVETN LISTENER TO THE START BUTTON, OPEN THE PILL NAV TEST AND START TEST
-document.getElementById("startBtn").addEventListener("click", () => {
+document.getElementById("startTestBtn").addEventListener("click", () => {
   activateElement(document.getElementById("nav-pill-test"));
   deactivateElement(document.getElementById("nav-pill-inst"));
   activateElement(document.getElementById("tab-3"));
@@ -230,7 +230,6 @@ function startTest() {
       styleOptionBtns(e.currentTarget, targetElement);
       hasSelectedAnswer = true;
 
-      // TODO: FIX BUTTON COLOR ACTIVE
       return;
     }
     else return;
@@ -246,10 +245,10 @@ function showResult() {
 
   let result = "";
 
-  activateElement(document.getElementById("nav-pill-result"));
-  deactivateElement(document.getElementById("nav-pill-test"));
+  // activateElement(document.getElementById("nav-pill-result"));
+  // deactivateElement(document.getElementById("nav-pill-test"));
   activateElement(document.getElementById("tab-4"));
-  deactivateElement(document.getElementById("tab-3"));
+  // deactivateElement(document.getElementById("tab-3"));
 
   // DISPLAY RESULTS IN A TABLE
   document.getElementById("table-head").innerHTML =
@@ -343,10 +342,9 @@ function showCardModal(plateNum) {
 
   // console.log(selectedPlate);
   // console.log(selectedPlate.plateURL);
-  // console.log(selectedPlate.plateURL2);
+  // console.log(selectedPlate.plateURL2); 
 
-  document.getElementById("cardModal").style.display = "block";
-  document.getElementById("overlay").classList.add("active");
+  document.getElementById("card-modal-title").innerHTML = `Plate ${plateNum}`;
 
   document.querySelector(".modal-plate-container").innerHTML =
     `
@@ -357,20 +355,16 @@ function showCardModal(plateNum) {
       src="${selectedPlate.plateURL2}"
       class="plate-A2 img-fluid rounded-start" alt="..." style="display: none" />
   `
-  displayPlateInfo(".answer-plate-info", selectedPlate.display);
   
-  console.log(document.querySelector(".modal-plate-container").innerHTML);
+  document.getElementById("cardModal").style.display = "block";
+  document.getElementById("overlay-light").classList.add("active");
 
-  
-
-  // TODO: What next after the card modal is shown?
-  // Display the plate information
-  
+  displayPlateInfo(".answer-plate-info", selectedPlate.display);  
 }
 
 function closeCardModal() {
   document.getElementById("cardModal").style.display = "none";
-  document.getElementById("overlay").classList.remove("active");
+  document.getElementById("overlay-light").classList.remove("active");
 }
 
 // ADD EVENT LISTERNER TO THE PLATE MODAL IMAGE
