@@ -7,14 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ishihara Test</title>
   <!-- BOOTSTRAP -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css" />
   <!-- FONT AWESOME -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
   <!-- CSS -->
   <link rel="stylesheet" href="css/ishihara.css" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="shortcut icon" href="photo/main-logo&favicon.png" type="image/x-icon"/>
+  <link rel="shortcut icon" href="photo/main-logo&favicon.png" type="image/x-icon" />
   <!-- JS/FIREBASE -->
   <script defer type="module" src="js/ishihara.js"></script>
 
@@ -28,6 +29,7 @@
     window.addEventListener("load", pageLoaded);
   </script>
 </head>
+
 <body>
 
   <div id="loader">
@@ -100,40 +102,41 @@
   </nav>
   <!-- END OF NAVBAR ------------------------------------------------------------------------------>
 
+  <!-- PARALLAX SECTION ---------------------------------------------------------------->
+  <section id="parallax-section">
+    <div class="parallax-ishihara">
+      <h2><span class="ishihara-text-gradient">Welcome to &nbsp;&nbsp;</span></h2>
+      <h1><span class="ishihara-text-gradient">Ishihara Test &nbsp;&nbsp;</span></h1>
+    </div>
+  </section>
+
   <!-- PILL NAVBAR -------------------------------------------------------------------------------->
-  <div class="pill-navbar mt-4 pt-5">
-    <ul class="nav nav-pills nav-fill gap-2 p-1 bg-light rounded-5" id="pill-tabs"
-      role="tablist" style="
+  <div id="pill-navbar" class="pill-navbar mt-3">
+    <ul class="nav nav-pills nav-fill gap-2 p-1 bg-light rounded-5" id="pill-tabs" role="tablist" style="
           --bs-nav-link-color: var(--bs-white);
           --bs-nav-pills-link-active-color: var(--bs-white);
           --bs-nav-pills-link-active-bg: var(--bs-primary);
         ">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active rounded-5" id="nav-pill-intro" data-bs-toggle="tab" data-bs-target="#tab-1"
+        <button class="nav-link active rounded-5" id="nav-pill-about" data-bs-toggle="tab" data-bs-target="#tab-1"
           type="button" role="tab" aria-selected="true" data-tab-value="tab-intro">
-          Introduction
+          About the Test
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link rounded-5" id="nav-pill-inst" data-bs-toggle="tab" data-bs-target="#tab-2"
-          type="button" role="tab" aria-selected="false" data-tab-value="tab-inst">
+        <button class="nav-link rounded-5" id="nav-pill-inst" data-bs-toggle="tab" data-bs-target="#tab-2" type="button"
+          role="tab" aria-selected="false" data-tab-value="tab-inst">
           Instruction
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link rounded-5" id="nav-pill-test" data-bs-toggle="tab" data-bs-target="#tab-3"
-          type="button" role="tab" aria-selected="false" data-tab-value="tab-test">
-          Ishihara Test
+        <button class="nav-link rounded-5" id="nav-pill-test" data-bs-toggle="tab" data-bs-target="#tab-3" type="button"
+          role="tab" aria-selected="false" data-tab-value="tab-test">
+          Start Ishihara Test
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link rounded-5" id="nav-pill-result" data-bs-toggle="tab" data-bs-target="#tab-4"
-          type="button" role="tab" aria-selected="false" data-tab-value="tab-result">
-          Result
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link rounded-5" id="nav-pill-plates" data-bs-toggle="tab" data-bs-target="#tab-5"
+        <button class="nav-link rounded-5" id="nav-pill-plates" data-bs-toggle="tab" data-bs-target="#tab-4"
           aria-selected="false" data-tab-value="tab-plates">
           Ishihara Plates
         </button>
@@ -143,106 +146,120 @@
   <!-- END OF PILL NAVBAR ------------------------------------------------------------------------>
 
   <section class="tab-container my-3">
-    <!-- INDTRODUCTION --------------------------------------------------------------------------->
-    <div id="tab-1" class="tab-pane active bg-light rounded-3 shadow-lg pb-3">
-      <h2 class="py-3 text-center">
-        Online Ishihara Test for Color Blindness
-      </h2>
-      <div class="text-center">
-        <img class="img-fluid pb-3"
-          src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-page%2Fishihara-colour-blindness-header-img.jpg?alt=media&token=59deac3f-9bca-4c23-ae3b-ce2d5d5bf12d"
-          alt="" style="width: 100%" />
+    <!-- ABOUT THE TEST --------------------------------------------------------------------------->
+    <div id="tab-1" class="tab-pane active rounded-3 shadow-lg">
+      <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
+        <h2 class="py-2 m-0">Online Ishihara Test for Color Blindness</h2>
       </div>
-      <div class="content px-5">
-        <p>
-          This online Ishihara color blindness test is a simple method to
-          diagnose the existence of red-green deficiency. Red-green deficiency
-          means having problems distinguishing reds and greens and is by far
-          the most common form of color vision deficiency.
-        </p>
-        <p>
-          This test was originally designed by Dr Shinobu Ishihara in 1917 and
-          this tool has all 38 Ishihara plates. Each plate contains a circle
-          of dots appearing randomized in color and size. Within the pattern
-          are dots which form a number or a colored line visible to those with
-          normal color vision and invisible, or difficult to see, for those
-          with a red-green color vision defect.
-        </p>
-        <p>
-          To pass each test you must identify the hidden number or line. At
-          any time you can reveal the answer and at the end of the test you
-          will see the test results.
-        </p>
-        <p>
-          If you suffer from red-blindness (protanopia), you are unable to see
-          the color red. If you suffer from green-blindness (deuteranopia),
-          you are unable to see the color green.
-        </p>
-        <p>
-          If you suffer from red-weakness (protanomaly), you will have some
-          difficulty to see the color red. If you suffer from green-weakness
-          (deuteranomaly), you will have some difficulty to see the color
-          green.
-        </p>
+      <div class="bg-white rounded-bottom-3 pb-3">
+        <div class="text-center">
+          <img class="img-fluid pb-3"
+            src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-page%2Fishihara-colour-blindness-header-img.jpg?alt=media&token=59deac3f-9bca-4c23-ae3b-ce2d5d5bf12d"
+            alt="" style="width: 100%" />
+        </div>
+        <div class="content px-5">
+          <p>
+            This online Ishihara color blindness test is a simple method to
+            diagnose the existence of red-green deficiency. Red-green deficiency
+            means having problems distinguishing reds and greens and is by far
+            the most common form of color vision deficiency.
+          </p>
+          <p>
+            This test was originally designed by Dr Shinobu Ishihara in 1917 and
+            this tool has all 38 Ishihara plates. Each plate contains a circle
+            of dots appearing randomized in color and size. Within the pattern
+            are dots which form a number or a colored line visible to those with
+            normal color vision and invisible, or difficult to see, for those
+            with a red-green color vision defect.
+          </p>
+          <p>
+            To pass each test you must identify the hidden number or line. At
+            any time you can reveal the answer and at the end of the test you
+            will see the test results.
+          </p>
+          <p>
+            If you suffer from red-blindness (protanopia), you are unable to see
+            the color red. If you suffer from green-blindness (deuteranopia),
+            you are unable to see the color green.
+          </p>
+          <p>
+            If you suffer from red-weakness (protanomaly), you will have some
+            difficulty to see the color red. If you suffer from green-weakness
+            (deuteranomaly), you will have some difficulty to see the color
+            green.
+          </p>
+        </div>
       </div>
     </div>
 
     <!-- INSTRUCTION ------------------------------------------------------------------------------>
-    <div id="tab-2" class="tab-pane px-5 inactive bg-light rounded-3 shadow-lg pb-3">
-      <h2 class="py-3 text-center">Instruction</h2>
-      <p>Plates 1 – 25 each contain a number, plates 26 – 38 contain one or two wiggly lines. To pass each test you must
-        identify the correct number, or correctly trace the wiggly lines. </p>
-      <ol>
-        <li>Sit approximately 75cm from your monitor, with each circle set at eye level. </li>
-        <li>Preferably have mild natural light and no glare on your screen. Interior lights and glare can alter the
-          color of the pictures. </li>
-        <li>Attempt to identify the hidden number or line within 5 seconds and select an answer, then click on the image (left mouse button).
-        </li>
-        <li>Upon left clicking, the answer will be revealed along with an analysis explaining your condition if you got
-          it wrong. </li>
-        <li>Continue to the next Ishihara test, Complete them all to help gauge your color blindness severity. </li>
-        <li>The result of the test will be shown after completion of the test.</li>
-      </ol>
-      <br>
-      <h5>Notes:</h5>
-      <ul>
-        <li>After an answer is selected for each plate, you can toggle back and forth between the original plate and the answer by clicking on the plate itself.
-        </li>
-        <li><strong>This test cannot guarantee complete accuracy. Your monitor and quality loss of online images may
-            affect the original colors used. Should these tests suggest that you may be color blind, you should seek
-            professional confirmation.</strong></li>
-      </ul>
-      
-        <a id="startBtn" class="btn btn-primary" data-toggle="tab" href="#">Start Test</a>
+    <div id="tab-2" class="tab-pane inactive rounded-3 shadow-lg">
+      <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
+        <h2 class="py-2 m-0">Instruction</h2>
+      </div>
+      <div class="px-5 bg-white pt-2 rounded-bottom-3 pb-3">
+        <p>Plates 1 – 25 each contain a number, plates 26 – 38 contain one or two wiggly lines. To pass each test you
+          must
+          identify the correct number, or correctly trace the wiggly lines. </p>
+        <ol>
+          <li>Sit approximately 75cm from your monitor, with each circle set at eye level. </li>
+          <li>Preferably have mild natural light and no glare on your screen. Interior lights and glare can alter the
+            color of the pictures. </li>
+          <li>Attempt to identify the hidden number or line within 5 seconds and select an answer, then click on the
+            image
+            (left mouse button).
+          </li>
+          <li>Upon left clicking, the answer will be revealed along with an analysis explaining your condition if you
+            got
+            it wrong. </li>
+          <li>Continue to the next Ishihara test, Complete them all to help gauge your color blindness severity. </li>
+          <li>The result of the test will be shown after completion of the test.</li>
+        </ol>
+        <br>
+        <h5>Notes:</h5>
+        <ul>
+          <li>After an answer is selected for each plate, you can toggle back and forth between the original plate and
+            the
+            answer by clicking on the plate itself.
+          </li>
+          <li><strong>This test cannot guarantee complete accuracy. Your monitor and quality loss of online images may
+              affect the original colors used. Should these tests suggest that you may be color blind, you should seek
+              professional confirmation.</strong></li>
+        </ul>
+        <a id="startTestBtn" class="btn btn-primary" data-toggle="tab" href="#pill-navbar">Start Test</a>
+      </div>
     </div>
 
     <!-- ISHIHARA TEST ---------------------------------------------------------------------------->
-    <div id="tab-3" class="tab-pane px-5 inactive bg-light rounded-3 shadow-lg">
-      <div class="plate-name text-center">
-        <h2 class="py-3">Ishihara Test</h2>
+    <div id="tab-3" class="tab-pane inactive rounded-3 shadow-lg">
+      <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
+        <h2 class="py-2 m-0">Ishihara Test</h2>
       </div>
-      <div class="progress mt-2">
-        <!-- GET PROGRESS NAD DISPLAY PROGRESS BAR HERE -->
-      </div>
-      <div class="ishihara-container d-grid mb-3 pb-3">
-        <div class="row">
-          <!-- GET AND DISPLAY LEFT PANEL - ISHIHARA PLATE -->
-          <div class="plate-container col-md-6 rounded-5">
-            <!-- GET AND DISPLAY PLATE NUMBER AND IMAGE HERE -->
-          </div>
-
-          <!-- RIGHT PANEL - DISPLAY --------------------------------------------->
-          <div class="display-right-panel col pt-5 g-1">
-            <h5>What does the patient see?</h5>
-            <div class="options col d-flex gap-2 flex-wrap mb-5">
-              <!-- GET OPTIONS AND DISPLAY HERE -->
+      <div class="px-5 bg-white pt-2 rounded-bottom-3">
+        <div class="progress my-2">
+          <!-- GET PROGRESS NAD DISPLAY PROGRESS BAR HERE -->
+        </div>
+        <div class="ishihara-container d-grid pb-3 pb-3">
+          <div class="row">
+            <!-- GET AND DISPLAY LEFT PANEL - ISHIHARA PLATE -->
+            <div class="plate-container col-md-6 rounded-5">
+              <!-- GET AND DISPLAY PLATE NUMBER AND IMAGE HERE -->
             </div>
-            <div class="plate-info col p-3 shadow rounded-3 bg-light" style="display: none">
-              <!-- FETCH DISPLAY INFO AND DISPLAY HERE -->
+
+            <!-- RIGHT PANEL - DISPLAY --------------------------------------------->
+            <div class="display-right-panel col pt-5 g-1">
+              <h5>What does the patient see?</h5>
+              <div class="options col d-flex gap-2 flex-wrap mb-5">
+                <!-- GET OPTIONS AND DISPLAY HERE -->
+              </div>
+              <div class="plate-info col p-3 shadow rounded-3 bg-light" style="display: none">
+                <!-- FETCH DISPLAY INFO AND DISPLAY HERE -->
+              </div>
             </div>
           </div>
         </div>
       </div>
+
 
       <!-- Modal -->
       <div class="modal" id="errModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modal-title"
@@ -257,69 +274,102 @@
             <div class="modal-body text-center d-flex flex-row justify-content-center align-content-center">
               <!-- <i class="fa-solid fa-circle-xmark fa-4x text-primary me-4"></i> -->
               <i class="bi bi-x-circle-fill fs-1 text-primary me-4"></i>
-      
+
               <h5 class="align-self-center">Please select answer</h5>
             </div>
           </div>
         </div>
-      </div>      
-      
+      </div>
+
     </div>
     <!-- END OF ISHIHARA TEST ----------------------------------------------------------------------->
 
     <div id="overlay"></div>
+    <div id="overlay-light"></div>
 
     <!-- RESULT ------------------------------------------------------------------------------------->
-    <div id="tab-4" class="tab-pane inactive bg-light rounded-3 shadow-lg px-5 pb-3">
-      <h2 class="py-3 text-center">
-        Result
-      </h2>
-      <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-          <thead id="table-head" class="table-secondary">
-            
-          </thead>
-          <tbody id="table-body">
-            
-          </tbody>
-        </table>
+    <div id="test-result" class="mt-5 bg-transparent">
+      <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
+        <h2 class="py-2 m-0">Result</h2>
+      </div>
+      <div class="result-bar-container bg-light p-5">
+        <div>TRICHROMATISM (Normal Vision): </div>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 25%" aria-valuenow="25"
+            aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="mt-3">RED GREEN COLOR DIFICIENCY (Insufficient distinction between shades of red and green):</div>
+        <div class="progress rounded-0">
+          <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 10%" aria-valuenow="10"
+            aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="mt-3">PROTANOPIA (Not recognized color red): </div>
+        <div class="progress rounded-0">
+          <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 0%" aria-valuenow="0"
+            aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="mt-3">DEUTERANOPIA (Not recognized color green): </div>
+        <div class="progress rounded-0">
+          <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 50%" aria-valuenow="50"
+            aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="mt-3">UNIDENTIFIED ANOMALY: </div>
+        <div class="progress rounded-0">
+          <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 20%" aria-valuenow="20"
+            aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+      </div>
+      <div class="bg-light">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover pb-3 rounded-bottom-3">
+            <thead id="table-head" class="table-primary">
+
+            </thead>
+            <tbody id="table-body">
+
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
     <!-- ISHIHARA PLATES PREVIEW CARDS -------------------------------------------------------------->
-    <div id="tab-5" class="tab-pane inactive">
-      <h2 class="py-3 text-center">
-        Ishihara Plates
-      </h2>
-      <div id="plate-cards-preview" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-        <!-- DISPLAY PLATES PREVIEW HERE -->
+    <div id="tab-4" class="tab-pane inactive rounded-3 shadow-lg">
+      <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
+        <h2 class="py-2 m-0">Ishihara Plates</h2>
+      </div>
+      <div class="bg-transparent rounded-bottom-3">
+        <div id="plate-cards-preview" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 p-3 m-0 shadow-lg">
+          <!-- GET AND DISPLAY PLATES PREVIEW HERE -->
+        </div>
       </div>
 
       <!-- CARD MODAL -->
       <div id="cardModal" class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" display="none">
+        tabindex="-1" aria-labelledby="card-modal-title" aria-hidden="true" display="none">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                Ishihara Plate 1
+          <div class="modal-content border-0">
+            <div class="modal-header border-0 bg-primary bg-gradient">
+              <h1 class="modal-title fs-5 text-white" id="card-modal-title">
+                <!-- GET AND DISPLAY PALTE NUMBER -->
               </h1>
               <button type="button" class="btn-close closeBtn" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div id="cardModalBody" class="modal-body justify-content-center">
+            <div id="cardModalBody" class="modal-body justify-content-center bg-primary">
               <!-- CARD INSIDE THE MODAL -->
-              <div class="card mb-3">
+              <div class="card border-0 p-2">
                 <div class="row g-0">
                   <div class="col-md-7 modal-plate-container">
                     <!-- GET AND DISPLAY PLATE AND ANWEER PLARTE -->
                   </div>
                   <div class="col-md-5 g-danger my-auto">
-                    <div class="card-body">
+                    <div class="card-body modal-card-body">
                       <div class="question-message p-3">
-                        <h5 class="card-title">What do you see?</h5>
-                        <p class="card-text">Click the plate to check.</p>
+                        <!-- <h5 class="card-title">What do you see?</h5>
+                        <p class="card-text">Click the plate to check.</p> -->
                       </div>
-                      <div class="answer-plate-info p-3 shadow rounded-3 bg-light" style="display: none">
+                      <div class="answer-plate-info p-3 shadow rounded-3 bg-light">
                         <!-- FETCH DISPLAY AND DISPLAY HERE -->
                       </div>
                     </div>
@@ -336,6 +386,13 @@
   </section>
   <!-- END OF ISHIHARA TABS SECTION ---------------------------------------------------------------->
 
+
+  <!-- ENCHROMA FEATURE SECTION - CONNECT TO FIN -->
+  <div class="feature-enchroma container-fluid mx-0 mt-5">
+    <img class="img-fluid" style="width: 100%; object-fit: contain;"
+      src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-page%2Fishihara.webp?alt=media&token=445f4203-a0be-4ba6-84f7-ff39acf0169b"
+      alt="">
+  </div>
 
   <!-- FEATURE SECTION ----------------------------------------------------------------------------->
   <div class="feature-optician mt-5">
@@ -430,7 +487,9 @@
   </footer>
   <!-- END OF FOOTER SECTION ---------------------------------------------------------------------->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

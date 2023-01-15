@@ -36,7 +36,7 @@ const platesRef = collection(db, 'ishihara-vcd-38');
 
 // SAMPLE ANSWER SET FOR TESTING ONLY
 let answer = [];
-answer = ['12', '13', '14', '15', '16', '17'];
+// answer = ['12', '13', '14', '15', '16', '17'];
 const plates = [];
 let currentIndex = 0;
 let n_plates = 38;
@@ -63,7 +63,7 @@ function displayPlates(plate) {
   document.querySelector(".plate-container").innerHTML =
     `
     <div class="plate-name pt-2 text-center">
-      <h5>Plate ${plate.plate}</h5>
+      <h4>Plate ${plate.plate}</h4>
     </div>
     <img id="plate-Q" class="plate-Q ishihara-plate-img img-fluid" src="${plate.plateURL}"
       alt="Ishihara Plate ${plate.plate}" data-plate="${plate.plate}" data-url="plateURL"/>
@@ -165,7 +165,7 @@ function deactivateElement(element) {
 }
 
 // ADD EVETN LISTENER TO THE START BUTTON, OPEN THE PILL NAV TEST AND START TEST
-document.getElementById("startBtn").addEventListener("click", () => {
+document.getElementById("startTestBtn").addEventListener("click", () => {
   activateElement(document.getElementById("nav-pill-test"));
   deactivateElement(document.getElementById("nav-pill-inst"));
   activateElement(document.getElementById("tab-3"));
@@ -199,18 +199,23 @@ function startTest() {
 
     let targetElement = e.target;
     let option = targetElement.dataset.option;
-    console.log("Selected option: " + option);
+    // console.log("Selected option: " + option);
 
     if (option === "next" && selectedOption != "" && currentIndex === n_plates - 1) {
       console.log("End of plates");
       console.log(`Final Answer[]: ${answer}`);
 
+      // TODO: DISPLAY BUTTON OR MODAL "You have reached the end of the test." "Show Result"
+
       // TODO: COMPUTE RESULTS AND DISOPLAY A RESPONSIVE TABLE
       showResult();
+
+      
     }
     else if (option === "next" && selectedOption != "") {
 
       // PUSH ANSWER TO THE PLATES ARRAY
+      answer.push(selectedOption);
       plates[currentIndex].answer = selectedOption;
       console.log(answer);
       hidePlateA(".plate-A", ".plate-info");
@@ -230,7 +235,6 @@ function startTest() {
       styleOptionBtns(e.currentTarget, targetElement);
       hasSelectedAnswer = true;
 
-      // TODO: FIX BUTTON COLOR ACTIVE
       return;
     }
     else return;
@@ -242,16 +246,12 @@ function startTest() {
 
 }
 
+// DISPLAY RESULTS IN A RESPONSIVE TABLE
 function showResult() {
 
   let result = "";
+  activateElement(document.getElementById("test-result"));
 
-  activateElement(document.getElementById("nav-pill-result"));
-  deactivateElement(document.getElementById("nav-pill-test"));
-  activateElement(document.getElementById("tab-4"));
-  deactivateElement(document.getElementById("tab-3"));
-
-  // DISPLAY RESULTS IN A TABLE
   document.getElementById("table-head").innerHTML =
     `
     <tr>
@@ -341,12 +341,7 @@ function showCardModal(plateNum) {
 
   const selectedPlate = plates.find(current_plate => current_plate.plate === parseInt(plateNum));
 
-  // console.log(selectedPlate);
-  // console.log(selectedPlate.plateURL);
-  // console.log(selectedPlate.plateURL2);
-
-  document.getElementById("cardModal").style.display = "block";
-  document.getElementById("overlay").classList.add("active");
+  document.getElementById("card-modal-title").innerHTML = `Plate ${plateNum}`;
 
   document.querySelector(".modal-plate-container").innerHTML =
     `
@@ -357,40 +352,41 @@ function showCardModal(plateNum) {
       src="${selectedPlate.plateURL2}"
       class="plate-A2 img-fluid rounded-start" alt="..." style="display: none" />
   `
+
+  document.querySelector(".question-message").innerHTML =
+    `
+    <h5 class="card-title">What do you see?</h5>
+    <p class="card-text">Click the plate to check.</p>
+  `  
+
+  document.getElementById("cardModal").style.display = "block";
+  document.getElementById("overlay-light").classList.add("active");
+
   displayPlateInfo(".answer-plate-info", selectedPlate.display);
-  
-  console.log(document.querySelector(".modal-plate-container").innerHTML);
-
-  
-
-  // TODO: What next after the card modal is shown?
-  // Display the plate information
-  
+  // DEFAULT DISPLAY OF PLATE INFO
+  document.querySelector(".question-message").style.display = "block";    
+  document.querySelector(".answer-plate-info").style.display = "none";    
 }
 
 function closeCardModal() {
   document.getElementById("cardModal").style.display = "none";
-  document.getElementById("overlay").classList.remove("active");
+  document.getElementById("overlay-light").classList.remove("active");
 }
 
 // ADD EVENT LISTERNER TO THE PLATE MODAL IMAGE
 document.querySelector(".modal-plate-container").addEventListener("click", (e) => {
- 
-  let targetElement = e.target;  
+
+  let targetElement = e.target;
 
   if (targetElement.classList.contains("plate-Q2")) {
-    console.log(targetElement);
-    document.querySelector(".question-message").style.display = "none";
     hidePlateQ(".plate-Q2");
+    document.querySelector(".question-message").style.display = "none";    
     showPlateA(".plate-A2", ".answer-plate-info");
-    console.log(document.querySelector(".modal-plate-container"));
   }
   if (targetElement.classList.contains("plate-A2")) {
-    console.log(targetElement);
     hidePlateA(".plate-A2", ".answer-plate-info");
     showPlateQ(".plate-Q2");
     document.querySelector(".question-message").style.display = "block";
-    console.log(document.querySelector(".modal-plate-container"));
   }
 });
 
