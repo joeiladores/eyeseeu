@@ -31,16 +31,16 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Collection Reference
-const pageRef = collection(db, 'ishihara-page');
 const platesRef = collection(db, 'ishihara-vcd-38');
 
 // SAMPLE ANSWER SET FOR TESTING ONLY
-let answer = [];
+const answer = [];
 // answer = ['12', '13', '14', '15', '16', '17'];
 const plates = [];
 let currentIndex = 0;
 let n_plates = 38;
 let hasSelectedAnswer = false;
+let isTestComplete = false;
 
 const q = query(platesRef, orderBy("plate", "asc"));
 const snapshot = await getDocs(q);
@@ -131,6 +131,14 @@ function showModal() {
   document.getElementById("overlay").classList.add("active");
 }
 
+function enableElement(element) {
+  element.classList.remove("disabled");
+}
+
+function disableElement(element) {
+  element.classList.add("disabled");
+}
+
 // SDD EVENT LISTNER TO THE MODAL CLOSE BUTTON
 document.getElementById("closeModalBtn").addEventListener("click", () => {
   document.getElementById("errModal").style.display = "none";
@@ -190,6 +198,8 @@ function styleOptionBtns(current_target, target_element) {
 function startTest() {
 
   let selectedOption = "";
+  console.log(plates);
+  console.log(isTestComplete);
 
   // DISPLAY INITIAL PLATE 1
   displayPlates(plates[0]);
@@ -204,13 +214,14 @@ function startTest() {
     if (option === "next" && selectedOption != "" && currentIndex === n_plates - 1) {
       console.log("End of plates");
       console.log(`Final Answer[]: ${answer}`);
+      isTestComplete = true;
 
       // TODO: DISPLAY BUTTON OR MODAL "You have reached the end of the test." "Show Result"
 
       // TODO: COMPUTE RESULTS AND DISOPLAY A RESPONSIVE TABLE
       showResult();
 
-      
+
     }
     else if (option === "next" && selectedOption != "") {
 
@@ -249,10 +260,16 @@ function startTest() {
 // DISPLAY RESULTS IN A RESPONSIVE TABLE
 function showResult() {
 
-  let result = "";
-  activateElement(document.getElementById("test-result"));
+  
+  enableElement(document.getElementById("nav-pill-result"));
+  activateElement(document.getElementById("tab-4"));
 
-  document.getElementById("table-head").innerHTML =
+  let result = "";  
+  const result_bar = document.getElementById("result-bar");
+  const table_head = document.getElementById("table-head");
+  const table_body = document.getElementById("table-body");    
+
+  table_head.innerHTML =
     `
     <tr>
       <th scope="col">Plate</th>
@@ -264,29 +281,9 @@ function showResult() {
     </tr>  
     `
 
-  // for(let i = 0; i < n_plates; i++) {
-
-  //   result = compute(plates[i].normal, plates[i].weak_vcd, plates[i].answer)
-
-  //   document.getElementById("table-body").innerHTML +=
-  //     `
-  //     <tr>
-  //       <td>${plates[i].plate}</td>
-  //       <td>${plates[i].type}</td>
-  //       <td>${plates[i].answer}</td>
-  //       <td>${plates[i].normal}</td>
-  //       <td>${plates[i].weak_vcd}</td>
-  //       <td>${result}</td>
-  //     </tr>
-  //     `
-  // }
-
-
   plates.forEach((plate) => {
-
-    result = computeResult(plate.normal, plate.weak_vcd, plate.answer)
-
-    document.getElementById("table-body").innerHTML +=
+    result = computeResult(plate.answer, plate.normal, plate.weak_vcd);
+    table_body.innerHTML +=
       `
         <tr>
           <td>${plate.plate}</td>
@@ -299,9 +296,43 @@ function showResult() {
         `
   });
 
+  result_bar.innerHTML =
+    `
+      <div>TRICHROMATISM (Normal Vision): </div>
+        <div class="progress">
+          <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: 75%" aria-valuenow="75"
+            aria-valuemin="0" aria-valuemax="100">75%</div>
+        </div>
+        <div class="mt-3">RED GREEN COLOR DIFICIENCY (Insufficient distinction between shades of red and green):</div>
+        <div class="progress rounded-0">
+          <div class="progress-bar bg-warning text-dark p-1" role="progressbar" aria-label="Basic example" style="width: 10%" aria-valuenow="10"
+            aria-valuemin="0" aria-valuemax="100">10%</div>
+        </div>
+        <div class="ms-5 ps-5">
+          <div class="mt-3">PROTANOPIA (Not recognized color red): </div>
+        <div class="progress rounded-0">
+          <div class="progress-bar bg-primary" role="progressbar" aria-label="Basic example" style="width: 0%" aria-valuenow="0"
+            aria-valuemin="0" aria-valuemax="100">0%</div>
+        </div>
+        <div class="mt-3">DEUTERANOPIA (Not recognized color green): </div>
+        <div class="progress rounded-0">
+          <div class="progress-bar bg-primary" role="progressbar" aria-label="Basic example" style="width: 0%" aria-valuenow="0"
+            aria-valuemin="0" aria-valuemax="100">0%</div>
+        </div>
+        </div>        
+        <div class="mt-3">UNIDENTIFIED ANOMALY: </div>
+        <div class="progress rounded-0">
+          <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: 15%" aria-valuenow="15"
+            aria-valuemin="0" aria-valuemax="100">15%</div>
+      </div>
+  `
+
 }
 
-function computeResult(normal, weakvcd, answer) {
+function computeResult(answer, normal, weakvcd) {
+
+  let count_normal = 0;
+  let count_weakvcd = 0;
 
   if (answer === normal) return "correct";
   else return "wrong";
@@ -310,9 +341,10 @@ function computeResult(normal, weakvcd, answer) {
   // CAN BE LIKE A PROGRESS BAR 
 }
 
+// EVENT WHEN PILL NAVBAR RESULT IS SELECTED
 document.getElementById("nav-pill-plates").addEventListener("click", showPlatesPreview());
 
-// FOR THE PLATES PREVIEW CARDS
+// DISPLAY THE PLATES PREVIEW CARDS
 function showPlatesPreview() {
 
   plates.forEach((plate) => {
@@ -357,15 +389,15 @@ function showCardModal(plateNum) {
     `
     <h5 class="card-title">What do you see?</h5>
     <p class="card-text">Click the plate to check.</p>
-  `  
+  `
 
   document.getElementById("cardModal").style.display = "block";
   document.getElementById("overlay-light").classList.add("active");
 
   displayPlateInfo(".answer-plate-info", selectedPlate.display);
   // DEFAULT DISPLAY OF PLATE INFO
-  document.querySelector(".question-message").style.display = "block";    
-  document.querySelector(".answer-plate-info").style.display = "none";    
+  document.querySelector(".question-message").style.display = "block";
+  document.querySelector(".answer-plate-info").style.display = "none";
 }
 
 function closeCardModal() {
@@ -380,7 +412,7 @@ document.querySelector(".modal-plate-container").addEventListener("click", (e) =
 
   if (targetElement.classList.contains("plate-Q2")) {
     hidePlateQ(".plate-Q2");
-    document.querySelector(".question-message").style.display = "none";    
+    document.querySelector(".question-message").style.display = "none";
     showPlateA(".plate-A2", ".answer-plate-info");
   }
   if (targetElement.classList.contains("plate-A2")) {
@@ -401,7 +433,7 @@ document.getElementById("plate-cards-preview").addEventListener("click", (e) => 
   }
 });
 
-// PILL NAVBAR EVENTS
+// EVENT FOR PILL NAVBAR SELECTION
 const pillContainer = document.querySelector("#pill-tabs");
 const pillElement = pillContainer.querySelectorAll("[data-bs-toggle='tab']")
 
@@ -414,7 +446,7 @@ function tabEventShow(event) {
   // console.log("Index: " + index);
   // console.log("Tab Id:" + tabId);
 
-  const tabContainer = document.getElementById("tab-container");
+  // const tabContainer = document.getElementById("tab-container");
   const tabList = Array.from(document.querySelectorAll(".tab-pane"));
 
   for (let i = 0; i < tabList.length; i++) {
@@ -427,9 +459,7 @@ function tabEventShow(event) {
       tabList[i].classList.add("inactive");
       tabList[i].classList.remove("active");
     }
-
   }
-
 }
 
 pillElement.forEach((tab) => {
