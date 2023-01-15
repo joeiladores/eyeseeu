@@ -1,6 +1,21 @@
+// product main page 
+const url = new URL(window.location.href);
+const filter = url.searchParams.get("filter");
+document.getElementById("loader").style.display = "block";
+fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
+    .then((response) => response.json())
+    .then((data) => {
+        const filteredProducts = data.filter(product => product.productType === filter);
+        renderProducts(filteredProducts);
+        document.getElementById("loader").style.display = "none";
+    });
+// end product main page
+
 
 // product display
+
 function displayProduct() {
+  document.getElementById("loader").style.display = "block";
   fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
       .then((response) => response.json())
       .then((data) => {
@@ -29,9 +44,14 @@ function displayProduct() {
       `;
               document.querySelector('#productDetails').innerHTML += cards;
           });
+          document.getElementById("loader").style.display = "none";
+          window.onload = function () {
+            displayProduct();
+          };
       });
 }
 // end of product display
+
 
 // filter
 let links = document.querySelectorAll('.nav-link');
@@ -39,21 +59,23 @@ let links = document.querySelectorAll('.nav-link');
 links.forEach(link => {
   link.addEventListener('click', function(event) {
     let productType = this.dataset.productType;
-    fetch('https://63bec3bce348cb076217c92f.mockapi.io/products/')
+    document.getElementById("loader").style.display = "block";
+    fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
       .then(response => response.json())
       .then(data => {
         let filteredProducts = data.filter(product => product.productType === productType);
-
+        
         renderProducts(filteredProducts);
       });
+      document.getElementById("loader").style.display = "none";
   });
 });
 
+
 function renderProducts(products) {
+  
   let productList = document.getElementById("productDetails");
   productList.innerHTML = "";
-  let productFilter = document.getElementById("productDetails");
-  productFilter.innerHTML = "";
   for (let i = 0; i < products.length; i++) {
     let product = products[i];
       const productTemplate = 
@@ -75,7 +97,3 @@ function renderProducts(products) {
 
 // end of filter
 
-
-window.onload = function () {
-  displayProduct();
-};
