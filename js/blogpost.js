@@ -67,7 +67,10 @@ async function displayBlogs() {
   let counter = 0;
   let cardsPerSlide = 3;
 
-  if (window.matchMedia("(max-width: 1122px)").matches) {
+  if (window.matchMedia("(max-width: 1215px)").matches) {
+    cardsPerSlide = 2;
+  }
+  if (window.matchMedia("(max-width: 920px)").matches) {
     cardsPerSlide = 1;
   }
   
@@ -92,7 +95,7 @@ async function displayBlogs() {
         break;
       }
       cardsHTML += `
-        <div class="col-sm-4">
+        <div class="col-4">
           <div class="card border border-light" style="width: 18rem;">
             <div class="card-body">
               <img src="${blogs[j].Thumbnail}" class="card-img-top" alt="...">

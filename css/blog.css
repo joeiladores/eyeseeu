@@ -106,5 +106,15 @@ width: 18rem;
     width: 100%;
   }
 
-}
+  }
+
+  @media only screen and (max-width: 920px) {
+    .carousel-inner .carousel-item .col-4{
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin-right: 100px;
+     
+    }
+  }
 
