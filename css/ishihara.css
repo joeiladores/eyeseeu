@@ -168,20 +168,12 @@ body {
     padding-left: 1.25em;
     padding-right: 1.25em;
   }
-  /* TODO: */
-  .tab-pane,
-  .tab-pane .content {
-    padding-left: 1em;
-    padding-right: 1em;
-    /* font-size: 0.8rem; */
-  } 
   .ishihara-plate-img {
     height: 40vh;
-    /* width: 100%;
-    object-fit: cover;
-    object-position: center;
-    object-fit: scale-down;
-    transition: 200ms ease-in-out; */
+  }
+  .tab-pane .tab-content {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
   }
 
 }
