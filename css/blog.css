@@ -63,19 +63,20 @@ body {
   
   
 .card-right {
-
 float: right;
 width: 18rem;
 }
 
 .card {
     transition: all 0.3s;
-
 }
 
 .card:hover {
-
     transform: scale(1.01);
+}
+
+#blogpostfooter {
+  margin-top: 100px;
 }
   
 
@@ -89,18 +90,21 @@ width: 18rem;
   main {
     margin-left: 1.5em;
     margin-right: 1.5em;
-  
   }
 
 }
+
   
-
-
-@media (max-width: 768px) {
-  #carouselExampleDark .carousel-inner {
-    display: flex;
+@media (max-width: 1000px) {
+  #asides {
+    width: 100%;
+    position: relative;
+    flex-basis: 100%;
+    top: 0;
   }
-  #carouselExampleDark .carousel-item {
+  #asides .right-sidebar {
     width: 100%;
   }
+
 }
+
