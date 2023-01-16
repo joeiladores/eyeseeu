@@ -30,9 +30,10 @@
     <link rel="icon" href="photo/main-logo&favicon.png" type="image/x-icon" />
   </head>
 
-  <body>
+  <body  onload="myFunction()" >
+    <div id="loader"></div>
     <!-- NAVBAR SECTION -->
-    <nav class="navbar navbar-expand-lg bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg bg-light fixed-top animate-bottom">
       <div class="container">
         <a class="custom-navbarbrand fs-4" href="index.html">
           <img
@@ -122,6 +123,7 @@
     </nav>
 
     <!-- CAROUSEL SECTION-->
+    <div   class="animate-bottom">
     <div id="carouselExampleAutoplaying" class="carousel slide m-4 d-none d-lg-block" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -143,25 +145,25 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-
+  </div>
     <!-- Product Display -->
-  <section>
+  <section  class="animate-bottom">
     <div class="container ">
       <div class="row justify-content-around mb-5">
       <div class="col-6 col-md-4 card mt-5 links" style="width: 20.5rem;">
-        <a href="">
+        <a  onclick="filterAndRedirect('Accessories')" class="nav-link" id="Accessories">
         <img src="https://firebasestorage.googleapis.com/v0/b/products-6e252.appspot.com/o/accessories%2Fcase.jpg?alt=media&token=da81451b-00e0-44f6-94ff-4a4fef180e90" alt="case" class="card-img-top img-fluid">
         <h3 class="text-center card-text">Accessories</h3>
       </a>
       </div>
       <div class="col-6 col-md-4 card mt-5 links" style="width: 20.5rem;">
-        <a href="">
+        <a onclick="filterAndRedirect('sunGlasses')" class="nav-link" id="sunGlasses">
         <img src="https://firebasestorage.googleapis.com/v0/b/products-6e252.appspot.com/o/sunGlasses%2Flander2.jpg?alt=media&token=cae1a0f1-06fb-4620-a10b-d6b6d21db729" alt="sun glass" class="card-img-top img-fluid">
         <h3 class="text-center card-text">Sun glass</h3>
       </a>
       </div>
       <div class="col-6 col-md-4 card mt-5 links" style="width: 20.5rem;">
-        <a href="">
+        <a onclick="filterAndRedirect('contactLens')" class="nav-link" id="clLens">
         <img src="https://firebasestorage.googleapis.com/v0/b/products-6e252.appspot.com/o/contactLens%2Fadore2.jpg?alt=media&token=2e2b2b3e-f97d-404a-9ea2-4a961e88aaa2" alt="contact lens" class="card-img-top img-fluid">
         <h3 class="text-center card-text">Contact Lens</h3>
       </a>
@@ -169,13 +171,13 @@
       </div>
       <div class="row justify-content-evenly mb-5">
       <div class="col-6 col-md-4 card links" style="width: 20.5rem;">
-        <a href="">
+        <a onclick="filterAndRedirect('eyeGlasses')" class="nav-link" id="eyeGlass">
         <img src="https://firebasestorage.googleapis.com/v0/b/products-6e252.appspot.com/o/eyeglasses%2Feyewear%2Fantonio.jpg?alt=media&token=e663eba5-cac1-4701-9337-1ba86730b194" alt="Eye glass" class="card-img-top img-fluid">
         <h3 class="text-center card-text">Eye glass</h3>
       </a>
       </div>
       <div class="col-6 col-md-4 card  mb-5 links" style="width: 20.5rem;">
-        <a href="">
+        <a onclick="filterAndRedirect('readingGlass')" class="nav-link" id="readingGlass">
         <img src="https://firebasestorage.googleapis.com/v0/b/products-6e252.appspot.com/o/readingGlass%2F13023-2.jpg?alt=media&token=c708a26e-167a-43ac-9025-ee0a14b57e91" alt="reading glass" class="card-img-top img-fluid">
         <h3 class="text-center card-text">Reading glass</h3>
       </a>
@@ -185,7 +187,7 @@
   </section>
   
     <!-- FOOTER SECTION -->
-    <footer>
+    <footer   class="animate-bottom">
       <div class="container">
         <div class="row">
           <div class="col-md-4">
@@ -256,5 +258,7 @@
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"
     ></script>
+    <script src="js/products.js"></script>
+    <script src="js/pageloader.js"></script>
   </body>
 </html>
