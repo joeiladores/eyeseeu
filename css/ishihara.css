@@ -139,22 +139,19 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-.sticky-nav {
-  position: fixed;
-  top: 61px;
-  z-index: 1;
+.table-container {
+  position: relative;
 }
-
-.relative-element {
-  margin-top: 110px; /* adjust the value to match the height of your nav-pills */
+.table-container thead {
+  position: sticky;
+  top: 0;
+  /* background-color: #f5f5f5; */
 }
-
-/* TODO: STYLES FOR TABLE */
-/* #table-head {
-  height: 50%;
-  width: 100%;
-  scroll-behavior: auto;
-} */
+/* Add a scrollbar to the table body */
+.table-container tbody {
+  overflow-y: scroll;
+  /* height: 300px; */
+}
 
 @media screen and (max-width: 576px) {
   .pill-navbar,
