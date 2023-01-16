@@ -164,6 +164,7 @@ body {
   .tab-container {
     margin-left: 1.25em;
     margin-right: 1.25em;
+    margin-top: 1.25em;
   }
   .feature-optician {
     padding-left: 1.25em;
@@ -183,6 +184,7 @@ body {
 @media screen and (max-width: 830px) {
   .nav-pills {
     flex-direction: column;
+    
   }
 
 }
