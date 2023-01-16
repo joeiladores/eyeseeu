@@ -424,7 +424,6 @@ document.getElementById("openResultBtn").addEventListener("click", () => {
 
 // EVENT WHEN PILL NAVBAR RESULT IS SELECTED
 document.getElementById("nav-pill-plates").addEventListener("click", showPlatesPreview());
-document.getElementById("nav-pill-result").addEventListener("click", showResult());
 
 // DISPLAY THE PLATES PREVIEW CARDS
 function showPlatesPreview() {
