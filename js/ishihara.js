@@ -84,10 +84,10 @@ function displayPlates(plate) {
     option = plate.options[i];
 
     if (option === "I don’t know") {
-      optionsElement += `<div class="optionBtn btn" data-option="Nothing" data-selected=false>${option}</div>`;
+      optionsElement += `<div class="optionBtn btn" data-option="Nothing">${option}</div>`;
     }
     else {
-      optionsElement += `<div class="optionBtn btn" data-option=${option} data-selected=false>${option}</div>`;
+      optionsElement += `<div class="optionBtn btn" data-option='${option}'>${option}</div>`;
     }
   }
 
@@ -219,12 +219,11 @@ function startTest() {
     let targetElement = e.target;
     let option = targetElement.dataset.option;
 
-    if (option === "next" && selectedOption != "" && currentIndex === n_plates - 1) {
-      showTestCompleteModal();
-    }
-    else if (option === "next" && selectedOption != "") {
+    console.log("Index: " + currentIndex);
 
-      // PUSH ANSWER TO THE PLATES ARRAY
+    if (option === "next" && selectedOption != "") {
+
+      // PUSH ANSWER TO THE PLATES ARRAY      
       answer.push(selectedOption);
       hidePlateA(".plate-A", ".plate-info");
 
@@ -233,13 +232,16 @@ function startTest() {
       // RESET SELECTED OPTION TO ""
       selectedOption = "";
       hasSelectedAnswer = false;
+
+      console.log(answer);
     }
     else if (option === "next" && selectedOption === "") {
       showModal();
     }
     else if (targetElement.classList.contains("optionBtn")) {
       // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
-      selectedOption = option;
+
+      selectedOption = option;      
       styleOptionBtns(e.currentTarget, targetElement);
       hasSelectedAnswer = true;
 
@@ -248,7 +250,13 @@ function startTest() {
     else return;
 
     // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
-    displayPlates(plates[currentIndex]);
+    if (currentIndex < n_plates) {
+      displayPlates(plates[currentIndex]);
+    }
+    // WHEN THE TEST IS COMPLETE
+    else {
+      showTestCompleteModal();
+    }
   });
 
 
@@ -288,9 +296,11 @@ function computeResult() {
       }
       else if (plates[i].subtype === "vcd") {
         if (answer[i] === plates[i].protanopia) {
+          count_weakv++;
           count_protan++;
         }
         else if (answer[i] === plates[i].deuteranopia) {
+          count_weakv++;
           count_deuteran++;
         }
         else {
@@ -309,19 +319,13 @@ function computeResult() {
   else
     count_badv++;
 
-  count_weakv = count_weakv + count_protan + count_deuteran;
+  // count_weakv = count_weakv + count_protan + count_deuteran;
 
   p_normal = Math.floor((count_normal / (n_plates)) * 100);
   p_weakv = Math.floor((count_weakv / (n_plates - 2)) * 100);
   p_protan = Math.floor((count_protan / n_weakvcd) * 100);
   p_deuteran = Math.floor((count_deuteran / n_weakvcd) * 100);
   p_badv = Math.floor((count_badv / n_plates) * 100);
-
-  // console.log(`Normal: ${count_normal}, ${p_normal}%`);
-  // console.log(`Weak VCD: ${count_weakv}, ${p_weakv}%`);
-  // console.log(`Protanopia: ${count_protan}, ${p_protan}%`);
-  // console.log(`Deutranopia: ${count_deuteran}, ${p_deuteran}%`);
-  // console.log(`Bad VCD / Unidentified Anomaly: ${count_badv}, ${p_badv}%`);
 
   const result = {
     count_normal: count_normal,
@@ -380,10 +384,10 @@ function showResult() {
     `
     <tr>
       <th scope="col">Plate</th>
-      <th scope="col">Type</th>
+      <th scope="col">Type</th>      
+      <th scope="col">Normal</th>
+      <th scope="col">Red-Green Deficiency</th>
       <th scope="col">Answer</th>
-      <th scope="col">Correct</th>
-      <th scope="col">Weak VCD</th>
       <th scope="col">Result</th>
     </tr>  
     `
@@ -395,13 +399,12 @@ function showResult() {
         <tr>
           <td>${plates[i].plate}</td>
           <td>${plates[i].type}</td>
-          <td>${answer[i]}</td>
           <td>${plates[i].normal}</td>
           <td>${plates[i].weak_vcd}</td>
+          <td>${answer[i]}</td>
           <td>${result}</td>
         </tr>
         `
-    console.log("loop pass no: " + i)
   }
 }
 
@@ -447,10 +450,6 @@ function showPlatesPreview() {
 }
 
 function showCardModal(plateNum) {
-
-  // console.log("In showCardModal...");
-  // console.log("Plate num: " + plateNum);
-  // console.log(typeof parseInt(plateNum));
 
   const selectedPlate = plates.find(current_plate => current_plate.plate === parseInt(plateNum));
 
@@ -544,30 +543,30 @@ pillElement.forEach((tab) => {
 })
 
 // STICKY NAV PILL
-const navbarHeight = document.getElementById("main-navbar").offsetHeight;
-const parallaxTop = document.getElementById("parallax-section").offsetHeight;
-const pillNavbarHeight = document.getElementById("pill-navbar-container").offsetHeight;
+// const navbarHeight = document.getElementById("main-navbar").offsetHeight;
+// const parallaxTop = document.getElementById("parallax-section").offsetHeight;
+// const pillNavbarHeight = document.getElementById("pill-navbar-container").offsetHeight;
 // const parallaxTop = document.querySelector(".parallax-ishihara").offsetTop;
-console.log(navbarHeight);
-console.log(parallaxTop);
-console.log(parallaxTop + navbarHeight);
-console.log(pillNavbarHeight);
+// console.log(navbarHeight);
+// console.log(parallaxTop);
+// console.log(parallaxTop + navbarHeight);
+// console.log(pillNavbarHeight);
 
-window.addEventListener("scroll", function () {
-  if (window.pageYOffset > parallaxTop - navbarHeight) {
-    document.getElementById("pill-navbar-container").classList.add("sticky-nav");
-    let elementsBelow = document.getElementsByClassName("relative-element");
-    for (let i = 0; i < elementsBelow.length; i++) {
-        elementsBelow[i].classList.add("relative-element");
-    }
-  } 
-  else {
-    document.getElementById("pill-navbar-container").classList.remove("sticky-nav");
-    let elementsBelow = document.getElementsByClassName("relative-element");
-    for (let i = 0; i < elementsBelow.length; i++) {
-        elementsBelow[i].classList.remove("relative-element");
-    }
-  }
+// window.addEventListener("scroll", function () {
+//   if (window.pageYOffset > parallaxTop - navbarHeight) {
+//     document.getElementById("pill-navbar-container").classList.add("sticky-nav");
+//     let elementsBelow = document.getElementsByClassName("relative-element");
+//     for (let i = 0; i < elementsBelow.length; i++) {
+//       elementsBelow[i].classList.add("relative-element");
+//     }
+//   }
+//   else {
+//     document.getElementById("pill-navbar-container").classList.remove("sticky-nav");
+//     let elementsBelow = document.getElementsByClassName("relative-element");
+//     for (let i = 0; i < elementsBelow.length; i++) {
+//       elementsBelow[i].classList.remove("relative-element");
+//     }
+//   }
 
-});
+// });
 

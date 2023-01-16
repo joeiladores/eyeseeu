@@ -17,13 +17,13 @@ body {
   z-index: 9999;
 }
 
-#pill-navbar-container *,
+.pill-navbar *,
 .tab-container *,
 .feature-optician *{
   font-family: 'Roboto', sans-serif;
 }
 
-#pill-navbar-container {
+.pill-navbar {
   padding-left: 6.25em;
   padding-right: 6.25em;
 }
@@ -157,7 +157,7 @@ body {
 } */
 
 @media screen and (max-width: 576px) {
-  #pill-navbar-container,
+  .pill-navbar,
   .tab-container {
     margin-left: 1.25em;
     margin-right: 1.25em;
