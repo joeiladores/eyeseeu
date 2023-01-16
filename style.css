@@ -398,7 +398,7 @@ footer li {
   background-image: url(https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-page%2Fishihara-bg.webp?alt=media&token=50f55cb3-b159-413c-afe1-a705233390c2);
   /* background-image: url(https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-page%2FEnchroma-bg-wide.png?alt=media&token=69634995-79a2-4764-b12e-794cffccc247); */
   background-attachment: fixed;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: top center;
 }

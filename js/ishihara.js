@@ -33,12 +33,19 @@ const db = getFirestore(app);
 // Collection Reference
 const platesRef = collection(db, 'ishihara-vcd-38');
 
-// SAMPLE ANSWER SET FOR TESTING ONLY
 const answer = [];
-// answer = ['12', '13', '14', '15', '16', '17'];
+// SAMPLE ANSWER SET FOR TESTING ONLY
+// NORMAL SAMPLING
+// const answer = ['12', '8', '6', '29', '57', '5', '3', '15', '74', '2', '6', '97', '45', '5', '7', '16', '73', 'Nothing', 'Nothing', 'Nothing', 'Nothing', '26', '42', '35', '96', 'Purple and red line', 'Purple and red line', 'Nothing', 'Nothing', 'Blue-green line', 'Blue-green line', 'Orange line', 'Orange line', 'Blue-green and yellow-green line', 'Blue-green and yellow-green line', 'Purple and orange line', 'Purple and orange line', 'Orange line'];
+// WEAKVCD SAMPLING PROTAN
+// const answer = ['12', '3', '5', '70', '35', '2', '5', '17', '21', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', '5', '2', '45', '73', '6', '2', '5', '6', 'Purple line', 'Purple line', 'A line', 'A line', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Purple and red-green line', 'Blue-green and purple line', 'Blue-green and purple line', 'Blue-green and purple line', 'Orange line'];
+// WEAK VCD SAMPLEING DEUTRAN
+// const answer = ['12', '3', '5', '70', '35', '2', '5', '17', '21', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', '5', '2', '45', '73', '2', '4', '3', '9', 'Red line', 'Red line', 'A line', 'A line', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Purple and red-green line', 'Blue-green and purple line', 'Blue-green and purple line', 'Blue-green and purple line', 'Orange line'];
+
 const plates = [];
 let currentIndex = 0;
-let n_plates = 38;
+const n_plates = 38;
+const n_weakvcd = 6;
 let hasSelectedAnswer = false;
 let isTestComplete = false;
 
@@ -131,6 +138,11 @@ function showModal() {
   document.getElementById("overlay").classList.add("active");
 }
 
+function showTestCompleteModal() {
+  document.getElementById("testCompleteModal").style.display = "block";
+  document.getElementById("overlay").classList.add("active");
+}
+
 function enableElement(element) {
   element.classList.remove("disabled");
 }
@@ -144,7 +156,6 @@ document.getElementById("closeModalBtn").addEventListener("click", () => {
   document.getElementById("errModal").style.display = "none";
   document.getElementById("overlay").classList.remove("active");
 });
-
 
 // ADD EVENT LISTERNER TO THE PLATE IMAGE
 document.querySelector(".plate-container").addEventListener("click", (e) => {
@@ -198,8 +209,6 @@ function styleOptionBtns(current_target, target_element) {
 function startTest() {
 
   let selectedOption = "";
-  console.log(plates);
-  console.log(isTestComplete);
 
   // DISPLAY INITIAL PLATE 1
   displayPlates(plates[0]);
@@ -209,26 +218,14 @@ function startTest() {
 
     let targetElement = e.target;
     let option = targetElement.dataset.option;
-    // console.log("Selected option: " + option);
 
     if (option === "next" && selectedOption != "" && currentIndex === n_plates - 1) {
-      console.log("End of plates");
-      console.log(`Final Answer[]: ${answer}`);
-      isTestComplete = true;
-
-      // TODO: DISPLAY BUTTON OR MODAL "You have reached the end of the test." "Show Result"
-
-      // TODO: COMPUTE RESULTS AND DISOPLAY A RESPONSIVE TABLE
-      showResult();
-
-
+      showTestCompleteModal();
     }
     else if (option === "next" && selectedOption != "") {
 
       // PUSH ANSWER TO THE PLATES ARRAY
       answer.push(selectedOption);
-      plates[currentIndex].answer = selectedOption;
-      console.log(answer);
       hidePlateA(".plate-A", ".plate-info");
 
       currentIndex++;
@@ -257,17 +254,127 @@ function startTest() {
 
 }
 
+// ANSWER DATASET FOR TESTING OF RESULT
+function computeResult() {
+
+  let count_normal = 0;
+  let count_weakv = 0;
+  let count_protan = 0;
+  let count_deuteran = 0;
+  let count_badv = 0;
+  let p_normal = 0;
+  let p_weakv = 0;
+  let p_protan = 0;
+  let p_deuteran = 0;
+  let p_badv = 0;
+
+  // CHECKING PLATE 1
+  if (answer[0] === plates[0].normal && answer[0] === plates[0].weakv) {
+    count_normal++;
+  }  
+  else {
+    count_badv++;
+  }    
+
+  // CHECKING PLATES 2 - 37
+  for (let i = 1; i < n_plates - 1; i++) {
+
+    if (answer[i] === plates[i].normal) {
+      count_normal++;
+    }
+    else {
+      if (answer[i] === plates[i].weak_vcd) {
+        count_weakv++;
+      }
+      else if (plates[i].subtype === "vcd") {
+        if (answer[i] === plates[i].protanopia) {
+          count_protan++;
+        }
+        else if(answer[i] === plates[i].deuteranopia) {
+          count_deuteran++;
+        }
+        else {
+          count_badv++;
+        }
+      }
+      else {
+        count_badv++;
+      }
+    }
+  }
+
+  // CHECKING FOR PLATE 38
+  if (answer[n_plates - 1] === plates[n_plates - 1].normal && answer[n_plates - 1] === plates[n_plates - 1].weak_vcd)
+    count_normal++;
+  else
+    count_badv++;
+
+  count_weakv = count_weakv + count_protan + count_deuteran;
+
+  p_normal = Math.floor((count_normal / (n_plates)) * 100);
+  p_weakv = Math.floor((count_weakv / (n_plates - 2)) * 100);
+  p_protan = Math.floor((count_protan / n_weakvcd) * 100);
+  p_deuteran = Math.floor((count_deuteran / n_weakvcd) * 100);
+  p_badv = Math.floor((count_badv / n_plates) * 100);
+
+  // console.log(`Normal: ${count_normal}, ${p_normal}%`);
+  // console.log(`Weak VCD: ${count_weakv}, ${p_weakv}%`);
+  // console.log(`Protanopia: ${count_protan}, ${p_protan}%`);
+  // console.log(`Deutranopia: ${count_deuteran}, ${p_deuteran}%`);
+  // console.log(`Bad VCD / Unidentified Anomaly: ${count_badv}, ${p_badv}%`);
+
+  const result = {
+    count_normal: count_normal,
+    count_weakv: count_weakv,
+    count_protan: count_protan,
+    count_deuteran: count_deuteran,
+    count_badv: count_badv,
+    p_normal: p_normal,
+    p_weakv: p_weakv,
+    p_protan: p_protan,
+    p_deuteran: p_deuteran,
+    p_badv: p_badv
+  }  
+  return result;
+}
+
 // DISPLAY RESULTS IN A RESPONSIVE TABLE
 function showResult() {
 
-  
-  enableElement(document.getElementById("nav-pill-result"));
-  activateElement(document.getElementById("tab-4"));
-
-  let result = "";  
+  let result = "";
   const result_bar = document.getElementById("result-bar");
   const table_head = document.getElementById("table-head");
-  const table_body = document.getElementById("table-body");    
+  const table_body = document.getElementById("table-body");
+  const result_info = computeResult();   
+
+  result_bar.innerHTML =
+    `
+      <div>TRICHROMATISM (Normal Vision): </div>
+        <div class="progress rounded-0">
+          <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_normal}%" aria-valuenow="${result_info.p_normal}"
+            aria-valuemin="0" aria-valuemax="100">${result_info.p_normal}%</div>
+        </div>
+        <div class="mt-3">RED GREEN COLOR DIFICIENCY (Insufficient distinction between shades of red and green):</div>
+        <div class="progress rounded-0">
+          <div class="progress-bar bg-warning text-dark p-1" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_weakv}%" aria-valuenow="${result_info.p_weakv}"
+            aria-valuemin="0" aria-valuemax="100">${result_info.p_weakv}%</div>
+        </div>
+          <div class="mt-3">PROTANOPIA (Not recognized color red): </div>
+        <div class="progress rounded-0">
+          <div class="progress-bar bg-primary" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_protan}%" aria-valuenow="${result_info.p_protan}"
+            aria-valuemin="0" aria-valuemax="100">${result_info.p_protan}%</div>
+        </div>
+        <div class="mt-3">DEUTERANOPIA (Not recognized color green): </div>
+        <div class="progress rounded-0">
+          <div class="progress-bar bg-primary" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_deuteran}%" aria-valuenow="${result_info.p_deuteran}"
+            aria-valuemin="0" aria-valuemax="100">${result_info.p_deuteran}%</div>
+        </div>     
+        <div class="mt-3">UNIDENTIFIED ANOMALY: </div>
+        <div class="progress rounded-0">
+          <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_badv}%" aria-valuenow="${result_info.p_badv}"
+            aria-valuemin="0" aria-valuemax="100">${result_info.p_badv}%</div>
+      </div>
+  `
 
   table_head.innerHTML =
     `
@@ -281,68 +388,43 @@ function showResult() {
     </tr>  
     `
 
-  plates.forEach((plate) => {
-    result = computeResult(plate.answer, plate.normal, plate.weak_vcd);
+  for(let i = 0; i < n_plates; i++) {
+    result = answer[i] === plates[i].normal ? "Correct" : "Wrong";
     table_body.innerHTML +=
       `
         <tr>
-          <td>${plate.plate}</td>
-          <td>${plate.type}</td>
-          <td>${plate.answer}</td>
-          <td>${plate.normal}</td>
-          <td>${plate.weak_vcd}</td>
+          <td>${plates[i].plate}</td>
+          <td>${plates[i].type}</td>
+          <td>${answer[i]}</td>
+          <td>${plates[i].normal}</td>
+          <td>${plates[i].weak_vcd}</td>
           <td>${result}</td>
         </tr>
         `
-  });
-
-  result_bar.innerHTML =
-    `
-      <div>TRICHROMATISM (Normal Vision): </div>
-        <div class="progress">
-          <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: 75%" aria-valuenow="75"
-            aria-valuemin="0" aria-valuemax="100">75%</div>
-        </div>
-        <div class="mt-3">RED GREEN COLOR DIFICIENCY (Insufficient distinction between shades of red and green):</div>
-        <div class="progress rounded-0">
-          <div class="progress-bar bg-warning text-dark p-1" role="progressbar" aria-label="Basic example" style="width: 10%" aria-valuenow="10"
-            aria-valuemin="0" aria-valuemax="100">10%</div>
-        </div>
-        <div class="ms-5 ps-5">
-          <div class="mt-3">PROTANOPIA (Not recognized color red): </div>
-        <div class="progress rounded-0">
-          <div class="progress-bar bg-primary" role="progressbar" aria-label="Basic example" style="width: 0%" aria-valuenow="0"
-            aria-valuemin="0" aria-valuemax="100">0%</div>
-        </div>
-        <div class="mt-3">DEUTERANOPIA (Not recognized color green): </div>
-        <div class="progress rounded-0">
-          <div class="progress-bar bg-primary" role="progressbar" aria-label="Basic example" style="width: 0%" aria-valuenow="0"
-            aria-valuemin="0" aria-valuemax="100">0%</div>
-        </div>
-        </div>        
-        <div class="mt-3">UNIDENTIFIED ANOMALY: </div>
-        <div class="progress rounded-0">
-          <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: 15%" aria-valuenow="15"
-            aria-valuemin="0" aria-valuemax="100">15%</div>
-      </div>
-  `
-
+    console.log("loop pass no: " + i)
+  }  
 }
 
-function computeResult(answer, normal, weakvcd) {
+document.getElementById("moreDetailsBtn").addEventListener("click", () => {
+  activateElement(document.getElementById("table-tab"));
+  deactivateElement(document.getElementById("moreDetailsBtn"));
+});
 
-  let count_normal = 0;
-  let count_weakvcd = 0;
-
-  if (answer === normal) return "correct";
-  else return "wrong";
-
-  // TODO: MAKE A COMPUTATION FOR NORMAL VISION, WEAK VCD, EXTREME VCD OR TOTAL BLINDNESS
-  // CAN BE LIKE A PROGRESS BAR 
-}
+// ADD EVETN LISTENER TO THE OPENRESULTBUTTON, OPEN THE PILL NAV RESULT AND START SHOWING RESULT
+document.getElementById("openResultBtn").addEventListener("click", () => {
+  deactivateElement(document.getElementById("nav-pill-test"));
+  enableElement(document.getElementById("nav-pill-result"));
+  activateElement(document.getElementById("nav-pill-result"));
+  activateElement(document.getElementById("tab-4"));
+  deactivateElement(document.getElementById("tab-3"));
+  showResult();
+  document.getElementById("testCompleteModal").style.display = "none";
+  document.getElementById("overlay").classList.remove("active");  
+});
 
 // EVENT WHEN PILL NAVBAR RESULT IS SELECTED
 document.getElementById("nav-pill-plates").addEventListener("click", showPlatesPreview());
+document.getElementById("nav-pill-result").addEventListener("click", showResult());
 
 // DISPLAY THE PLATES PREVIEW CARDS
 function showPlatesPreview() {
@@ -467,13 +549,3 @@ pillElement.forEach((tab) => {
 })
 
 
-// ANSWER DATASET FOR TESTING OF RESULT
-function testAnswerData() {
-
-
-
-
-
-}
-
-testAnswerData();

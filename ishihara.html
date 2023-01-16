@@ -136,8 +136,8 @@
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link rounded-5 disabled" id="nav-pill-result" data-bs-toggle="tab" data-bs-target="#tab-4" type="button"
-          role="tab" aria-selected="false" data-tab-value="tab-result">
+        <button class="nav-link rounded-5 disabled" id="nav-pill-result" data-bs-toggle="tab" data-bs-target="#tab-4"
+          type="button" role="tab" aria-selected="false" data-tab-value="tab-result">
           Result
         </button>
       </li>
@@ -153,7 +153,7 @@
 
   <section class="tab-container my-3">
     <!-- ABOUT THE TEST --------------------------------------------------------------------------->
-    <div id="tab-1" class="tab-pane active rounded-3 shadow-lg">
+    <div id="tab-1" class="tab-pane active rounded-3 shadow-lg p-0">
       <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
         <h2 class="py-2 m-0">Online Ishihara Test for Color Blindness</h2>
       </div>
@@ -199,7 +199,7 @@
     </div>
 
     <!-- INSTRUCTION ------------------------------------------------------------------------------>
-    <div id="tab-2" class="tab-pane inactive rounded-3 shadow-lg">
+    <div id="tab-2" class="tab-pane inactive rounded-3 shadow-lg p-0">
       <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
         <h2 class="py-2 m-0">Instruction</h2>
       </div>
@@ -237,7 +237,7 @@
     </div>
 
     <!-- ISHIHARA TEST ---------------------------------------------------------------------------->
-    <div id="tab-3" class="tab-pane inactive rounded-3 shadow-lg">
+    <div id="tab-3" class="tab-pane inactive rounded-3 shadow-lg p-0">
       <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
         <h2 class="py-2 m-0">Ishihara Test</h2>
       </div>
@@ -260,14 +260,13 @@
               </div>
               <div class="plate-info col p-3 shadow rounded-3 bg-light" style="display: none">
                 <!-- FETCH DISPLAY INFO AND DISPLAY HERE -->
-              </div>              
+              </div>
             </div>
-          </div>
+          </div>  
         </div>
       </div>
 
-
-      <!-- Modal -->
+      <!-- MODAL FOR ERROR IN SELECTING OPTION -->
       <div class="modal" id="errModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modal-title"
         aria-hidden="true" style="display: none">
         <div class="modal-dialog modal-dialog-centered">
@@ -287,6 +286,31 @@
         </div>
       </div>
 
+      <!-- MODAL FOR COMPLETION OF TEST -->
+      <div class="modal" id="testCompleteModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modal-title"
+        aria-hidden="true" style="display: none">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header justify-content-center bg-primary">
+              <h5 class="modal-title text-light" id="modal-title">Test Complete</h5>
+              <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="p-5 mx-auto">
+              <h5 class="align-self-center">The test is complete. Proceed to see the result.</h5>
+              <!-- <a href="#pill-navbar">
+                <button id="openResultBtn" type="button" class="btn btn-primary">
+                  Result
+                </button>
+              </a>       -->
+              <a id="openResultBtn" class="btn btn-primary" data-toggle="tab" href="#pill-navbar">Go to Result</a>        
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
     </div>
     <!-- END OF ISHIHARA TEST ----------------------------------------------------------------------->
 
@@ -294,16 +318,19 @@
     <div id="overlay-light"></div>
 
     <!-- RESULT ------------------------------------------------------------------------------------->
-    <div id="tab-4" class="tab-pane inactive">
+    <div id="tab-4" class="tab-pane bg-light inactive rounded-3">
       <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
         <h2 class="py-2 m-0">Result</h2>
       </div>
-      <div id="result-bar" class="bg-light p-5">
+      <div id="result-bar" class="bg-light p-3 col-md-9 mx-auto">
         <!-- DISPLAY COMPUTED RESULT HERE -->
       </div>
-      <div class="bg-light">
+      <div class="text-center">
+        <button id="moreDetailsBtn" class="btn btn-primary my-3">View detailed answers</button>
+      </div>
+      <div id="table-tab" class="inactive bg-light py-5 px-3">
         <div class="table-responsive">
-          <table class="table table-bordered table-hover rounded-bottom-3 p-5">
+          <table class="table table-bordered table-hover rounded-bottom-3">
             <thead id="table-head" class="table-primary">
               <!-- DISPLAY TABLE HEADING HERE -->
             </thead>
@@ -315,8 +342,10 @@
       </div>
     </div>
 
+
+
     <!-- ISHIHARA PLATES PREVIEW CARDS -------------------------------------------------------------->
-    <div id="tab-5" class="tab-pane inactive rounded-3 shadow-lg">
+    <div id="tab-5" class="tab-pane inactive shadow-lg p-0">
       <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
         <h2 class="py-2 m-0">Ishihara Plates</h2>
       </div>
