@@ -17,19 +17,15 @@ body {
   z-index: 9999;
 }
 
-.pill-navbar *,
+#pill-navbar-container *,
 .tab-container *,
 .feature-optician *{
   font-family: 'Roboto', sans-serif;
 }
 
-.pill-navbar {
-  margin-left: 6.25em;
-  margin-right: 6.25em;
-  position: sticky;
-  top: 1rem;
-  /* height: auto; */
-  z-index: 10;
+#pill-navbar-container {
+  padding-left: 6.25em;
+  padding-right: 6.25em;
 }
 
 .tab-container .active {
@@ -66,11 +62,6 @@ body {
   object-position: center;
   object-fit: scale-down;
   transition: 200ms ease-in-out;
-}
-
-#startTestBtn:target {
-  background-color: #FD8647;
-  position:sticky;
 }
 
 #overlay {
@@ -148,19 +139,25 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.sticky-nav {
+  position: fixed;
+  top: 61px;
+  z-index: 1;
+}
+
+.relative-element {
+  margin-top: 110px; /* adjust the value to match the height of your nav-pills */
+}
+
 /* TODO: STYLES FOR TABLE */
-#table-head {
+/* #table-head {
   height: 50%;
   width: 100%;
   scroll-behavior: auto;
-  /* position: sticky;
-  top: 5rem;
-  cursor: pointer; */
-}
+} */
 
 @media screen and (max-width: 576px) {
-
-  .pill-navbar,
+  #pill-navbar-container,
   .tab-container {
     margin-left: 1.25em;
     margin-right: 1.25em;
@@ -177,14 +174,14 @@ body {
     padding-right: 1em;
     font-size: 0.8rem;
   }
-
+  
 
 }
 
-@media screen and (max-width: 830px) {
-  .nav-pills {
-    flex-direction: column;
-    
+@media screen and (max-width: 870px) {
+  .pill-navbar,
+  .nav-link {
+    flex-direction: column;  
+    border-radius:5px !important;  
   }
-
 }

@@ -271,10 +271,10 @@ function computeResult() {
   // CHECKING PLATE 1
   if (answer[0] === plates[0].normal && answer[0] === plates[0].weakv) {
     count_normal++;
-  }  
+  }
   else {
     count_badv++;
-  }    
+  }
 
   // CHECKING PLATES 2 - 37
   for (let i = 1; i < n_plates - 1; i++) {
@@ -290,7 +290,7 @@ function computeResult() {
         if (answer[i] === plates[i].protanopia) {
           count_protan++;
         }
-        else if(answer[i] === plates[i].deuteranopia) {
+        else if (answer[i] === plates[i].deuteranopia) {
           count_deuteran++;
         }
         else {
@@ -334,7 +334,7 @@ function computeResult() {
     p_protan: p_protan,
     p_deuteran: p_deuteran,
     p_badv: p_badv
-  }  
+  }
   return result;
 }
 
@@ -345,7 +345,7 @@ function showResult() {
   const result_bar = document.getElementById("result-bar");
   const table_head = document.getElementById("table-head");
   const table_body = document.getElementById("table-body");
-  const result_info = computeResult();   
+  const result_info = computeResult();
 
   result_bar.innerHTML =
     `
@@ -388,7 +388,7 @@ function showResult() {
     </tr>  
     `
 
-  for(let i = 0; i < n_plates; i++) {
+  for (let i = 0; i < n_plates; i++) {
     result = answer[i] === plates[i].normal ? "Correct" : "Wrong";
     table_body.innerHTML +=
       `
@@ -402,7 +402,7 @@ function showResult() {
         </tr>
         `
     console.log("loop pass no: " + i)
-  }  
+  }
 }
 
 document.getElementById("moreDetailsBtn").addEventListener("click", () => {
@@ -419,7 +419,7 @@ document.getElementById("openResultBtn").addEventListener("click", () => {
   deactivateElement(document.getElementById("tab-3"));
   showResult();
   document.getElementById("testCompleteModal").style.display = "none";
-  document.getElementById("overlay").classList.remove("active");  
+  document.getElementById("overlay").classList.remove("active");
 });
 
 // EVENT WHEN PILL NAVBAR RESULT IS SELECTED
@@ -524,10 +524,6 @@ function tabEventShow(event) {
   const index = list.indexOf(currentItem);
   const tabId = "tab-" + (index + 1);
 
-  // console.log("Index: " + index);
-  // console.log("Tab Id:" + tabId);
-
-  // const tabContainer = document.getElementById("tab-container");
   const tabList = Array.from(document.querySelectorAll(".tab-pane"));
 
   for (let i = 0; i < tabList.length; i++) {
@@ -547,4 +543,31 @@ pillElement.forEach((tab) => {
   tab.addEventListener("show.bs.tab", tabEventShow)
 })
 
+// STICKY NAV PILL
+const navbarHeight = document.getElementById("main-navbar").offsetHeight;
+const parallaxTop = document.getElementById("parallax-section").offsetHeight;
+const pillNavbarHeight = document.getElementById("pill-navbar-container").offsetHeight;
+// const parallaxTop = document.querySelector(".parallax-ishihara").offsetTop;
+console.log(navbarHeight);
+console.log(parallaxTop);
+console.log(parallaxTop + navbarHeight);
+console.log(pillNavbarHeight);
+
+window.addEventListener("scroll", function () {
+  if (window.pageYOffset > parallaxTop - navbarHeight) {
+    document.getElementById("pill-navbar-container").classList.add("sticky-nav");
+    let elementsBelow = document.getElementsByClassName("relative-element");
+    for (let i = 0; i < elementsBelow.length; i++) {
+        elementsBelow[i].classList.add("relative-element");
+    }
+  } 
+  else {
+    document.getElementById("pill-navbar-container").classList.remove("sticky-nav");
+    let elementsBelow = document.getElementsByClassName("relative-element");
+    for (let i = 0; i < elementsBelow.length; i++) {
+        elementsBelow[i].classList.remove("relative-element");
+    }
+  }
+
+});
 
