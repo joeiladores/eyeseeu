@@ -6,14 +6,13 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    
-
+  
 }
 
 body {
 
     height: 100%;   
-    background: url(https://www.freeiconspng.com/uploads/blue-circle-png-30.png) no-repeat left;
+    background: url(https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-page%2Fishihara-test-blue-bg.jpg?alt=media&token=c902e814-1bc3-48e4-b658-2ccf795b2bc0) no-repeat left;
     background-attachment: fixed;
 }
 
@@ -59,33 +58,14 @@ body {
   background-attachment: fixed;
   background-size: cover;
   background-blend-mode: darken;
-
-
 }
 
 /* About Us Section */
 
 .inner-container {
-transition: all 0.3s;
-}
-
-.inner-container:hover {
-  transform: scale(1.15);
-}
-
-.about-section {
-  background: url(https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xpbmljfGVufDB8fDB8fA%3D%3D&w=1000&q=80) no-repeat left;
-  background-size: 65%;
-  overflow: hidden;
-  padding: 110px 0;
-  
- 
-}
-
-
-.inner-container {
+  transition: all 0.3s;
   flex-basis: 100%;
-  width: 55%;
+  width: 45%;
   height: 100%;
   float: right;
   background-color: white;
@@ -93,17 +73,29 @@ transition: all 0.3s;
   border-radius: 20% 20% 20% 20%;
 }
 
-.inner-container h1 {
-margin-bottom: 30px;
-font-size: 30px;
-font-weight: 900;
+.inner-container:hover {
+  transform: scale(1.10);
 }
+
+.about-section {
+  margin-top: 65px;
+  background: url(https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xpbmljfGVufDB8fDB8fA%3D%3D&w=1000&q=80) no-repeat left;
+  background-size: 75%;
+  overflow: hidden;
+  padding: 110px 0; 
+  
+}
+.inner-container h1 {
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: 900;
+  }
 
 .text {
 font-size: 18px;
 color: black;
 line-height: 30px;
-text-align: justify;
+
 
 }
 
@@ -168,9 +160,6 @@ width: 100%;
 object-fit: cover;
 position: relative;
 }
-
-
-
 
 .postcard .postcard__img_link {
 display: contents;
@@ -300,7 +289,6 @@ width: 100px;
 }
 /* COLORS */
 
-
 .postcard .postcard__tagbox .blue.play:hover {
 background: #0076bd;
 }
@@ -336,16 +324,17 @@ background-image: linear-gradient(30deg, rgba(0, 118, 189, 0.1), transparent 50%
   font-weight: bold;
   letter-spacing: 2px;
   color: #333;
-  margin-top: 100px;
+  margin-top: 65px;
 }
 
 .h1:after {
   content: '';
-  background: #333;
+  background: white;
   display: block;
   height: 3px;
   width: 150px;
   margin: 10px auto;
+  text-shadow: #333;
 }
 
 /* Banner Bottom */
@@ -354,18 +343,15 @@ background-image: linear-gradient(30deg, rgba(0, 118, 189, 0.1), transparent 50%
   background: url("https://i.ibb.co/Sw9PFqd/bannerbottom.png");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
-  min-height: 459px;
-  
- 
+  background-position: left;
+  min-height: 550px;
 }
 
-@media (max-width: 600px) {
+/* @media screen and (max-width:767px) {
   .banner {
-    background-position: center;
-    background-size: cover;
+    min-height: 600px;
   }
-}
+} */
 
 .card-button {
   background-color: #009eff;
@@ -466,9 +452,6 @@ color: black;
 background-color: #fff;
 cursor: pointer;
 }
-
-
-
 
 
 @media screen and (max-width:1200px) {

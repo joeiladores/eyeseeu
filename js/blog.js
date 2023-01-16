@@ -67,6 +67,8 @@ function displayBlogs() {
 
 function displayFilteredBlogs(m, y) {
 
+  
+
   // console.log("Filtered blogs...");
   // console.log(`m: ${m}, y: ${y}`);
   // console.log("typeof m: " + typeof m, " typeof y: " + typeof y);
@@ -75,6 +77,9 @@ function displayFilteredBlogs(m, y) {
   fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew?sortBy=Publish_Date&order=desc')
     .then((response) => response.json())
     .then((blogs) => {
+
+        // Clear previous blog posts
+        document.getElementById("blog").innerHTML = "";
 
       // DISPLAY 5 BLOGS
       blogs.map((blog) => {
@@ -86,15 +91,17 @@ function displayFilteredBlogs(m, y) {
         day = d.getDate();
         year = d.getFullYear().toString();
 
+        
+
         // console.log(typeof month);
         // console.log(typeof day);
         // console.log(typeof year);
 
         if (m === month && y === year) {
-
-          // console.log("Inside if....");
-          // console.log(`month: ${month}, day: ${day}, year: ${year}`);
-
+          let contentPreview = blog.Content_Preview;
+          if(contentPreview.length > 300) {
+             contentPreview = contentPreview.slice(0,300) + "...";
+          }
           document.getElementById("blog").innerHTML +=
             `
             <div class="card mb-3 shadow-lg rounded-3">
@@ -107,7 +114,7 @@ function displayFilteredBlogs(m, y) {
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title mb-3">${blog.Title}</h5>
-                    ${blog.Content_Preview}                                  
+                    ${contentPreview}                                  
                     <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
                     <div class="mt-3"><a href="blogpost.html?blog=${blog.id}" class="btn btn-primary mb-3">Read More</a></div>  
                   </div>
@@ -117,6 +124,10 @@ function displayFilteredBlogs(m, y) {
           `;
         }
         if (m === "all" && y === "all") {
+          let contentPreview = blog.Content_Preview;
+          if(contentPreview.length > 300) {
+             contentPreview = contentPreview.slice(0,300) + "...";
+          }
           document.getElementById("blog").innerHTML +=
             `
             <div class="card mb-3 shadow-lg rounded-3">
@@ -129,7 +140,7 @@ function displayFilteredBlogs(m, y) {
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title mb-3">${blog.Title}</h5>
-                    ${blog.Content_Preview}                                  
+                    ${contentPreview}                                  
                     <p class="card-text mt-3"><small class="text-muted">${month} ${day}, ${year}</small></p>
                     <div class="mt-3"><a href="blogpost.html?blog=${blog.id}" class="btn btn-primary mb-3">Read More</a></div>  
                   </div>
@@ -140,7 +151,7 @@ function displayFilteredBlogs(m, y) {
         }
 
       });
-
+      
     })
     .catch((err) => {
       console.log("Error is: " + err);
@@ -163,6 +174,8 @@ function displayStickyBlogFilter() {
         month = monthNames[d.getMonth()];
         year = d.getFullYear();
         month_year = month + " " + year;
+
+        
 
         // console.log(`month_year: ${month_year}`);
 
@@ -199,11 +212,14 @@ function displayStickyBlogFilter() {
       <a class="list-group-item" data-month="all" data-year="all">All Blogs</a>   
       `
 
-      // Add event listener to "Home" button
-      const homeButton = document.querySelector("[data-month='home']");
-      homeButton.addEventListener("click", () => {
-        window.scrollTo(0, 0);
+      // Add event listener to the sticky filter buttons
+      const buttons = document.querySelectorAll(".list-group-item");
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          window.scrollTo(0, 0);
+        });
       });
+      
     })
     .catch((err) => {
       console.log("Error is: " + err);

@@ -25,9 +25,9 @@ function displayBlogPost() {
         year = jsDate.getFullYear();
         document.getElementById("blog-title").innerHTML =
           `
-            <h1>${blog.Title}</h1>
-            <h3>${blog.Author}</h3>
-            <h5><small>${month} ${day}, ${year}</small></h5>
+            <h1 class="mx-3">${blog.Title}</h1>
+            <h3 class="mx-5">${blog.Author}</h3>
+            <h5 class="mx-5"><small>${month} ${day}, ${year}</small></h5>
           `;
         document.getElementById("blog-cover-image").innerHTML =
           `
@@ -35,7 +35,7 @@ function displayBlogPost() {
           `;
         document.getElementById("blog-content").innerHTML =
           `
-            <div>${blog.Content}</div>
+            <div class="mx-5">${blog.Content}</div>
           `;
       })
       .catch((err) => {
