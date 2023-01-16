@@ -8,7 +8,6 @@ body {
   
   html {
     font-family: Arial, Helvetica, sans-serif;
-    height: 200vh;
   }
   
   
@@ -17,7 +16,7 @@ body {
     margin-top: 80px;
     margin-left: 6.25em;
     margin-right: 6.25em;
-    margin-bottom: 1.25em;
+    margin-bottom: 3.25em;
   }
   
   .article {
@@ -75,15 +74,15 @@ width: 18rem;
     transform: scale(1.01);
 }
 
-#blogpostfooter {
-  margin-top: 100px;
-}
+
   
 
 .card-img-top {
   width: 100%;
   height: auto; /* Adjusts the height to maintain the aspect ratio of the image */
 }
+
+
   
 @media screen and (max-width: 756px) {
   
