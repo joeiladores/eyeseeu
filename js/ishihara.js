@@ -84,10 +84,10 @@ function displayPlates(plate) {
     option = plate.options[i];
 
     if (option === "I don’t know") {
-      optionsElement += `<div class="optionBtn btn" data-option="Nothing" data-selected=false>${option}</div>`;
+      optionsElement += `<div class="optionBtn btn" data-option="Nothing">${option}</div>`;
     }
     else {
-      optionsElement += `<div class="optionBtn btn" data-option=${option} data-selected=false>${option}</div>`;
+      optionsElement += `<div class="optionBtn btn" data-option='${option}'>${option}</div>`;
     }
   }
 
@@ -219,12 +219,11 @@ function startTest() {
     let targetElement = e.target;
     let option = targetElement.dataset.option;
 
-    if (option === "next" && selectedOption != "" && currentIndex === n_plates - 1) {
-      showTestCompleteModal();
-    }
-    else if (option === "next" && selectedOption != "") {
+    console.log("Index: " + currentIndex);
 
-      // PUSH ANSWER TO THE PLATES ARRAY
+    if (option === "next" && selectedOption != "") {
+
+      // PUSH ANSWER TO THE PLATES ARRAY      
       answer.push(selectedOption);
       hidePlateA(".plate-A", ".plate-info");
 
@@ -233,13 +232,16 @@ function startTest() {
       // RESET SELECTED OPTION TO ""
       selectedOption = "";
       hasSelectedAnswer = false;
+
+      console.log(answer);
     }
     else if (option === "next" && selectedOption === "") {
       showModal();
     }
     else if (targetElement.classList.contains("optionBtn")) {
       // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
-      selectedOption = option;
+
+      selectedOption = option;      
       styleOptionBtns(e.currentTarget, targetElement);
       hasSelectedAnswer = true;
 
@@ -248,7 +250,13 @@ function startTest() {
     else return;
 
     // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
-    displayPlates(plates[currentIndex]);
+    if (currentIndex < n_plates) {
+      displayPlates(plates[currentIndex]);
+    }
+    // WHEN THE TEST IS COMPLETE
+    else {
+      showTestCompleteModal();
+    }
   });
 
 
@@ -271,10 +279,10 @@ function computeResult() {
   // CHECKING PLATE 1
   if (answer[0] === plates[0].normal && answer[0] === plates[0].weakv) {
     count_normal++;
-  }  
+  }
   else {
     count_badv++;
-  }    
+  }
 
   // CHECKING PLATES 2 - 37
   for (let i = 1; i < n_plates - 1; i++) {
@@ -288,9 +296,11 @@ function computeResult() {
       }
       else if (plates[i].subtype === "vcd") {
         if (answer[i] === plates[i].protanopia) {
+          count_weakv++;
           count_protan++;
         }
-        else if(answer[i] === plates[i].deuteranopia) {
+        else if (answer[i] === plates[i].deuteranopia) {
+          count_weakv++;
           count_deuteran++;
         }
         else {
@@ -309,19 +319,13 @@ function computeResult() {
   else
     count_badv++;
 
-  count_weakv = count_weakv + count_protan + count_deuteran;
+  // count_weakv = count_weakv + count_protan + count_deuteran;
 
   p_normal = Math.floor((count_normal / (n_plates)) * 100);
   p_weakv = Math.floor((count_weakv / (n_plates - 2)) * 100);
   p_protan = Math.floor((count_protan / n_weakvcd) * 100);
   p_deuteran = Math.floor((count_deuteran / n_weakvcd) * 100);
   p_badv = Math.floor((count_badv / n_plates) * 100);
-
-  // console.log(`Normal: ${count_normal}, ${p_normal}%`);
-  // console.log(`Weak VCD: ${count_weakv}, ${p_weakv}%`);
-  // console.log(`Protanopia: ${count_protan}, ${p_protan}%`);
-  // console.log(`Deutranopia: ${count_deuteran}, ${p_deuteran}%`);
-  // console.log(`Bad VCD / Unidentified Anomaly: ${count_badv}, ${p_badv}%`);
 
   const result = {
     count_normal: count_normal,
@@ -334,7 +338,7 @@ function computeResult() {
     p_protan: p_protan,
     p_deuteran: p_deuteran,
     p_badv: p_badv
-  }  
+  }
   return result;
 }
 
@@ -345,7 +349,7 @@ function showResult() {
   const result_bar = document.getElementById("result-bar");
   const table_head = document.getElementById("table-head");
   const table_body = document.getElementById("table-body");
-  const result_info = computeResult();   
+  const result_info = computeResult();
 
   result_bar.innerHTML =
     `
@@ -380,29 +384,28 @@ function showResult() {
     `
     <tr>
       <th scope="col">Plate</th>
-      <th scope="col">Type</th>
+      <th scope="col">Type</th>      
+      <th scope="col">Normal</th>
+      <th scope="col">Red-Green Deficiency</th>
       <th scope="col">Answer</th>
-      <th scope="col">Correct</th>
-      <th scope="col">Weak VCD</th>
       <th scope="col">Result</th>
     </tr>  
     `
 
-  for(let i = 0; i < n_plates; i++) {
+  for (let i = 0; i < n_plates; i++) {
     result = answer[i] === plates[i].normal ? "Correct" : "Wrong";
     table_body.innerHTML +=
       `
         <tr>
           <td>${plates[i].plate}</td>
           <td>${plates[i].type}</td>
-          <td>${answer[i]}</td>
           <td>${plates[i].normal}</td>
           <td>${plates[i].weak_vcd}</td>
+          <td>${answer[i]}</td>
           <td>${result}</td>
         </tr>
         `
-    console.log("loop pass no: " + i)
-  }  
+  }
 }
 
 document.getElementById("moreDetailsBtn").addEventListener("click", () => {
@@ -419,7 +422,7 @@ document.getElementById("openResultBtn").addEventListener("click", () => {
   deactivateElement(document.getElementById("tab-3"));
   showResult();
   document.getElementById("testCompleteModal").style.display = "none";
-  document.getElementById("overlay").classList.remove("active");  
+  document.getElementById("overlay").classList.remove("active");
 });
 
 // EVENT WHEN PILL NAVBAR RESULT IS SELECTED
@@ -447,10 +450,6 @@ function showPlatesPreview() {
 }
 
 function showCardModal(plateNum) {
-
-  // console.log("In showCardModal...");
-  // console.log("Plate num: " + plateNum);
-  // console.log(typeof parseInt(plateNum));
 
   const selectedPlate = plates.find(current_plate => current_plate.plate === parseInt(plateNum));
 
@@ -524,10 +523,6 @@ function tabEventShow(event) {
   const index = list.indexOf(currentItem);
   const tabId = "tab-" + (index + 1);
 
-  // console.log("Index: " + index);
-  // console.log("Tab Id:" + tabId);
-
-  // const tabContainer = document.getElementById("tab-container");
   const tabList = Array.from(document.querySelectorAll(".tab-pane"));
 
   for (let i = 0; i < tabList.length; i++) {
@@ -547,4 +542,31 @@ pillElement.forEach((tab) => {
   tab.addEventListener("show.bs.tab", tabEventShow)
 })
 
+// STICKY NAV PILL
+// const navbarHeight = document.getElementById("main-navbar").offsetHeight;
+// const parallaxTop = document.getElementById("parallax-section").offsetHeight;
+// const pillNavbarHeight = document.getElementById("pill-navbar-container").offsetHeight;
+// const parallaxTop = document.querySelector(".parallax-ishihara").offsetTop;
+// console.log(navbarHeight);
+// console.log(parallaxTop);
+// console.log(parallaxTop + navbarHeight);
+// console.log(pillNavbarHeight);
+
+// window.addEventListener("scroll", function () {
+//   if (window.pageYOffset > parallaxTop - navbarHeight) {
+//     document.getElementById("pill-navbar-container").classList.add("sticky-nav");
+//     let elementsBelow = document.getElementsByClassName("relative-element");
+//     for (let i = 0; i < elementsBelow.length; i++) {
+//       elementsBelow[i].classList.add("relative-element");
+//     }
+//   }
+//   else {
+//     document.getElementById("pill-navbar-container").classList.remove("sticky-nav");
+//     let elementsBelow = document.getElementsByClassName("relative-element");
+//     for (let i = 0; i < elementsBelow.length; i++) {
+//       elementsBelow[i].classList.remove("relative-element");
+//     }
+//   }
+
+// });
 

@@ -72,20 +72,23 @@
   pointer-events: all;
 }
 
-
-
-/* MEDIA QUERY FOR BOOKING SECTION *********************/
-/* TODO: check this */
+/* RESOPNSIVE *********************/
 @media screen and (max-width: 576px) {
   .booking-section {
-    padding: 2em 2em;
-    /* margin: 0; */
+    padding: 1em 1em;
+  }
+  .message-section {
+    padding: 1em 1em;
+    margin: 5em 1em;
   }
 }
 
 @media screen and (min-width: 577px) and  (max-width: 768px) {
-  .booking-section {
-    padding: 4em 4em;
-    /* margin: 0; */
+  .booking-section{
+    padding: 2em 2em;
+  }
+  .message-section {
+    padding: 2em 2em;
+    margin: 5em 1em;
   }
 }

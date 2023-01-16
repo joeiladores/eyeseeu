@@ -39,7 +39,7 @@
   </div>
 
   <!-- NAVBAR SECTION ---------------------------------------------------------------->
-  <nav class="navbar navbar-expand-lg bg-light fixed-top">
+  <nav class="navbar navbar-expand-lg bg-light fixed-top" id="main-navbar">
     <div class="container">
       <a class="custom-navbarbrand fs-4" href="index.html">
         <img src="photo/main-logo&favicon.png" alt="Logo" width="35" height="45"
@@ -111,12 +111,12 @@
   </section>
 
   <!-- PILL NAVBAR -------------------------------------------------------------------------------->
-  <div id="pill-navbar" class="pill-navbar mt-3">
+  <div id="pill-navbar" class="pill-navbar mt-2">
     <ul class="nav nav-pills nav-fill gap-2 p-1 bg-light rounded-5" id="pill-tabs" role="tablist" style="
-          --bs-nav-link-color: var(--bs-white);
-          --bs-nav-pills-link-active-color: var(--bs-white);
-          --bs-nav-pills-link-active-bg: var(--bs-primary);
-        ">
+            --bs-nav-link-color: var(--bs-white);
+            --bs-nav-pills-link-active-color: var(--bs-white);
+            --bs-nav-pills-link-active-bg: var(--bs-primary);
+          ">
       <li class="nav-item" role="presentation">
         <button class="nav-link active rounded-5" id="nav-pill-about" data-bs-toggle="tab" data-bs-target="#tab-1"
           type="button" role="tab" aria-selected="true" data-tab-value="tab-intro">
@@ -149,9 +149,10 @@
       </li>
     </ul>
   </div>
+
   <!-- END OF PILL NAVBAR ------------------------------------------------------------------------>
 
-  <section class="tab-container my-3">
+  <section class="tab-container my-2">
     <!-- ABOUT THE TEST --------------------------------------------------------------------------->
     <div id="tab-1" class="tab-pane active rounded-3 shadow-lg p-0">
       <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
@@ -163,7 +164,7 @@
             src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-page%2Fishihara-colour-blindness-header-img.jpg?alt=media&token=59deac3f-9bca-4c23-ae3b-ce2d5d5bf12d"
             alt="" style="width: 100%" />
         </div>
-        <div class="content px-5">
+        <div class="tab-content px-5">
           <p>
             This online Ishihara color blindness test is a simple method to
             diagnose the existence of red-green deficiency. Red-green deficiency
@@ -203,7 +204,7 @@
       <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
         <h2 class="py-2 m-0">Instruction</h2>
       </div>
-      <div class="px-5 bg-white pt-2 rounded-bottom-3 pb-3">
+      <div class="tab-content px-5 bg-white pt-2 rounded-bottom-3 pb-3">
         <p>Plates 1 – 25 each contain a number, plates 26 – 38 contain one or two wiggly lines. To pass each test you
           must
           identify the correct number, or correctly trace the wiggly lines. </p>
@@ -232,16 +233,16 @@
               affect the original colors used. Should these tests suggest that you may be color blind, you should seek
               professional confirmation.</strong></li>
         </ul>
-        <a id="startTestBtn" class="btn btn-primary" data-toggle="tab" href="#">Start Test</a>
+        <a id="startTestBtn" class="btn btn-primary" data-toggle="tab" href="#pill-navbar">Start Test</a>
       </div>
     </div>
 
     <!-- ISHIHARA TEST ---------------------------------------------------------------------------->
-    <div id="tab-3" class="tab-pane inactive rounded-3 shadow-lg p-0">
+    <div id="tab-3" class="tab-pane inactive rounded-3 shadow-lg">
       <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
         <h2 class="py-2 m-0">Ishihara Test</h2>
       </div>
-      <div class="px-5 bg-white pt-2 rounded-bottom-3">
+      <div class="info-container px-5 bg-white pt-2 rounded-bottom-3">
         <div class="progress my-2">
           <!-- GET PROGRESS NAD DISPLAY PROGRESS BAR HERE -->
         </div>
@@ -262,7 +263,7 @@
                 <!-- FETCH DISPLAY INFO AND DISPLAY HERE -->
               </div>
             </div>
-          </div>  
+          </div>
         </div>
       </div>
 
@@ -303,7 +304,7 @@
                   Result
                 </button>
               </a>       -->
-              <a id="openResultBtn" class="btn btn-primary" data-toggle="tab" href="#pill-navbar">Go to Result</a>        
+              <a id="openResultBtn" class="btn btn-primary" data-toggle="tab" href="#pill-navbar">Go to Result</a>
             </div>
           </div>
         </div>
@@ -326,12 +327,12 @@
         <!-- DISPLAY COMPUTED RESULT HERE -->
       </div>
       <div class="text-center">
-        <button id="moreDetailsBtn" class="btn btn-primary my-3">View detailed answers</button>
+        <button id="moreDetailsBtn" class="btn btn-primary my-3" target="#table-tab">View answers</button>
       </div>
       <div id="table-tab" class="inactive bg-light py-5 px-3">
-        <div class="table-responsive">
-          <table class="table table-bordered table-hover rounded-bottom-3">
-            <thead id="table-head" class="table-primary">
+        <div class="table-responsive table-container" style="height: 60vh">
+          <table class="table table-bordered table-hover">
+            <thead id="table-head" class="bg-primary text-light">
               <!-- DISPLAY TABLE HEADING HERE -->
             </thead>
             <tbody id="table-body">
