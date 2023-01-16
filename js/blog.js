@@ -1,8 +1,9 @@
 window.onload = function () {
   displayBlogs();
   displayStickyBlogFilter()
-
+ 
 }
+
 
 let startPageIndex = 0, pageLimit = 5, currentPageEnd = pageLimit, pageEnd;
 
@@ -147,19 +148,16 @@ function displayFilteredBlogs(m, y) {
 }
 
 function displayStickyBlogFilter() {
-
   // GET BLOGS DATES
   fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew')
     .then((response) => response.json())
     .then((data) => {
-
       // const blogs = [];
       let blogMonths = [];
       const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       let month, month_num, year, month_year;
 
       data.forEach((blog) => {
-
         const d = new Date(blog.Publish_Date);
         month_num = d.getMonth();
         month = monthNames[d.getMonth()];
@@ -175,7 +173,6 @@ function displayStickyBlogFilter() {
         if (!containsMonthYear(blogMonths, month_year)) {
           blogMonths.push({ month_num: month_num, month: month, year: year, month_year: month_year });
         }
-
       });
 
       // SORT MONTH BY DATE - START FROM LATEST YEAR, MONTH 
@@ -187,7 +184,7 @@ function displayStickyBlogFilter() {
       // DISPLAY MONTHS & YEAR IN THE STICKY RIGHT PANEL
       document.getElementById("blogMonth").innerHTML +=
         `
-      <a class="list-group-item" data-month="home" data-year="home">Home</a>   
+        <a class="list-group-item active" data-month="home" data-year="home">Home</a>   
       `
 
       blogMonths.forEach((blog) => {
@@ -202,17 +199,24 @@ function displayStickyBlogFilter() {
       <a class="list-group-item" data-month="all" data-year="all">All Blogs</a>   
       `
 
+      // Add event listener to "Home" button
+      const homeButton = document.querySelector("[data-month='home']");
+      homeButton.addEventListener("click", () => {
+        window.scrollTo(0, 0);
+      });
     })
     .catch((err) => {
       console.log("Error is: " + err);
     });
 
+    
 }
 
 // ADD EVENT LISTENER TO MONTHS CLICK EVENTS
 document.getElementById("blogMonth").addEventListener("click", (e) => {
   e.preventDefault();
 
+  
   let targetElement = e.target;
   let month = targetElement.dataset.month;
   let year = targetElement.dataset.year;
@@ -220,6 +224,7 @@ document.getElementById("blogMonth").addEventListener("click", (e) => {
   let monthList = document.querySelectorAll(".list-group-item");
   monthList.forEach(function (item) {
     item.classList.remove("active");
+  
   });
   targetElement.classList.add("active");
 
