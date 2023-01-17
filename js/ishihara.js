@@ -24,16 +24,13 @@ const firebaseConfig = {
   appId: "1:210845750796:web:af3f92bccaf04fa201c029"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Services
 const db = getFirestore(app);
 
-// Collection Reference
 const platesRef = collection(db, 'ishihara-vcd-38');
 
-const answer = [];
+const answers = [];
 // SAMPLE ANSWER SET FOR TESTING ONLY
 // NORMAL SAMPLING
 // const answer = ['12', '8', '6', '29', '57', '5', '3', '15', '74', '2', '6', '97', '45', '5', '7', '16', '73', 'Nothing', 'Nothing', 'Nothing', 'Nothing', '26', '42', '35', '96', 'Purple and red line', 'Purple and red line', 'Nothing', 'Nothing', 'Blue-green line', 'Blue-green line', 'Orange line', 'Orange line', 'Blue-green and yellow-green line', 'Blue-green and yellow-green line', 'Purple and orange line', 'Purple and orange line', 'Orange line'];
@@ -47,7 +44,6 @@ let currentIndex = 0;
 const n_plates = 38;
 const n_weakvcd = 6;
 let hasSelectedAnswer = false;
-let isTestComplete = false;
 
 const q = query(platesRef, orderBy("plate", "asc"));
 const snapshot = await getDocs(q);
@@ -141,6 +137,7 @@ function showModal() {
 function showTestCompleteModal() {
   document.getElementById("testCompleteModal").style.display = "block";
   document.getElementById("overlay").classList.add("active");
+  document.getElementById("restartTestBtn").style.display = "block";
 }
 
 function enableElement(element) {
@@ -150,6 +147,27 @@ function enableElement(element) {
 function disableElement(element) {
   element.classList.add("disabled");
 }
+
+// EVENT LISTENER FOR RESTART TEST BUTTON
+document.getElementById("restartTestBtn").addEventListener("click", () => {
+  const lengthPlates = plates.length;
+  const lengthAnswers = answers.length;
+
+  // RESET USED ARRAYS AND OTHER DEFAULT
+  // for(let i = 0; i < lengthPlates; i++) {
+  //   plates.pop();
+  // }
+  for(let i = 0; i < lengthAnswers; i++) {
+    answers.pop();
+  }
+  disableElement(document.getElementById("nav-pill-result"));
+  hasSelectedAnswer = false;
+  
+  startTest();
+
+  document.getElementById("restartTestBtn").style.display = "none";
+
+});
 
 // SDD EVENT LISTNER TO THE MODAL CLOSE BUTTON
 document.getElementById("closeModalBtn").addEventListener("click", () => {
@@ -208,10 +226,15 @@ function styleOptionBtns(current_target, target_element) {
 
 function startTest() {
 
-  let selectedOption = "";
+  // let selectedOption = "";
+
+  // snapshot.forEach(doc => {
+  //   plates.push(doc.data());
+  // });
 
   // DISPLAY INITIAL PLATE 1
   displayPlates(plates[0]);
+  console.log(plates);
 
   // ADD EVENT LISTENERS TO OPTIONS
   document.querySelector(".options").addEventListener("click", (e) => {
@@ -224,7 +247,7 @@ function startTest() {
     if (option === "next" && selectedOption != "") {
 
       // PUSH ANSWER TO THE PLATES ARRAY      
-      answer.push(selectedOption);
+      answers.push(selectedOption);
       hidePlateA(".plate-A", ".plate-info");
 
       currentIndex++;
@@ -233,7 +256,7 @@ function startTest() {
       selectedOption = "";
       hasSelectedAnswer = false;
 
-      console.log(answer);
+      console.log(answers);
     }
     else if (option === "next" && selectedOption === "") {
       showModal();
@@ -277,7 +300,7 @@ function computeResult() {
   let p_badv = 0;
 
   // CHECKING PLATE 1
-  if (answer[0] === plates[0].normal || answer[0] === plates[0].weak_vcd) {
+  if (answers[0] === plates[0].normal || answers[0] === plates[0].weak_vcd) {
     count_normal++;
   }
   else {
@@ -288,19 +311,19 @@ function computeResult() {
   // CHECKING PLATES 2 - 37
   for (let i = 1; i < n_plates - 1; i++) {
 
-    if (answer[i] === plates[i].normal) {
+    if (answers[i] === plates[i].normal) {
       count_normal++;
     }
     else {
-      if (answer[i] === plates[i].weak_vcd) {
+      if (answers[i] === plates[i].weak_vcd) {
         count_weakv++;
       }
       else if (plates[i].subtype === "vcd") {
-        if (answer[i] === plates[i].protanopia) {
+        if (answers[i] === plates[i].protanopia) {
           count_weakv++;
           count_protan++;
         }
-        else if (answer[i] === plates[i].deuteranopia) {
+        else if (answers[i] === plates[i].deuteranopia) {
           count_weakv++;
           count_deuteran++;
         }
@@ -317,7 +340,7 @@ function computeResult() {
   }
 
   // CHECKING FOR PLATE 38
-  if (answer[n_plates - 1] === plates[n_plates - 1].normal && answer[n_plates - 1] === plates[n_plates - 1].weak_vcd) {
+  if (answers[n_plates - 1] === plates[n_plates - 1].normal && answers[n_plates - 1] === plates[n_plates - 1].weak_vcd) {
     count_normal++;
   }
   else {
@@ -436,7 +459,7 @@ function showResult() {
     `
 
   for (let i = 0; i < n_plates; i++) {
-    result = answer[i] === plates[i].normal ? "Correct" : "Wrong";
+    result = answers[i] === plates[i].normal ? "Correct" : "Wrong";
     table_body.innerHTML +=
       `
         <tr>
@@ -444,13 +467,14 @@ function showResult() {
           <td>${plates[i].type}</td>
           <td>${plates[i].normal}</td>
           <td>${plates[i].weak_vcd}</td>
-          <td>${answer[i]}</td>
+          <td>${answers[i]}</td>
           <td>${result}</td>
         </tr>
         `
   }
 }
 
+// EVENT LISTENER FOR MORE BUTTON TO VIEW DETAILED ANSWER RESULT
 document.getElementById("moreDetailsBtn").addEventListener("click", () => {
   activateElement(document.getElementById("table-tab"));
   deactivateElement(document.getElementById("moreDetailsBtn"));
@@ -493,12 +517,18 @@ function showPlatesPreview() {
 }
 
 function showCardModal(plateNum) {
-
+  
+  const modal_card_title = document.getElementById("card-modal-title");
+  const modal_plate_container = document.querySelector(".modal-plate-container");
+  const question_mssg = document.querySelector(".question-message");
+  const answer_plate_info = document.querySelector(".answer-plate-info")
+  const modal_card = document.getElementById("cardModal");
+  const modal_overlay = document.getElementById("overlay");
   const selectedPlate = plates.find(current_plate => current_plate.plate === parseInt(plateNum));
 
-  document.getElementById("card-modal-title").innerHTML = `Plate ${plateNum}`;
+  modal_card_title.innerHTML = `Plate ${plateNum}`;
 
-  document.querySelector(".modal-plate-container").innerHTML =
+  modal_plate_container.innerHTML =
     `
     <img
       src="${selectedPlate.plateURL}"
@@ -508,19 +538,19 @@ function showCardModal(plateNum) {
       class="plate-A2 img-fluid rounded-start" alt="..." style="display: none" />
   `
 
-  document.querySelector(".question-message").innerHTML =
+  question_mssg.innerHTML =
     `
     <h5 class="card-title">What do you see?</h5>
     <p class="card-text">Click the plate to check.</p>
   `
 
-  document.getElementById("cardModal").style.display = "block";
-  document.getElementById("overlay").classList.add("active");
+  modal_card.style.display = "block";
+  modal_overlay.classList.add("active");
 
   displayPlateInfo(".answer-plate-info", selectedPlate.display);
   // DEFAULT DISPLAY OF PLATE INFO
-  document.querySelector(".question-message").style.display = "block";
-  document.querySelector(".answer-plate-info").style.display = "none";
+  question_mssg.style.display = "block";
+  answer_plate_info.style.display = "none";
 }
 
 function closeCardModal() {
@@ -584,32 +614,3 @@ function tabEventShow(event) {
 pillElement.forEach((tab) => {
   tab.addEventListener("show.bs.tab", tabEventShow)
 })
-
-// STICKY NAV PILL
-// const navbarHeight = document.getElementById("main-navbar").offsetHeight;
-// const parallaxTop = document.getElementById("parallax-section").offsetHeight;
-// const pillNavbarHeight = document.getElementById("pill-navbar-container").offsetHeight;
-// const parallaxTop = document.querySelector(".parallax-ishihara").offsetTop;
-// console.log(navbarHeight);
-// console.log(parallaxTop);
-// console.log(parallaxTop + navbarHeight);
-// console.log(pillNavbarHeight);
-
-// window.addEventListener("scroll", function () {
-//   if (window.pageYOffset > parallaxTop - navbarHeight) {
-//     document.getElementById("pill-navbar-container").classList.add("sticky-nav");
-//     let elementsBelow = document.getElementsByClassName("relative-element");
-//     for (let i = 0; i < elementsBelow.length; i++) {
-//       elementsBelow[i].classList.add("relative-element");
-//     }
-//   }
-//   else {
-//     document.getElementById("pill-navbar-container").classList.remove("sticky-nav");
-//     let elementsBelow = document.getElementsByClassName("relative-element");
-//     for (let i = 0; i < elementsBelow.length; i++) {
-//       elementsBelow[i].classList.remove("relative-element");
-//     }
-//   }
-
-// });
-
