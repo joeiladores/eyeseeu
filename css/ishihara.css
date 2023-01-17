@@ -4,6 +4,12 @@ body {
   background-image: url('https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-page%2Fishihara-test-blue-bg.jpg?alt=media&token=c902e814-1bc3-48e4-b658-2ccf795b2bc0');
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #loader {
   display: flex;
   align-items: center;
@@ -188,6 +194,9 @@ body {
   .display-right-panel .options {
     justify-content: center !important;
     margin-bottom: 10px !important;
+  }
+  .question-message {
+    text-align:center;
   }
 }
 
