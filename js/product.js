@@ -13,12 +13,16 @@ fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
 
 
 // product display
+window.onload = function () {
+  displayProduct();
+};
 
 function displayProduct() {
-  document.getElementById("loader").style.display = "block";
-  fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
+  
+  fetch('https://63bec3bce348cb076217c92f.mockapi.io/products?page=1&limit=15')
       .then((response) => response.json())
       .then((data) => {
+        document.getElementById("loader").style.display = "block";
         let productDetails = document.querySelector('#productDetails');
           productDetails.innerHTML = "";
           let randomData = [];
@@ -27,28 +31,31 @@ function displayProduct() {
               randomData.push(data[randomIndex]);
               data.splice(randomIndex, 1);
           }
-          randomData.forEach((user) => {
+          randomData.forEach((prod) => {
               const cards = `
-              <div class="col-md-4 g-3 mt-5">
-              <figure class="card card-product-grid">
-                <div class="img-wrap"> 
-                  <img src="${user.img}" class="img-fluid">
-                </div>
-                <figcaption class="info-wrap">
-                  <div class="fix-height">
-                    <h5 class="title text-center">${user.name}</h5>
-                  </div>
-                </figcaption>
-              </figure>
+              <div class="col-md-4 g-3 text-center">
+        <a class="nav-link">
+          <figure class="card card-product-grid">
+            <div class="img-wrap"> 
+              <img src="${prod.img}" class="img-fluid">
+              <img src="${prod.img1}" class="img-top img-fluid" alt="Card Front">
             </div>
+            <figcaption class="info-wrap">
+              <div class="fix-height">
+                <h5 class="title">${prod.name}</h5>
+              </div>
+            </figcaption>
+          </figure>
+          </a>
+        </div>
       `;
               document.querySelector('#productDetails').innerHTML += cards;
+              
           });
           document.getElementById("loader").style.display = "none";
-          window.onload = function () {
-            displayProduct();
-          };
+
       });
+
 }
 // end of product display
 
@@ -59,41 +66,48 @@ let links = document.querySelectorAll('.nav-link');
 links.forEach(link => {
   link.addEventListener('click', function(event) {
     let productType = this.dataset.productType;
-    document.getElementById("loader").style.display = "block";
-    fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
-      .then(response => response.json())
-      .then(data => {
-        let filteredProducts = data.filter(product => product.productType === productType);
-        
-        renderProducts(filteredProducts);
-      });
-      document.getElementById("loader").style.display = "none";
+    if (productType === 'all') {
+      fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
+        .then(response => response.json())
+        .then(data => {
+          renderProducts(data);
+        });
+    } else {
+      fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
+        .then(response => response.json())
+        .then(data => {
+          let filteredProducts = data.filter(product => product.productType === productType);
+          renderProducts(filteredProducts);
+        });
+    }
   });
 });
 
 
 function renderProducts(products) {
-  
+  products.sort(() => Math.random() - 0.5);
   let productList = document.getElementById("productDetails");
   productList.innerHTML = "";
   for (let i = 0; i < products.length; i++) {
     let product = products[i];
       const productTemplate = 
-        `<div class="col-md-4 g-3">
-          <figure class="card card-product-grid">
+        `<div class="col-md-4 g-3 text-center">
+          <figure class="card card-product-grid" >
+          <a class="nav-link" data-name="${product.name}">
             <div class="img-wrap"> 
               <img src="${product.img}" class="img-fluid">
+              <img src="${product.img1}" class="img-top img-fluid">
             </div>
             <figcaption class="info-wrap">
               <div class="fix-height">
                 <h5 class="title">${product.name}</h5>
               </div>
             </figcaption>
+            </a>
           </figure>
         </div>`;
         productList.insertAdjacentHTML('beforeend',productTemplate);
   }
-}
-
+} 
 // end of filter
 
