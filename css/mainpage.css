@@ -13,7 +13,6 @@
 }
 
 #mp-vid {
-  filter: blur(4px);
   filter: brightness(-50px);
 }
 
