@@ -15,10 +15,23 @@
   <link rel="icon" href="photo/main-logo&favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
   <script src="js/services.js"></script>
+  <script>
+    // Function to execute when the page finishes loading
+    function pageLoaded() {
+      // Hide the loader
+      document.getElementById("loader").style.display = "none";
+    }
+    // Add the pageLoaded function as a listener to the onload event
+    window.addEventListener("load", pageLoaded);
+  </script>
 </head>
 
 <body>
-
+  <div id="loader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
   <!-- NAVBAR SECTION ------------------------------------------------------------------->
   <nav class="navbar navbar-expand-lg bg-light fixed-top">
     <div class="container">
@@ -74,7 +87,7 @@
                 >
               </li>
               <li>
-                <a class="dropdown-item" href="product.html">Products Gallery</a>
+                <a class="dropdown-item" href="products.html">Products Gallery</a>
               </li>
             </ul>
           </li>

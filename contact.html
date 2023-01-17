@@ -22,9 +22,24 @@
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
   <!-- EMAILJS -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    // Function to execute when the page finishes loading
+    function pageLoaded() {
+      // Hide the loader
+      document.getElementById("loader").style.display = "none";
+    }
+    // Add the pageLoaded function as a listener to the onload event
+    window.addEventListener("load", pageLoaded);
+  </script>
 </head>
 
 <body>
+
+  <div id="loader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
   <!-- NAVBAR SECTION -->
   <nav class="navbar navbar-expand-lg bg-light fixed-top">
     <div class="container">
