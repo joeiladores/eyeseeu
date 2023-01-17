@@ -248,21 +248,22 @@
         </div>
         <div class="ishihara-container d-grid pb-3 pb-3">
           <div class="row">
-            <!-- GET AND DISPLAY LEFT PANEL - ISHIHARA PLATE -->
+            <!-- LEFT PANEL-->
             <div class="plate-container col-md-6 rounded-5">
               <!-- GET AND DISPLAY PLATE NUMBER AND IMAGE HERE -->
             </div>
 
-            <!-- RIGHT PANEL - DISPLAY --------------------------------------------->
+            <!-- RIGHT PANEL -->
             <div class="display-right-panel col pt-5 g-1">
               <h5>What does the patient see?</h5>
               <div class="options col d-flex gap-2 flex-wrap mb-5">
-                <!-- GET OPTIONS AND DISPLAY HERE -->
+                <!-- GET AND DISPLAY OPTIONS HERE -->
               </div>
               <div class="plate-info col p-3 shadow rounded-3 bg-light" style="display: none">
-                <!-- FETCH DISPLAY INFO AND DISPLAY HERE -->
-              </div>
+                <!-- FETCH AND DISPLAY INFO HERE -->
+              </div>              
             </div>
+            <button id="restartTestBtn" class="btn btn-primary my-3" target="#tab-3" style="display: none">Restart</button>
           </div>
         </div>
       </div>
@@ -315,13 +316,16 @@
       <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
         <h2 class="py-2 m-0">Result</h2>
       </div>
+      <div id="result-diag" class="p-3 text-center col-md-11 m-2 shadow-sm">        
+        <!-- DISPLAY DIAGNOSIS HERE -->
+      </div>
       <div id="result-bar" class="bg-light p-3 col-md-9 mx-auto">
         <!-- DISPLAY COMPUTED RESULT HERE -->
       </div>
       <div class="text-center">
         <button id="moreDetailsBtn" class="btn btn-primary my-3" target="#table-tab">View answers</button>
       </div>
-      <div id="table-tab" class="inactive bg-light py-5 px-3">
+      <div id="table-tab" class="inactive bg-light py-3 px-3">
         <div class="table-responsive table-container" style="height: 60vh">
           <table class="table table-bordered table-hover">
             <thead id="table-head" class="bg-primary text-light">
@@ -363,7 +367,7 @@
               <!-- CARD INSIDE THE MODAL -->
               <div class="card border-0 p-2">
                 <div class="row g-0">
-                  <div class="col-md-7 modal-plate-container">
+                  <div class="col-md-7 modal-plate-container p-2">
                     <!-- GET AND DISPLAY PLATE AND ANWEER PLARTE -->
                   </div>
                   <div class="col-md-5 g-danger my-auto">

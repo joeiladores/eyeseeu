@@ -24,16 +24,13 @@ const firebaseConfig = {
   appId: "1:210845750796:web:af3f92bccaf04fa201c029"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Services
 const db = getFirestore(app);
 
-// Collection Reference
 const platesRef = collection(db, 'ishihara-vcd-38');
 
-const answer = [];
+const answers = [];
 // SAMPLE ANSWER SET FOR TESTING ONLY
 // NORMAL SAMPLING
 // const answer = ['12', '8', '6', '29', '57', '5', '3', '15', '74', '2', '6', '97', '45', '5', '7', '16', '73', 'Nothing', 'Nothing', 'Nothing', 'Nothing', '26', '42', '35', '96', 'Purple and red line', 'Purple and red line', 'Nothing', 'Nothing', 'Blue-green line', 'Blue-green line', 'Orange line', 'Orange line', 'Blue-green and yellow-green line', 'Blue-green and yellow-green line', 'Purple and orange line', 'Purple and orange line', 'Orange line'];
@@ -47,7 +44,6 @@ let currentIndex = 0;
 const n_plates = 38;
 const n_weakvcd = 6;
 let hasSelectedAnswer = false;
-let isTestComplete = false;
 
 const q = query(platesRef, orderBy("plate", "asc"));
 const snapshot = await getDocs(q);
@@ -141,6 +137,7 @@ function showModal() {
 function showTestCompleteModal() {
   document.getElementById("testCompleteModal").style.display = "block";
   document.getElementById("overlay").classList.add("active");
+  document.getElementById("restartTestBtn").style.display = "block";
 }
 
 function enableElement(element) {
@@ -150,6 +147,27 @@ function enableElement(element) {
 function disableElement(element) {
   element.classList.add("disabled");
 }
+
+// EVENT LISTENER FOR RESTART TEST BUTTON
+document.getElementById("restartTestBtn").addEventListener("click", () => {
+  const lengthPlates = plates.length;
+  const lengthAnswers = answers.length;
+
+  // RESET USED ARRAYS AND OTHER DEFAULT
+  // for(let i = 0; i < lengthPlates; i++) {
+  //   plates.pop();
+  // }
+  for(let i = 0; i < lengthAnswers; i++) {
+    answers.pop();
+  }
+  disableElement(document.getElementById("nav-pill-result"));
+  hasSelectedAnswer = false;
+  
+  startTest();
+
+  document.getElementById("restartTestBtn").style.display = "none";
+
+});
 
 // SDD EVENT LISTNER TO THE MODAL CLOSE BUTTON
 document.getElementById("closeModalBtn").addEventListener("click", () => {
@@ -208,10 +226,15 @@ function styleOptionBtns(current_target, target_element) {
 
 function startTest() {
 
-  let selectedOption = "";
+  // let selectedOption = "";
+
+  // snapshot.forEach(doc => {
+  //   plates.push(doc.data());
+  // });
 
   // DISPLAY INITIAL PLATE 1
   displayPlates(plates[0]);
+  console.log(plates);
 
   // ADD EVENT LISTENERS TO OPTIONS
   document.querySelector(".options").addEventListener("click", (e) => {
@@ -224,7 +247,7 @@ function startTest() {
     if (option === "next" && selectedOption != "") {
 
       // PUSH ANSWER TO THE PLATES ARRAY      
-      answer.push(selectedOption);
+      answers.push(selectedOption);
       hidePlateA(".plate-A", ".plate-info");
 
       currentIndex++;
@@ -233,7 +256,7 @@ function startTest() {
       selectedOption = "";
       hasSelectedAnswer = false;
 
-      console.log(answer);
+      console.log(answers);
     }
     else if (option === "next" && selectedOption === "") {
       showModal();
@@ -241,7 +264,7 @@ function startTest() {
     else if (targetElement.classList.contains("optionBtn")) {
       // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
 
-      selectedOption = option;      
+      selectedOption = option;
       styleOptionBtns(e.currentTarget, targetElement);
       hasSelectedAnswer = true;
 
@@ -277,66 +300,59 @@ function computeResult() {
   let p_badv = 0;
 
   // CHECKING PLATE 1
-  if (answer[0] === plates[0].normal && answer[0] === plates[0].weakv) {
+  if (answers[0] === plates[0].normal || answers[0] === plates[0].weak_vcd) {
     count_normal++;
   }
   else {
+    console.log("wrong at index: 0");
     count_badv++;
   }
 
   // CHECKING PLATES 2 - 37
   for (let i = 1; i < n_plates - 1; i++) {
 
-    if (answer[i] === plates[i].normal) {
+    if (answers[i] === plates[i].normal) {
       count_normal++;
     }
     else {
-      if (answer[i] === plates[i].weak_vcd) {
+      if (answers[i] === plates[i].weak_vcd) {
         count_weakv++;
       }
       else if (plates[i].subtype === "vcd") {
-        if (answer[i] === plates[i].protanopia) {
+        if (answers[i] === plates[i].protanopia) {
           count_weakv++;
           count_protan++;
         }
-        else if (answer[i] === plates[i].deuteranopia) {
+        else if (answers[i] === plates[i].deuteranopia) {
           count_weakv++;
           count_deuteran++;
         }
         else {
+          console.log("wrong at index: " + i);
           count_badv++;
         }
       }
       else {
+        console.log("wrong at index: " + i);
         count_badv++;
       }
     }
   }
 
   // CHECKING FOR PLATE 38
-  if (answer[n_plates - 1] === plates[n_plates - 1].normal && answer[n_plates - 1] === plates[n_plates - 1].weak_vcd)
+  if (answers[n_plates - 1] === plates[n_plates - 1].normal && answers[n_plates - 1] === plates[n_plates - 1].weak_vcd) {
     count_normal++;
-  else
+  }
+  else {
+    console.log("wrong at index: " + n_plates - 1);
     count_badv++;
-
-  // count_weakv = count_weakv + count_protan + count_deuteran;
+  }
 
   p_normal = Math.floor((count_normal / (n_plates)) * 100);
   p_weakv = Math.floor((count_weakv / (n_plates - 2)) * 100);
   p_protan = Math.floor((count_protan / n_weakvcd) * 100);
   p_deuteran = Math.floor((count_deuteran / n_weakvcd) * 100);
   p_badv = Math.floor((count_badv / n_plates) * 100);
-
-  console.log("count_normal" + count_normal)
-  console.log("count_weakv" + count_weakv)
-  console.log("count_protan" + count_protan)
-  console.log("count_deuteran" + count_deuteran)
-  console.log("count_badv" + count_badv)
-  console.log("p_normal" + p_normal)
-  console.log("p_weakv" + p_weakv)
-  console.log("p_protan" + p_protan)
-  console.log("p_deuteran" + p_deuteran)
-  console.log("p_badv" + p_badv)
 
   const result = {
     count_normal: count_normal,
@@ -357,23 +373,48 @@ function computeResult() {
 function showResult() {
 
   let result = "";
+  const result_diag = document.getElementById("result-diag");
   const result_bar = document.getElementById("result-bar");
   const table_head = document.getElementById("table-head");
   const table_body = document.getElementById("table-body");
   const result_info = computeResult();
+  let result_desc1 = "";
+  let result_desc2 = "";
 
   console.log(result_info);
 
-  console.log("count_normal" + result_info.count_normal);
-  console.log("count_weakv" + result_info.count_weakv);
-  console.log("count_protan" + result_info.count_protan);
-  console.log("count_deuteran" + result_info.count_deuteran);
-  console.log("count_badv" + result_info.count_badv);
-  console.log("p_normal" + result_info.p_normal);
-  console.log("p_weakv" + result_info.p_weakv);
-  console.log("p_protan" + result_info.p_protan);
-  console.log("p_deuteran" + result_info.p_deuteran);
-  console.log("p_badv" + result_info.p_badv);
+  console.log("count_normal " + result_info.count_normal);
+  console.log("count_weakv " + result_info.count_weakv);
+  console.log("count_protan " + result_info.count_protan);
+  console.log("count_deuteran " + result_info.count_deuteran);
+  console.log("count_badv " + result_info.count_badv);
+  console.log("p_normal " + result_info.p_normal);
+  console.log("p_weakv " + result_info.p_weakv);
+  console.log("p_protan " + result_info.p_protan);
+  console.log("p_deuteran " + result_info.p_deuteran);
+  console.log("p_badv " + result_info.p_badv);
+
+  // Patients with more than two incorrect plates are considered to have color vision deficiency.
+  if(result_info.count_normal >= n_plates - 2) {
+    result_desc1 = "NORMAL COLOR VISION";
+    result_desc2 = "You can see up to one million disctict shades of color!";
+  }
+  else if(result_info.count_weakv > 2 || result_info.count_badv > 2) {
+    result_desc1 = "According to this test you have some form of red-green color blindness.";
+    result_desc2 = "You did not correctly identify the hidden figures in more than two test condition. You may have difficulty distinguishing many colors and it most likely impacts your daily life. Be sure to consult with your eye doctor to explore options to improve your color vision!";
+  } 
+  else {
+
+  }
+
+  console.log(result_desc1);
+  console.log(result_desc2);
+
+  result_diag.innerHTML = 
+    `
+      <div class="alert alert-primary fs-6" role="alert">${result_desc1}</div>   
+      <div>${result_desc2}</div>
+    `
 
   result_bar.innerHTML =
     `
@@ -382,9 +423,10 @@ function showResult() {
           <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_normal}%" aria-valuenow="${result_info.p_normal}"
             aria-valuemin="0" aria-valuemax="100">${result_info.p_normal}%</div>
         </div>
-        <div class="mt-3">RED GREEN COLOR DIFICIENCY (Insufficient distinction between shades of red and green):</div>
+        <div class="mt-3">RED GREEN COLOR DIFICIENCY</div>
+        <div>(Insufficient distinction between shades of red and green):</div>
         <div class="progress rounded-0">
-          <div class="progress-bar bg-warning text-dark p-1" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_weakv}%" aria-valuenow="${result_info.p_weakv}"
+          <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_weakv}%" aria-valuenow="${result_info.p_weakv}"
             aria-valuemin="0" aria-valuemax="100">${result_info.p_weakv}%</div>
         </div>
           <div class="mt-3">PROTANOPIA (Not recognized color red): </div>
@@ -417,7 +459,7 @@ function showResult() {
     `
 
   for (let i = 0; i < n_plates; i++) {
-    result = answer[i] === plates[i].normal ? "Correct" : "Wrong";
+    result = answers[i] === plates[i].normal ? "Correct" : "Wrong";
     table_body.innerHTML +=
       `
         <tr>
@@ -425,13 +467,14 @@ function showResult() {
           <td>${plates[i].type}</td>
           <td>${plates[i].normal}</td>
           <td>${plates[i].weak_vcd}</td>
-          <td>${answer[i]}</td>
+          <td>${answers[i]}</td>
           <td>${result}</td>
         </tr>
         `
   }
 }
 
+// EVENT LISTENER FOR MORE BUTTON TO VIEW DETAILED ANSWER RESULT
 document.getElementById("moreDetailsBtn").addEventListener("click", () => {
   activateElement(document.getElementById("table-tab"));
   deactivateElement(document.getElementById("moreDetailsBtn"));
@@ -474,12 +517,18 @@ function showPlatesPreview() {
 }
 
 function showCardModal(plateNum) {
-
+  
+  const modal_card_title = document.getElementById("card-modal-title");
+  const modal_plate_container = document.querySelector(".modal-plate-container");
+  const question_mssg = document.querySelector(".question-message");
+  const answer_plate_info = document.querySelector(".answer-plate-info")
+  const modal_card = document.getElementById("cardModal");
+  const modal_overlay = document.getElementById("overlay");
   const selectedPlate = plates.find(current_plate => current_plate.plate === parseInt(plateNum));
 
-  document.getElementById("card-modal-title").innerHTML = `Plate ${plateNum}`;
+  modal_card_title.innerHTML = `Plate ${plateNum}`;
 
-  document.querySelector(".modal-plate-container").innerHTML =
+  modal_plate_container.innerHTML =
     `
     <img
       src="${selectedPlate.plateURL}"
@@ -489,24 +538,24 @@ function showCardModal(plateNum) {
       class="plate-A2 img-fluid rounded-start" alt="..." style="display: none" />
   `
 
-  document.querySelector(".question-message").innerHTML =
+  question_mssg.innerHTML =
     `
     <h5 class="card-title">What do you see?</h5>
     <p class="card-text">Click the plate to check.</p>
   `
 
-  document.getElementById("cardModal").style.display = "block";
-  document.getElementById("overlay-light").classList.add("active");
+  modal_card.style.display = "block";
+  modal_overlay.classList.add("active");
 
   displayPlateInfo(".answer-plate-info", selectedPlate.display);
   // DEFAULT DISPLAY OF PLATE INFO
-  document.querySelector(".question-message").style.display = "block";
-  document.querySelector(".answer-plate-info").style.display = "none";
+  question_mssg.style.display = "block";
+  answer_plate_info.style.display = "none";
 }
 
 function closeCardModal() {
   document.getElementById("cardModal").style.display = "none";
-  document.getElementById("overlay-light").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
 }
 
 // ADD EVENT LISTERNER TO THE PLATE MODAL IMAGE
@@ -565,32 +614,3 @@ function tabEventShow(event) {
 pillElement.forEach((tab) => {
   tab.addEventListener("show.bs.tab", tabEventShow)
 })
-
-// STICKY NAV PILL
-// const navbarHeight = document.getElementById("main-navbar").offsetHeight;
-// const parallaxTop = document.getElementById("parallax-section").offsetHeight;
-// const pillNavbarHeight = document.getElementById("pill-navbar-container").offsetHeight;
-// const parallaxTop = document.querySelector(".parallax-ishihara").offsetTop;
-// console.log(navbarHeight);
-// console.log(parallaxTop);
-// console.log(parallaxTop + navbarHeight);
-// console.log(pillNavbarHeight);
-
-// window.addEventListener("scroll", function () {
-//   if (window.pageYOffset > parallaxTop - navbarHeight) {
-//     document.getElementById("pill-navbar-container").classList.add("sticky-nav");
-//     let elementsBelow = document.getElementsByClassName("relative-element");
-//     for (let i = 0; i < elementsBelow.length; i++) {
-//       elementsBelow[i].classList.add("relative-element");
-//     }
-//   }
-//   else {
-//     document.getElementById("pill-navbar-container").classList.remove("sticky-nav");
-//     let elementsBelow = document.getElementsByClassName("relative-element");
-//     for (let i = 0; i < elementsBelow.length; i++) {
-//       elementsBelow[i].classList.remove("relative-element");
-//     }
-//   }
-
-// });
-
