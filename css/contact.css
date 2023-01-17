@@ -23,11 +23,6 @@
   margin-bottom: 0;
 }
 
-/* .page-x-margin {
-  margin-left: 6.25em;
-  margin-right: 6.25em;
-} */
-
 .booking-section {
   padding-left: 6.25em;
   padding-right: 6.25em;
@@ -47,11 +42,6 @@
 #btnCalendly:hover {
   background-color: #cfcaca;
 }
-
-/* #customModal::backdrop {
-  background-color: purple;
-  opacity: .2;
-} */
 
 .modal::backdrop {
   background-color: purple;
