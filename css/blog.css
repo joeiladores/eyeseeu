@@ -10,7 +10,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
   }
   
-  
   main {
     max-width: 90%;
     margin-top: 80px;
@@ -60,7 +59,6 @@ body {
     object-position: center;
   }
   
-  
 .card-right {
 float: right;
 width: 18rem;
@@ -74,13 +72,16 @@ width: 18rem;
     transform: scale(1.01);
 }
 
-
-  
-
 .card-img-top {
   width: 100%;
-  height: auto; /* Adjusts the height to maintain the aspect ratio of the image */
+  height: auto; 
 }
+
+#blogcard {
+  height: 350px;
+}
+
+
 
 
   
