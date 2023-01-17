@@ -25,20 +25,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
-
 const platesRef = collection(db, 'ishihara-vcd-38');
 
 const answers = [];
-// SAMPLE ANSWER SET FOR TESTING ONLY
-// NORMAL SAMPLING
-// const answer = ['12', '8', '6', '29', '57', '5', '3', '15', '74', '2', '6', '97', '45', '5', '7', '16', '73', 'Nothing', 'Nothing', 'Nothing', 'Nothing', '26', '42', '35', '96', 'Purple and red line', 'Purple and red line', 'Nothing', 'Nothing', 'Blue-green line', 'Blue-green line', 'Orange line', 'Orange line', 'Blue-green and yellow-green line', 'Blue-green and yellow-green line', 'Purple and orange line', 'Purple and orange line', 'Orange line'];
-// WEAKVCD SAMPLING PROTAN
-// const answer = ['12', '3', '5', '70', '35', '2', '5', '17', '21', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', '5', '2', '45', '73', '6', '2', '5', '6', 'Purple line', 'Purple line', 'A line', 'A line', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Purple and red-green line', 'Blue-green and purple line', 'Blue-green and purple line', 'Blue-green and purple line', 'Orange line'];
-// WEAK VCD SAMPLEING DEUTRAN
-// const answer = ['12', '3', '5', '70', '35', '2', '5', '17', '21', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', '5', '2', '45', '73', '2', '4', '3', '9', 'Red line', 'Red line', 'A line', 'A line', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Purple and red-green line', 'Blue-green and purple line', 'Blue-green and purple line', 'Blue-green and purple line', 'Orange line'];
-
 const plates = [];
 let currentIndex = 0;
 const n_plates = 38;
@@ -157,12 +147,12 @@ document.getElementById("restartTestBtn").addEventListener("click", () => {
   // for(let i = 0; i < lengthPlates; i++) {
   //   plates.pop();
   // }
-  for(let i = 0; i < lengthAnswers; i++) {
+  for (let i = 0; i < lengthAnswers; i++) {
     answers.pop();
   }
   disableElement(document.getElementById("nav-pill-result"));
   hasSelectedAnswer = false;
-  
+
   startTest();
 
   document.getElementById("restartTestBtn").style.display = "none";
@@ -226,11 +216,7 @@ function styleOptionBtns(current_target, target_element) {
 
 function startTest() {
 
-  // let selectedOption = "";
-
-  // snapshot.forEach(doc => {
-  //   plates.push(doc.data());
-  // });
+  let selectedOption = "";
 
   // DISPLAY INITIAL PLATE 1
   displayPlates(plates[0]);
@@ -395,14 +381,14 @@ function showResult() {
   console.log("p_badv " + result_info.p_badv);
 
   // Patients with more than two incorrect plates are considered to have color vision deficiency.
-  if(result_info.count_normal >= n_plates - 2) {
+  if (result_info.count_normal >= n_plates - 2) {
     result_desc1 = "NORMAL COLOR VISION";
     result_desc2 = "You can see up to one million disctict shades of color!";
   }
-  else if(result_info.count_weakv > 2 || result_info.count_badv > 2) {
+  else if (result_info.count_weakv > 2 || result_info.count_badv > 2) {
     result_desc1 = "According to this test you have some form of red-green color blindness.";
     result_desc2 = "You did not correctly identify the hidden figures in more than two test condition. You may have difficulty distinguishing many colors and it most likely impacts your daily life. Be sure to consult with your eye doctor to explore options to improve your color vision!";
-  } 
+  }
   else {
 
   }
@@ -410,7 +396,7 @@ function showResult() {
   console.log(result_desc1);
   console.log(result_desc2);
 
-  result_diag.innerHTML = 
+  result_diag.innerHTML =
     `
       <div class="alert alert-primary fs-6" role="alert">${result_desc1}</div>   
       <div>${result_desc2}</div>
@@ -517,7 +503,7 @@ function showPlatesPreview() {
 }
 
 function showCardModal(plateNum) {
-  
+
   const modal_card_title = document.getElementById("card-modal-title");
   const modal_plate_container = document.querySelector(".modal-plate-container");
   const question_mssg = document.querySelector(".question-message");
