@@ -35,7 +35,7 @@ Languages and Tools Used🛠:
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/joeiladores/eyeseeu/photos/screenshot/eyeseeu.png)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/joeiladores/eyeseeu)
 An API-Driven Web Application
 
 
@@ -53,4 +53,4 @@ Heherson Edra - hehersone@gmail.com <br />
 </details>
  
 
-[product-screenshot]: /assets/img/Screenshot.png
+[product-screenshot]: /phpto/screenshot/eyeseeu.png
