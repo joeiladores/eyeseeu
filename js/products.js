@@ -1,6 +1,6 @@
-function filterAndRedirect(filter) {
+function filterAndRedirect(productType) {
   const currentUrl = window.location.href;
-  const filteredProductUrl = `product.html?filter=${filter}`;
+  const filteredProductUrl = `product.html?filter=${productType}`;
   window.location.href = filteredProductUrl;
 }
 

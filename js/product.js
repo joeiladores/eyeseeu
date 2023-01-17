@@ -32,23 +32,22 @@ function displayProduct() {
               data.splice(randomIndex, 1);
           }
           randomData.forEach((prod) => {
-              const cards = `
-              <div class="col-md-4 g-3 text-center">
-        <a class="nav-link">
-          <figure class="card card-product-grid">
+              const cards =  
+              `<div class="col-md-4 g-3 text-center">
+          <figure class="card card-product-grid" >
+          <a class="nav-link" data-name="${prod.name}">
             <div class="img-wrap"> 
-              <img src="${prod.img}" class="img-fluid">
-              <img src="${prod.img1}" class="img-top img-fluid" alt="Card Front">
+              <img src="${prod.image1}" class="img-fluid">
+              <img src="${prod.img2}" class="img-top img-fluid">
             </div>
             <figcaption class="info-wrap">
               <div class="fix-height">
                 <h5 class="title">${prod.name}</h5>
               </div>
             </figcaption>
+            </a>
           </figure>
-          </a>
-        </div>
-      `;
+        </div>`;
               document.querySelector('#productDetails').innerHTML += cards;
               
           });
@@ -95,8 +94,8 @@ function renderProducts(products) {
           <figure class="card card-product-grid" >
           <a class="nav-link" data-name="${product.name}">
             <div class="img-wrap"> 
-              <img src="${product.img}" class="img-fluid">
-              <img src="${product.img1}" class="img-top img-fluid">
+              <img src="${product.image1}" class="img-fluid">
+              <img src="${product.img2}" class="img-top img-fluid">
             </div>
             <figcaption class="info-wrap">
               <div class="fix-height">
