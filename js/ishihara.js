@@ -327,6 +327,17 @@ function computeResult() {
   p_deuteran = Math.floor((count_deuteran / n_weakvcd) * 100);
   p_badv = Math.floor((count_badv / n_plates) * 100);
 
+  console.log("count_normal" + count_normal)
+  console.log("count_weakv" + count_weakv)
+  console.log("count_protan" + count_protan)
+  console.log("count_deuteran" + count_deuteran)
+  console.log("count_badv" + count_badv)
+  console.log("p_normal" + p_normal)
+  console.log("p_weakv" + p_weakv)
+  console.log("p_protan" + p_protan)
+  console.log("p_deuteran" + p_deuteran)
+  console.log("p_badv" + p_badv)
+
   const result = {
     count_normal: count_normal,
     count_weakv: count_weakv,
@@ -350,6 +361,19 @@ function showResult() {
   const table_head = document.getElementById("table-head");
   const table_body = document.getElementById("table-body");
   const result_info = computeResult();
+
+  console.log(result_info);
+
+  console.log("count_normal" + result_info.count_normal);
+  console.log("count_weakv" + result_info.count_weakv);
+  console.log("count_protan" + result_info.count_protan);
+  console.log("count_deuteran" + result_info.count_deuteran);
+  console.log("count_badv" + result_info.count_badv);
+  console.log("p_normal" + result_info.p_normal);
+  console.log("p_weakv" + result_info.p_weakv);
+  console.log("p_protan" + result_info.p_protan);
+  console.log("p_deuteran" + result_info.p_deuteran);
+  console.log("p_badv" + result_info.p_badv);
 
   result_bar.innerHTML =
     `
@@ -436,9 +460,9 @@ function showPlatesPreview() {
     document.getElementById("plate-cards-preview").innerHTML +=
       `
       <div class="col">
-        <div class="card shadow-lg rounded-3 pb-3">
-          <div class="card-body">
-            <h5 class="card-title text-center">Plate ${plate.plate}</h5>
+        <div class="card shadow-lg rounded-3 pb-1">
+          <div class="card-body p-0 pt-2">
+            <h5 class="card-title text-center m-0">Plate ${plate.plate}</h5>
           </div>
           <div class="zoom-plate p-3">
             <img class="card-img-bottom img-fluid" src=${plate.plateURL}" alt="Ishihara Plate ${plate.plate}" data-plate=${plate.plate}>      
