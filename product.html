@@ -122,10 +122,15 @@
       </div>
     </nav>
 
+<!-- Back to top button -->
+<button type="button" class="btn btn-primary btn-floating btn-lg" id="btn-back-to-top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
 <!-- filter -->
-<div class="container animate-bottom">
+<div class="container">
 	<div class="row">
-	<aside class="col-md-3">
+	<aside class="col-lg-4">
 <div class="accordion" id="accordionExample" style="margin-top: 5em;">
 	<article class="filter-group accordion-item">
 		<header class="card-header accordion-header" id="headingOne">
@@ -134,14 +139,14 @@
 			</button>
 		</header>
 		<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" id="accordionExample">
-			<div class="card-body accordion-body">
+			<div class="card-body accordion-body m-4">
       
-        <ul id="product-list" class="nav nav-pills">
-          <li><button data-product-type="Accessories" class="nav-link" >Accessories</button></li>
-          <li ><button data-product-type="sunGlasses" class="nav-link" >Sun glass</button></li>
-          <li><button data-product-type="contactLens" class="nav-link" >Contact lens</button></li>
-          <li><button data-product-type="eyeGlasses" class="nav-link" >Eye glass</button></li>
-          <li><button data-product-type="readingGlass" class="nav-link" >Reading glass</button></li>
+        <ul id="product-list" class="nav nav-pills list-group list-group-horizontal">
+          <li><button data-product-type="Accessories" class="nav-link list-group-item" >Accessories</button></li>
+          <li ><button data-product-type="sunGlasses" class="nav-link list-group-item" >Sun glass</button></li>
+          <li><button data-product-type="contactLens" class="nav-link list-group-item" >Contact lens</button></li>
+          <li><button data-product-type="eyeGlasses" class="nav-link list-group-item" >Eye glass</button></li>
+          <li><button data-product-type="readingGlass" class="nav-link list-group-item" >Reading glass</button></li>
         </ul>
         
 
@@ -154,10 +159,10 @@
   <!-- end filter -->
 
   <!-- product -->
-<main class="col-md-9">
-<div class="row" id="productDetails">
-
+<main class="col-md-8 d-flex justify-content-center">
+<div class="row " id="productDetails">
   </div>
+  <div id="gallery"></div>
   </main>
 <!-- end produdct -->
   </div>
