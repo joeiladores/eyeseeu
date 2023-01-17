@@ -35,7 +35,7 @@ Languages and Tools Used🛠:
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/joeiladores/eyeseeu)
+[![Product Name Screen Shot][product-screenshot]](https://eyeseeuoptical.vercel.app)
 An API-Driven Web Application
 
 
@@ -53,4 +53,4 @@ Heherson Edra - hehersone@gmail.com <br />
 </details>
  
 
-[product-screenshot]: /phpto/screenshot/eyeseeu.png
+[product-screenshot]: /photo/screenshot/eyeseeu.png
