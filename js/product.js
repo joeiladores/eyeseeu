@@ -13,10 +13,13 @@ fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
 
 
 // product display
+window.onload = function () {
+  displayProduct();
+};
 
 function displayProduct() {
   
-  fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
+  fetch('https://63bec3bce348cb076217c92f.mockapi.io/products?page=1&limit=15')
       .then((response) => response.json())
       .then((data) => {
         document.getElementById("loader").style.display = "block";
@@ -30,16 +33,16 @@ function displayProduct() {
           }
           randomData.forEach((prod) => {
               const cards = `
-              <div class="col-md-4 g-3">
-        <a class="product-list" data-name="${product.name}">
+              <div class="col-md-4 g-3 text-center">
+        <a class="nav-link">
           <figure class="card card-product-grid">
             <div class="img-wrap"> 
-              <img src="${product.img}" class="img-fluid">
-              <img src="${product.img1}" class="img-top img-fluid" alt="Card Front">
+              <img src="${prod.img}" class="img-fluid">
+              <img src="${prod.img1}" class="img-top img-fluid" alt="Card Front">
             </div>
             <figcaption class="info-wrap">
               <div class="fix-height">
-                <h5 class="title">${product.name}</h5>
+                <h5 class="title">${prod.name}</h5>
               </div>
             </figcaption>
           </figure>
@@ -50,10 +53,9 @@ function displayProduct() {
               
           });
           document.getElementById("loader").style.display = "none";
-          window.onload = function () {
-            displayProduct();
-          };
+
       });
+
 }
 // end of product display
 
@@ -64,15 +66,20 @@ let links = document.querySelectorAll('.nav-link');
 links.forEach(link => {
   link.addEventListener('click', function(event) {
     let productType = this.dataset.productType;
-    document.getElementById("loader").style.display = "block";
-    fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
-      .then(response => response.json())
-      .then(data => {
-        let filteredProducts = data.filter(product => product.productType === productType);
-        
-        renderProducts(filteredProducts);
-      });
-      document.getElementById("loader").style.display = "none";
+    if (productType === 'all') {
+      fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
+        .then(response => response.json())
+        .then(data => {
+          renderProducts(data);
+        });
+    } else {
+      fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
+        .then(response => response.json())
+        .then(data => {
+          let filteredProducts = data.filter(product => product.productType === productType);
+          renderProducts(filteredProducts);
+        });
+    }
   });
 });
 
@@ -101,5 +108,6 @@ function renderProducts(products) {
         </div>`;
         productList.insertAdjacentHTML('beforeend',productTemplate);
   }
-}
+} 
 // end of filter
+
