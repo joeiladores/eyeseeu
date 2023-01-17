@@ -325,16 +325,6 @@ function computeResult() {
     count_badv++;
   }
 
-  console.log("In computeResult()");
-  console.log("count_normal: " + count_normal);
-  console.log("weakv: " + count_weakv);
-  console.log("protan: " + count_protan);
-  console.log("deuteran: " + count_deuteran);
-  console.log("count_badv: " + count_badv);
-
-
-  // count_weakv = count_weakv + count_protan + count_deuteran;
-
   p_normal = Math.floor((count_normal / (n_plates)) * 100);
   p_weakv = Math.floor((count_weakv / (n_plates - 2)) * 100);
   p_protan = Math.floor((count_protan / n_weakvcd) * 100);
@@ -360,10 +350,13 @@ function computeResult() {
 function showResult() {
 
   let result = "";
+  const result_diag = document.getElementById("result-diag");
   const result_bar = document.getElementById("result-bar");
   const table_head = document.getElementById("table-head");
   const table_body = document.getElementById("table-body");
   const result_info = computeResult();
+  let result_desc1 = "";
+  let result_desc2 = "";
 
   console.log(result_info);
 
@@ -378,6 +371,28 @@ function showResult() {
   console.log("p_deuteran " + result_info.p_deuteran);
   console.log("p_badv " + result_info.p_badv);
 
+  // Patients with more than two incorrect plates are considered to have color vision deficiency.
+  if(result_info.count_normal >= n_plates - 2) {
+    result_desc1 = "NORMAL COLOR VISION";
+    result_desc2 = "You can see up to one million disctict shades of color!";
+  }
+  else if(result_info.count_weakv > 2 || result_info.count_badv > 2) {
+    result_desc1 = "According to this test you have some form of red-green color blindness.";
+    result_desc2 = "You did not correctly identify the hidden figures in more than two test condition. You may have difficulty distinguishing many colors and it most likely impacts your daily life. Be sure to consult with your eye doctor to explore options to improve your color vision!";
+  } 
+  else {
+
+  }
+
+  console.log(result_desc1);
+  console.log(result_desc2);
+
+  result_diag.innerHTML = 
+    `
+      <div class="alert alert-primary fs-6" role="alert">${result_desc1}</div>   
+      <div>${result_desc2}</div>
+    `
+
   result_bar.innerHTML =
     `
       <div>TRICHROMATISM (Normal Vision): </div>
@@ -385,7 +400,8 @@ function showResult() {
           <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_normal}%" aria-valuenow="${result_info.p_normal}"
             aria-valuemin="0" aria-valuemax="100">${result_info.p_normal}%</div>
         </div>
-        <div class="mt-3">RED GREEN COLOR DIFICIENCY (Insufficient distinction between shades of red and green):</div>
+        <div class="mt-3">RED GREEN COLOR DIFICIENCY</div>
+        <div>(Insufficient distinction between shades of red and green):</div>
         <div class="progress rounded-0">
           <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_weakv}%" aria-valuenow="${result_info.p_weakv}"
             aria-valuemin="0" aria-valuemax="100">${result_info.p_weakv}%</div>
