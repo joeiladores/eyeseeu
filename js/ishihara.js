@@ -241,7 +241,7 @@ function startTest() {
     else if (targetElement.classList.contains("optionBtn")) {
       // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
 
-      selectedOption = option;      
+      selectedOption = option;
       styleOptionBtns(e.currentTarget, targetElement);
       hasSelectedAnswer = true;
 
@@ -277,10 +277,11 @@ function computeResult() {
   let p_badv = 0;
 
   // CHECKING PLATE 1
-  if (answer[0] === plates[0].normal && answer[0] === plates[0].weakv) {
+  if (answer[0] === plates[0].normal || answer[0] === plates[0].weak_vcd) {
     count_normal++;
   }
   else {
+    console.log("wrong at index: 0");
     count_badv++;
   }
 
@@ -304,20 +305,33 @@ function computeResult() {
           count_deuteran++;
         }
         else {
+          console.log("wrong at index: " + i);
           count_badv++;
         }
       }
       else {
+        console.log("wrong at index: " + i);
         count_badv++;
       }
     }
   }
 
   // CHECKING FOR PLATE 38
-  if (answer[n_plates - 1] === plates[n_plates - 1].normal && answer[n_plates - 1] === plates[n_plates - 1].weak_vcd)
+  if (answer[n_plates - 1] === plates[n_plates - 1].normal && answer[n_plates - 1] === plates[n_plates - 1].weak_vcd) {
     count_normal++;
-  else
+  }
+  else {
+    console.log("wrong at index: " + n_plates - 1);
     count_badv++;
+  }
+
+  console.log("In computeResult()");
+  console.log("count_normal: " + count_normal);
+  console.log("weakv: " + count_weakv);
+  console.log("protan: " + count_protan);
+  console.log("deuteran: " + count_deuteran);
+  console.log("count_badv: " + count_badv);
+
 
   // count_weakv = count_weakv + count_protan + count_deuteran;
 
@@ -326,17 +340,6 @@ function computeResult() {
   p_protan = Math.floor((count_protan / n_weakvcd) * 100);
   p_deuteran = Math.floor((count_deuteran / n_weakvcd) * 100);
   p_badv = Math.floor((count_badv / n_plates) * 100);
-
-  console.log("count_normal" + count_normal)
-  console.log("count_weakv" + count_weakv)
-  console.log("count_protan" + count_protan)
-  console.log("count_deuteran" + count_deuteran)
-  console.log("count_badv" + count_badv)
-  console.log("p_normal" + p_normal)
-  console.log("p_weakv" + p_weakv)
-  console.log("p_protan" + p_protan)
-  console.log("p_deuteran" + p_deuteran)
-  console.log("p_badv" + p_badv)
 
   const result = {
     count_normal: count_normal,
@@ -364,16 +367,16 @@ function showResult() {
 
   console.log(result_info);
 
-  console.log("count_normal" + result_info.count_normal);
-  console.log("count_weakv" + result_info.count_weakv);
-  console.log("count_protan" + result_info.count_protan);
-  console.log("count_deuteran" + result_info.count_deuteran);
-  console.log("count_badv" + result_info.count_badv);
-  console.log("p_normal" + result_info.p_normal);
-  console.log("p_weakv" + result_info.p_weakv);
-  console.log("p_protan" + result_info.p_protan);
-  console.log("p_deuteran" + result_info.p_deuteran);
-  console.log("p_badv" + result_info.p_badv);
+  console.log("count_normal " + result_info.count_normal);
+  console.log("count_weakv " + result_info.count_weakv);
+  console.log("count_protan " + result_info.count_protan);
+  console.log("count_deuteran " + result_info.count_deuteran);
+  console.log("count_badv " + result_info.count_badv);
+  console.log("p_normal " + result_info.p_normal);
+  console.log("p_weakv " + result_info.p_weakv);
+  console.log("p_protan " + result_info.p_protan);
+  console.log("p_deuteran " + result_info.p_deuteran);
+  console.log("p_badv " + result_info.p_badv);
 
   result_bar.innerHTML =
     `
@@ -384,7 +387,7 @@ function showResult() {
         </div>
         <div class="mt-3">RED GREEN COLOR DIFICIENCY (Insufficient distinction between shades of red and green):</div>
         <div class="progress rounded-0">
-          <div class="progress-bar bg-warning text-dark p-1" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_weakv}%" aria-valuenow="${result_info.p_weakv}"
+          <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_weakv}%" aria-valuenow="${result_info.p_weakv}"
             aria-valuemin="0" aria-valuemax="100">${result_info.p_weakv}%</div>
         </div>
           <div class="mt-3">PROTANOPIA (Not recognized color red): </div>
@@ -496,7 +499,7 @@ function showCardModal(plateNum) {
   `
 
   document.getElementById("cardModal").style.display = "block";
-  document.getElementById("overlay-light").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
 
   displayPlateInfo(".answer-plate-info", selectedPlate.display);
   // DEFAULT DISPLAY OF PLATE INFO
@@ -506,7 +509,7 @@ function showCardModal(plateNum) {
 
 function closeCardModal() {
   document.getElementById("cardModal").style.display = "none";
-  document.getElementById("overlay-light").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
 }
 
 // ADD EVENT LISTERNER TO THE PLATE MODAL IMAGE

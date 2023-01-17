@@ -141,6 +141,7 @@ body {
 
 .ishihara-text-gradient {
   background: linear-gradient(to right, #3B12E2, #2ad2e4, transparent);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
