@@ -100,14 +100,6 @@ body {
   text-align:justify;
 }
 
-/* RESPONSIVLE PARALLAX */
-/* big */
-/* @media screen and (max-width: 959px) and (min-width: 768px) {
-  #parallax-section .parallax-content {
-    padding: 20px; 
-    width: 620px;    
-} */
-
 /* medium */
 @media screen and (max-width: 767px) {
   #parallax-section .parallax-content {

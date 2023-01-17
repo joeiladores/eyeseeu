@@ -90,7 +90,6 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  /* background-color: rgba(0, 0, 0, 0.5); */
   background-color: rgba(255, 255, 255, 0.5);
   pointer-events: none;
 }
@@ -152,12 +151,10 @@ body {
 .table-container thead {
   position: sticky;
   top: 0;
-  /* background-color: #f5f5f5; */
 }
 /* Add a scrollbar to the table body */
 .table-container tbody {
   overflow-y: scroll;
-  /* height: 300px; */
 }
 
 @media screen and (max-width: 576px) {

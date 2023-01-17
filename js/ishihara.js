@@ -101,6 +101,17 @@ function displayPlateInfo(element, info) {
   `
 }
 
+function styleOptionBtns(current_target, target_element) {
+
+  const otherOptions = Array.from(current_target.children);
+
+  otherOptions.forEach((child) => {
+    if (child != target_element) child.classList.remove("active");
+    else child.classList.add("active");
+  });
+
+}
+
 function hidePlateQ(imageElement) {
   document.querySelector(imageElement).style.display = "none";
 }
@@ -138,15 +149,21 @@ function disableElement(element) {
   element.classList.add("disabled");
 }
 
+function activateElement(element) {
+  element.classList.add("active");
+  element.classList.remove("inactive");
+}
+
+function deactivateElement(element) {
+  element.classList.add("inactive");
+  element.classList.remove("active");
+}
+
 // EVENT LISTENER FOR RESTART TEST BUTTON
 document.getElementById("restartTestBtn").addEventListener("click", () => {
   const lengthPlates = plates.length;
   const lengthAnswers = answers.length;
 
-  // RESET USED ARRAYS AND OTHER DEFAULT
-  // for(let i = 0; i < lengthPlates; i++) {
-  //   plates.pop();
-  // }
   for (let i = 0; i < lengthAnswers; i++) {
     answers.pop();
   }
@@ -181,16 +198,6 @@ document.querySelector(".plate-container").addEventListener("click", (e) => {
   }
 });
 
-function activateElement(element) {
-  element.classList.add("active");
-  element.classList.remove("inactive");
-}
-
-function deactivateElement(element) {
-  element.classList.add("inactive");
-  element.classList.remove("active");
-}
-
 // ADD EVETN LISTENER TO THE START BUTTON, OPEN THE PILL NAV TEST AND START TEST
 document.getElementById("startTestBtn").addEventListener("click", () => {
   activateElement(document.getElementById("nav-pill-test"));
@@ -201,18 +208,6 @@ document.getElementById("startTestBtn").addEventListener("click", () => {
 });
 
 document.getElementById("nav-pill-test").addEventListener("click", startTest());
-
-function styleOptionBtns(current_target, target_element) {
-
-  const otherOptions = Array.from(current_target.children);
-  // console.log(otherOptions);
-
-  otherOptions.forEach((child) => {
-    if (child != target_element) child.classList.remove("active");
-    else child.classList.add("active");
-  });
-
-}
 
 function startTest() {
 
