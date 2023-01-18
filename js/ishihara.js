@@ -44,6 +44,7 @@ snapshot.forEach(doc => {
 function startTest() {
 
   let selectedOption = "";
+  currentIndex = 0;
 
   // DISPLAY INITIAL PLATE 1
   displayPlates(plates[0]);
