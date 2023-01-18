@@ -41,6 +41,54 @@ snapshot.forEach(doc => {
   plates.push(doc.data());
 });
 
+function startTest() {
+
+  let selectedOption = "";
+
+  // DISPLAY INITIAL PLATE 1
+  displayPlates(plates[0]);
+
+  // ADD EVENT LISTENERS TO OPTIONS
+  document.querySelector(".options").addEventListener("click", (e) => {
+
+    let targetElement = e.target;
+    let option = targetElement.dataset.option;
+
+    if (option === "next" && selectedOption != "") {
+
+      answers.push(selectedOption);
+      hidePlateA(".plate-A", ".plate-info");
+
+      currentIndex++;
+
+      // RESET SELECTED OPTION
+      selectedOption = "";
+      hasSelectedAnswer = false;
+    }
+    else if (option === "next" && selectedOption === "") {
+      showModal();
+    }
+    else if (targetElement.classList.contains("optionBtn")) {
+      // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
+      selectedOption = option;
+      styleOptionBtns(e.currentTarget, targetElement);
+      hasSelectedAnswer = true;
+
+      return;
+    }
+    else return;
+
+    // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
+    if (currentIndex < n_plates) {
+      displayPlates(plates[currentIndex]);
+    }
+    // WHEN THE TEST IS COMPLETE
+    else {
+      showTestCompleteModal();
+    }
+  });
+}
+
 function displayPlates(plate) {
 
   let progressValue = Math.floor((plate.plate / 38) * 100);
@@ -112,160 +160,6 @@ function styleOptionBtns(current_target, target_element) {
 
 }
 
-function hidePlateQ(imageElement) {
-  document.querySelector(imageElement).style.display = "none";
-}
-
-function showPlateQ(imageElement) {
-  document.querySelector(imageElement).style.display = "block";
-}
-
-function showPlateA(imageElement, infoElement) {
-  document.querySelector(imageElement).style.display = "block";
-  document.querySelector(infoElement).style.display = "block";
-}
-
-function hidePlateA(imageElement, infoElement) {
-  document.querySelector(imageElement).style.display = "none";
-  document.querySelector(infoElement).style.display = "none";
-}
-
-function showModal() {
-  document.getElementById("errModal").style.display = "block";
-  document.getElementById("overlay").classList.add("active");
-}
-
-function showTestCompleteModal() {
-  document.getElementById("testCompleteModal").style.display = "block";
-  document.getElementById("overlay").classList.add("active");
-  document.getElementById("restartTestBtn").style.display = "block";
-}
-
-function enableElement(element) {
-  element.classList.remove("disabled");
-}
-
-function disableElement(element) {
-  element.classList.add("disabled");
-}
-
-function activateElement(element) {
-  element.classList.add("active");
-  element.classList.remove("inactive");
-}
-
-function deactivateElement(element) {
-  element.classList.add("inactive");
-  element.classList.remove("active");
-}
-
-// EVENT LISTENER FOR RESTART TEST BUTTON
-document.getElementById("restartTestBtn").addEventListener("click", () => {
-  const lengthPlates = plates.length;
-  const lengthAnswers = answers.length;
-
-  for (let i = 0; i < lengthAnswers; i++) {
-    answers.pop();
-  }
-  disableElement(document.getElementById("nav-pill-result"));
-  hasSelectedAnswer = false;
-
-  startTest();
-
-  document.getElementById("restartTestBtn").style.display = "none";
-
-});
-
-// SDD EVENT LISTNER TO THE MODAL CLOSE BUTTON
-document.getElementById("closeModalBtn").addEventListener("click", () => {
-  document.getElementById("errModal").style.display = "none";
-  document.getElementById("overlay").classList.remove("active");
-});
-
-// ADD EVENT LISTERNER TO THE PLATE IMAGE
-document.querySelector(".plate-container").addEventListener("click", (e) => {
-
-  let targetElement = e.target;
-  // let elementID = targetElement.id;
-
-  if (targetElement.classList.contains("plate-Q") && hasSelectedAnswer) {
-    hidePlateQ(".plate-Q");
-    showPlateA(".plate-A", ".plate-info");
-  }
-  if (targetElement.classList.contains("plate-A")) {
-    hidePlateA(".plate-A", ".plate-info");
-    showPlateQ(".plate-Q");
-  }
-});
-
-// ADD EVETN LISTENER TO THE START BUTTON, OPEN THE PILL NAV TEST AND START TEST
-document.getElementById("startTestBtn").addEventListener("click", () => {
-  activateElement(document.getElementById("nav-pill-test"));
-  deactivateElement(document.getElementById("nav-pill-inst"));
-  activateElement(document.getElementById("tab-3"));
-  deactivateElement(document.getElementById("tab-2"));
-  startTest();
-});
-
-document.getElementById("nav-pill-test").addEventListener("click", startTest());
-
-function startTest() {
-
-  let selectedOption = "";
-
-  // DISPLAY INITIAL PLATE 1
-  displayPlates(plates[0]);
-  console.log(plates);
-
-  // ADD EVENT LISTENERS TO OPTIONS
-  document.querySelector(".options").addEventListener("click", (e) => {
-
-    let targetElement = e.target;
-    let option = targetElement.dataset.option;
-
-    console.log("Index: " + currentIndex);
-
-    if (option === "next" && selectedOption != "") {
-
-      // PUSH ANSWER TO THE PLATES ARRAY      
-      answers.push(selectedOption);
-      hidePlateA(".plate-A", ".plate-info");
-
-      currentIndex++;
-
-      // RESET SELECTED OPTION TO ""
-      selectedOption = "";
-      hasSelectedAnswer = false;
-
-      console.log(answers);
-    }
-    else if (option === "next" && selectedOption === "") {
-      showModal();
-    }
-    else if (targetElement.classList.contains("optionBtn")) {
-      // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
-
-      selectedOption = option;
-      styleOptionBtns(e.currentTarget, targetElement);
-      hasSelectedAnswer = true;
-
-      return;
-    }
-    else return;
-
-    // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
-    if (currentIndex < n_plates) {
-      displayPlates(plates[currentIndex]);
-    }
-    // WHEN THE TEST IS COMPLETE
-    else {
-      showTestCompleteModal();
-    }
-  });
-
-
-}
-
 // ANSWER DATASET FOR TESTING OF RESULT
 function computeResult() {
 
@@ -285,7 +179,6 @@ function computeResult() {
     count_normal++;
   }
   else {
-    console.log("wrong at index: 0");
     count_badv++;
   }
 
@@ -309,12 +202,10 @@ function computeResult() {
           count_deuteran++;
         }
         else {
-          console.log("wrong at index: " + i);
           count_badv++;
         }
       }
       else {
-        console.log("wrong at index: " + i);
         count_badv++;
       }
     }
@@ -325,7 +216,6 @@ function computeResult() {
     count_normal++;
   }
   else {
-    console.log("wrong at index: " + n_plates - 1);
     count_badv++;
   }
 
@@ -362,34 +252,15 @@ function showResult() {
   let result_desc1 = "";
   let result_desc2 = "";
 
-  console.log(result_info);
-
-  console.log("count_normal " + result_info.count_normal);
-  console.log("count_weakv " + result_info.count_weakv);
-  console.log("count_protan " + result_info.count_protan);
-  console.log("count_deuteran " + result_info.count_deuteran);
-  console.log("count_badv " + result_info.count_badv);
-  console.log("p_normal " + result_info.p_normal);
-  console.log("p_weakv " + result_info.p_weakv);
-  console.log("p_protan " + result_info.p_protan);
-  console.log("p_deuteran " + result_info.p_deuteran);
-  console.log("p_badv " + result_info.p_badv);
-
   // Patients with more than two incorrect plates are considered to have color vision deficiency.
   if (result_info.count_normal >= n_plates - 2) {
     result_desc1 = "NORMAL COLOR VISION";
     result_desc2 = "You can see up to one million disctict shades of color!";
   }
-  else if (result_info.count_weakv > 2 || result_info.count_badv > 2) {
+  if (result_info.count_weakv > 2 || result_info.count_badv > 2) {
     result_desc1 = "According to this test you have some form of red-green color blindness.";
     result_desc2 = "You did not correctly identify the hidden figures in more than two test condition. You may have difficulty distinguishing many colors and it most likely impacts your daily life. Be sure to consult with your eye doctor to explore options to improve your color vision!";
   }
-  else {
-
-  }
-
-  console.log(result_desc1);
-  console.log(result_desc2);
 
   result_diag.innerHTML =
     `
@@ -455,6 +326,108 @@ function showResult() {
   }
 }
 
+function hidePlateQ(imageElement) {
+  document.querySelector(imageElement).style.display = "none";
+}
+
+function showPlateQ(imageElement) {
+  document.querySelector(imageElement).style.display = "block";
+}
+
+function showPlateA(imageElement, infoElement) {
+  document.querySelector(imageElement).style.display = "block";
+  document.querySelector(infoElement).style.display = "block";
+}
+
+function hidePlateA(imageElement, infoElement) {
+  document.querySelector(imageElement).style.display = "none";
+  document.querySelector(infoElement).style.display = "none";
+}
+
+function showModal() {
+  document.getElementById("errModal").style.display = "block";
+  document.getElementById("overlay").classList.add("active");
+}
+
+function showTestCompleteModal() {
+  document.getElementById("testCompleteModal").style.display = "block";
+  document.getElementById("overlay").classList.add("active");
+  document.getElementById("restartTestBtn").style.display = "block";
+}
+
+function enableElement(element) {
+  element.classList.remove("disabled");
+}
+
+function disableElement(element) {
+  element.classList.add("disabled");
+}
+
+function activateElement(element) {
+  element.classList.add("active");
+  element.classList.remove("inactive");
+}
+
+function deactivateElement(element) {
+  element.classList.add("inactive");
+  element.classList.remove("active");
+}
+
+function closeCardModal() {
+  document.getElementById("cardModal").style.display = "none";
+  document.getElementById("overlay").classList.remove("active");
+}
+
+// EVENT LISTENER FOR RESTART TEST BUTTON
+document.getElementById("restartTestBtn").addEventListener("click", () => {
+  const lengthPlates = plates.length;
+  const lengthAnswers = answers.length;
+
+  for (let i = 0; i < lengthAnswers; i++) {
+    answers.pop();
+  }
+  disableElement(document.getElementById("nav-pill-result"));
+  hasSelectedAnswer = false;
+
+  startTest();
+
+  document.getElementById("restartTestBtn").style.display = "none";
+
+});
+
+// SDD EVENT LISTNER TO THE MODAL CLOSE BUTTON
+document.getElementById("closeModalBtn").addEventListener("click", () => {
+  document.getElementById("errModal").style.display = "none";
+  document.getElementById("overlay").classList.remove("active");
+});
+
+// ADD EVENT LISTERNER TO THE PLATE IMAGE
+document.querySelector(".plate-container").addEventListener("click", (e) => {
+
+  let targetElement = e.target;
+  // let elementID = targetElement.id;
+
+  if (targetElement.classList.contains("plate-Q") && hasSelectedAnswer) {
+    hidePlateQ(".plate-Q");
+    showPlateA(".plate-A", ".plate-info");
+  }
+  if (targetElement.classList.contains("plate-A")) {
+    hidePlateA(".plate-A", ".plate-info");
+    showPlateQ(".plate-Q");
+  }
+});
+
+// ADD EVETN LISTENER TO THE START BUTTON, OPEN THE PILL NAV TEST AND START TEST
+document.getElementById("startTestBtn").addEventListener("click", () => {
+  activateElement(document.getElementById("nav-pill-test"));
+  deactivateElement(document.getElementById("nav-pill-inst"));
+  activateElement(document.getElementById("tab-3"));
+  deactivateElement(document.getElementById("tab-2"));
+  startTest();
+});
+
+document.getElementById("nav-pill-test").addEventListener("click", startTest());
+
 // EVENT LISTENER FOR MORE BUTTON TO VIEW DETAILED ANSWER RESULT
 document.getElementById("moreDetailsBtn").addEventListener("click", () => {
   activateElement(document.getElementById("table-tab"));
@@ -476,6 +449,37 @@ document.getElementById("openResultBtn").addEventListener("click", () => {
 // EVENT WHEN PILL NAVBAR RESULT IS SELECTED
 document.getElementById("nav-pill-plates").addEventListener("click", showPlatesPreview());
 
+// EVENT FOR PILL NAVBAR SELECTION
+const pillContainer = document.querySelector("#pill-tabs");
+const pillElement = pillContainer.querySelectorAll("[data-bs-toggle='tab']")
+
+function tabEventShow(event) {
+  const currentItem = this.parentNode;
+  const list = Array.from(currentItem.parentNode.children);
+  const index = list.indexOf(currentItem);
+  const tabId = "tab-" + (index + 1);
+
+  const tabList = Array.from(document.querySelectorAll(".tab-pane"));
+
+  for (let i = 0; i < tabList.length; i++) {
+
+    if (tabList[i].id === tabId) {
+      tabList[i].classList.add("active");
+      tabList[i].classList.remove("inactive");
+    }
+    else {
+      tabList[i].classList.add("inactive");
+      tabList[i].classList.remove("active");
+    }
+  }
+}
+
+pillElement.forEach((tab) => {
+  tab.addEventListener("show.bs.tab", tabEventShow)
+})
+
+
+// TAB 5 *********************************************************************************
 // DISPLAY THE PLATES PREVIEW CARDS
 function showPlatesPreview() {
 
@@ -534,11 +538,6 @@ function showCardModal(plateNum) {
   answer_plate_info.style.display = "none";
 }
 
-function closeCardModal() {
-  document.getElementById("cardModal").style.display = "none";
-  document.getElementById("overlay").classList.remove("active");
-}
-
 // ADD EVENT LISTERNER TO THE PLATE MODAL IMAGE
 document.querySelector(".modal-plate-container").addEventListener("click", (e) => {
 
@@ -556,42 +555,15 @@ document.querySelector(".modal-plate-container").addEventListener("click", (e) =
   }
 });
 
+// EVENT FOR CARD MODAL CLOSE BUTTON
 document.querySelector(".closeBtn").onclick = () => closeCardModal();
 
 // EVENT FOR CARD PREVIEW
 document.getElementById("plate-cards-preview").addEventListener("click", (e) => {
   const card = e.target;
   if (card.classList.contains("card-img-bottom")) {
-    // console.log(card.dataset.plate);
     showCardModal(card.dataset.plate);
   }
 });
 
-// EVENT FOR PILL NAVBAR SELECTION
-const pillContainer = document.querySelector("#pill-tabs");
-const pillElement = pillContainer.querySelectorAll("[data-bs-toggle='tab']")
 
-function tabEventShow(event) {
-  const currentItem = this.parentNode;
-  const list = Array.from(currentItem.parentNode.children);
-  const index = list.indexOf(currentItem);
-  const tabId = "tab-" + (index + 1);
-
-  const tabList = Array.from(document.querySelectorAll(".tab-pane"));
-
-  for (let i = 0; i < tabList.length; i++) {
-
-    if (tabList[i].id === tabId) {
-      tabList[i].classList.add("active");
-      tabList[i].classList.remove("inactive");
-    }
-    else {
-      tabList[i].classList.add("inactive");
-      tabList[i].classList.remove("active");
-    }
-  }
-}
-
-pillElement.forEach((tab) => {
-  tab.addEventListener("show.bs.tab", tabEventShow)
-})
