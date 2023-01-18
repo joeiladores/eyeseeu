@@ -1,20 +1,14 @@
-window.onload = function () {
-  populateServicePage();
-}
 
-function populateServicePage() {
 
-  // POPULATE MAIN SERVICE SECTION
-  fetch("https://638eb1de9cbdb0dbe31294ba.mockapi.io/services")
+// POPULATE MAIN SERVICE SECTION
+fetch("https://638eb1de9cbdb0dbe31294ba.mockapi.io/services")
   .then(response => response.json())
   .then(services => {
-    console.log(services);
-       
+
     services.map(service => {
 
-      console.log(service);
-      document.querySelector("#parallax-section").innerHTML = 
-      `
+      document.querySelector("#parallax-section").innerHTML =
+        `
         <section>
           <div class="page-title">
             <h1>${service.main_title}</h1>
@@ -32,16 +26,6 @@ function populateServicePage() {
           <div class="parallax-content">${service.main_content}</div>
         </section> 
       `;
-    });    
+    });
 
   });
-
-  
-  }
-
-
-
-
-
-
-

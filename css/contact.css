@@ -80,7 +80,7 @@
     padding: 1em 1em;
   }
   .message-section {
-    padding: 1em 1em;
+    padding: 1em 0;
     margin: 5em 1em;
   }
 }

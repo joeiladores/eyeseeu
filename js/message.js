@@ -23,50 +23,39 @@ const db = getFirestore(app);
 const clinicRef = collection(db, "clinic");
 let clinics = [];
 
-function m__populateClinicInfo() {
+// DISPLAY CLINIC BRANCH CONTACT INFO
+getDocs(clinicRef)
+  .then((snapshot) => {
 
-  getDocs(clinicRef)
-    .then((snapshot) => {
-      // console.log(snapshot.docs)
-      
-      const clinicSelect = document.getElementById("m__selectClinic");
-      const clinicContact = document.getElementById("clinic-contacts");
+    const clinicContact = document.getElementById("clinic-contacts");
 
-      snapshot.docs.forEach((clinic) => {
-        clinics.push({ ...clinic.data(), id: clinic.data().id });
-      });
-      // console.log(clinics);
+    snapshot.docs.forEach((clinic) => {
+      clinics.push({ ...clinic.data(), id: clinic.data().id });
+    });
 
-      clinics.sort(function(a, b){return a.name - b.name}); 
-      clinics.forEach((clinic) => {
+    clinics.sort(function (a, b) { return a.name - b.name });
+    clinics.forEach((clinic) => {
 
-        let clinicOption = document.createElement("option");
-        clinicOption.setAttribute("value", `${clinic.name}`);
-        clinicOption.textContent = `${clinic.name}`;
-        clinicSelect.appendChild(clinicOption);
-
-        clinicContact.innerHTML +=
-          `
-          <div class="bg-light text-dark p-2 my-1 mb-3 rounded-2 opacity-75" >
-            <div><h5>${clinic.name}</h5></div>
+      clinicContact.innerHTML +=
+        `
+          <div class="bg-light text-dark p-2 my-1 mb-2 rounded-2 opacity-75" >
+            <div class="fs-5 fw-bold">${clinic.name}</div>
             <div><i class="fa-solid fa-phone"></i> ${clinic.phone}</div>
             <div><i class="fa-solid fa-envelope"></i> ${clinic.email}</div>
           </div>    
         `;
 
-      });
-
-    })
-    .catch((err) => {
-      console.log(err.message);
     });
-}
 
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+
+
+// DISPLAY MODAL WITH SUCCESS OR ERROR MESSAGE
 function displayModal(status, icon, message) {
 
-  // console.log(`status: ${status}`);
-  // console.log(`message: ${message}`);
-  
   const modal = document.getElementById("customModal");
 
   modal.innerHTML =
@@ -75,7 +64,7 @@ function displayModal(status, icon, message) {
       <div class="modal-content text-center shadow-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5">${status}</h1>
+            <h5 class="modal-title fs-5">${status}</h5>
             <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body d-flex flex-row align-items-center justify-content-center bg-light">
@@ -92,58 +81,43 @@ function displayModal(status, icon, message) {
   closeModalBtn.addEventListener("click", () => {
     document.getElementById("customModal").style.display = "none";
     document.getElementById("overlay").classList.remove("active");
-    
+
   });
 
 }
 
-// document.getElementById("m__selectClinic").onchange = () => {
-//   // const value = document.getElementById("m__selectClinic").value;
-//   // console.log(`Selected clinic: ${value}`);
-// }
-
+// SUBMIT FORM AND SEND EMAIL
 document.getElementById("submitEmailBtn").onclick = (e) => {
   e.preventDefault();
 
-  if (document.getElementById("m__selectClinic").value != 0) {
+  let serviceID, templateID, publicKey;
+  let emailDetails = {
+    from_name: document.getElementById("name").value,
+    phone_number: document.getElementById("phone").value,
+    email: document.getElementById("email").value,
+    subject: document.getElementById("subject").value,
+    message: document.getElementById("message").value
+  };
 
-    let serviceID, templateID, publicKey;
-    let emailDetails = {
-      from_name: document.getElementById("name").value,
-      phone_number: document.getElementById("phone").value,
-      email: document.getElementById("email").value,
-      subject: document.getElementById("subject").value,
-      message: document.getElementById("message").value
-    };
+  serviceID = "service_7wa8qy5";
+  templateID = "template_xs15n5a";
+  publicKey = "TsPUKvTE8hthKh6WF";
 
-    clinics.forEach((clinic) => {
-      if (document.getElementById("m__selectClinic").value === clinic.name) {
-        serviceID = clinic.emailjs_serviceID;
-        templateID = clinic.emailjs_templateID;
-        publicKey = clinic.emailjs_publicKey;
+  emailjs.send(serviceID, templateID, emailDetails, publicKey)
+    .then(
+      (res) => {
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("subject").value = "";
+        document.getElementById("message").value = "";
+        displayModal(`Success`, `<i class="fa-sharp fa-solid fa-circle-check"></i>`, ` Your message was sent successfully!`);
       }
+    )
+    .catch((err) => {
+      displayModal(`Unsuccessful`, `<i class="fa-solid fa-circle-xmark"></i>`, ` Email not sent! Please fill in the message form completely`);
     });
 
-    emailjs.send(serviceID, templateID, emailDetails, publicKey)
-      .then(
-        (res) => {
-          document.getElementById("m__selectClinic").value = 0;
-          document.getElementById("name").value = "";
-          document.getElementById("phone").value = "";
-          document.getElementById("email").value = "";
-          document.getElementById("subject").value = "";
-          document.getElementById("message").value = "";
-          displayModal(`Success`, `<i class="fa-sharp fa-solid fa-circle-check"></i>`, ` Your message was sent successfully!`);
-        }
-      )
-      .catch((err) => console.log(err));
-  }
-  else {
-    displayModal(`Unsuccessful`, `<i class="fa-solid fa-circle-xmark"></i>`, ` Email not sent! Please fill in the message form completely`);
-  }
-
 }
-
-m__populateClinicInfo();
 
 
