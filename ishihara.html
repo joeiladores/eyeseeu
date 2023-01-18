@@ -20,12 +20,9 @@
   <script defer type="module" src="js/ishihara.js"></script>
 
   <script>
-    // Function to execute when the page finishes loading
     function pageLoaded() {
-      // Hide the loader
       document.getElementById("loader").style.display = "none";
     }
-    // Add the pageLoaded function as a listener to the onload event
     window.addEventListener("load", pageLoaded);
   </script>
 </head>
@@ -102,16 +99,20 @@
   </nav>
   <!-- END OF NAVBAR ------------------------------------------------------------------------------>
 
-  <!-- PARALLAX SECTION ---------------------------------------------------------------->
+  <!-- PARALLAX SECTION --------------------------------------------------------------------------->
   <section id="parallax-section">
+    <div class="page-title" id="contact">
+      <h1>ISHIHARA TEST</h1>
+    </div>
     <div class="parallax-ishihara">
       <h2><span class="ishihara-text-gradient">Welcome to &nbsp;&nbsp;</span></h2>
       <h1><span class="ishihara-text-gradient">Ishihara Test &nbsp;&nbsp;</span></h1>
     </div>
   </section>
 
+
   <!-- PILL NAVBAR -------------------------------------------------------------------------------->
-  <div id="pill-navbar" class="pill-navbar mt-2">
+  <div id="pill-navbar" class="pill-navbar mt-5">
     <ul class="nav nav-pills nav-fill gap-2 p-1 bg-light rounded-5" id="pill-tabs" role="tablist" style="
             --bs-nav-link-color: var(--bs-white);
             --bs-nav-pills-link-active-color: var(--bs-white);
@@ -149,7 +150,6 @@
       </li>
     </ul>
   </div>
-
   <!-- END OF PILL NAVBAR ------------------------------------------------------------------------>
 
   <section class="tab-container my-2">
@@ -248,21 +248,22 @@
         </div>
         <div class="ishihara-container d-grid pb-3 pb-3">
           <div class="row">
-            <!-- GET AND DISPLAY LEFT PANEL - ISHIHARA PLATE -->
+            <!-- LEFT PANEL-->
             <div class="plate-container col-md-6 rounded-5">
               <!-- GET AND DISPLAY PLATE NUMBER AND IMAGE HERE -->
             </div>
 
-            <!-- RIGHT PANEL - DISPLAY --------------------------------------------->
+            <!-- RIGHT PANEL -->
             <div class="display-right-panel col pt-5 g-1">
               <h5>What does the patient see?</h5>
               <div class="options col d-flex gap-2 flex-wrap mb-5">
-                <!-- GET OPTIONS AND DISPLAY HERE -->
+                <!-- GET AND DISPLAY OPTIONS HERE -->
               </div>
               <div class="plate-info col p-3 shadow rounded-3 bg-light" style="display: none">
-                <!-- FETCH DISPLAY INFO AND DISPLAY HERE -->
-              </div>
+                <!-- FETCH AND DISPLAY INFO HERE -->
+              </div>              
             </div>
+            <button id="restartTestBtn" class="btn btn-primary my-3" target="#tab-3" style="display: none">Restart</button>
           </div>
         </div>
       </div>
@@ -299,19 +300,11 @@
             </div>
             <div class="p-5 mx-auto">
               <h5 class="align-self-center">The test is complete. Proceed to see the result.</h5>
-              <!-- <a href="#pill-navbar">
-                <button id="openResultBtn" type="button" class="btn btn-primary">
-                  Result
-                </button>
-              </a>       -->
               <a id="openResultBtn" class="btn btn-primary" data-toggle="tab" href="#pill-navbar">Go to Result</a>
             </div>
           </div>
         </div>
       </div>
-
-
-
     </div>
     <!-- END OF ISHIHARA TEST ----------------------------------------------------------------------->
 
@@ -323,16 +316,19 @@
       <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
         <h2 class="py-2 m-0">Result</h2>
       </div>
+      <div id="result-diag" class="p-3 text-center col-md-11 m-2 mx-auto shadow-sm">        
+        <!-- DISPLAY DIAGNOSIS HERE -->
+      </div>
       <div id="result-bar" class="bg-light p-3 col-md-9 mx-auto">
         <!-- DISPLAY COMPUTED RESULT HERE -->
       </div>
       <div class="text-center">
         <button id="moreDetailsBtn" class="btn btn-primary my-3" target="#table-tab">View answers</button>
       </div>
-      <div id="table-tab" class="inactive bg-light py-5 px-3">
+      <div id="table-tab" class="inactive bg-light py-3 px-3">
         <div class="table-responsive table-container" style="height: 60vh">
           <table class="table table-bordered table-hover">
-            <thead id="table-head" class="bg-primary text-light">
+            <thead id="table-head" class="bg-dark bg-gradient text-light">
               <!-- DISPLAY TABLE HEADING HERE -->
             </thead>
             <tbody id="table-body">
@@ -350,8 +346,8 @@
       <div class="plate-name text-center bg-dark bg-gradient text-white rounded-top-3">
         <h2 class="py-2 m-0">Ishihara Plates</h2>
       </div>
-      <div class="bg-transparent rounded-bottom-3">
-        <div id="plate-cards-preview" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 p-3 m-0 shadow-lg">
+      <div class="bg-transparent">
+        <div id="plate-cards-preview" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2 m-0 shadow-lg rounded-bottom-3 pb-1">
           <!-- GET AND DISPLAY PLATES PREVIEW HERE -->
         </div>
       </div>
@@ -371,7 +367,7 @@
               <!-- CARD INSIDE THE MODAL -->
               <div class="card border-0 p-2">
                 <div class="row g-0">
-                  <div class="col-md-7 modal-plate-container">
+                  <div class="col-md-7 modal-plate-container p-2">
                     <!-- GET AND DISPLAY PLATE AND ANWEER PLARTE -->
                   </div>
                   <div class="col-md-5 g-danger my-auto">
@@ -398,29 +394,22 @@
   <!-- END OF ISHIHARA TABS SECTION ---------------------------------------------------------------->
 
 
-  <!-- ENCHROMA FEATURE SECTION - CONNECT TO FIN -->
-  <div class="feature-enchroma container-fluid mx-0 mt-5">
-    <img class="img-fluid" style="width: 100%; object-fit: contain;"
-      src="https://firebasestorage.googleapis.com/v0/b/eyeseeu-22ad4.appspot.com/o/ishihara-page%2Fishihara.webp?alt=media&token=445f4203-a0be-4ba6-84f7-ff39acf0169b"
-      alt="">
-  </div>
-
   <!-- FEATURE SECTION ----------------------------------------------------------------------------->
   <div class="feature-optician mt-5">
     <h3 class="text-center text-light">
-      Do I still need an eye test with my optician?
+      Do I still need an eye test with my Optometrist?
     </h3>
     <div class="feature-content shadow-lg bg-light p-5 mt-3 rounded-3">
       <p>
         Online eye tests should never replace in-person eye examinations with
-        your optician. While they may be able to give you some indication of
+        your eye doctor. While they may be able to give you some indication of
         your eyesight between your regular eye tests, results are not
         accurate, and cannot detect the existence of an underlying eye
         condition or visual impairment.
       </p>
       <p>
-        Visiting your optician regularly is the only way to diagnose any
-        changes to your vision or eye health. Opticians use a range of tests
+        Visiting your optometrist regularly is the only way to diagnose any
+        changes to your vision or eye health. They use a range of tests
         and equipment during an eye exam to check the overall health of your
         eyes thoroughly and advise the necessary treatments — whether that’s
         wearing glasses, contact lenses or referring you to a specialist. Your

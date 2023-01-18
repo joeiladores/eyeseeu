@@ -12,42 +12,55 @@ const firebaseConfig = {
   appId: "1:210845750796:web:af3f92bccaf04fa201c029"
 };
 
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
 const clinicRef = collection(db, 'clinic');
+const clinics = [];
+
+getDocs(clinicRef)
+  .then((snapshot) => {
+
+    const clinicSelect = document.getElementById("selectClinic");
+
+    snapshot.docs.forEach(clinic => {
+      clinics.push({ ...clinic.data()})
+
+      let clinicOption = document.createElement("option");
+      clinicOption.setAttribute("value", `${clinic.data().id}`);
+      clinicOption.textContent = `${clinic.data().name}`;
+      clinicSelect.appendChild(clinicOption);
+    });
+
+  })
+  .catch(err => {
+    console.log(err.message);
+  });
 
 document.getElementById("selectClinic").addEventListener("change", handleClinicChange);
 
 function handleClinicChange() {
 
-  const clinic = document.getElementById("selectClinic").value;
+  const s_clinic = parseInt(document.getElementById("selectClinic").value);
   const btnClinic = document.getElementById("displayBtnCalClinic");
 
-  if (clinic === "1") {
-    btnClinic.innerHTML =
-      `
-    <a href="" id="btnCalendly" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2"
-    onclick="Calendly.initPopupWidget({url: 'https://calendly.com/esuopticalcaloocan/consultation'});return false;"></i>&nbsp; Book an Appointment</a>
-    `;
-  }
-  else if (clinic === "2") {
+  if(typeof s_clinic == "number" && s_clinic > 0) {
+    clinics.forEach((clinic) => {
 
-    btnClinic.innerHTML =
-      `
-    <a href="" id="btnCalendly" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2"
-    onclick="Calendly.initPopupWidget({url: 'https://calendly.com/esuopticaliloilo/consultation'});return false;"><i
-        class="bi bi-calendar2-event"></i>&nbsp; Book an Appointment</a>
-    `;
-  }
-  else if (clinic === "3") {
-
-    btnClinic.innerHTML =
-      `
-    <a href="" id="btnCalendly" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2"
-    onclick="Calendly.initPopupWidget({url: 'https://calendly.com/esuopticalgensan/consultation'});return false;"><i class="bi bi-calendar2-event"></i>&nbsp; Book an Appointment</a>
-    `;
+      console.log(typeof s_clinic);
+      console.log(s_clinic);
+      console.log(clinic.id);
+      console.log(clinic.name);
+      console.log(clinic.calendly_url);
+  
+      if(parseInt(clinic.id) === s_clinic) {
+        btnClinic.innerHTML =
+        `
+        <a href="" id="btnCalendly" width="150px" class="btn theme-color-light rounded-3 py-3 px-3 fw-2"
+        onclick="Calendly.initPopupWidget({url: '${clinic.calendly_url}'});return false;"></i>&nbsp; Book an Appointment</a>
+        `   
+      }   
+      console.log(btnClinic.innerHTML);
+    }); 
   }
   else {
     btnClinic.innerHTML =
@@ -57,39 +70,3 @@ function handleClinicChange() {
   }
   
 };
-
-function populateClinicSelection() {
-  // Get Collection Data
-  getDocs(clinicRef)
-    .then((snapshot) => {
-      // console.log(snapshot.docs)
-      const clinics = [];
-      const clinicSelect = document.getElementById("selectClinic");
-
-      snapshot.docs.forEach(clinic => {
-        clinics.push({ ...clinic.data(), id: clinic.id })
-
-        let clinicOption = document.createElement("option");
-        clinicOption.setAttribute("value", `${clinic.data().id}`);
-        clinicOption.textContent = `${clinic.data().name}`;
-        clinicSelect.appendChild(clinicOption);
-      });
-
-    })
-    .catch(err => {
-      console.log(err.message);
-    });
-}
-
-populateClinicSelection();
-
-// Grand Central
-{/* <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/esuopticalcaloocan/consultation'});return false;">Book A Consultation</a>  */ }
-
-
-// Iloilo
-{/* <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/esuopticaliloilo/consultation'});return false;">Book A Consultation</a> */ }
-
-
-// Gensan
-{/* <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/esuopticalgensan/consultation'});return false;">Book A Consultation</a> */ }

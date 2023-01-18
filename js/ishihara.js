@@ -24,36 +24,71 @@ const firebaseConfig = {
   appId: "1:210845750796:web:af3f92bccaf04fa201c029"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Initialize Services
 const db = getFirestore(app);
-
-// Collection Reference
 const platesRef = collection(db, 'ishihara-vcd-38');
 
-const answer = [];
-// SAMPLE ANSWER SET FOR TESTING ONLY
-// NORMAL SAMPLING
-// const answer = ['12', '8', '6', '29', '57', '5', '3', '15', '74', '2', '6', '97', '45', '5', '7', '16', '73', 'Nothing', 'Nothing', 'Nothing', 'Nothing', '26', '42', '35', '96', 'Purple and red line', 'Purple and red line', 'Nothing', 'Nothing', 'Blue-green line', 'Blue-green line', 'Orange line', 'Orange line', 'Blue-green and yellow-green line', 'Blue-green and yellow-green line', 'Purple and orange line', 'Purple and orange line', 'Orange line'];
-// WEAKVCD SAMPLING PROTAN
-// const answer = ['12', '3', '5', '70', '35', '2', '5', '17', '21', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', '5', '2', '45', '73', '6', '2', '5', '6', 'Purple line', 'Purple line', 'A line', 'A line', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Purple and red-green line', 'Blue-green and purple line', 'Blue-green and purple line', 'Blue-green and purple line', 'Orange line'];
-// WEAK VCD SAMPLEING DEUTRAN
-// const answer = ['12', '3', '5', '70', '35', '2', '5', '17', '21', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Nothing', '5', '2', '45', '73', '2', '4', '3', '9', 'Red line', 'Red line', 'A line', 'A line', 'Nothing', 'Nothing', 'Nothing', 'Nothing', 'Purple and red-green line', 'Blue-green and purple line', 'Blue-green and purple line', 'Blue-green and purple line', 'Orange line'];
-
+const answers = [];
 const plates = [];
 let currentIndex = 0;
 const n_plates = 38;
 const n_weakvcd = 6;
 let hasSelectedAnswer = false;
-let isTestComplete = false;
 
 const q = query(platesRef, orderBy("plate", "asc"));
 const snapshot = await getDocs(q);
 snapshot.forEach(doc => {
   plates.push(doc.data());
 });
+
+function startTest() {
+
+  let selectedOption = "";
+  currentIndex = 0;
+
+  // DISPLAY INITIAL PLATE 1
+  displayPlates(plates[0]);
+
+  // ADD EVENT LISTENERS TO OPTIONS
+  document.querySelector(".options").addEventListener("click", (e) => {
+
+    let targetElement = e.target;
+    let option = targetElement.dataset.option;
+
+    if (option === "next" && selectedOption != "") {
+
+      answers.push(selectedOption);
+      hidePlateA(".plate-A", ".plate-info");
+
+      currentIndex++;
+
+      // RESET SELECTED OPTION
+      selectedOption = "";
+      hasSelectedAnswer = false;
+    }
+    else if (option === "next" && selectedOption === "") {
+      showModal();
+    }
+    else if (targetElement.classList.contains("optionBtn")) {
+      // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
+      selectedOption = option;
+      styleOptionBtns(e.currentTarget, targetElement);
+      hasSelectedAnswer = true;
+
+      return;
+    }
+    else return;
+
+    // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
+    if (currentIndex < n_plates) {
+      displayPlates(plates[currentIndex]);
+    }
+    // WHEN THE TEST IS COMPLETE
+    else {
+      showTestCompleteModal();
+    }
+  });
+}
 
 function displayPlates(plate) {
 
@@ -115,150 +150,14 @@ function displayPlateInfo(element, info) {
   `
 }
 
-function hidePlateQ(imageElement) {
-  document.querySelector(imageElement).style.display = "none";
-}
-
-function showPlateQ(imageElement) {
-  document.querySelector(imageElement).style.display = "block";
-}
-
-function showPlateA(imageElement, infoElement) {
-  document.querySelector(imageElement).style.display = "block";
-  document.querySelector(infoElement).style.display = "block";
-}
-
-function hidePlateA(imageElement, infoElement) {
-  document.querySelector(imageElement).style.display = "none";
-  document.querySelector(infoElement).style.display = "none";
-}
-
-function showModal() {
-  document.getElementById("errModal").style.display = "block";
-  document.getElementById("overlay").classList.add("active");
-}
-
-function showTestCompleteModal() {
-  document.getElementById("testCompleteModal").style.display = "block";
-  document.getElementById("overlay").classList.add("active");
-}
-
-function enableElement(element) {
-  element.classList.remove("disabled");
-}
-
-function disableElement(element) {
-  element.classList.add("disabled");
-}
-
-// SDD EVENT LISTNER TO THE MODAL CLOSE BUTTON
-document.getElementById("closeModalBtn").addEventListener("click", () => {
-  document.getElementById("errModal").style.display = "none";
-  document.getElementById("overlay").classList.remove("active");
-});
-
-// ADD EVENT LISTERNER TO THE PLATE IMAGE
-document.querySelector(".plate-container").addEventListener("click", (e) => {
-
-  let targetElement = e.target;
-  // let elementID = targetElement.id;
-
-  if (targetElement.classList.contains("plate-Q") && hasSelectedAnswer) {
-    hidePlateQ(".plate-Q");
-    showPlateA(".plate-A", ".plate-info");
-  }
-  if (targetElement.classList.contains("plate-A")) {
-    hidePlateA(".plate-A", ".plate-info");
-    showPlateQ(".plate-Q");
-  }
-});
-
-function activateElement(element) {
-  element.classList.add("active");
-  element.classList.remove("inactive");
-}
-
-function deactivateElement(element) {
-  element.classList.add("inactive");
-  element.classList.remove("active");
-}
-
-// ADD EVETN LISTENER TO THE START BUTTON, OPEN THE PILL NAV TEST AND START TEST
-document.getElementById("startTestBtn").addEventListener("click", () => {
-  activateElement(document.getElementById("nav-pill-test"));
-  deactivateElement(document.getElementById("nav-pill-inst"));
-  activateElement(document.getElementById("tab-3"));
-  deactivateElement(document.getElementById("tab-2"));
-  startTest();
-});
-
-document.getElementById("nav-pill-test").addEventListener("click", startTest());
-
 function styleOptionBtns(current_target, target_element) {
 
   const otherOptions = Array.from(current_target.children);
-  // console.log(otherOptions);
 
   otherOptions.forEach((child) => {
     if (child != target_element) child.classList.remove("active");
     else child.classList.add("active");
   });
-
-}
-
-function startTest() {
-
-  let selectedOption = "";
-
-  // DISPLAY INITIAL PLATE 1
-  displayPlates(plates[0]);
-
-  // ADD EVENT LISTENERS TO OPTIONS
-  document.querySelector(".options").addEventListener("click", (e) => {
-
-    let targetElement = e.target;
-    let option = targetElement.dataset.option;
-
-    console.log("Index: " + currentIndex);
-
-    if (option === "next" && selectedOption != "") {
-
-      // PUSH ANSWER TO THE PLATES ARRAY      
-      answer.push(selectedOption);
-      hidePlateA(".plate-A", ".plate-info");
-
-      currentIndex++;
-
-      // RESET SELECTED OPTION TO ""
-      selectedOption = "";
-      hasSelectedAnswer = false;
-
-      console.log(answer);
-    }
-    else if (option === "next" && selectedOption === "") {
-      showModal();
-    }
-    else if (targetElement.classList.contains("optionBtn")) {
-      // ONLY CLICK ON BUTTON OPTIONS AND NOT OTHER CHILD ELEMENTS
-
-      selectedOption = option;      
-      styleOptionBtns(e.currentTarget, targetElement);
-      hasSelectedAnswer = true;
-
-      return;
-    }
-    else return;
-
-    // DISPLAY NEZXT PLATE EVERY CLICK ON NEXT BUTTON
-    if (currentIndex < n_plates) {
-      displayPlates(plates[currentIndex]);
-    }
-    // WHEN THE TEST IS COMPLETE
-    else {
-      showTestCompleteModal();
-    }
-  });
-
 
 }
 
@@ -277,7 +176,7 @@ function computeResult() {
   let p_badv = 0;
 
   // CHECKING PLATE 1
-  if (answer[0] === plates[0].normal && answer[0] === plates[0].weakv) {
+  if (answers[0] === plates[0].normal || answers[0] === plates[0].weak_vcd) {
     count_normal++;
   }
   else {
@@ -287,19 +186,19 @@ function computeResult() {
   // CHECKING PLATES 2 - 37
   for (let i = 1; i < n_plates - 1; i++) {
 
-    if (answer[i] === plates[i].normal) {
+    if (answers[i] === plates[i].normal) {
       count_normal++;
     }
     else {
-      if (answer[i] === plates[i].weak_vcd) {
+      if (answers[i] === plates[i].weak_vcd) {
         count_weakv++;
       }
       else if (plates[i].subtype === "vcd") {
-        if (answer[i] === plates[i].protanopia) {
+        if (answers[i] === plates[i].protanopia) {
           count_weakv++;
           count_protan++;
         }
-        else if (answer[i] === plates[i].deuteranopia) {
+        else if (answers[i] === plates[i].deuteranopia) {
           count_weakv++;
           count_deuteran++;
         }
@@ -314,12 +213,12 @@ function computeResult() {
   }
 
   // CHECKING FOR PLATE 38
-  if (answer[n_plates - 1] === plates[n_plates - 1].normal && answer[n_plates - 1] === plates[n_plates - 1].weak_vcd)
+  if (answers[n_plates - 1] === plates[n_plates - 1].normal && answers[n_plates - 1] === plates[n_plates - 1].weak_vcd) {
     count_normal++;
-  else
+  }
+  else {
     count_badv++;
-
-  // count_weakv = count_weakv + count_protan + count_deuteran;
+  }
 
   p_normal = Math.floor((count_normal / (n_plates)) * 100);
   p_weakv = Math.floor((count_weakv / (n_plates - 2)) * 100);
@@ -346,10 +245,29 @@ function computeResult() {
 function showResult() {
 
   let result = "";
+  const result_diag = document.getElementById("result-diag");
   const result_bar = document.getElementById("result-bar");
   const table_head = document.getElementById("table-head");
   const table_body = document.getElementById("table-body");
   const result_info = computeResult();
+  let result_desc1 = "";
+  let result_desc2 = "";
+
+  // Patients with more than two incorrect plates are considered to have color vision deficiency.
+  if (result_info.count_normal >= n_plates - 2) {
+    result_desc1 = "NORMAL COLOR VISION";
+    result_desc2 = "You can see up to one million disctict shades of color!";
+  }
+  if (result_info.count_weakv > 2 || result_info.count_badv > 2) {
+    result_desc1 = "According to this test you have some form of red-green color blindness.";
+    result_desc2 = "You did not correctly identify the hidden figures in more than two test condition. You may have difficulty distinguishing many colors and it most likely impacts your daily life. Be sure to consult with your eye doctor to explore options to improve your color vision!";
+  }
+
+  result_diag.innerHTML =
+    `
+      <div class="alert alert-primary fs-6" role="alert">${result_desc1}</div>   
+      <div>${result_desc2}</div>
+    `
 
   result_bar.innerHTML =
     `
@@ -358,9 +276,10 @@ function showResult() {
           <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_normal}%" aria-valuenow="${result_info.p_normal}"
             aria-valuemin="0" aria-valuemax="100">${result_info.p_normal}%</div>
         </div>
-        <div class="mt-3">RED GREEN COLOR DIFICIENCY (Insufficient distinction between shades of red and green):</div>
+        <div class="mt-3">RED GREEN COLOR DIFICIENCY</div>
+        <div>(Insufficient distinction between shades of red and green):</div>
         <div class="progress rounded-0">
-          <div class="progress-bar bg-warning text-dark p-1" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_weakv}%" aria-valuenow="${result_info.p_weakv}"
+          <div class="progress-bar bg-warning text-dark" role="progressbar" aria-label="Basic example" style="width: ${result_info.p_weakv}%" aria-valuenow="${result_info.p_weakv}"
             aria-valuemin="0" aria-valuemax="100">${result_info.p_weakv}%</div>
         </div>
           <div class="mt-3">PROTANOPIA (Not recognized color red): </div>
@@ -393,7 +312,7 @@ function showResult() {
     `
 
   for (let i = 0; i < n_plates; i++) {
-    result = answer[i] === plates[i].normal ? "Correct" : "Wrong";
+    result = answers[i] === plates[i].normal ? "Correct" : "Wrong";
     table_body.innerHTML +=
       `
         <tr>
@@ -401,13 +320,116 @@ function showResult() {
           <td>${plates[i].type}</td>
           <td>${plates[i].normal}</td>
           <td>${plates[i].weak_vcd}</td>
-          <td>${answer[i]}</td>
+          <td>${answers[i]}</td>
           <td>${result}</td>
         </tr>
         `
   }
 }
 
+function hidePlateQ(imageElement) {
+  document.querySelector(imageElement).style.display = "none";
+}
+
+function showPlateQ(imageElement) {
+  document.querySelector(imageElement).style.display = "block";
+}
+
+function showPlateA(imageElement, infoElement) {
+  document.querySelector(imageElement).style.display = "block";
+  document.querySelector(infoElement).style.display = "block";
+}
+
+function hidePlateA(imageElement, infoElement) {
+  document.querySelector(imageElement).style.display = "none";
+  document.querySelector(infoElement).style.display = "none";
+}
+
+function showModal() {
+  document.getElementById("errModal").style.display = "block";
+  document.getElementById("overlay").classList.add("active");
+}
+
+function showTestCompleteModal() {
+  document.getElementById("testCompleteModal").style.display = "block";
+  document.getElementById("overlay").classList.add("active");
+  document.getElementById("restartTestBtn").style.display = "block";
+}
+
+function enableElement(element) {
+  element.classList.remove("disabled");
+}
+
+function disableElement(element) {
+  element.classList.add("disabled");
+}
+
+function activateElement(element) {
+  element.classList.add("active");
+  element.classList.remove("inactive");
+}
+
+function deactivateElement(element) {
+  element.classList.add("inactive");
+  element.classList.remove("active");
+}
+
+function closeCardModal() {
+  document.getElementById("cardModal").style.display = "none";
+  document.getElementById("overlay").classList.remove("active");
+}
+
+// EVENT LISTENER FOR RESTART TEST BUTTON
+document.getElementById("restartTestBtn").addEventListener("click", () => {
+  const lengthPlates = plates.length;
+  const lengthAnswers = answers.length;
+
+  for (let i = 0; i < lengthAnswers; i++) {
+    answers.pop();
+  }
+  disableElement(document.getElementById("nav-pill-result"));
+  hasSelectedAnswer = false;
+
+  startTest();
+
+  document.getElementById("restartTestBtn").style.display = "none";
+
+});
+
+// SDD EVENT LISTNER TO THE MODAL CLOSE BUTTON
+document.getElementById("closeModalBtn").addEventListener("click", () => {
+  document.getElementById("errModal").style.display = "none";
+  document.getElementById("overlay").classList.remove("active");
+});
+
+// ADD EVENT LISTERNER TO THE PLATE IMAGE
+document.querySelector(".plate-container").addEventListener("click", (e) => {
+
+  let targetElement = e.target;
+  // let elementID = targetElement.id;
+
+  if (targetElement.classList.contains("plate-Q") && hasSelectedAnswer) {
+    hidePlateQ(".plate-Q");
+    showPlateA(".plate-A", ".plate-info");
+  }
+  if (targetElement.classList.contains("plate-A")) {
+    hidePlateA(".plate-A", ".plate-info");
+    showPlateQ(".plate-Q");
+  }
+});
+
+// ADD EVETN LISTENER TO THE START BUTTON, OPEN THE PILL NAV TEST AND START TEST
+document.getElementById("startTestBtn").addEventListener("click", () => {
+  activateElement(document.getElementById("nav-pill-test"));
+  deactivateElement(document.getElementById("nav-pill-inst"));
+  activateElement(document.getElementById("tab-3"));
+  deactivateElement(document.getElementById("tab-2"));
+  startTest();
+});
+
+document.getElementById("nav-pill-test").addEventListener("click", startTest());
+
+// EVENT LISTENER FOR MORE BUTTON TO VIEW DETAILED ANSWER RESULT
 document.getElementById("moreDetailsBtn").addEventListener("click", () => {
   activateElement(document.getElementById("table-tab"));
   deactivateElement(document.getElementById("moreDetailsBtn"));
@@ -427,91 +449,6 @@ document.getElementById("openResultBtn").addEventListener("click", () => {
 
 // EVENT WHEN PILL NAVBAR RESULT IS SELECTED
 document.getElementById("nav-pill-plates").addEventListener("click", showPlatesPreview());
-
-// DISPLAY THE PLATES PREVIEW CARDS
-function showPlatesPreview() {
-
-  plates.forEach((plate) => {
-
-    document.getElementById("plate-cards-preview").innerHTML +=
-      `
-      <div class="col">
-        <div class="card shadow-lg rounded-3 pb-3">
-          <div class="card-body">
-            <h5 class="card-title text-center">Plate ${plate.plate}</h5>
-          </div>
-          <div class="zoom-plate p-3">
-            <img class="card-img-bottom img-fluid" src=${plate.plateURL}" alt="Ishihara Plate ${plate.plate}" data-plate=${plate.plate}>      
-          </div>    
-        </div>
-      </div>    
-    `
-  });
-}
-
-function showCardModal(plateNum) {
-
-  const selectedPlate = plates.find(current_plate => current_plate.plate === parseInt(plateNum));
-
-  document.getElementById("card-modal-title").innerHTML = `Plate ${plateNum}`;
-
-  document.querySelector(".modal-plate-container").innerHTML =
-    `
-    <img
-      src="${selectedPlate.plateURL}"
-      class="plate-Q2 img-fluid rounded-start" alt="..." />
-    <img
-      src="${selectedPlate.plateURL2}"
-      class="plate-A2 img-fluid rounded-start" alt="..." style="display: none" />
-  `
-
-  document.querySelector(".question-message").innerHTML =
-    `
-    <h5 class="card-title">What do you see?</h5>
-    <p class="card-text">Click the plate to check.</p>
-  `
-
-  document.getElementById("cardModal").style.display = "block";
-  document.getElementById("overlay-light").classList.add("active");
-
-  displayPlateInfo(".answer-plate-info", selectedPlate.display);
-  // DEFAULT DISPLAY OF PLATE INFO
-  document.querySelector(".question-message").style.display = "block";
-  document.querySelector(".answer-plate-info").style.display = "none";
-}
-
-function closeCardModal() {
-  document.getElementById("cardModal").style.display = "none";
-  document.getElementById("overlay-light").classList.remove("active");
-}
-
-// ADD EVENT LISTERNER TO THE PLATE MODAL IMAGE
-document.querySelector(".modal-plate-container").addEventListener("click", (e) => {
-
-  let targetElement = e.target;
-
-  if (targetElement.classList.contains("plate-Q2")) {
-    hidePlateQ(".plate-Q2");
-    document.querySelector(".question-message").style.display = "none";
-    showPlateA(".plate-A2", ".answer-plate-info");
-  }
-  if (targetElement.classList.contains("plate-A2")) {
-    hidePlateA(".plate-A2", ".answer-plate-info");
-    showPlateQ(".plate-Q2");
-    document.querySelector(".question-message").style.display = "block";
-  }
-});
-
-document.querySelector(".closeBtn").onclick = () => closeCardModal();
-
-// EVENT FOR CARD PREVIEW
-document.getElementById("plate-cards-preview").addEventListener("click", (e) => {
-  const card = e.target;
-  if (card.classList.contains("card-img-bottom")) {
-    // console.log(card.dataset.plate);
-    showCardModal(card.dataset.plate);
-  }
-});
 
 // EVENT FOR PILL NAVBAR SELECTION
 const pillContainer = document.querySelector("#pill-tabs");
@@ -542,31 +479,92 @@ pillElement.forEach((tab) => {
   tab.addEventListener("show.bs.tab", tabEventShow)
 })
 
-// STICKY NAV PILL
-// const navbarHeight = document.getElementById("main-navbar").offsetHeight;
-// const parallaxTop = document.getElementById("parallax-section").offsetHeight;
-// const pillNavbarHeight = document.getElementById("pill-navbar-container").offsetHeight;
-// const parallaxTop = document.querySelector(".parallax-ishihara").offsetTop;
-// console.log(navbarHeight);
-// console.log(parallaxTop);
-// console.log(parallaxTop + navbarHeight);
-// console.log(pillNavbarHeight);
 
-// window.addEventListener("scroll", function () {
-//   if (window.pageYOffset > parallaxTop - navbarHeight) {
-//     document.getElementById("pill-navbar-container").classList.add("sticky-nav");
-//     let elementsBelow = document.getElementsByClassName("relative-element");
-//     for (let i = 0; i < elementsBelow.length; i++) {
-//       elementsBelow[i].classList.add("relative-element");
-//     }
-//   }
-//   else {
-//     document.getElementById("pill-navbar-container").classList.remove("sticky-nav");
-//     let elementsBelow = document.getElementsByClassName("relative-element");
-//     for (let i = 0; i < elementsBelow.length; i++) {
-//       elementsBelow[i].classList.remove("relative-element");
-//     }
-//   }
+// TAB 5 *********************************************************************************
+// DISPLAY THE PLATES PREVIEW CARDS
+function showPlatesPreview() {
 
-// });
+  plates.forEach((plate) => {
+
+    document.getElementById("plate-cards-preview").innerHTML +=
+      `
+      <div class="col">
+        <div class="card shadow-lg rounded-3 pb-1">
+          <div class="card-body p-0 pt-2">
+            <h5 class="card-title text-center m-0">Plate ${plate.plate}</h5>
+          </div>
+          <div class="zoom-plate p-3">
+            <img class="card-img-bottom img-fluid" src=${plate.plateURL}" alt="Ishihara Plate ${plate.plate}" data-plate=${plate.plate}>      
+          </div>    
+        </div>
+      </div>    
+    `
+  });
+}
+
+function showCardModal(plateNum) {
+
+  const modal_card_title = document.getElementById("card-modal-title");
+  const modal_plate_container = document.querySelector(".modal-plate-container");
+  const question_mssg = document.querySelector(".question-message");
+  const answer_plate_info = document.querySelector(".answer-plate-info")
+  const modal_card = document.getElementById("cardModal");
+  const modal_overlay = document.getElementById("overlay");
+  const selectedPlate = plates.find(current_plate => current_plate.plate === parseInt(plateNum));
+
+  modal_card_title.innerHTML = `Plate ${plateNum}`;
+
+  modal_plate_container.innerHTML =
+    `
+    <img
+      src="${selectedPlate.plateURL}"
+      class="plate-Q2 img-fluid rounded-start" alt="..." />
+    <img
+      src="${selectedPlate.plateURL2}"
+      class="plate-A2 img-fluid rounded-start" alt="..." style="display: none" />
+  `
+
+  question_mssg.innerHTML =
+    `
+    <h5 class="card-title">What do you see?</h5>
+    <p class="card-text">Click the plate to check.</p>
+  `
+
+  modal_card.style.display = "block";
+  modal_overlay.classList.add("active");
+
+  displayPlateInfo(".answer-plate-info", selectedPlate.display);
+  // DEFAULT DISPLAY OF PLATE INFO
+  question_mssg.style.display = "block";
+  answer_plate_info.style.display = "none";
+}
+
+// ADD EVENT LISTERNER TO THE PLATE MODAL IMAGE
+document.querySelector(".modal-plate-container").addEventListener("click", (e) => {
+
+  let targetElement = e.target;
+
+  if (targetElement.classList.contains("plate-Q2")) {
+    hidePlateQ(".plate-Q2");
+    document.querySelector(".question-message").style.display = "none";
+    showPlateA(".plate-A2", ".answer-plate-info");
+  }
+  if (targetElement.classList.contains("plate-A2")) {
+    hidePlateA(".plate-A2", ".answer-plate-info");
+    showPlateQ(".plate-Q2");
+    document.querySelector(".question-message").style.display = "block";
+  }
+});
+
+// EVENT FOR CARD MODAL CLOSE BUTTON
+document.querySelector(".closeBtn").onclick = () => closeCardModal();
+
+// EVENT FOR CARD PREVIEW
+document.getElementById("plate-cards-preview").addEventListener("click", (e) => {
+  const card = e.target;
+  if (card.classList.contains("card-img-bottom")) {
+    showCardModal(card.dataset.plate);
+  }
+});
+
 

@@ -5,16 +5,23 @@
   /* font-family: 'Poppins', sans-serif; */
 }
 
+#loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 9999;
+}
 /* NEW STYLES */
 .no-y-margin {
   margin-top: 0;
   margin-bottom: 0;
 }
-
-/* .page-x-margin {
-  margin-left: 6.25em;
-  margin-right: 6.25em;
-} */
 
 .booking-section {
   padding-left: 6.25em;
@@ -35,11 +42,6 @@
 #btnCalendly:hover {
   background-color: #cfcaca;
 }
-
-/* #customModal::backdrop {
-  background-color: purple;
-  opacity: .2;
-} */
 
 .modal::backdrop {
   background-color: purple;
@@ -78,7 +80,7 @@
     padding: 1em 1em;
   }
   .message-section {
-    padding: 1em 1em;
+    padding: 1em 0;
     margin: 5em 1em;
   }
 }
