@@ -36,7 +36,7 @@ Languages and Tools Used🛠:
 [![Product Name Screen Shot][product-screenshot]](https://eyeseeuoptical.vercel.app)
 An API-Driven Web Application
 
-EyeSeeU Optical is an improved Kodego Mini-Project 1 (a then multi-page static website). It is developed to be an API-Driven Web Application.
+EyeSeeU Optical is an improved Mini-Project 1 (a then multi-page static website). It is developed to be an API-Driven Web Application.
 
 
 
