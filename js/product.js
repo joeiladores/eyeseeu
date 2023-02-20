@@ -2,7 +2,7 @@
 const url = new URL(window.location.href);
 const filter = url.searchParams.get("filter");
 document.getElementById("loader").style.display = "block";
-fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
+fetch('https://63f38f25864fb1d6001935c2.mockapi.io/products')
     .then((response) => response.json())
     .then((data) => {
         const filteredProducts = data.filter(product => product.productType === filter);
@@ -65,13 +65,13 @@ links.forEach(link => {
   link.addEventListener('click', function(event) {
     let productType = this.dataset.productType;
     if (productType === 'all') {
-      fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
+      fetch('https://63f38f25864fb1d6001935c2.mockapi.io/products')
         .then(response => response.json())
         .then(data => {
           renderProducts(data);
         });
     } else {
-      fetch('https://63bec3bce348cb076217c92f.mockapi.io/products')
+      fetch('https://63f38f25864fb1d6001935c2.mockapi.io/products')
         .then(response => response.json())
         .then(data => {
           let filteredProducts = data.filter(product => product.productType === productType);

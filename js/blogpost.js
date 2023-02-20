@@ -16,7 +16,7 @@ function displayBlogPost() {
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let month, year, day, jsDate;
     // GET SPECIFIC BLOG BY BLOG_ID
-    fetch(`https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew/${blogID}`)
+    fetch(`https://63f396c6de3a0b242b454efb.mockapi.io/blogsnew/${blogID}`)
       .then((response) => response.json())
       .then((blog) => {
         jsDate = new Date(blog.Publish_Date);
@@ -47,7 +47,7 @@ function displayBlogPost() {
   }
 }
 
-const API_URL = 'https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew?sortBy=Publish_Date&order=desc';
+const API_URL = 'https://63f396c6de3a0b242b454efb.mockapi.io/blogsnew?sortBy=Publish_Date&order=desc';
 
 async function getBlogs() {
   try {
