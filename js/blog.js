@@ -10,7 +10,7 @@ let startPageIndex = 0, pageLimit = 5, currentPageEnd = pageLimit, pageEnd;
 function displayBlogs() {
 
   // GET BLOGS
-  fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew?sortBy=Publish_Date&order=desc')
+  fetch('https://63f396c6de3a0b242b454efb.mockapi.io/blogsnew?sortBy=Publish_Date&order=desc')
     .then((response) => response.json())
     .then((blogs) => {
 
@@ -74,7 +74,7 @@ function displayFilteredBlogs(m, y) {
   // console.log("typeof m: " + typeof m, " typeof y: " + typeof y);
 
   // GET BLOGS
-  fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew?sortBy=Publish_Date&order=desc')
+  fetch('https://63f396c6de3a0b242b454efb.mockapi.io/blogsnew?sortBy=Publish_Date&order=desc')
     .then((response) => response.json())
     .then((blogs) => {
 
@@ -160,7 +160,7 @@ function displayFilteredBlogs(m, y) {
 
 function displayStickyBlogFilter() {
   // GET BLOGS DATES
-  fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/blogsnew')
+  fetch('https://63f396c6de3a0b242b454efb.mockapi.io/blogsnew')
     .then((response) => response.json())
     .then((data) => {
       // const blogs = [];

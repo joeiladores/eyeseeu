@@ -1,6 +1,6 @@
 function populateTestimonialPage() {
   
-  fetch('https://638eb1de9cbdb0dbe31294ba.mockapi.io/testimonial')
+  fetch('https://63f38f25864fb1d6001935c2.mockapi.io/testimonial')
     .then((response) => response.json())
     .then((data) => {
       data.forEach((user) => {
